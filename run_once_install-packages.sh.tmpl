@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+install_packages() {
+  pkg=${2:-$1}
+  if ! hash $1 &>/dev/null ; then
+    sudo $ins $pkg
+  fi
+}
+
+if hash emerge &>/dev/null ; then
+  ins="emerge -av"
+  install_packages gpg gnupg
+  install_packages zsh
+  install_packages awesome
+  install_packages pass
+elif hash pacman &>/dev/null ; then
+  ins="pacman -S"
+  install_packages gpg gnupg
+  install_packages zsh
+  install_packages awesomewm
+  install_packages pass
+fi
