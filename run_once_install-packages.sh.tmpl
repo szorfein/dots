@@ -7,16 +7,50 @@ install_packages() {
   fi
 }
 
+ins_short() {
+  for i in $@ ; do
+    if ! hash $i &>/dev/null ; then
+      sudo $ins $i
+    fi
+  done
+}
+
+euse_pkg() {
+  if ! grep -q $2 /etc/portage/package.use/${1#*/} ; then
+    sudo euse -p $2 -E $1
+  fi
+}
+
+euse_global() {
+  if ! grep -q $1 /etc/portage/make.conf ; then
+    sudo euse -E $1
+  fi
+}
+
+bye() {
+  echo
+  echo "Install done, Bye"
+  echo
+}
+
 if hash emerge &>/dev/null ; then
   ins="emerge -av"
+
+  # env
+  install_packages euse gentoolkit
+  euse_global zsh-completion
+
   install_packages gpg gnupg
-  install_packages zsh
-  install_packages awesome
-  install_packages pass
+
+  # for pass
+  euse_pkg app-admin/pass X
+  ins_short zsh awesome pass
+
 elif hash pacman &>/dev/null ; then
   ins="pacman -S"
+
   install_packages gpg gnupg
-  install_packages zsh
-  install_packages awesomewm
-  install_packages pass
+  ins_short zsh awesomewm pass
 fi
+
+trap bye EXIT
