@@ -1,0 +1,46 @@
+"
+"    ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄  
+"   ▓██░   █▒▓██▒▓██▒▀█▀ ██▒▓██ ▒ ██▒▒██▀ ▀█  
+"    ▓██  █▒░▒██▒▓██    ▓██░▓██ ░▄█ ▒▒▓█    ▄ 
+"     ▒██ █░░░██░▒██    ▒██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒
+"      ▒▀█░  ░██░▒██▒   ░██▒░██▓ ▒██▒▒ ▓███▀ ░
+"      ░ ▐░  ░▓  ░ ▒░   ░  ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░
+"      ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒   
+"        ░░   ▒ ░░      ░     ░░   ░ ░        
+"         ░   ░         ░      ░     ░ ░      
+
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+" Visual Setting
+set number
+
+" Encoding
+set ttyfast
+set binary
+
+" for vim 8
+if (has("termguicolors"))
+  set termguicolors
+  " This is only necessary if you use "set termguicolors".
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+" Colorscheme
+packadd! lilith
+colorscheme lilith
+
+" plugins
+source ~/.vim/plugin-configs.vim

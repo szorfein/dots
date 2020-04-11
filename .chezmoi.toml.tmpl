@@ -1,6 +1,12 @@
 {{- $email := promptString "email" -}}
 [gpg]
-  recipient = "E2ADD2080A6B28AE"
+  recipient = "id for the encrypt key"
 [data]
   email = "{{ $email }}"
   name = "szorfein"
+  [data.github]
+    email = "{{ $email }}"
+    name = "username"
+  [data.gpgkey]
+    sign = "id for the sign key"
+    encrypt = "id for the encrypt key"

@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+
+set -o errexit -o nounset -o pipefail
+
+vim_dir=$HOME/.vim/pack/my-plugins/start
+
+dll() {
+  [ -d $vim_dir/$2 ] || git clone $1 $vim_dir/$2
+}
+
+bye() {
+  echo
+  echo "vim plugins done"
+  echo
+}
+
+[ -d $vim_dir ] ||
+  mkdir -p $vim_dir
+
+# utils
+dll https://github.com/dense-analysis/ale.git ale
+dll https://github.com/lilydjwg/colorizer colorizer
+dll https://github.com/Yggdroot/indentLine indentLint
+dll https://github.com/itchyny/lightline.vim lightline
+dll https://github.com/mengelbrecht/lightline-bufferline lightline-bufferline
+dll https://github.com/ryanoasis/vim-devicons vim-devicons
+dll https://github.com/airblade/vim-gitgutter.git vim-gitgutter
+
+# colors
+dll https://github.com/szorfein/darkest-space darkest-space
+dll https://github.com/szorfein/lilith.vim lilith
+dll https://github.com/szorfein/fromthehell.vim fromthehell
+
+trap bye EXIT

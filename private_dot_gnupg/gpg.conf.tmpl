@@ -2,8 +2,10 @@
 # default key
 #-----------------------------
 
-default-key {{ .signinkey }}
-default-recipient {{ .encryptkey }}
+{{- if (index . "gpgkey") }}
+default-key {{ .gpgkey.sign }}
+default-recipient {{ .gpgkey.encrypt }}
+{{- end }}
 
 #-----------------------------
 # behavior
@@ -16,7 +18,7 @@ no-comments
 display-charset utf-8
 keyid-format 0xlong
 with-subkey-fingerprint
-with-fingerprint
+#with-fingerprint
 
 list-options show-uid-validity
 verify-options show-uid-validity

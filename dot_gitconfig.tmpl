@@ -1,10 +1,15 @@
 [user]
-  name = {{ .name }}
-  email = {{ .email }}
-  signingkey = {{ .signinkey }}
+  name = {{ .github.name }}
+  email = {{ .github.email }}
+  signingkey = {{ .gpgkey.sign }}
 
 [commit]
   gpgsign = true
 
 [core]
   editor = vim
+
+{{- if eq .name "szorfein" }}
+[url "git@github.com:szorfein"]
+  insteadOf = https://github.com/szorfein
+{{- end }}
