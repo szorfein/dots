@@ -1,2 +1,8 @@
 README.md
 LICENSE
+{{ if ne .chezmoi.username "daggoth" }}
+.asoundrc_daggoth
+{{ end }}
+{{ if ne .chezmoi.username "ninja" }}
+.asoundrc_ninja
+{{ end }}
