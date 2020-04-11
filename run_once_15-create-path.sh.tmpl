@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# dirs
+[ -d ~/musics ] || mkdir ~/musics
+[ -d ~/.config/mpd/playlists ] || mkdir -p ~/.config/mpd/playlists
+
+# files
+[ -f ~/.config/mpd/database ] || touch ~/.config/mpd/database
+[ -f ~/.config/mpd/state ] || touch ~/.config/mpd/state

@@ -38,8 +38,7 @@ if hash emerge &>/dev/null ; then
   euse_global ffmpeg
   euse_global ladspa 
   euse_global speex
-
-  euse_pkg media-plugins/alsa-plugins libsamplerate
+  euse_global libsamplerate
 
   sudo $ins alsa-utils tap-plugins swh-plugins libsamplerate ladspa-cmt caps-plugins ladspa-bs2b alsa-plugins
 
@@ -51,7 +50,9 @@ if hash emerge &>/dev/null ; then
   # for pass
   euse_pkg app-admin/pass X
 
-  sudo $ins gnupg pass vim zsh awesome mpd
+  euse_pkg media-sound/ncmpcpp taglib
+
+  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -62,7 +63,7 @@ elif hash pacman &>/dev/null ; then
 
   {{ end }}
 
-  sudo $ins gnupg pass vim zsh awesomewm mpd
+  sudo $ins gnupg pass vim zsh awesomewm mpd ncmpcpp
 fi
 
 trap bye EXIT

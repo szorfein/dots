@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+services="gpg-agent.socket gpg-agent-ssh.socket mpd.service"
+systemctl="systemctl --user"
+
+for service in $services ; do
+  echo -n "$service... "
+  if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
+  echo -n "$service... "
+  if ! $systemctl is-active $service ; then $systemctl start $service ; fi
+done
