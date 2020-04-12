@@ -30,6 +30,12 @@ set number
 set ttyfast
 set binary
 
+" Tabs, May be overwritten by autocmd rules
+set shiftwidth=2
+set softtabstop=0
+set tabstop=2
+set expandtab
+
 " for vim 8
 if (has("termguicolors"))
   set termguicolors
@@ -41,6 +47,13 @@ endif
 " Colorscheme
 packadd! lilith
 colorscheme lilith
+
+" if there are a custom lightline setting
+let x = "~/.vim/lightline-theme.vim"
+
+if filereadable(expand(x))
+  execute 'source' x
+endif
 
 " plugins
 source ~/.vim/plugin-configs.vim

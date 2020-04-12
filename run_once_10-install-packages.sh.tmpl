@@ -31,6 +31,19 @@ euse_global_disable() {
   fi
 }
 
+build_aur() {
+  PKG_URL="$1"
+  PKG_NAME=${PKG_URL##*/} # e.g xst-git.tar.gz
+  PKG=${PKG_NAME%%.*} # e.g xst-git
+  [ -d $HOME/build ] || mkdir $HOME/build
+  ( cd $HOME/build \
+      && wget $PKG_URL \
+      && tar xvf ${PKG_NAME} \
+      && cd ${PKG} \
+      && makepkg -si
+  )
+}
+
 bye() {
   echo
   echo "Install done, Bye"
@@ -70,7 +83,7 @@ if hash emerge &>/dev/null ; then
   # mpd
   euse_pkg_disable media-sound/mpd network
 
-  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp
+  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -81,7 +94,12 @@ elif hash pacman &>/dev/null ; then
 
   {{ end }}
 
-  sudo $ins gnupg pass xclip vim zsh awesomewm mpd ncmpcpp
+  sudo $ins gnupg pass xclip vim zsh awesomewm mpd ncmpcpp xorg-xinit xorg-server base-devel wget
+
+  # AUR
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
+
 fi
 
 trap bye EXIT
