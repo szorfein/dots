@@ -13,9 +13,21 @@ euse_pkg() {
   fi
 }
 
+euse_pkg_disable() {
+  if ! grep -q "\-$2" /etc/portage/package.use/${1#*/} 2>/dev/null ; then
+    sudo euse -p $1 -D $2
+  fi
+}
+
 euse_global() {
   if ! grep -q $1 /etc/portage/make.conf ; then
     sudo euse -E $1
+  fi
+}
+
+euse_global_disable() {
+  if ! grep -q "\-$1\|\-\*" /etc/portage/make.conf 2>/dev/null ; then
+    sudo euse -D $1
   fi
 }
 
@@ -30,6 +42,7 @@ if hash emerge &>/dev/null ; then
 
   # env
   install_packages euse gentoolkit
+  euse_global_disable deprecated
   euse_global zsh-completion
 
   {{- if eq .system.sound "alsa" }}
@@ -50,7 +63,12 @@ if hash emerge &>/dev/null ; then
   # for pass
   euse_pkg app-admin/pass X
 
+  # ncmpcpp
   euse_pkg media-sound/ncmpcpp taglib
+  euse_pkg dev-libs/boost icu
+
+  # mpd
+  euse_pkg_disable media-sound/mpd network
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp
 
@@ -63,7 +81,7 @@ elif hash pacman &>/dev/null ; then
 
   {{ end }}
 
-  sudo $ins gnupg pass vim zsh awesomewm mpd ncmpcpp
+  sudo $ins gnupg pass xclip vim zsh awesomewm mpd ncmpcpp
 fi
 
 trap bye EXIT

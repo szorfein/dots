@@ -1,0 +1,32 @@
+mpd_music_dir = "~/musics"
+
+playlist_display_mode = "classic"
+
+now_playing_prefix = ">> "
+
+header_visibility = "no"
+
+statusbar_visibility = "no"
+
+display_bitrate = "yes"
+
+enable_window_title = "yes"
+
+ignore_leading_the = "yes"
+
+#progressbar_look = "░█ "
+progressbar_look = "=>"
+#progressbar_look = "─- "
+#progressbar_look = "▒▒░"
+#progressbar_look = "┅┅┄"
+#progressbar_look = "─⊙┄"
+#progressbar_look = "─➞─"
+#progressbar_look = "─┅─"
+#progressbar_look = "▪▪▪"
+#progressbar_look = "▪▪▫"
+#progressbar_look = "───"
+#progressbar_look = "▁▁▁"
+#progressbar_look = "‒‒‒"
+#progressbar_look = "■◣ "
+#progressbar_look = "◈◆◇"
+#progressbar_look = "→→"
