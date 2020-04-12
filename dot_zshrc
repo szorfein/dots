@@ -3,3 +3,17 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 export PATH=$HOME/bin:$PATH
 export TERMINAL=xst
+
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Themes are into ~/.oh-my-zsh/themes/
+ZSH_THEME="spaceship"
+
+# Plugin list in ~/.oh-my-zsh/plugins
+plugins=(git git-prompt ruby)
+
+# Disable bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+source $ZSH/oh-my-zsh.sh
