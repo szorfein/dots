@@ -5,3 +5,4 @@ LICENSE
 {{ else }}
 .asoundrc_ninja
 {{ end }}
+dot-theme-*

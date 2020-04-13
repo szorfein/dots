@@ -83,7 +83,8 @@ if hash emerge &>/dev/null ; then
   # mpd
   euse_pkg_disable media-sound/mpd network
 
-  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka
+  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka brave-bin \
+    feh
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -94,11 +95,13 @@ elif hash pacman &>/dev/null ; then
 
   {{ end }}
 
-  sudo $ins gnupg pass xclip vim zsh awesomewm mpd ncmpcpp xorg-xinit xorg-server base-devel wget
+  sudo $ins gnupg pass xclip vim zsh awesomewm mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
+    feh
 
   # AUR
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/brave-bin.tar.gz
 
 fi
 
