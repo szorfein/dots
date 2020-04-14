@@ -25,7 +25,7 @@ Why i switch on chezmoi?
 
 ## Screenshots
 
-(Too ugly for now lol)
+![](https://github.com/szorfein/unix-portfolio/raw/master/sci/float.png)
 
 ## Packages
 
