@@ -35,8 +35,10 @@ Why i switch on chezmoi?
 | awesome | Window Manager | |
 | brave | Web Browser | Firefox is nice too, but it sucks with ALSA and pulseaudio is too slow on my netbook |
 | mpd | Music Player Daemon | with ncmpcpp, mpc |
+| picom | Compositor | Replacement for compton |
 | systemd | Init System | even on gentoo :) |
 | vim | Editor | i use vim 8 with the native third-party package loading |
+| xst | Terminal | |
 | zsh | Shell | with plugins: oh-my-zsh |
 
 ## Requirements
@@ -50,7 +52,7 @@ Or on archlinux:
 
 ## Clone this repo
 
-    $ chezmoi init --verbose https://github.com/szorfein/dots.git
+    $ chezmoi init https://github.com/szorfein/dots.git
 
 ## Config
 Edit the config file.
@@ -58,7 +60,7 @@ Edit the config file.
     $ chezmoi edit-config
 
 ## Apply
-`apply` will install all the dependencies and copy files to your $HOME.
+`apply` will install all the dependencies and add files to your $HOME.
 
     $ chezmoi -v apply
 

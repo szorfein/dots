@@ -1,0 +1,28 @@
+! Links
+! theme https://www.colorspire.com/
+! material color: https://material.io/inline-tools/color/
+! material: https://material.io/tools/color 
+! theme maker: https://coolors.co
+! Contrast Ratio: https://contrast-ratio.com/
+
+! BG !
+#define theme0  #130F14
+#define theme1  #151416
+#define theme2  #1A181C
+#define theme3  #281f2c
+! FG !
+#define theme4  #afca9b
+#define theme5  #CCECEC
+#define theme6  #e1ffef
+! Primary, Secondary !
+#define theme7  #1f9369
+#define theme8  #53b491
+#define theme9  #6b51c1
+#define theme10 #a998db
+! Alert !
+#define theme11 #ef536d
+#define theme12 #f47b97
+! Others ! (yellow, green, blue)
+#define theme13 #ace269
+#define theme14 #83d860
+#define theme15 #56d7a0

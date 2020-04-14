@@ -14,6 +14,8 @@ enable_window_title = "yes"
 
 ignore_leading_the = "yes"
 
+ask_before_clearing_playlists = "no"
+
 #progressbar_look = "░█ "
 progressbar_look = "=>"
 #progressbar_look = "─- "
