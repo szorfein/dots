@@ -11,24 +11,24 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "Iosevka Medium 8"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.bg_normal     = M.x.background
+theme.bg_focus      = M.x.dark_primary
+theme.bg_urgent     = M.x.error
+theme.bg_minimize   = M.x.background
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = M.x.on_background .. "C2" -- 76%
+theme.fg_focus      = M.x.on_background
+theme.fg_urgent     = M.x.on_error
+theme.fg_minimize   = M.x.on_background .. "80" -- 50%
 
 theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(1)
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
+theme.border_normal = M.x.background
+theme.border_focus  = M.x.dark_primary
+theme.border_marked = M.x.error
 
 -- There are other variable sets
 -- overriding the default one when
@@ -97,7 +97,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = os.getenv("HOME").."/images/sfi.jpg"
+theme.wallpaper = os.getenv("HOME").."/images/sci.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
@@ -119,7 +119,7 @@ theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
+    theme.menu_height, M.x.primary, M.x.on_primary
 )
 
 -- Define the icon theme for application icons. If not set then the icons

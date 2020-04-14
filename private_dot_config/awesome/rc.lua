@@ -43,6 +43,8 @@ do
 end
 
 -- Variable definitions
+M = require("env-theme") -- material env globally
+
 -- Themes define colours, icons, font and wallpapers.
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/theme/"
 beautiful.init( theme_dir .. "theme.lua")

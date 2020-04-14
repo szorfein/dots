@@ -84,7 +84,7 @@ if hash emerge &>/dev/null ; then
   euse_pkg_disable media-sound/mpd network
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka brave-bin \
-    feh picom
+    feh picom scrot
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -96,7 +96,7 @@ elif hash pacman &>/dev/null ; then
   {{ end }}
 
   sudo $ins gnupg pass xclip vim zsh awesomewm mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
-    feh picom
+    feh picom scrot
 
   # AUR
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz

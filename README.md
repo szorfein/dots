@@ -36,6 +36,7 @@ Why i switch on chezmoi?
 | brave | Web Browser | Firefox is nice too, but it sucks with ALSA and pulseaudio is too slow on my netbook |
 | mpd | Music Player Daemon | with ncmpcpp, mpc |
 | picom | Compositor | Replacement for compton |
+| scrot | Screen Capture | |
 | systemd | Init System | even on gentoo :) |
 | vim | Editor | i use vim 8 with the native third-party package loading |
 | xst | Terminal | |
