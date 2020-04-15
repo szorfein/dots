@@ -40,7 +40,7 @@ build_aur() {
       && wget $PKG_URL \
       && tar xvf ${PKG_NAME} \
       && cd ${PKG} \
-      && makepkg -si
+      && makepkg -si --noconfirm
   )
 }
 

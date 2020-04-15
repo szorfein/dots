@@ -29,4 +29,38 @@ mytheme.x = {
   
 }
 
+-- fonts
+mytheme.f = {
+  h1 = "Iosevka Light 60", -- used rarely on big icon or big title
+  h4 = "Iosevka Regular 32",
+  h6 = "Iosevka Regular 20",
+  subtile_1 = "Iosevka Regular 12", -- used on text list
+  body_1 = "Iosevka Term Regular 15", -- used on text body title
+  body_2 = "Iosevka Term Light 13", -- used on text body
+  -- for button, don't use a Mono variant because icons are too small
+  -- issue: https://github.com/Powerlevel9k/powerlevel9k/issues/430
+  button = "Iosevka Medium Nerd Font Complete 14", -- used on text button
+  caption = "Iosevka Bold 12", -- used on annotation
+  overline = "Iosevka Regular 10",
+}
+
+-- text emphasis
+-- https://material.io/design/color/dark-theme.html#ui-application
+mytheme.t = {
+  high = 87,
+  medium = 60,
+  disabled = 38
+}
+
+-- elevation overlay transparency in hexa code
+-- https://material.io/design/color/dark-theme.html#properties
+mytheme.e = {
+  dp00 = "00",
+  dp01 = "0D",
+  dp02 = "12",
+  dp03 = "14",
+  dp04 = "17",
+  dp06 = "1C",
+}
+
 return mytheme

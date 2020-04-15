@@ -56,7 +56,7 @@ Or on archlinux:
     $ chezmoi init https://github.com/szorfein/dots.git
 
 ## Config
-Edit the config file.
+Edit the config file with your favorite text editor.
 
     $ EDITOR="vim" chezmoi edit-config
 
