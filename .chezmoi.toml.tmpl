@@ -3,12 +3,12 @@
   recipient = "id for the encrypt key"
 [data]
   email = "{{ $email }}"
-  theme = "sci" # first theme
+  theme = "sci" # first theme for now
   [data.github]
     email = "{{ $email }}"
-    theme = "username"
+    name = "username"
   [data.gpgkey]
     sign = "id for the sign key" 
     encrypt = "id for the encrypt key"
   [data.system]
-    sound = "alsa" # remove the line if you do not want alsa
+    sound = "alsa" # set alsa or pulseaudio here

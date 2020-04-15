@@ -8,7 +8,7 @@ Why i switch on chezmoi?
 + Even with gnu/stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
 + Template are great.
 + Possibility of encrypt files.
-+ Updates are easy !
++ Updates are easy.
 
 ## Table of contents
 
@@ -43,13 +43,13 @@ Why i switch on chezmoi?
 | zsh | Shell | with plugins: oh-my-zsh |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io):
+You need to install [chezmoi](https://chezmoi.io) with 2 additionnal package, `sudo` and `git`:
 
     $ curl -sfL https://git.io/chezmoi | sh
 
 Or on archlinux:
 
-    $ sudo pacman -S chezmoi
+    $ sudo pacman -S chezmoi sudo git
 
 ## Clone this repo
 
@@ -58,10 +58,15 @@ Or on archlinux:
 ## Config
 Edit the config file.
 
-    $ chezmoi edit-config
+    $ EDITOR="vim" chezmoi edit-config
 
 ## Apply
-`apply` will install all the dependencies and add files to your $HOME.
+`apply` will install all the dependencies and add files to your $HOME, before `apply`, you only need verify 2 things:
+
++ If you have create your first user, logout and back to initialize his environment correctly.
++ You need `sudo` configured with at least `username ALL=(ALL) ALL`.
+
+When you are ready, execute:
 
     $ chezmoi -v apply
 
