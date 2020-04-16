@@ -1,11 +1,11 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
 Work only on distro linux including the installer:
-+ `emerge`: `Gentoo`.
-+ `pacman`: `Archlinux`, `Manjaro`, `Antergos`, `ArchBang`,...
++ `emerge`: Gentoo.
++ `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
 
 Why i switch on chezmoi?
-+ Even with gnu/stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
++ Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
 + Template are great.
 + Possibility of encrypt files.
 + Install and updates are easy.
@@ -20,6 +20,7 @@ Why i switch on chezmoi?
    * [Config](#config)
    * [Apply](#apply)
    * [Update](#update)
+   * [Final settings](#final-settings)
 
 <!--te-->
 
@@ -33,7 +34,8 @@ Why i switch on chezmoi?
 |---|---|---|
 | alsa | Audio Driver | can be remove in the config file if you prefer pulseaudio |
 | awesome | Window Manager | |
-| brave | Web Browser | Firefox is nice too, but it sucks with ALSA and pulseaudio is too slow on my netbook |
+| brave | Web Browser | brave-bin with alsa, firefox with pulseaudio |
+| feh | Image Viewer | |
 | mpd | Music Player Daemon | with ncmpcpp, mpc |
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
@@ -43,7 +45,7 @@ Why i switch on chezmoi?
 | zsh | Shell | with plugins: oh-my-zsh |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io) with additionnal packages:
+You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`):
 On gentoo:
 
     $ curl -sfL https://git.io/chezmoi | sh
@@ -55,10 +57,10 @@ Or on archlinux:
 
 `sudo` should have permission for install packages:
 
-    $ EDITOR="vim" visudo
+    # EDITOR="vim" visudo
     username ALL=(ALL) ALL
 
-If you have create your first user (via: useradd -m -G users,wheel,audio,video <username>), logout and back to initialize his environment correctly.
+If you have create your first user recently (via: `useradd -m -G users,wheel,audio,video username`), logout and back to initialize his environment correctly.
     
 ## Clone this repo
 
@@ -69,6 +71,13 @@ Edit the config file with your favorite text editor.
 
     $ EDITOR="vim" chezmoi edit-config
 
+You can change for example in `data.system`:
+
+    [data.system]
+      sound = "pulseaudio"
+
+It will install firefox rather than brave-bin and modify a lot of things in the repos.
+
 ## Apply
 `apply` will install all the dependencies and add files to your $HOME.
 
@@ -77,3 +86,9 @@ Edit the config file with your favorite text editor.
 ## Update
 
     $ chezmoi update
+
+## Final settings
+If you have not yet configure X, change the keyboard layout like with:
+
+    # localectl list-x11-keymap-layouts | grep fr
+    # localectl set-x11-keymap fr

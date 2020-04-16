@@ -57,8 +57,9 @@ if hash emerge &>/dev/null ; then
   install_packages euse gentoolkit
   euse_global_disable deprecated
   euse_global zsh-completion
+  euse_global vim-syntax
 
-  {{- if eq .system.sound "alsa" }}
+  {{ if eq .system.sound "alsa" }}
 
   euse_global alsa
   euse_global ffmpeg
@@ -66,9 +67,16 @@ if hash emerge &>/dev/null ; then
   euse_global speex
   euse_global libsamplerate
 
-  sudo $ins alsa-utils tap-plugins swh-plugins libsamplerate ladspa-cmt caps-plugins ladspa-bs2b alsa-plugins
+  sudo $ins alsa-utils tap-plugins swh-plugins libsamplerate ladspa-cmt caps-plugins ladspa-bs2b alsa-plugins brave-bin
 
-  {{- end }}
+  {{ end }}
+
+  {{ if eq .system.sound "pulseaudio" }}
+
+  euse_global pulseaudio
+  sudo $ins pulseaudio firefox-bin
+
+  {{ end }}
 
   # for vim
   euse_pkg app-editors/vim X
@@ -83,7 +91,7 @@ if hash emerge &>/dev/null ; then
   # mpd
   euse_pkg_disable media-sound/mpd network
 
-  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka brave-bin \
+  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
     feh picom scrot
 
 elif hash pacman &>/dev/null ; then
@@ -92,6 +100,13 @@ elif hash pacman &>/dev/null ; then
   {{ if eq .system.sound "alsa" }}
 
   sudo $ins alsa-utils alsa-plugins ladspa swh-plugins libsamplerate
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/brave-bin.tar.gz
+
+  {{ end }}
+
+  {{ if eq .system.sound "pulseaudio" }}
+
+  sudo $ins pulseaudio firefox
 
   {{ end }}
 
@@ -101,7 +116,6 @@ elif hash pacman &>/dev/null ; then
   # AUR
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
-  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/brave-bin.tar.gz
 
 fi
 

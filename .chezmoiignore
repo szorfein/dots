@@ -1,8 +1,4 @@
 README.md
 LICENSE
-{{ if ne .chezmoi.username "daggoth" }}
-.asoundrc_daggoth
-{{ else }}
-.asoundrc_ninja
-{{ end }}
 dot-theme-*
+asound
