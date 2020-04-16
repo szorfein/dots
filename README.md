@@ -37,12 +37,15 @@ Why i switch on chezmoi?
 | brave | Web Browser | brave-bin with alsa, firefox with pulseaudio |
 | feh | Image Viewer | |
 | mpd | Music Player Daemon | with ncmpcpp, mpc |
+| mpv | Video Player | |
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
 | systemd | Init System | even on gentoo :) |
+| vifm | File Manager | |
 | vim | Editor | i use vim 8 with the native third-party package loading |
 | xst | Terminal | |
 | zsh | Shell | with plugins: oh-my-zsh |
+| zathura | PDF viewer | |
 
 ## Requirements
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`):

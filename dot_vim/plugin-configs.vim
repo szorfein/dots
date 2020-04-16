@@ -176,7 +176,7 @@ augroup alestatus
   autocmd User ALEFixPost call lightline#update()
 augroup END
 
-let g:lightline.colorscheme = "Lilith"
+let g:lightline.colorscheme = "lilith"
 let g:lightline.tabline = {'left': [['buffers']], 'right': [['close']] }
 let g:lightline.component = { 'close':  'X ' }
 let g:lightline.separator = { 'right': '', 'left': '' }
