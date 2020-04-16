@@ -16,17 +16,36 @@ function exit_screen_hide()
   s.exit_screen.visible = false
 end
 
+local function poweroff_command()
+  awful.spawn("sudo systemctl poweroff")
+  exit_screen_hide()
+end
+
 -- button poweroff
 local poweroff = button({
   fg_icon = M.x.error,
   icon = font.h1("⭘"),
   text = font.button("Poweroff"),
   width = 110,
-  command = function()
-    awful.spawn("sudo systemctl poweroff")
-    exit_screen_hide()
-  end
+  command = poweroff_command,
 })
+
+local function reboot_command() 
+  awful.spawn("sudo systemctl reboot")
+end
+
+-- button reboot
+local reboot = button({
+  fg_icon = M.x.error_variant_1,
+  icon = font.h1("ﰇ"),
+  text = font.button("Reboot"),
+  width = 110,
+  command = reboot_command,
+})
+
+local function exit_command()
+  awesome.quit()
+end
 
 -- button exit
 local exit = button({
@@ -34,10 +53,13 @@ local exit = button({
   icon = font.h1(">>"),
   text = font.button("Exit"),
   width = 110,
-  command = function()
-    awesome.quit()
-  end
+  command = exit_command,
 })
+
+local function lock_command()
+    exit_screen_hide()
+    lock_screen_show()
+end
 
 -- button lock
 local lock = button({
@@ -45,10 +67,7 @@ local lock = button({
   icon = font.h1(""),
   text = font.button("Lock"),
   width = 110,
-  command = function()
-    exit_screen_hide()
-    lock_screen_show()
-  end
+  command = lock_command,
 })
 
 local exit_root = class()
@@ -62,6 +81,7 @@ function exit_root:init(s)
     local grabber = keygrabber {
       keybindings = {
         { {}, 'p', function() poweroff_command() end },
+        { {}, 'r', function() reboot_command() end },
         { {}, 'e', function() exit_command() end },
         { {}, 'l', function() lock_command() end },
         { {}, 'q', function() exit_screen_hide() end },
@@ -87,6 +107,7 @@ function exit_root:init(s)
     {
       {
         poweroff,
+        reboot,
         exit,
         lock,
         spacing = 12,

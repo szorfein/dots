@@ -1,14 +1,14 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
-Work only on distrib linux included:
-+ `gentoo`
-+ `archlinux`
+Work only on distro linux including the installer:
++ `emerge`: `Gentoo`.
++ `pacman`: `Archlinux`, `Manjaro`, `Antergos`, `ArchBang`,...
 
 Why i switch on chezmoi?
 + Even with gnu/stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
 + Template are great.
 + Possibility of encrypt files.
-+ Updates are easy.
++ Install and updates are easy.
 
 ## Table of contents
 
@@ -43,14 +43,23 @@ Why i switch on chezmoi?
 | zsh | Shell | with plugins: oh-my-zsh |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io) with 2 additionnal package, `sudo` and `git`:
+You need to install [chezmoi](https://chezmoi.io) with additionnal packages:
+On gentoo:
 
     $ curl -sfL https://git.io/chezmoi | sh
+    $ sudo emerge -av sudo git vim
 
 Or on archlinux:
 
-    $ sudo pacman -S chezmoi sudo git
+    $ sudo pacman -S chezmoi sudo git vim
 
+`sudo` should have permission for install packages:
+
+    $ EDITOR="vim" visudo
+    username ALL=(ALL) ALL
+
+If you have create your first user (via: useradd -m -G users,wheel,audio,video <username>), logout and back to initialize his environment correctly.
+    
 ## Clone this repo
 
     $ chezmoi init https://github.com/szorfein/dots.git
@@ -61,12 +70,7 @@ Edit the config file with your favorite text editor.
     $ EDITOR="vim" chezmoi edit-config
 
 ## Apply
-`apply` will install all the dependencies and add files to your $HOME, before `apply`, you only need verify 2 things:
-
-+ If you have create your first user, logout and back to initialize his environment correctly.
-+ You need `sudo` configured with at least `username ALL=(ALL) ALL`.
-
-When you are ready, execute:
+`apply` will install all the dependencies and add files to your $HOME.
 
     $ chezmoi -v apply
 

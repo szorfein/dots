@@ -1,0 +1,12 @@
+# Add bin to the path
+export PATH=$HOME/bin:$PATH
+
+# Default terminal
+export TERMINAL=xst
+
+# Init gpg
+export GPG_TTY=$(tty)
+export GPG_AGENT_INFO=""
+
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
