@@ -39,7 +39,7 @@ Why i switch on chezmoi?
 | feh | Image Viewer | |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
-| neomutt | Email Reader | Customized from [here](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
+| neomutt | Email Reader | with fdm and msmtp, customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
 | systemd | Init System | Even on gentoo :) |

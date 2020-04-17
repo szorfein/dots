@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-services="gpg-agent.socket gpg-agent-ssh.socket mpd.service"
+services="gpg-agent.socket gpg-agent-ssh.socket mpd.service fdm.timer"
 systemctl="systemctl --user"
 
 for service in $services ; do

@@ -1,10 +1,24 @@
 #!/usr/bin/env sh
 
+add_dir() {
+  [ -d $1 ] || mkdir -p $1
+}
+
+add_file() {
+  [ -f $1 ] || touch $1
+}
+
 # dirs
-[ -d ~/images ] || mkdir ~/images
-[ -d ~/musics ] || mkdir ~/musics
-[ -d ~/.config/mpd/playlists ] || mkdir -p ~/.config/mpd/playlists
+add_dir ~/images
+add_dir ~/musics
+add_dir ~/.config/mpd/playlists
+add_dir ~/.mails/INBOX/new
+add_dir ~/.mails/INBOX/cur
+add_dir ~/.mails/INBOX/tmp
+add_dir ~/.mails/Junk
+
+chmod -R 700 ~/.mails
 
 # files
-[ -f ~/.config/mpd/database ] || touch ~/.config/mpd/database
-[ -f ~/.config/mpd/state ] || touch ~/.config/mpd/state
+add_file ~/.config/mpd/database
+add_file ~/.config/mpd/state

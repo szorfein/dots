@@ -95,7 +95,7 @@ if hash emerge &>/dev/null ; then
   euse_pkg media-video/mpv cli
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf
+    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -114,7 +114,7 @@ elif hash pacman &>/dev/null ; then
   {{ end }}
 
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf
+    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
 
   # AUR
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz

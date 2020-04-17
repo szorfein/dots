@@ -1,0 +1,30 @@
+# SSL
+set verify-certificates
+
+# Dir
+$path = "%h/.mails"
+
+# Mutt use maildir
+action "inbox" maildir "${path}/INBOX"
+action "junk" maildir "${path}/Junk"
+
+# Accounts
+account "gmail" imaps server "imap.googlemail.com"
+  port 993 user "{{ .name }}@gmail.com" pass $(pass gmail/{{ .name }})
+
+# Junk (spam)
+match "^From:.*ezine@recruitni.com" in headers action drop
+match "^From:.*@*.chase.com" in headers action drop
+match "^From:.*@*.chaseonline.com" in headers action drop
+match "^From:.*@citi-bank.com" in headers action drop
+match "^From:.*@emaillabs.com" in headers action drop
+match "^From:.*baypos@gmail.com" in headers action drop
+match "^From:.*E-Greeting" in headers action drop
+match "^From:.*@postcard.org" in headers action drop
+match "^From:.*@mail.itp.net" in headers action drop
+match "^From:.*@faith-h.net" in headers action drop
+match "^From:.*reponse@altech-france.fr" in headers action drop
+match "^From:.*ecards@americangreetings.com" in headers action drop
+
+# Default action
+match all action "inbox"
