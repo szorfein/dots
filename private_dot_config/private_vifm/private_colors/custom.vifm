@@ -4,7 +4,10 @@ highlight clear
 highlight Win cterm=none ctermfg=15 ctermbg=none
 
 highlight Directory cterm=none ctermfg=14 ctermbg=none
-highlight Executable cterm=none ctermfg=1 ctermbg=none
+highlight Link cterm=none ctermfg=2 ctermbg=none
+highlight BrokenLink cterm=bold ctermfg=3 ctermbg=none
+highlight Socket cterm=bold ctermfg=4 ctermbg=none
+highlight Fifo cterm=none ctermfg=1 ctermbg=none
 highlight Selected cterm=none ctermfg=13 ctermbg=none
 
 highlight CurrLine cterm=reverse ctermfg=default ctermbg=default

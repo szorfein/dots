@@ -3,6 +3,7 @@ Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.pa
 Work only on distro linux including the installer:
 + `emerge`: Gentoo.
 + `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
++ TODO: add support for apt-get system...
 
 Why i switch on chezmoi?
 + Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
@@ -32,20 +33,21 @@ Why i switch on chezmoi?
 
 | name | WTF | Notes |
 |---|---|---|
-| alsa | Audio Driver | can be remove in the config file if you prefer pulseaudio |
-| awesome | Window Manager | |
+| alsa | Audio Driver | Can be remove in the config file if you prefer pulseaudio |
+| awesome | Window Manager | Configs recreate from scratch |
 | brave | Web Browser | brave-bin with alsa, firefox with pulseaudio |
 | feh | Image Viewer | |
-| mpd | Music Player Daemon | with ncmpcpp, mpc |
+| mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
+| neomutt | Email Reader | Customized from [here](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
-| systemd | Init System | even on gentoo :) |
-| vifm | File Manager | |
-| vim | Editor | i use vim 8 with the native third-party package loading |
+| systemd | Init System | Even on gentoo :) |
+| vifm | File Manager | Faster than ranger, customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
+| vim | Editor | I use vim 8 with the native third-party package loading |
 | xst | Terminal | |
-| zsh | Shell | with plugins: oh-my-zsh |
-| zathura | PDF viewer | |
+| zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
+| zathura | PDF/Epub viewer | |
 
 ## Requirements
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`):
@@ -79,7 +81,7 @@ You can change for example in `data.system`:
     [data.system]
       sound = "pulseaudio"
 
-It will install firefox rather than brave-bin and modify a lot of things in the repos.
+It will install firefox rather than brave-bin and modify a lot of things in the repo.
 
 ## Apply
 `apply` will install all the dependencies and add files to your $HOME.
@@ -91,7 +93,7 @@ It will install firefox rather than brave-bin and modify a lot of things in the 
     $ chezmoi update
 
 ## Final settings
-If you have not yet configure X, change the keyboard layout like with:
+If you have not yet configure X, change the keyboard layout like this:
 
     # localectl list-x11-keymap-layouts | grep fr
     # localectl set-x11-keymap fr
