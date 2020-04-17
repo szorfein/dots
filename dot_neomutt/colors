@@ -1,0 +1,37 @@
+# general ------------ foreground ---- background -----------------------------
+color error             color3          color8
+color indicator         color6          color8
+color markers           color2          default
+color message           default         default
+color normal            color7          default
+color prompt            default         default
+color search            color84         default
+color status            color5          color8
+color tilde             color231        default
+color tree              color13         default
+
+# message index ------ foreground ---- background -----------------------------
+color index             color9          default   ~D # deleted messages
+color index             color84         default   ~F # flagged messages
+color index             color4          default   ~N # new messages
+color index             color12         default   ~Q # messages which have been replied to
+color index             color215        default   ~T # tagged messages
+color index             color141        default   ~v # messages part of a collapsed thread
+
+# message headers ---- foreground ---- background -----------------------------
+color hdrdefault        color5          default
+color header            color15         default   ^Subject:.*
+
+# message body ------- foreground ---- background -----------------------------
+color attachment        color9          default
+color body              color12         default   [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+               # email addresses
+color body              color2          default   (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+        # URLs
+color body              color13         default   (^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$) # *bold* text
+color body              color7          default   (^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)     # _underlined_ text
+color body              color7          default   (^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)     # /italic/ text
+color quoted            color2          default
+color quoted1           color117        default
+color quoted2           color5          default
+color quoted3           color13         default
+color quoted4           color14         default
+color signature         color14         default

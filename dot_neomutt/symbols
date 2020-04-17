@@ -1,0 +1,36 @@
+set index_format="     %zs %zc %zt | %-28.28L  %?X?& ? %.46s %?M10?(%1M)&? %> %{!%a %d %h %H:%M}      "
+set pager_format="\n  %n %T %s%*  %{!%d %b · %H:%M} %?X? %X?%P    \n \n"
+set status_format = "  %f %?r? %m ?%?n? %n ?%?d? %d ?%?t? %t ?%?F? %F ?%?p? %p?  \n \n"
+#set vfolder_format = "%N %?n?%3n&   ?  %8m  · %f"
+set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
+
+# powerline status bar hack
+color status color4 color0 '([a-zA-Z0-9])(\s)'
+color status color4 color0 '(\s)([a-zA-Z0-9])'
+color status color4 color0 '( )'
+color status color4 color0 '(\S)'
+color status color0 default '(|)'
+color status green color0 ''
+color status white color0 ''
+color status yellow color0 ''
+color status red color0 ''
+
+# no addressed to me, to me, group, cc, sent by me, mailing list
+set to_chars=""
+# unchanged mailbox, changed, read only, attach mode
+set status_chars = " "
+ifdef crypt_chars set crypt_chars = " "
+set flag_chars = "      "
+
+set hidden_tags = "unread,draft,flagged,passed,replied,attachment,signed,encrypted"
+tag-transforms "replied" "↻ "  \
+               "encrytpted" "" \
+               "signed" "" \
+               "attachment" "" \
+
+# The formats must start with 'G' and the entire sequence is case sensitive.
+tag-formats "replied" "GR" \
+            "encrypted" "GE" \
+            "signed" "GS" \
+            "attachment" "GA" \
+
