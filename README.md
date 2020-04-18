@@ -95,5 +95,5 @@ It will install firefox rather than brave-bin and modify a lot of things in the 
 ## Final settings
 If you have not yet configure X, change the keyboard layout like this:
 
-    # localectl list-x11-keymap-layouts | grep fr
-    # localectl set-x11-keymap fr
+    $ localectl list-x11-keymap-layouts | grep fr
+    $ localectl set-x11-keymap fr

@@ -1,5 +1,5 @@
 ---------------------------
--- {{ .theme }} awesome theme --
+--   Sci awesome theme   --
 ---------------------------
 
 local theme_assets = require("beautiful.theme_assets")
@@ -24,7 +24,7 @@ theme.fg_focus      = M.x.on_background
 theme.fg_urgent     = M.x.on_error
 theme.fg_minimize   = M.x.on_background .. "80" -- 50%
 
-theme.useless_gap   = dpi(0)
+theme.useless_gap   = dpi(6)
 theme.border_width  = dpi(1)
 theme.border_normal = M.x.background
 theme.border_focus  = M.x.dark_primary

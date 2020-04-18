@@ -455,6 +455,9 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
+                     size_hints_honor = false,
+                     honor_workarea = true,
+                     honor_padding = true,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
      }
     },
