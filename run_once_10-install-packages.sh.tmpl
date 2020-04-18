@@ -97,9 +97,10 @@ if hash emerge &>/dev/null ; then
   # neomutt
   euse_pkg mail-client/neomutt gpgme
   euse_pkg mail-client/neomutt gdbm
+  euse_pkg mail-mta/msmtp sasl
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt
+    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -118,7 +119,7 @@ elif hash pacman &>/dev/null ; then
   {{ end }}
 
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt
+    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt imagemagick msmtp msmtp-mta
 
   # AUR
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz

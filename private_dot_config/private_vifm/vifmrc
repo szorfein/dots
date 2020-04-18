@@ -109,10 +109,6 @@ if !has('win')
     set slowfs=curlftpfs
 endif
 
-" Set custom status line look
-
-set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
-
 " ------------------------------------------------------------------------------
 
 " :mark mark /full/directory/path [filename]
@@ -200,21 +196,21 @@ filextype *.djvu
         \ apvlv %f,
 
 " Audio
-filetype <audio/*> mpv %c %i &
+filetype <audio/*> mpv %c %i </dev/null &>/dev/null &
 fileviewer <audio/*>
   \ vifminmg audio %px %py %pw %ph %c
   \ %pc
   \ vifmimg clear
 
 " Video
-filextype <video/*> mpv %c %i &
+filextype <video/*> mpv %c %i </dev/null &>/dev/null &
 fileviewer <video/*>
   \ vifmimg video %px %py %pw %ph %c
   \ %pc
   \ vifmimg clear
 
 " Images
-filextype <image/*> mpv %c %i &
+filextype <image/*> mpv %c %i </dev/null &>/dev/null &
 fileviewer <image/*>
   \ vifmimg draw %px %py %pw %ph %c
   \ %pc
@@ -350,6 +346,9 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 " ------------------------------------------------------------------------------
 
 " Sample mappings
+
+" Easily quit
+nmap q ZQ
 
 " Start shell in current directory
 nnoremap s :shell<cr>

@@ -1,0 +1,17 @@
+# The SMTP smarthost.
+account gmail
+host smtp.gmail.com
+port 587
+from {{ .name }}@gmail.com
+user {{ .name }}
+passwordeval "pass gmail/{{ .name }}"
+
+# Use TLS.
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+# Syslog logging with facility LOG_MAIL instead of the default LOG_USER.
+syslog LOG_MAIL
+
+account default : gmail
