@@ -1,5 +1,9 @@
+local screen = require("awful.screen")
 local beautiful = require("beautiful")
 local xrdb = beautiful.xresources.get_current_theme()
+
+local width = screen.focused().geometry.width
+local height = screen.focused().geometry.height
 
 local mytheme = {}
 
@@ -31,12 +35,12 @@ mytheme.x = {
 
 -- fonts
 mytheme.f = {
-  h1 = "Iosevka Light 60", -- used rarely on big icon or big title
+  h1 = (height >= 1024 and "Iosevka Light 60" or "Iosevka Light 40"), -- used on big icon or big title
   h4 = "Iosevka Regular 32",
   h6 = "Iosevka Regular 20",
   subtile_1 = "Iosevka Regular 12", -- used on text list
-  body_1 = "Iosevka Term Regular 15", -- used on text body title
-  body_2 = "Iosevka Term Light 13", -- used on text body
+  body_1 = "Iosevka Term Medium 15", -- used on text body title
+  body_2 = (height >= 1024 and "Iosevka Regular 14" or "Iosevka Regular 12"), -- used on text body
   -- for button, don't use a Mono variant because icons are too small
   -- issue: https://github.com/Powerlevel9k/powerlevel9k/issues/430
   button = "Iosevka Medium Nerd Font Complete 14", -- used on text button

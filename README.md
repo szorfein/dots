@@ -27,6 +27,7 @@ Why i switch on chezmoi?
 
 ## Screenshots
 
+![](https://github.com/szorfein/unix-portfolio/raw/master/sci/logout.png)
 ![](https://github.com/szorfein/unix-portfolio/raw/master/sci/float.png)
 
 ## Packages
@@ -82,7 +83,7 @@ You can change for example in `data.system`:
     [data.system]
       sound = "pulseaudio"
 
-It will install firefox rather than brave-bin and modify a lot of things in the install.
+It will install firefox rather than brave-bin and modify a lot of things during the install.
 
 ## Apply
 `apply` will install all the dependencies and add files to your $HOME.

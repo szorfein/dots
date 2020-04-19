@@ -18,7 +18,6 @@ end
 
 local function poweroff_command()
   awful.spawn("sudo systemctl poweroff")
-  exit_screen_hide()
 end
 
 -- button poweroff
