@@ -50,9 +50,19 @@ if (has("termguicolors"))
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
+{{ if eq .theme "sci" }}
+
 " Colorscheme
+packadd! {{ .theme }}
+colorscheme {{ .theme }}
+
+" reload darkest-space
+map <F8> :update<CR>:colorscheme {{ .theme }}<CR>
+
+{{ else }}
 packadd! lilith
 colorscheme lilith
+{{ end }}
 
 " plugins
 source ~/.vim/plugin-configs.vim

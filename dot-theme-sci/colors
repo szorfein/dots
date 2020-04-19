@@ -8,7 +8,7 @@
 ! BG !
 #define theme0  #0D1014
 #define theme1  #12171c
-#define theme2  #151B21
+#define theme2  #161D23
 #define theme3  #172028
 ! FG !
 #define theme4  #cbf7fe

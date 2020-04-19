@@ -43,6 +43,7 @@ Why i switch on chezmoi?
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
 | systemd | Init System | Even on gentoo :) |
+| tmux | Terminal multiplexer | |
 | vifm | File Manager | Faster than ranger, customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim | Editor | I use vim 8 with the native third-party package loading |
 | xst | Terminal | |
@@ -81,7 +82,7 @@ You can change for example in `data.system`:
     [data.system]
       sound = "pulseaudio"
 
-It will install firefox rather than brave-bin and modify a lot of things in the repo.
+It will install firefox rather than brave-bin and modify a lot of things in the install.
 
 ## Apply
 `apply` will install all the dependencies and add files to your $HOME.
