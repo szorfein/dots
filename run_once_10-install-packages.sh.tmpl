@@ -100,7 +100,7 @@ if hash emerge &>/dev/null ; then
   euse_pkg mail-mta/msmtp sasl
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux
+    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -125,6 +125,7 @@ elif hash pacman &>/dev/null ; then
   # AUR
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
 
 fi
 
