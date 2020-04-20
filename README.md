@@ -89,7 +89,7 @@ It will install firefox rather than brave-bin and modify a lot of things during 
 ## Apply
 `apply` will install all the dependencies and add files to your $HOME.
 
-    $ chezmoi -v apply
+    $ chezmoi apply
 
 ## Update
 

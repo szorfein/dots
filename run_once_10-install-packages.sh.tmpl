@@ -103,7 +103,8 @@ if hash emerge &>/dev/null ; then
   euse_pkg dev-python/pillow jpeg
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug
+    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
+    weechat
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -111,7 +112,6 @@ elif hash pacman &>/dev/null ; then
   {{ if eq .system.sound "alsa" }}
 
   sudo $ins alsa-utils alsa-plugins ladspa swh-plugins libsamplerate
-  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/brave-bin.tar.gz
 
   {{ end }}
 
@@ -123,7 +123,14 @@ elif hash pacman &>/dev/null ; then
 
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt imagemagick msmtp msmtp-mta \
-    tmux
+    tmux weechat
+
+  {{ if eq .system.sound "alsa" }}
+
+  # the only alternative to chrome
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/brave-bin.tar.gz
+
+  {{ end }}
 
   # AUR
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz
