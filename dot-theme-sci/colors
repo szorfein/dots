@@ -4,10 +4,11 @@
 ! Contrast Ratio: https://contrast-ratio.com/
 ! search triadic, complementary, etc: https://htmlcolorcodes.com/color-picker/
 ! colors: https://mycolor.space/
+! mix colors: https://colordesigner.io/color-mixer
 
 ! BG !
-#define theme0  #0D1014
-#define theme1  #12171c
+#define theme0  #12171E
+#define theme1  #141A21
 #define theme2  #161D23
 #define theme3  #172028
 ! FG !

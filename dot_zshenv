@@ -13,3 +13,6 @@ export GPG_AGENT_INFO=""
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+
+# aliases
+alias vifm=vifmrun

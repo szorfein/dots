@@ -99,8 +99,11 @@ if hash emerge &>/dev/null ; then
   euse_pkg mail-client/neomutt gdbm
   euse_pkg mail-mta/msmtp sasl
 
+  # vifm 
+  euse_pkg dev-python/pillow jpeg
+
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava
+    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
@@ -126,6 +129,7 @@ elif hash pacman &>/dev/null ; then
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/python-ueberzug.tar.gz
 
 fi
 

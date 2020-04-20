@@ -29,6 +29,7 @@ Why i switch on chezmoi?
 
 ![](https://github.com/szorfein/unix-portfolio/raw/master/sci/logout.png)
 ![](https://github.com/szorfein/unix-portfolio/raw/master/sci/float.png)
+![](https://github.com/szorfein/unix-portfolio/raw/master/sci/vim.png)
 
 ## Packages
 

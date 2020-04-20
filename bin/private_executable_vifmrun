@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit -o nounset -o pipefail
+
+export FIFO_UEBERZUG="/tmp/vifm-ueberzug-${PPID}"
+
+cleanup() {
+  [ -p $FIFO_UEBERZUG ] && rm "$FIFO_UEBERZUG" 2>/dev/null
+  pkill -P $$ 2>/dev/null
+}
+
+[ -p $FIFO_UEBERZUG ] && rm "$FIFO_UEBERZUG"
+mkfifo "$FIFO_UEBERZUG"
+trap cleanup EXIT
+tail --follow "$FIFO_UEBERZUG" | ueberzug layer --silent --parser bash &
+
+vifm "$@"
+cleanup
