@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+pkgs=""
+
 install_packages() {
   pkg=${2:-$1}
   if ! hash $1 &>/dev/null ; then
@@ -67,14 +69,14 @@ if hash emerge &>/dev/null ; then
   euse_global speex
   euse_global libsamplerate
 
-  sudo $ins alsa-utils tap-plugins swh-plugins libsamplerate ladspa-cmt caps-plugins ladspa-bs2b alsa-plugins brave-bin
+  pkgs="alsa-utils tap-plugins swh-plugins libsamplerate ladspa-cmt caps-plugins ladspa-bs2b alsa-plugins brave-bin"
 
   {{ end }}
 
   {{ if eq .system.sound "pulseaudio" }}
 
   euse_global pulseaudio
-  sudo $ins pulseaudio firefox-bin
+  pkgs="pulseaudio firefox-bin"
 
   {{ end }}
 
@@ -104,26 +106,26 @@ if hash emerge &>/dev/null ; then
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
-    weechat
+    weechat $pkgs
 
 elif hash pacman &>/dev/null ; then
   ins="pacman -S --needed"
 
   {{ if eq .system.sound "alsa" }}
 
-  sudo $ins alsa-utils alsa-plugins ladspa swh-plugins libsamplerate
+  pkgs="alsa-utils alsa-plugins ladspa swh-plugins libsamplerate"
 
   {{ end }}
 
   {{ if eq .system.sound "pulseaudio" }}
 
-  sudo $ins pulseaudio firefox
+  pkgs="pulseaudio firefox"
 
   {{ end }}
 
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt imagemagick msmtp msmtp-mta \
-    tmux weechat
+    tmux weechat $pkgs
 
   {{ if eq .system.sound "alsa" }}
 
@@ -137,6 +139,57 @@ elif hash pacman &>/dev/null ; then
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/python-ueberzug.tar.gz
+
+elif hash apt-get &>/dev/null ; then
+  ins="apt-get install"
+
+  {{ if eq .system.sound "alsa" }}
+
+  pkgs="alsa-utils"
+
+  {{ end }}
+
+  {{ if eq .system.sound "pulseaudio" }}
+
+  pkgs="pulseaudio firefox-esr"
+
+  {{ end }}
+
+  sudo $ins gpgv2 gpg-agent xclip pass vim zsh awesome mpd ncmpcpp xinit xserver-xorg-core \
+    xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm neomutt imagemagick msmtp \
+    msmtp-mta tmux weechat $pkgs
+
+  # xst dep
+  sudo $ins build-essential pkg-config x11proto-core-dev libx11-dev libxft-dev fontconfig \
+    x11proto-dev libxext-dev
+
+  [ -d ~/builds ] || mkdir -p ~/builds
+  ( cd ~/builds \
+    && wget https://github.com/gnotclub/xst/archive/v0.7.2.tar.gz \
+    && tar xvf v0.7.2.tar.gz \
+    && cd xst-0.7.2 \
+    && sudo make install
+  )
+
+  # Iosevka font
+  [ -d ~/.local/share/fonts ] || mkdir -p ~/.local/share/fonts
+  [ -f ~/.local/share/fonts/Iosevka.zip ] || {
+    ( cd ~/.local/share/fonts \
+        && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
+    )
+  }
+
+  [ -d ~/.local/share/fonts/iosevka ] && rm -rf ~/.local/share/fonts/iosevka
+  ( mkdir ~/.local/share/fonts/iosevka \
+      && cd ~/.local/share/fonts/iosevka \
+      && unzip ../Iosevka.zip \
+      && rm ../Iosevka*.zip
+  )
+
+  fc-cache -vf ~/.local/share/fonts
+
+  # set zsh
+  chsh -s /usr/bin/zsh
 
 fi
 

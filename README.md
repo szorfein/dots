@@ -1,9 +1,9 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
 Work only on distro linux including the installer:
-+ `emerge`: Gentoo.
++ `emerge`: Gentoo, Pentoo, no Funtoo because my dots require `systemd`.
 + `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
-+ TODO: add support for apt-get system...
++ `apt-get`: Debian, Ubuntu, Kali, etc...
 
 Why i switch on chezmoi?
 + Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
@@ -53,17 +53,23 @@ Why i switch on chezmoi?
 | zathura | PDF/Epub viewer | |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`):
-On gentoo:
+You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
++ On `emerge` (gentoo):
 
-    $ curl -sfL https://git.io/chezmoi | sh
     $ sudo emerge -av sudo git vim
+    $ curl -sfL https://git.io/chezmoi | sh
 
-Or on archlinux:
++ On `pacman` (arch,...):
 
     $ sudo pacman -S chezmoi sudo git vim
 
-`sudo` should have permission for install packages:
++ On `apt-get` (debian,...)
+
+    $ sudo apt-get install sudo git vim
+    $ wget -cv https://github.com/twpayne/chezmoi/releases/download/v1.8.0/chezmoi_1.8.0_linux_amd64.deb
+    $ sudo dpkg -i chezmoi_1.8.0_linux_amd64.deb
+
+`sudo`, user should have permission for install packages:
 
     # EDITOR="vim" visudo
     username ALL=(ALL) ALL
@@ -99,4 +105,4 @@ It will install firefox rather than brave-bin and modify a lot of things during 
 If you have not yet configure X, change the keyboard layout like this:
 
     $ localectl list-x11-keymap-layouts | grep fr
-    $ localectl set-x11-keymap fr
+    $ sudo localectl set-x11-keymap fr
