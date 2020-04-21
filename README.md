@@ -54,16 +54,16 @@ Why i switch on chezmoi?
 
 ## Requirements
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
-+ On `emerge` (gentoo):
+On `emerge` (gentoo):
 
     $ sudo emerge -av sudo git vim
     $ curl -sfL https://git.io/chezmoi | sh
 
-+ On `pacman` (arch,...):
+On `pacman` (arch,...):
 
     $ sudo pacman -S chezmoi sudo git vim
 
-+ On `apt-get` (debian,...)
+On `apt-get` (debian,...)
 
     $ sudo apt-get install sudo git vim
     $ wget -cv https://github.com/twpayne/chezmoi/releases/download/v1.8.0/chezmoi_1.8.0_linux_amd64.deb

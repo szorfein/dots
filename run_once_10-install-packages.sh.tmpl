@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -o errexit
+
 pkgs=""
 
 install_packages() {
@@ -52,7 +54,7 @@ bye() {
   echo
 }
 
-if hash emerge &>/dev/null ; then
+if hash emerge 2>/dev/null ; then
   ins="emerge -av --changed-use"
 
   # env
@@ -108,7 +110,7 @@ if hash emerge &>/dev/null ; then
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
     weechat $pkgs
 
-elif hash pacman &>/dev/null ; then
+elif hash pacman 2>/dev/null ; then
   ins="pacman -S --needed"
 
   {{ if eq .system.sound "alsa" }}
@@ -140,7 +142,7 @@ elif hash pacman &>/dev/null ; then
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/python-ueberzug.tar.gz
 
-elif hash apt-get &>/dev/null ; then
+elif hash apt-get 2>/dev/null ; then
   ins="apt-get install"
 
   {{ if eq .system.sound "alsa" }}
