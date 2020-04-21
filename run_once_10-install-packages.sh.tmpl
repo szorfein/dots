@@ -170,6 +170,7 @@ elif hash apt-get 2>/dev/null ; then
     && wget https://github.com/gnotclub/xst/archive/v0.7.2.tar.gz \
     && tar xvf v0.7.2.tar.gz \
     && cd xst-0.7.2 \
+    && sudo make \
     && sudo make install
   )
 
@@ -189,6 +190,23 @@ elif hash apt-get 2>/dev/null ; then
   )
 
   fc-cache -vf ~/.local/share/fonts
+
+  # picom
+  sudo $ins meson ninja-build cmake libev-dev libx11-xcb-dev libxcb-render-util0-dev \
+    libxcb-image0-dev libpixman-1-dev libxcb-damage0-dev libxcb-randr0-dev \
+    libxcb-sync-dev libxcb-composite0-dev libxcb-xinerama0-dev libxcb-present-dev \
+    libxcb-glx0-dev uthash-dev libconfig-dev libpcre3-dev libgl1-mesa-dev libdbus-1-dev
+
+  git clone https://github.com/yshui/picom ~/builds/picom
+  ( cd ~/builds/picom \
+      && meson --buildtype=release . build \
+      && ninja -C build \
+      && sudo ninja -C build install
+  )
+
+  # ueberzug (vifm image preview)
+  sudo apt-get install python3-pip
+  sudo pip3 install ueberzug
 
   # set zsh
   chsh -s /usr/bin/zsh
