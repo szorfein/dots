@@ -171,7 +171,7 @@ elif hash apt-get 2>/dev/null ; then
     && tar xvf v0.7.2.tar.gz \
     && cd xst-0.7.2 \
     && sudo make \
-    && sudo make install
+    && sudo make PREFIX=/usr DESTDIR=/ install
   )
 
   # Iosevka font
