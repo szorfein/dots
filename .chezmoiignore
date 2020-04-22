@@ -1,5 +1,7 @@
 README.md
 LICENSE
+Makefile
 dot-theme-*
 asound
 dot_weechat/private_weechat.conf
+*.tar.gz

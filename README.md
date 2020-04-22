@@ -1,7 +1,7 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
-Work only on distro linux including the installer:
-+ `emerge`: Gentoo, Pentoo, no Funtoo because my dots require `systemd`.
+Work only on distro linux including the installer: ( tested on a clean install of Gentoo, Archlinux and Debian )  
++ `emerge`: Gentoo, Pentoo, no Funtoo because this require `systemd`.
 + `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
 + `apt-get`: Debian, Ubuntu, Kali, etc...
 
@@ -48,22 +48,23 @@ Why i switch on chezmoi?
 | tmux | Terminal multiplexer | |
 | vifm | File Manager | Faster than ranger, customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim | Editor | I use vim 8 with the native third-party package loading |
+| weechat | IRC client | |
 | xst | Terminal | |
-| zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
 | zathura | PDF/Epub viewer | |
+| zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
 
 ## Requirements
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
-On `emerge` (gentoo):
+With `emerge` (gentoo):
 
     $ sudo emerge -av sudo git vim
     $ curl -sfL https://git.io/chezmoi | sh
 
-On `pacman` (arch,...):
+With `pacman` (arch,...):
 
     $ sudo pacman -S chezmoi sudo git vim
 
-On `apt-get` (debian,...)
+With `apt-get` (debian,...)
 
     $ sudo apt-get install sudo git vim
     $ wget -cv https://github.com/twpayne/chezmoi/releases/download/v1.8.0/chezmoi_1.8.0_linux_amd64.deb
