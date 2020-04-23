@@ -192,13 +192,18 @@ elif hash apt-get 2>/dev/null ; then
   fc-cache -vf ~/.local/share/fonts
 
   # picom
+  pversion="8"
+
   sudo $ins meson ninja-build cmake libev-dev libx11-xcb-dev libxcb-render-util0-dev \
     libxcb-image0-dev libpixman-1-dev libxcb-damage0-dev libxcb-randr0-dev \
     libxcb-sync-dev libxcb-composite0-dev libxcb-xinerama0-dev libxcb-present-dev \
     libxcb-glx0-dev uthash-dev libconfig-dev libpcre3-dev libgl1-mesa-dev libdbus-1-dev
 
-  git clone https://github.com/yshui/picom ~/builds/picom
-  ( cd ~/builds/picom \
+  rm -rf ~/builds/picom*
+  curl -s -L -o ~/builds/picom-${pversion}.tar.gz https://github.com/yshui/picom/archive/v${pversion}.tar.gz
+  ( cd ~/builds/ \
+      && tar xvf picom-${pversion}.tar.gz \
+      && cd picom-${pversion} \
       && meson --buildtype=release . build \
       && ninja -C build \
       && sudo ninja -C build install
