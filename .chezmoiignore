@@ -1,10 +1,10 @@
 README.md
 LICENSE
 Makefile
-dot-theme-*
+theme-*
 asound
-dot_weechat/private_weechat.conf
+.weechat/private_weechat.conf
 *.tar.gz
 {{- if ne .github.name "szorfein" }}
-dot_weechat/certs
+.weechat/certs
 {{- end }}
