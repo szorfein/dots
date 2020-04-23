@@ -39,6 +39,7 @@ Why i switch on chezmoi?
 | awesome | Window Manager | Configs recreate from scratch |
 | brave | Web Browser | brave-bin with alsa, firefox with pulseaudio |
 | feh | Image Viewer | |
+| i3lock-color | Lock Screen | for now, maybe [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) later |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
 | neomutt | Email Reader | with fdm and msmtp, customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |

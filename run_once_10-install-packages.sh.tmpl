@@ -108,7 +108,7 @@ if hash emerge 2>/dev/null ; then
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
-    weechat $pkgs
+    weechat i3lock-color $pkgs
 
 elif hash pacman 2>/dev/null ; then
   ins="pacman -S --needed"
@@ -127,7 +127,7 @@ elif hash pacman 2>/dev/null ; then
 
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt imagemagick msmtp msmtp-mta \
-    tmux weechat $pkgs
+    tmux weechat i3lock-color $pkgs
 
   {{ if eq .system.sound "alsa" }}
 
@@ -210,8 +210,26 @@ elif hash apt-get 2>/dev/null ; then
   )
 
   # ueberzug (vifm image preview)
-  sudo apt-get install python3-pip
+  sudo $ins python3-pip
   sudo pip3 install ueberzug
+
+  # i3lock-color
+  PV="2.12.c.2"
+
+  sudo $ins libpam0g-dev libcairo2-dev libxcb-xkb-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev \
+    libjpeg-dev autoconf libxcb-util0-dev
+
+  [ -f ~/builds/i3lock-color-${PV}.tar.gz ] ||
+    curl -s -L -o ~/builds/i3lock-color-${PV}.tar.gz https://github.com/Raymo111/i3lock-color/archive/${PV}.tar.gz
+
+  rm -rf ~/builds/i3lock-color-${PV}
+  ( cd ~/builds \
+      && tar xvf i3lock-color-${PV}.tar.gz \
+      && cd i3lock-color-${PV} \
+      && autoreconf -fiv \
+      && ./configure --prefix=/usr --sysconfdir=/etc \
+      && sudo make DESTDIR=/ install
+  )
 
   # set zsh
   chsh -s /usr/bin/zsh

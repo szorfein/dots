@@ -57,7 +57,7 @@ local exit = button({
 
 local function lock_command()
     exit_screen_hide()
-    lock_screen_show()
+    awful.spawn.with_shell("lock.sh")
 end
 
 -- button lock
