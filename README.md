@@ -22,6 +22,9 @@ Why i switch on chezmoi?
    * [Apply](#apply)
    * [Update](#update)
    * [Final settings](#final-settings)
+   * [Left Over](#left-over)
+     * [Issues](#issues)
+     * [Support](#support)
 
 <!--te-->
 
@@ -108,3 +111,12 @@ If you have not yet configure X, change the keyboard layout like this:
 
     $ localectl list-x11-keymap-layouts | grep fr
     $ sudo localectl set-x11-keymap fr
+
+## Left Over
+
+### Issues
+For any questions, comments, feedback or issues, submit a [new issue](https://github.com/szorfein/dots/issues/new).
+
+### Support
+Any support are greatly appreciated, star the repo, offer me a coffee... thanks you!  
+[![Donate](https://img.shields.io/badge/don-liberapay-1ba9a4)](https://liberapay.com/szorfein) [![Donate](https://img.shields.io/badge/don-patreon-ab69f4)](https://www.patreon.com/szorfein)

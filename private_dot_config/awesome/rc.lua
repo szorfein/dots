@@ -21,6 +21,7 @@ require("awful.hotkeys_popup.keys")
 M = require("env-theme")
 
 local noti = require("utils.noti")
+local helper = require("utils.helper")
 
 -- Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -61,8 +62,8 @@ local theme_dir = os.getenv("HOME") .. "/.config/awesome/theme/"
 beautiful.init( theme_dir .. "theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = os.getenv("TERMINAL") or "xterm"
-editor = os.getenv("EDITOR") or "nano"
+terminal = os.getenv("TERMINAL") or "xst"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -84,7 +85,6 @@ awful.layout.layouts = {
   awful.layout.suit.spiral,
   awful.layout.suit.spiral.dwindle,
   awful.layout.suit.max,
-  awful.layout.suit.max.fullscreen,
   awful.layout.suit.magnifier,
   awful.layout.suit.corner.nw,
 }
@@ -496,6 +496,26 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = true }
     },
 
+    -- Center 66
+    { rule_any = {
+      class = {
+        "feh",
+        "mpv",
+      },
+      name = {
+        "Save File"
+      },
+    }, properties = helper.like_subtle({ 25, 25, 50, 50 }) },
+
+    -- Web browsers on tag 2
+    { rule_any = {
+      class = {
+        "Brave-browser",
+        "Firefox",
+        "Tor Browser"
+      },
+    }, properties = { tag = screen[1].tags[2], switch_to_tags = true } },
+
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
@@ -563,4 +583,6 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+require("autostart")
 -- }}}

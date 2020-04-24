@@ -7,8 +7,6 @@ if [ -f "$userresources" ]; then
   xrdb -merge "$userresources"
 fi
 
-picom -b
-
 {{ if eq .theme "sci" }}
 exec awesome
 {{ end }}
