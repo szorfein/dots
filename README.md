@@ -17,9 +17,10 @@ Why i switch on chezmoi?
 
    * [Packages](#packages)
    * [Requirements](#requirements)
-   * [Clone](#clone-this-repo)
-   * [Config](#config)
-   * [Apply](#apply)
+   * [Install](#install)
+     * [Clone](#clone-this-repo)
+     * [Config](#config)
+     * [Apply](#apply)
    * [Update](#update)
    * [Final settings](#final-settings)
    * [Left Over](#left-over)
@@ -81,11 +82,14 @@ With `apt-get` (debian,...)
 
 If you have create your first user recently (via: `useradd -m -G users,wheel,audio,video username`), logout and back to initialize his environment correctly.
     
-## Clone this repo
+## Install
+Only 3 little steps here
+
+### Clone this repo
 
     $ chezmoi init https://github.com/szorfein/dots.git
 
-## Config
+### Config
 Edit the config file with your favorite text editor.
 
     $ EDITOR="vim" chezmoi edit-config
@@ -97,7 +101,7 @@ You can change for example in `data.system`:
 
 It will install firefox rather than brave-bin and modify a lot of things during the install.
 
-## Apply
+### Apply
 `apply` will install all the dependencies and add files to your $HOME.
 
     $ chezmoi apply

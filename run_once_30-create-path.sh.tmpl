@@ -1,5 +1,24 @@
 #!/usr/bin/env sh
 
+cyan=$'\e[0;96m'
+white=$'\e[0;97m'
+endc=$'\e[0m'
+
+msg() {
+  echo ""
+  echo "$cyan--------------------------------------------------$endc"
+  echo "$cyan-->$white $1 $endc"
+  echo ""
+}
+
+bye() {
+  echo ""
+    echo "$cyan-->$white End for $0 $endc"
+    echo "$cyan--------------------------------------------------$endc"
+}
+
+msg "Execute $0..."
+
 add_dir() {
   [ -d $1 ] || mkdir -p $1
 }
@@ -22,3 +41,5 @@ chmod -R 700 ~/.mails
 # files
 add_file ~/.config/mpd/database
 add_file ~/.config/mpd/state
+
+trap bye EXIT

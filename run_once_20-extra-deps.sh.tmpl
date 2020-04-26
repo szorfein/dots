@@ -1,0 +1,130 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+cyan=$'\e[0;96m'
+white=$'\e[0;97m'
+endc=$'\e[0m'
+
+build_aur() {
+  PKG_URL="$1"
+  PKG_NAME=${PKG_URL##*/} # e.g xst-git.tar.gz
+  PKG=${PKG_NAME%%.*} # e.g xst-git
+  [ -d $HOME/build ] || mkdir $HOME/build
+  ( cd $HOME/build \
+      && wget $PKG_URL \
+      && tar xvf ${PKG_NAME} \
+      && cd ${PKG} \
+      && makepkg -si --noconfirm
+  )
+}
+
+msg() {
+  echo ""
+  echo "$cyan--------------------------------------------------$endc"
+  echo "$cyan-->$white $1 $endc"
+  echo ""
+}
+
+bye() {
+  echo ""
+  echo "$cyan-->$white End for $0 $endc"
+  echo "$cyan--------------------------------------------------$endc"
+}
+
+msg "Execute $0..."
+
+if hash pacman 2>/dev/null ; then
+  ins="pacman -S --noconfirm --needed"
+
+  {{ if eq .system.sound "alsa" }}
+
+  # the only alternative to chrome
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/brave-bin.tar.gz
+
+  {{ end }}
+
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/xst.tar.gz
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/python-ueberzug.tar.gz
+
+elif hash apt-get 2>/dev/null ; then
+  ins="apt-get install -y"
+
+  # xst dep
+  PV="0.7.2"
+
+  sudo $ins build-essential pkg-config x11proto-core-dev libx11-dev libxft-dev fontconfig \
+    x11proto-dev libxext-dev
+
+  [ -d ~/builds ] || mkdir -p ~/builds
+  ( cd ~/builds \
+    && wget https://github.com/gnotclub/xst/archive/v$PV.tar.gz \
+    && tar xvf v$PV.tar.gz \
+    && cd xst-$PV \
+    && sudo make \
+    && sudo make PREFIX=/usr DESTDIR=/ install
+  )
+
+  # Iosevka font
+  PV="2.1.0"
+
+  [ -d ~/.local/share/fonts ] || mkdir -p ~/.local/share/fonts
+  [ -f ~/.local/share/fonts/Iosevka.zip ] || {
+    ( cd ~/.local/share/fonts \
+        && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/Iosevka.zip
+    )
+  }
+
+  [ -d ~/.local/share/fonts/iosevka ] && rm -rf ~/.local/share/fonts/iosevka
+  ( mkdir ~/.local/share/fonts/iosevka \
+      && cd ~/.local/share/fonts/iosevka \
+      && unzip ../Iosevka.zip \
+      && rm ../Iosevka*.zip
+  )
+
+  fc-cache -vf ~/.local/share/fonts
+
+  # picom
+  PV="8"
+
+  sudo $ins meson ninja-build cmake libev-dev libx11-xcb-dev libxcb-render-util0-dev \
+    libxcb-image0-dev libpixman-1-dev libxcb-damage0-dev libxcb-randr0-dev \
+    libxcb-sync-dev libxcb-composite0-dev libxcb-xinerama0-dev libxcb-present-dev \
+    libxcb-glx0-dev uthash-dev libconfig-dev libpcre3-dev libgl1-mesa-dev libdbus-1-dev
+
+  rm -rf ~/builds/picom*
+  curl -s -L -o ~/builds/picom-$PV.tar.gz https://github.com/yshui/picom/archive/v$PV.tar.gz
+  ( cd ~/builds/ \
+      && tar xvf picom-$PV.tar.gz \
+      && cd picom-$PV \
+      && meson --buildtype=release . build \
+      && ninja -C build \
+      && sudo ninja -C build install
+  )
+
+  # ueberzug (vifm image preview)
+  sudo $ins python3-pip
+  sudo pip3 install ueberzug
+
+  # i3lock-color
+  PV="2.12.c.2"
+
+  sudo $ins libpam0g-dev libcairo2-dev libxcb-xkb-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev \
+    libjpeg-dev autoconf libxcb-util0-dev
+
+  [ -f ~/builds/i3lock-color-${PV}.tar.gz ] ||
+    curl -s -L -o ~/builds/i3lock-color-${PV}.tar.gz https://github.com/Raymo111/i3lock-color/archive/${PV}.tar.gz
+
+  rm -rf ~/builds/i3lock-color-${PV}
+  ( cd ~/builds \
+      && tar xvf i3lock-color-${PV}.tar.gz \
+      && cd i3lock-color-${PV} \
+      && autoreconf -fiv \
+      && ./configure --prefix=/usr --sysconfdir=/etc \
+      && sudo make DESTDIR=/ install
+  )
+fi
+
+trap bye EXIT

@@ -17,6 +17,8 @@ ask_before_clearing_playlists = "no"
 now_playing_prefix = "$5>> $1"
 song_list_format = "$7{%a}|{%D}$8 * $5%t$R $6%l"
 
+autocenter_mode = "yes"
+
 #progressbar_look = "░█ "
 progressbar_look = "=>"
 #progressbar_look = "─- "
