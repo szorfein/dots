@@ -1,0 +1,54 @@
+configuration {
+  location: 1;
+  yoffset: 0;
+  xoffset: 0;
+  fake-transparency: false;
+  hide-scrollbar: true;
+  bw: 0;
+  fullscreen: false;
+  show-icons: false;
+  terminal: "xst";
+  sidebar-mode: false;
+}
+
+* {
+  background-color: @xbg;
+  font: @xfont;
+  padding: 6 6 6 6;
+}
+
+window {
+  height: 100%;
+  width: 240;
+  transparency: "real";
+}
+
+mainbox {
+  children: [ inputbar, listview ];
+  background-color: @xbg;
+}
+
+element {
+  text-color: @xfg;
+  padding: 8 2 8 2;
+}
+
+element selected {
+  background-color: @xbg-sel;
+  text-color: @xfg-sel;
+}
+
+inputbar {
+  children: [entry];
+  padding: 4 8 4 8;
+  background-color: @xred;
+  border-color: @xfg;
+}
+
+entry {
+  font: @xfont-entry;
+  text-color: @xfg;
+  padding: 4 2 4 2;
+}
+
+@import "colors.rasi"

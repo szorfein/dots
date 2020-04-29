@@ -42,6 +42,7 @@ SYSTEMCTL=$(which systemctl)
 cat << EOF | sudo tee /etc/sudoers.d/dots
 $USER ALL=(ALL) NOPASSWD: $SYSTEMCTL poweroff
 $USER ALL=(ALL) NOPASSWD: $SYSTEMCTL reboot
+$USER ALL=(ALL) NOPASSWD: $SYSTEMCTL restart tor
 EOF
 
 trap bye EXIT

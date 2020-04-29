@@ -28,9 +28,7 @@ local helper = require("utils.helper")
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
   noti.critical(awesome.startup_errors)
-end
-
--- Handle runtime errors after startup
+end -- Handle runtime errors after startup
 do
   local in_error = false
   awesome.connect_signal("debug::error", function (err)
@@ -326,7 +324,8 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
+    --awful.key({ modkey }, "p", function() menubar.show() end,
+    awful.key({ modkey }, "p", function() awful.spawn("rofi -no-lazy-grab -show drun -theme ~/.config/rofi/config.rasi") end,
               {description = "show the menubar", group = "launcher"})
 )
 
