@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=neomutt %u
+Icon=neomutt
+Name=Neomutt
+Terminal=true
+Type=Application
+GenericName=Mail client
+Categories=Office;Network;Email;

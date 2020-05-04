@@ -106,6 +106,10 @@ if hash emerge 2>/dev/null ; then
   # rofi
   euse_pkg x11-libs/pango X
 
+  # mpv driver
+  euse_pkg media-video/ffmpeg openh264
+  euse_pkg media-video/ffmpeg vpx
+
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
     weechat i3lock-color rofi youtube-dl $pkgs
@@ -146,7 +150,7 @@ elif hash apt-get 2>/dev/null ; then
 
   sudo $ins gpg gpg-agent xclip pass vim zsh awesome mpd ncmpcpp xinit xserver-xorg-core \
     xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm neomutt imagemagick msmtp \
-    msmtp-mta tmux weechat rofi youtube-dl $pkgs
+    msmtp-mta tmux weechat rofi youtube-dl fonts-materialdesignicons-webfont $pkgs
 
   # set zsh
   chsh -s /usr/bin/zsh

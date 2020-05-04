@@ -34,7 +34,22 @@ bye() {
 
 msg "Execute $0..."
 
-if hash pacman 2>/dev/null ; then
+if hash emerge 2>/dev/null ; then
+  PN="MaterialDesign-Webfont"
+  PV="3.8.95"
+
+  [ -d ~/.local/share/fonts ] || mkdir -p ~/.local/share/fonts
+  [ -d ~/builds ] || mkdir ~/builds
+
+  (cd ~/builds \
+     && rm -rf font-mat*.tar.gz \
+     && rm -rf $PN* \
+     && curl -L -o font-material.tar.gz https://github.com/Templarian/$PN/archive/v$PV.tar.gz \
+     && tar xvf font-material.tar.gz \
+     && mv $PN-$PV/fonts/materialdesignicons-webfont.ttf ~/.local/share/fonts/ \
+     && fc-cache -vf ~/.local/share/fonts/
+  )
+elif hash pacman 2>/dev/null ; then
   ins="pacman -S --noconfirm --needed"
 
   {{ if eq .system.sound "alsa" }}
@@ -48,6 +63,7 @@ if hash pacman 2>/dev/null ; then
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/python-ueberzug.tar.gz
+  build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/ttf-material-design-icons-webfont.tar.gz
 
 elif hash apt-get 2>/dev/null ; then
   ins="apt-get install -y"
