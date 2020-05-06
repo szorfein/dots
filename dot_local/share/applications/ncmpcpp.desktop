@@ -5,3 +5,4 @@ GenericName=Music Player
 Exec=ncmpcpp
 Terminal=true
 Categories=AudioVideo;Audio;Player
+Icon=music-amarok

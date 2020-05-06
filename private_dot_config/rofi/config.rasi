@@ -1,54 +1,37 @@
 configuration {
-  location: 1;
-  yoffset: 0;
+	modi: "combi,drun,windowcd,run";
+	width: 16;
+	font: @xfont;
+	bw: 0;
+  yoffset: 32;
   xoffset: 0;
-  fake-transparency: false;
-  hide-scrollbar: true;
+	location: 1;
+	padding: 6;
+	fixed-num-lines: false;
+	show-icons: true;
+	terminal: "xst";
   bw: 0;
-  fullscreen: false;
-  show-icons: false;
-  terminal: "xst";
-  sidebar-mode: false;
-}
-
-* {
-  background-color: @xbg;
-  font: @xfont;
-  padding: 6 6 6 6;
-}
-
-window {
-  height: 100%;
-  width: 240;
-  transparency: "real";
-}
-
-mainbox {
-  children: [ inputbar, listview ];
-  background-color: @xbg;
-}
-
-element {
-  text-color: @xfg;
-  padding: 8 2 8 2;
-}
-
-element selected {
-  background-color: @xbg-sel;
-  text-color: @xfg-sel;
-}
-
-inputbar {
-  children: [entry];
-  padding: 4 8 4 8;
-  background-color: @xred;
-  border-color: @xfg;
-}
-
-entry {
-  font: @xfont-entry;
-  text-color: @xfg;
-  padding: 4 2 4 2;
+	icon-theme:"Papirus-Dark";
+	drun-match-fields: "name,generic,exec,categories";
+	drun-show-actions: false;
+	drun-display-format: "{icon} {name}"; 
+	disable-history: false;
+	ignored-prefixes: "";
+	window-format: "{t}";
+	case-sensitive: false;
+	cycle: true;
+	sidebar-mode: false;
+	combi-modi: "window,drun";
+	hide-scrollbar: true;
+	theme:"./theme.rasi";
+	display-window:" ";
+	display-windowcd:" " ;
+	display-run:"  ";
+	display-ssh:" ";
+	display-drun:"  ";
+	display-combi:" ";
+	display-keys:" ";
+	me-accept-custom: "Control+MouseDPrimary";
 }
 
 @import "colors.rasi"

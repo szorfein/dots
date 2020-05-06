@@ -1,0 +1,128 @@
+#window {
+  background-color: @xbg;
+  border:           3;
+  border-radius:	  11; 
+  padding:          5;
+}
+
+#mainbox {
+  border:  0;
+  padding: 0;
+	background-color: @xbg;
+}
+
+#textbox {
+  text-color: @xfg;
+	background-color: @xbg;
+}
+
+#listview {
+  fixed-height: 0;
+  spacing:      2px ;
+  scrollbar:    false ;
+  padding:      2px 0px 0px ;
+	background-color: @xbg;
+}
+
+#element {
+  border:  0 ;
+  padding: 5px ;
+	background-color: @xbg;
+}
+
+#element.normal.normal {
+  background-color: @xbg;
+  text-color:       @xfg;
+}
+
+#element.normal.urgent {
+  background-color: @xred;
+  text-color:       @xfg;
+}
+
+#element.normal.active {
+  background-color: @xbg;
+  text-color:       @xfg;
+}
+
+#element.selected.normal {
+  background-color: @xbg-sel;
+  text-color:       @xfg-sel;
+	border: 1px;
+	border-color: @xbg-sel;
+	border-radius: 5px;
+}
+
+#element.selected.urgent {
+  background-color: @xred;
+}
+
+#element.selected.active {
+  background-color: @xbg-sel;
+  text-color:       @xfg;
+	border: 2px;
+	border-color: @xbg-sel;
+	border-radius: 5px;
+}
+
+#element.alternate.normal {
+  background-color: @xbg;
+  text-color:       @xfg;
+}
+
+#element.alternate.urgent {
+  background-color: @xred;
+  text-color:       @xfg;
+}
+
+#element-icon {
+	size: 22px;
+}
+
+#inputbar {
+  spacing:    0;
+  text-color: @xfg;
+  padding:    0;
+	border: 0 0 2 0;
+	border-color: @xbg-sel;
+}
+
+#case-indicator {
+  spacing:    0;
+  text-color: @xbg-sel;
+}
+
+#entry {
+  spacing:    0;
+  text-color: @xfg;
+  font: @xfont-entry;
+}
+
+#prompt {
+  spacing:    0;
+  text-color: @xfg;
+}
+
+#inputbar {
+  children:   [ prompt,textbox-prompt-colon,entry ];
+}
+
+prompt,
+textbox-prompt-colon,
+entry,
+inputbar{
+	background-color: @xbg;
+}
+
+prompt,
+textbox-prompt-colon{
+	text-color: @xfg;
+}
+
+#textbox-prompt-colon {
+  expand:     false;
+  str:        "";
+  margin:     0px 0.3em 0em 0em ;
+}
+
+@import "colors.rasi"
