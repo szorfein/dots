@@ -25,7 +25,7 @@ theme.fg_urgent     = M.x.on_error
 theme.fg_minimize   = M.x.on_background .. "80" -- 50%
 
 theme.useless_gap   = dpi(6)
-theme.border_width  = dpi(1)
+theme.border_width  = dpi(6)
 theme.border_normal = M.x.background
 theme.border_focus  = M.x.dark_primary
 theme.border_marked = M.x.error

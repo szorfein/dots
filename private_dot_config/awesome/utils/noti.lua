@@ -1,11 +1,6 @@
 local naughty = require("naughty")
 local helper = require("utils.helper")
 
--- timeout
-naughty.config.spacing = 10
-naughty.config.defaults.timeout = 0
-naughty.config.presets.low.timeout = 6
-
 -- configs
 naughty.config.presets.low = {
   font = M.f.body_2,

@@ -39,6 +39,10 @@ function font.body_2(text)
   return widget_text(M.f.body_2, text)
 end
 
+function font.icon(text)
+  return widget_text(M.f.icon, text)
+end
+
 function font.button(text)
   return widget_text(M.f.button, text)
 end
