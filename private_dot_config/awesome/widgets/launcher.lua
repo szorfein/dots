@@ -13,6 +13,7 @@ function launcher_root:init()
     icon = font.icon(""),
     command = self.cmd,
     layout = "horizontal",
+    margins = dpi(4),
   })
 end
 

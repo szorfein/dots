@@ -32,9 +32,10 @@ function mat_button:init(args)
   self.command = args.command or nil
   -- button mode https://material.io/components/buttons/#
   self.mode = args.mode or 'text' -- mode are: contained , outlined or text
+  self.margins = args.margins or 10
   -- widgets
   self.margin = wibox.widget {
-    margins = 10,
+    margins = self.margins,
     forced_height = self.height,
     forced_width = self.width,
     widget = wibox.container.margin
@@ -61,6 +62,7 @@ function mat_button:make_widget()
 end
 
 function mat_button:add_action()
+  if self.command == nil then return end
   self.w:buttons(table.join(
     awful.button({}, 1, function() 
       self.command()

@@ -105,6 +105,7 @@ if hash emerge 2>/dev/null ; then
 
   # rofi
   euse_pkg x11-libs/pango X
+  euse_pkg x11-misc/rofi windowmode
 
   # mpv driver
   euse_pkg media-video/ffmpeg openh264
@@ -112,7 +113,7 @@ if hash emerge 2>/dev/null ; then
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
-    weechat i3lock-color rofi youtube-dl papirus-icon-theme $pkgs
+    weechat i3lock-color rofi youtube-dl papirus-icon-theme media-sound/mpc $pkgs
 
 elif hash pacman 2>/dev/null ; then
   ins="pacman -S --needed"
@@ -131,7 +132,7 @@ elif hash pacman 2>/dev/null ; then
 
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt imagemagick msmtp msmtp-mta \
-    tmux weechat i3lock-color rofi youtube-dl papirus-icon-theme $pkgs
+    tmux weechat i3lock-color rofi youtube-dl papirus-icon-theme mpc $pkgs
 
 elif hash apt-get 2>/dev/null ; then
   ins="apt-get install"
@@ -150,7 +151,8 @@ elif hash apt-get 2>/dev/null ; then
 
   sudo $ins gpg gpg-agent xclip pass vim zsh awesome mpd ncmpcpp xinit xserver-xorg-core \
     xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm neomutt imagemagick msmtp \
-    msmtp-mta tmux weechat rofi youtube-dl fonts-materialdesignicons-webfont papirus-icon-theme $pkgs
+    msmtp-mta tmux weechat rofi youtube-dl papirus-icon-theme \
+    mpc $pkgs
 
   # set zsh
   chsh -s /usr/bin/zsh
