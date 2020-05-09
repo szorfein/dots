@@ -11,8 +11,12 @@ local music_root = class()
 function music_root:init()
   self.title = font.body_2('')
   self.artist = font.body_2('')
-  self.cover = wibox.widget.imagebox(nil, true)
-  self.cover.forced_width = 200
+  self.cover = wibox.widget {
+    resize = true,
+    forced_height = 90,
+    forced_width = 90,
+    widget = wibox.widget.imagebox
+  }
   self.w = button({
     fg_icon = M.x.secondary,
     icon = font.icon(""),
@@ -21,6 +25,28 @@ function music_root:init()
   })
   self:gen_popup()
   self:signals()
+end
+
+function music_root:gen_popup()
+  local w = awful.popup {
+    widget = {
+      nil,
+      {
+        self.title,
+        self.artist,
+        self.cover,
+        layout = wibox.layout.fixed.vertical
+      },
+      nil,
+      expand = "none",
+      layout = wibox.layout.align.horizontal
+    },
+    hide_on_right_click = true,
+    visible = false,
+    ontop = true,
+    bg = M.x.surface,
+  }
+  w:bind_to_widget(self.w)
 end
 
 function music_root:signals()
@@ -33,35 +59,8 @@ function music_root:signals()
     --self.cover:set_image(cover)
     --self.cover:emit_signal("widget::redraw_needed")
     --self.cover:emit_signal("widget::layout_changed")
-    self.cover.image = cover
+    self.cover:set_image(cover)
   end)
-end
-
-function music_root:gen_popup()
-  local w = awful.popup {
-    widget = {
-      {
-        nil,
-        {
-          self.title,
-          self.artist,
-          self.cover,
-          layout = wibox.layout.fixed.vertical
-        },
-        nil,
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-      },
-      forced_width = 200,
-      forced_height = 200,
-      layout = wibox.layout.fixed.vertical
-    },
-    hide_on_right_click = true,
-    visible = false,
-    ontop = true,
-    bg = M.x.surface,
-  }
-  w:bind_to_widget(self.w)
 end
 
 local music_widget = class(music_root)

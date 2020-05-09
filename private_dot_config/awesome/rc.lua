@@ -89,11 +89,8 @@ awful.layout.layouts = {
   awful.layout.suit.tile.top,
   awful.layout.suit.fair,
   awful.layout.suit.fair.horizontal,
-  awful.layout.suit.spiral,
-  awful.layout.suit.spiral.dwindle,
   awful.layout.suit.max,
-  awful.layout.suit.magnifier,
-  awful.layout.suit.corner.nw,
+  awful.layout.suit.spiral.dwindle,
 }
 
 -- Menu
@@ -169,12 +166,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(gears.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+    s.mylayoutbox = require("widgets.layoutbox")(s, {})
     -- Create a taglist widget
     s.mytaglist = require("widgets.taglist")(s, {})
 
