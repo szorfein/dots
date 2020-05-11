@@ -1,4 +1,5 @@
 local spawn = require('awful.spawn')
+local timer = require("gears.timer")
 local noti = require('utils.noti')
 
 local function music_cover()
@@ -42,10 +43,32 @@ local music_infos = function()
   end)
 end
 
+local function music_time()
+  spawn.easy_async_with_shell([[ 
+    mpc status | awk 'NR==2 { split($4, a); print a[1]}' | tr -d '[\%\(\)]'
+  ]], function(stdout)
+
+    local time = 0
+    if stdout ~= nil then
+      time = tonumber(stdout)
+    end
+
+    awesome.emit_signal("daemon::mpd_time", time)
+  end)
+end
+
 local function update_all()
   music_infos()
   music_cover()
 end
+
+-- update time separately 
+timer {
+  timeout = 5, autostart = true, call_now = true,
+  callback = function()
+    music_time()
+  end
+}
 
 -- init once
 update_all()

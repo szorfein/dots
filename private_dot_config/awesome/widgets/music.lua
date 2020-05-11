@@ -5,16 +5,16 @@ local font = require("utils.font")
 local shape = require("gears.shape")
 local surface = require("gears.surface")
 local noti = require("utils.noti")
+local progressbar = require("utils.progressbar")
 
 local music_root = class()
 
 function music_root:init()
   self.title = font.body_2('')
   self.artist = font.body_2('')
+  self.progress = progressbar.horiz()
   self.cover = wibox.widget {
     resize = true,
-    forced_height = 90,
-    forced_width = 90,
     widget = wibox.widget.imagebox
   }
   self.w = button({
@@ -30,16 +30,26 @@ end
 function music_root:gen_popup()
   local w = awful.popup {
     widget = {
-      nil,
       {
-        self.title,
-        self.artist,
+        self.progress,
         self.cover,
         layout = wibox.layout.fixed.vertical
       },
-      nil,
+      {
+        self.title,
+        self.artist,
+        layout = wibox.layout.fixed.vertical
+      },
+      {
+        nil,
+        require("widgets.mpc")({}),
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+      },
       expand = "none",
-      layout = wibox.layout.align.horizontal
+      forced_height = dpi(200),
+      forced_width = dpi(200),
+      layout = wibox.layout.align.vertical
     },
     hide_on_right_click = true,
     visible = false,
@@ -51,8 +61,12 @@ end
 
 function music_root:signals()
   awesome.connect_signal("daemon::mpd_infos", function(title, artist)
-    self.artist.text = artist
     self.title.text = title
+    if not (artist == nil or artist == '') then
+      self.artist.text = " by "..artist
+    else
+      self.artist.text = artist
+    end
   end)
   awesome.connect_signal("daemon::mpd_cover", function(cover)
     --noti.info('in signal cover ' .. cover) 
@@ -60,6 +74,9 @@ function music_root:signals()
     --self.cover:emit_signal("widget::redraw_needed")
     --self.cover:emit_signal("widget::layout_changed")
     self.cover:set_image(cover)
+  end)
+  awesome.connect_signal("daemon::mpd_time", function(time)
+    self.progress:set_value(time)
   end)
 end
 

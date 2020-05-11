@@ -52,6 +52,20 @@ local function update_icon(item, c)
     item.text = ""
   elseif c.name == "vifm" then
     item.text = ""
+  elseif c.class == "feh" then
+    item.text = ""
+  elseif c.class == "mpv" then
+    item.text = ""
+  elseif c.name:match("paranoid") then
+    item.text = ""
+  elseif c.name:match("spior") then
+    item.text = ""
+  elseif c.name == "cava" then
+    item.text = ""
+  elseif c.name:match("VIM") then
+    item.text = ""
+  elseif c.class:match("VirtualBox") then
+    item.text = ""
   else
     item.text = ""
   end
@@ -108,6 +122,7 @@ function tasklist_root:template_text()
           layout = wibox.layout.fixed.horizontal,
         },
         left = dpi(8), right = dpi(8),
+        top = dpi(4), bottom = dpi(4), -- one line only !
         widget = wibox.container.margin
       },
       id = 'mat_background',

@@ -11,11 +11,12 @@ function tooltip.create(w)
     visible = false,
     shape = helper.rrect(50),
     timeout = 4,
-    margin_leftright = 5,
-    margin_topbottom = 6,
+    margin_leftright = 16,
+    margin_topbottom = 10,
     font = M.f.caption,
-    bg = M.x.on_surface,
-    fg = M.x.surface,
+    --bg = M.x.dark_primary,
+    bg = M.x.dark_primary,
+    fg = M.x.on_background .. "B3", -- 70%
     objects = { w }
   }
 end
