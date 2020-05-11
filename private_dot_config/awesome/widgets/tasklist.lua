@@ -4,6 +4,8 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local font = require("utils.font")
 
+beautiful.tasklist_font = M.f.subtile_2
+
 local tasklist_root = class()
 
 function tasklist_root:init(args)
@@ -115,7 +117,6 @@ function tasklist_root:template_text()
           },
           {
             id = 'text_role',
-            font = M.f.button,
             widget = wibox.widget.textbox,
           },
           spacing = dpi(8),
@@ -163,6 +164,7 @@ function tasklist_widget:init(s, args)
   local w = awful.widget.tasklist {
     screen = s,
     filter  = awful.widget.tasklist.filter.currenttags,
+    --filter =  awful.widget.tasklist.filter.minimizedcurrenttags, -- TODO: do not work for now? try for the 4.4
     buttons = self.buttons,
     widget_template = self.template
   }

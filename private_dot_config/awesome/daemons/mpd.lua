@@ -74,9 +74,7 @@ timer {
 update_all()
 
 local mpd_event_listener = [[
-  sh -c '
-    mpc idleloop player
-  '
+  mpc idleloop player
 ]]
 
 local kill_mpd_event_listener = [[

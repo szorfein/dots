@@ -39,12 +39,13 @@ mytheme.f = {
   h4 = "Iosevka Regular 32",
   h6 = "Iosevka Regular 20",
   subtile_1 = "Iosevka Regular 12", -- used on text list
+  subtile_2 = (height >= 1024 and "Iosevka Light 10" or "Iosevka Light 9"), -- used tasklist
   body_1 = "Iosevka Term Medium 15", -- used on text body title
-  body_2 = (height >= 1024 and "Iosevka Regular 14" or "Iosevka Regular 12"), -- used on text body
+  body_2 = (height >= 1024 and "Iosevka Regular 14" or "Iosevka Medium 13"), -- used on text body
   -- for button, don't use a Mono variant because icons are too small
   -- issue: https://github.com/Powerlevel9k/powerlevel9k/issues/430
   icon = "Material Design Icons Regular 15", -- used for icon
-  button = "Iosevka Medium Nerd Font Complete 15", -- used on text with icon
+  button = (height >= 1024 and "Iosevka Regular 15" or "Iosevka Regular 14"), -- used on text with icon
   caption = "Iosevka Bold 12", -- used on annotation
   overline = "Iosevka Regular 10",
 }
