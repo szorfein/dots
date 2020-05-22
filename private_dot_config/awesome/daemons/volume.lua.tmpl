@@ -4,8 +4,9 @@ local spawn = require("awful.spawn")
 local noti = require("utils.noti")
 
 {{- if eq .system.sound "alsa" }}
-local gtimer = require("gears.timer")
+local timer = require("gears.timer")
 
+local vol = 0
 local update_volume = function()
   spawn.easy_async_with_shell("~/bin/volume.sh get", function(stdout)
     local volume = tonumber(stdout:match('(%d+)%%'))
@@ -14,15 +15,24 @@ local update_volume = function()
       noti.error("Can't find volume for alsa")
     else
       local is_muted = volume <= 0 and true or false
+
+      -- the notification only display when the value change
+      if vol ~= volume then
+        vol = volume
+        local icon = "<span foreground='" .. M.x.primary .. "'> 墳 </span>"
+        noti.info(icon .. tostring(volume))
+      end
       awesome.emit_signal("daemon::volume", volume, is_muted)
     end
   end)
 end
 
-gtimer.start_new(5, function()
-  update_volume()
-  return true
-end)
+timer {
+  timeout = 5, autostart = true, call_now = false,
+  callback = function()
+    update_volume()
+  end
+}
 
 {{- end }}
 {{- if eq .system.sound "pulseaudio" }}
