@@ -19,7 +19,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 -- Material env globally
-M = require("env-theme")
+M = require("theme.env")
 
 local noti = require("utils.noti")
 local helper = require("utils.helper")
@@ -78,7 +78,7 @@ editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
 
 -- daemons
-require("daemons.mpd")
+require("daemons")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -166,8 +166,9 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            require("widgets.music")(),
             wibox.widget.systray(),
+            require("widgets.music")(),
+            require("widgets.volume")(),
             mytextclock,
             s.mylayoutbox,
         },

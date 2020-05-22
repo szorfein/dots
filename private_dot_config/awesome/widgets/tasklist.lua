@@ -68,6 +68,10 @@ local function update_icon(item, c)
     item.text = ""
   elseif c.class:match("VirtualBox") then
     item.text = ""
+  elseif c.class == "Zathura" then
+    item.text = ""
+  elseif c.class == "Lutris" then
+    item.text = ""
   else
     item.text = ""
   end
@@ -123,12 +127,13 @@ function tasklist_root:template_text()
           layout = wibox.layout.fixed.horizontal,
         },
         left = dpi(8), right = dpi(8),
-        top = dpi(4), bottom = dpi(4), -- one line only !
+        top = dpi(2), bottom = dpi(2), -- one line only !
         widget = wibox.container.margin
       },
       id = 'mat_background',
       widget = wibox.container.background,
     },
+    id = 'background_role',
     widget = wibox.container.background,
     create_callback = function(self, c, index, objects)
 
@@ -164,7 +169,7 @@ function tasklist_widget:init(s, args)
   local w = awful.widget.tasklist {
     screen = s,
     filter  = awful.widget.tasklist.filter.currenttags,
-    --filter =  awful.widget.tasklist.filter.minimizedcurrenttags, -- TODO: do not work for now? try for the 4.4
+    --filter =  awful.widget.tasklist.filter.minimizedcurrenttags, -- TODO: no work for now? try with the 4.4
     buttons = self.buttons,
     widget_template = self.template
   }

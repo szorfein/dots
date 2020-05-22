@@ -1,0 +1,67 @@
+-- Create a signal: daemon::volume
+-- return values: volume [number], is_muted [boolean]
+local spawn = require("awful.spawn")
+local noti = require("utils.noti")
+
+{{- if eq .system.sound "alsa" }}
+local gtimer = require("gears.timer")
+
+local update_volume = function()
+  spawn.easy_async_with_shell("~/bin/volume get", function(stdout)
+    local volume = tonumber(stdout:match('(%d+)%%'))
+
+    if not volume then
+      noti.error("Can't find volume for alsa")
+    end
+      local is_muted = volume <= 0 and true or false
+      awesome.emit_signal("daemon::volume", volume, is_muted)
+    end
+  )
+end
+
+gtimer.start_new(5, function()
+  update_volume()
+  return true
+end)
+
+{{- end }}
+{{- if eq .system.sound "pulseaudio" }}
+
+local function emit_volume_info()
+  spawn.easy_async("pacmd list-sinks", function(stdout)
+    local volume = stdout:match('(%d+)%%') or nil
+    local is_muted = stdout:match('Mute:(%s+)[yes]') and true or false
+
+    if volume ~= nil then
+      local icon = "<span foreground='" .. M.x.primary .. "'> 墳 </span>"
+      noti.info(icon .. tostring(volume))
+      awesome.emit_signal("daemon::volume", tonumber(volume), is_muted)
+    else
+      noti.error("Can't find volume for pulse")
+    end
+  end
+  )
+end
+
+-- initialize signal
+emit_volume_info()
+
+local volume_script = [[
+  bash -c '
+  pactl subscribe | grep --line-buffered "sink"
+  '
+]]
+
+-- update the signal when receive new things
+spawn.easy_async_with_shell("pgrep -x pactl | xargs kill", function()
+
+  -- Run emit_volume_info() with each line printed
+  spawn.with_line_callback(volume_script, {
+    stdout = function(line)
+      emit_volume_info()
+    end
+  })
+
+end)
+
+{{- end }}

@@ -22,14 +22,6 @@ local keys = {}
 modkey = "Mod4"
 altkey = "Mod1"
 
-{{- if eq .system.sound "alsa" }}
-  {{- if eq .chezmoi.username "daggoth" }}
-  local alsa_card="hw:Pro"
-  {{- else }}
-  local alsa_card="pulse"
-  {{- end }}
-{{- end }}
-
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -143,27 +135,14 @@ keys.globalkeys = table.join(
   { description = "show the menubar", group = "launcher" }),
 
   -- Sound
-  {{- if eq .system.sound "alsa" }}
-    awful.key({ altkey, "Control" }, "Up", function()
-      awful.spawn.with_shell("amixer -D "..alsa_card.." sset Master 1%+")
-    end,
-  { description = "increase volume", group = "sound" }),
-    awful.key({ altkey, "Control" }, "Down", function()
-      awful.spawn.with_shell("amixer -D "..alsa_card.." sset Master 1%-")
-    end,
-  { description = "lower volume", group = "sound" })
-  {{- end }}
-
-  {{- if eq .system.sound "pulseaudio" }}
-  awful.key({}, 'XF86AudioRaiseVolume', "Up", function()
-    awful.spawn.with_shell("pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +1%")
+  awful.key({}, "XF86AudioRaiseVolume", function()
+    awful.spawn.with_shell("~/bin/volume.sh up")
   end,
   { description = "increase volume", group = "sound" }),
-  awful.key({}, 'XF86AudioLowerVolume', "Down", function()
-    awful.spawn.with_shell("pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -1%")
+  awful.key({}, "XF86AudioLowerVolume", function()
+    awful.spawn.with_shell("~/bin/volume.sh down")
   end,
   { description = "lower volume", group = "sound" })
-  {{- end }}
 )
 
 keys.clientkeys = table.join(
