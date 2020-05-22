@@ -7,16 +7,16 @@ local noti = require("utils.noti")
 local gtimer = require("gears.timer")
 
 local update_volume = function()
-  spawn.easy_async_with_shell("~/bin/volume get", function(stdout)
+  spawn.easy_async_with_shell("~/bin/volume.sh get", function(stdout)
     local volume = tonumber(stdout:match('(%d+)%%'))
 
-    if not volume then
+    if not volume or volume == nil then
       noti.error("Can't find volume for alsa")
-    end
+    else
       local is_muted = volume <= 0 and true or false
       awesome.emit_signal("daemon::volume", volume, is_muted)
     end
-  )
+  end)
 end
 
 gtimer.start_new(5, function()

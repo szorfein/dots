@@ -11,6 +11,14 @@ naughty.config.presets.low = {
   border_color = M.x.surface
 }
 
+naughty.config.presets.normal = {
+  font = M.f.subtile_1,
+  fg = M.x.on_surface,
+  bg = M.x.surface,
+  margin = 16,
+  shape = helper.rrect(6),
+}
+
 naughty.config.presets.critical = {
   font = M.f.subtile_1,
   fg = M.x.on_surface,
@@ -31,6 +39,14 @@ function noti.info(msg)
     position = "bottom_middle",
     preset = naughty.config.presets.low
  })
+end
+
+function noti.error(msg)
+  naughty.notify({
+    text = tostring(msg),
+    position = "top_right",
+    preset = naughty.config.presets.normal
+  })
 end
 
 function noti.critical(msg)

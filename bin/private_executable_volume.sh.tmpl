@@ -19,8 +19,8 @@ vol_set() {
 }
 
 vol_get() {
-  vol=$(amixer -D {{ .system.soundcard }} sget Master | grep "\[" | head -n 1)
-  echo $vol
+  vol=$(amixer -D {{ .system.soundcard }} sget Master | grep -o "[0-9]*%" | head -n 1)
+  echo "$vol"
 }
 {{- end }}
 
@@ -44,8 +44,8 @@ vol_set() {
 }
 
 vol_get() {
-  vol=$(pacmd list-sinks | grep "-" | grep -oE " [0-9]+% " | head -n1)
-  echo $vol
+  vol=$(pacmd list-sinks | grep "-" | grep -o " [0-9]*% " | head -n1)
+  echo "$vol"
 }
 {{- end }}
 
