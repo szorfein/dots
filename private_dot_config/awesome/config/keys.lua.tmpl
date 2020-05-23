@@ -142,7 +142,18 @@ keys.globalkeys = table.join(
   awful.key({}, "XF86AudioLowerVolume", function()
     awful.spawn.with_shell("~/bin/volume.sh down")
   end,
-  { description = "lower volume", group = "sound" })
+  { description = "lower volume", group = "sound" }),
+
+  -- Brightness
+  awful.key( { }, "XF86MonBrightnessDown", function()
+    awful.spawn.with_shell("light -U 3")
+  end,
+  { description = "Decrease brightness", group = "brightness"} ),
+
+  awful.key({}, "XF86MonBrightnessUp", function()
+    awful.spawn.with_shell("light -A 3")
+  end,
+  { description = "Increase brightness", group = "brightness"} )
 )
 
 keys.clientkeys = table.join(

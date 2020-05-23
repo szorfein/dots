@@ -147,6 +147,30 @@ elif hash apt-get 2>/dev/null ; then
   )
 
   add_material_font
+
+  # light
+  PN="light"
+  PV="1.2.2"
+
+  # deps
+  sudo apt-get install debhelper-compat
+
+  # clean
+  rm -rf ~/builds/$PN-$PV
+  rm -rf ~/builds/$PN*.{gz,deb}
+
+  # build
+  curl -L -o ~/builds/$PN-$PV.tar.gz https://github.com/haikarainen/$PN/archive/v${PV}.tar.gz
+  ( cd ~/builds \
+      && tar xvf $PN-$PV.tar.gz \
+      && cd $PN-$PV \
+      && ./configure --with-udev && make deb
+  )
+
+  # install
+  ( cd ~/builds \
+      && sudo dpkg -i ${PN}_1.2.1-1_amd64.deb
+  )
 fi
 
 trap bye EXIT
