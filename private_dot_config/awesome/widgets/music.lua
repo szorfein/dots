@@ -10,7 +10,7 @@ local progressbar = require("utils.progressbar")
 local music_root = class()
 
 function music_root:init()
-  self.title = font.body_2('')
+  self.title = font.body_1('')
   self.artist = font.body_2('')
   self.progress = progressbar.horiz()
   self.cover = wibox.widget {
@@ -36,9 +36,14 @@ function music_root:gen_popup()
         layout = wibox.layout.fixed.vertical
       },
       {
-        self.title,
-        self.artist,
-        layout = wibox.layout.fixed.vertical
+        {
+          self.title,
+          self.artist,
+          forced_height = dpi(76),
+          layout = wibox.layout.fixed.vertical
+        },
+        margins = dpi(8),
+        widget = wibox.container.margin
       },
       {
         nil,
@@ -61,9 +66,11 @@ end
 
 function music_root:signals()
   awesome.connect_signal("daemon::mpd_infos", function(title, artist)
-    self.title.text = title
+    self.title.text = #title > 20
+      and string.sub(title, 1, 20)
+      or title
     if not (artist == nil or artist == '') then
-      self.artist.text = " by "..artist
+      self.artist.text = "by " .. artist
     else
       self.artist.text = artist
     end

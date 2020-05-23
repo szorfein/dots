@@ -91,17 +91,16 @@ elif hash apt-get 2>/dev/null ; then
   PV="2.1.0"
 
   [ -d ~/.local/share/fonts ] || mkdir -p ~/.local/share/fonts
-  [ -f ~/.local/share/fonts/Iosevka.zip ] || {
+  [ -f ~/.local/share/fonts/Iosevka-$PV.zip ] || {
     ( cd ~/.local/share/fonts \
-        && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/Iosevka.zip
+        && curl -L -o Iosevka-$PV.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/Iosevka.zip
     )
   }
 
   [ -d ~/.local/share/fonts/iosevka ] && rm -rf ~/.local/share/fonts/iosevka
   ( mkdir ~/.local/share/fonts/iosevka \
       && cd ~/.local/share/fonts/iosevka \
-      && unzip ../Iosevka.zip \
-      && rm ../Iosevka*.zip
+      && unzip ../Iosevka-$PV.zip \
   )
 
   fc-cache -vf ~/.local/share/fonts
@@ -164,6 +163,7 @@ elif hash apt-get 2>/dev/null ; then
   ( cd ~/builds \
       && tar xvf $PN-$PV.tar.gz \
       && cd $PN-$PV \
+      && ./autogen.sh \
       && ./configure --with-udev && make deb
   )
 
