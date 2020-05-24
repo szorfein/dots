@@ -177,7 +177,7 @@ fileviewer <video/*>
         \ vifmimg clear
 
 " Images
-filextype <image/*> mpv %c %i </dev/null &>/dev/null &
+filextype <image/*> feh %c %i </dev/null &>/dev/null &
 fileviewer <image/*>
         \ vifmimg draw %px %py %pw %ph %c
         \ %pc
