@@ -3,6 +3,7 @@ local table = require("gears.table")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local font = require("utils.font")
+local helper = require("utils.helper")
 
 beautiful.tasklist_font = M.f.subtile_2
 
@@ -72,6 +73,8 @@ local function update_icon(item, c)
     item.text = ""
   elseif c.class == "Lutris" then
     item.text = ""
+  elseif c.class:match("xst") then
+    item.text = ""
   else
     item.text = ""
   end
@@ -79,9 +82,9 @@ end
 
 local function update_fg(item, c)
   if client.focus == c then
-    item.fg = M.x.primary .. "FF" -- 100%
+    item.fg = M.x.on_background .. "E6" -- 90%
   elseif client.unfocus == c then
-    item.fg = M.x.primary .. "B3" -- 70%
+    item.fg = M.x.on_background .. "B3" -- 70%
   elseif client.minimized == c then
     item.fg = M.x.on_background .. "80" -- 50%
   elseif client.urgent == c then
@@ -119,21 +122,22 @@ function tasklist_root:template_text()
             id = "mat_fg",
             widget = wibox.container.background
           },
-          {
-            id = 'text_role',
-            widget = wibox.widget.textbox,
-          },
+          --{
+          --  id = 'text_role',
+          --  widget = wibox.widget.textbox,
+          --},
           spacing = dpi(8),
           layout = wibox.layout.fixed.horizontal,
         },
         left = dpi(8), right = dpi(8),
-        top = dpi(2), bottom = dpi(2), -- one line only !
+        --top = dpi(2), bottom = dpi(2), -- one line only !
         widget = wibox.container.margin
       },
       id = 'mat_background',
+      shape = helper.rrect(16),
       widget = wibox.container.background,
     },
-    id = 'background_role',
+    --id = 'background_role',
     widget = wibox.container.background,
     create_callback = function(self, c, index, objects)
 
@@ -171,7 +175,10 @@ function tasklist_widget:init(s, args)
     filter  = awful.widget.tasklist.filter.currenttags,
     --filter =  awful.widget.tasklist.filter.minimizedcurrenttags, -- TODO: no work for now? try with the 4.4
     buttons = self.buttons,
-    widget_template = self.template
+    widget_template = self.template,
+    layout = {
+      layout = wibox.layout.fixed.horizontal
+    }
   }
   return w
 end
