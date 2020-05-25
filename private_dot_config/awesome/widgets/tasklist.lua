@@ -4,6 +4,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local font = require("utils.font")
 local helper = require("utils.helper")
+local icons = require("config.icons")
 
 beautiful.tasklist_font = M.f.subtile_2
 
@@ -46,37 +47,37 @@ end
 
 local function update_icon(item, c)
   if c.class == "Firefox" or c.class == "Brave-browser" then
-    item.text = ""
+    item.text = icons["web"]
   elseif c.name == "neomutt" then
-    item.text = ""
+    item.text = icons["neomutt"]
   elseif c.name == "weechat" then
-    item.text = ""
+    item.text = icons["weechat"]
   elseif c.name:match("ncmpcpp") then
-    item.text = ""
+    item.text = icons["ncmpcpp"]
   elseif c.name == "vifm" then
-    item.text = ""
+    item.text = icons["vifm"]
   elseif c.class == "feh" then
-    item.text = ""
+    item.text = icons["feh"]
   elseif c.class == "mpv" then
-    item.text = ""
+    item.text = icons["mpv"]
   elseif c.name:match("paranoid") then
-    item.text = ""
+    item.text = icons["paranoid"]
   elseif c.name:match("spior") then
-    item.text = ""
+    item.text = icons["spior"]
   elseif c.name == "cava" then
-    item.text = ""
+    item.text = icons["cava"]
   elseif c.name:match("VIM") then
-    item.text = ""
+    item.text = icons["vim"]
   elseif c.class:match("VirtualBox") then
-    item.text = ""
+    item.text = icons["virtualbox"]
   elseif c.class == "Zathura" then
-    item.text = ""
+    item.text = icons["zathura"]
   elseif c.class == "Lutris" then
-    item.text = ""
+    item.text = icons["lutris"]
   elseif c.class:match("xst") then
-    item.text = ""
+    item.text = icons["xst"]
   else
-    item.text = ""
+    item.text = icons["default"]
   end
 end
 

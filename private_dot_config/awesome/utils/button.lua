@@ -24,6 +24,7 @@ function mat_button:init(args)
   self.text = args.text or font.button("")
   self.fg_text = args.fg_text or M.x.on_surface
   self.fg_icon = args.fg_icon or M.x.on_surface
+  self.bg = args.bg or M.x.primary -- used only on mode "contained"
   self.layout = args.layout or "vertical"
   self.rrect = args.rrect or 10
   self.width = args.width or nil
@@ -44,6 +45,34 @@ function mat_button:init(args)
 end
 
 function mat_button:make_widget()
+  if self.mode == "contained" then
+    return self:init_contained()
+  else
+    return self:init_text()
+  end
+end
+
+function mat_button:init_contained()
+  return wibox.widget {
+    {
+      {
+        {
+          self.icon,
+          fg = self.fg_icon,
+          widget = wibox.container.background
+        },
+        widget = self.margin
+      },
+      bg = self.bg .. "CC", -- 80%
+      shape = helper.rrect(self.rrect),
+      widget = wibox.container.background
+    },
+    margins = self.margins,
+    widget = wibox.container.margin
+  }
+end
+
+function mat_button:init_text()
   return wibox.widget {
     {
       {

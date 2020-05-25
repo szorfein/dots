@@ -9,6 +9,10 @@ function app.start(cmd, is_shell, have_class, callback)
   if callback then callback() end
 end
 
+function app.shell(cmd)
+  spawn.with_shell(terminal .. " -e " .. cmd)
+end
+
 local function check_proc(cmd_arr)
   for _, cmd in ipairs(cmd_arr) do
     local findme = cmd

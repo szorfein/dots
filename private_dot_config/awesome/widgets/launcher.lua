@@ -9,11 +9,13 @@ function launcher_root:init()
     spawn("rofi -no-lazy-grab -show drun")
   end
   self.w = button({
-    fg_icon = M.x.primary,
+    fg_icon = M.x.on_primary,
     icon = font.icon(""),
     command = self.cmd,
     layout = "horizontal",
-    margins = dpi(4),
+    rrect = 5,
+    margins = dpi(2),
+    mode = "contained"
   })
 end
 
