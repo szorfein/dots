@@ -117,9 +117,6 @@ keys.globalkeys = table.join(
   { description = "restore minimized", group = "client" }),
 
   -- Prompt
-  awful.key({ modkey },            "r",     function() awful.screen.focused().mypromptbox:run() end,
-  { description = "run prompt", group = "launcher" }),
-
   awful.key({ modkey }, "x", function()
     awful.prompt.run {
       prompt       = "Run Lua code: ",
@@ -131,8 +128,11 @@ keys.globalkeys = table.join(
   { description = "lua execute prompt", group = "awesome" }),
 
   -- Menubar
-  awful.key({ modkey }, "p", function() awful.spawn("rofi -no-lazy-grab -show drun") end,
-  { description = "show the menubar", group = "launcher" }),
+  awful.key({ modkey }, "p", app_drawer_toggle,
+  { description = "App drawer", group = "launcher" }),
+
+  awful.key({ modkey }, "r", function() awful.spawn("rofi -no-lazy-grab -show drun") end,
+  { description = "show rofi", group = "launcher" }),
 
   -- Sound
   awful.key({}, "XF86AudioRaiseVolume", function()

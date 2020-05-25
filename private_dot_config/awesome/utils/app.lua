@@ -13,6 +13,10 @@ function app.shell(cmd)
   spawn.with_shell(terminal .. " -e " .. cmd)
 end
 
+function app.web(link)
+  spawn(web_browser .. " " .. link)
+end
+
 local function check_proc(cmd_arr)
   for _, cmd in ipairs(cmd_arr) do
     local findme = cmd

@@ -23,6 +23,10 @@ function font.h4(text)
   return widget_text(M.f.h4, text)
 end
 
+function font.h5(text)
+  return widget_text(M.f.h5, text)
+end
+
 function font.h6(text)
   return widget_text(M.f.h6, text)
 end

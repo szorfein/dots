@@ -1,16 +1,9 @@
 configuration {
-	modi: "combi,drun,windowcd,run";
-	width: 16;
+	modi: "combi,run,drun,windowcd";
 	font: @xfont;
-	bw: 0;
-  yoffset: 32;
-  xoffset: 0;
-	location: 1;
-	padding: 6;
-	fixed-num-lines: false;
+	fixed-num-lines: true;
 	show-icons: true;
 	terminal: "xst";
-  bw: 0;
 	icon-theme:"Papirus-Dark";
 	drun-match-fields: "name,generic,exec,categories";
 	drun-show-actions: false;

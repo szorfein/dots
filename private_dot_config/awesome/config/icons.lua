@@ -15,6 +15,8 @@ local icons = {
   lutris = "",
   tmux = "",
   scrot = "",
+  github = "",
+  reddit = "",
   default = ""
 }
 

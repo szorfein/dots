@@ -66,9 +66,7 @@ local theme_dir = os.getenv("HOME") .. "/.config/awesome/theme/"
 beautiful.init( theme_dir .. "theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = os.getenv("TERMINAL") or "xst"
-editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
+require("config.app")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -140,8 +138,6 @@ awful.screen.connect_for_each_screen(function(s)
     -- layouts
     require("layouts")(s)
 
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = require("widgets.layoutbox")(s, {})
@@ -162,7 +158,6 @@ awful.screen.connect_for_each_screen(function(s)
             spacing = dpi(4),
             require("widgets.launcher")(),
             s.mytaglist,
-            s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets

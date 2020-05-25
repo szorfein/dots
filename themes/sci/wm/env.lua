@@ -35,6 +35,7 @@ mytheme.x = {
 mytheme.f = {
   h1 = (height >= 1024 and "Iosevka Light 56" or "Iosevka Light 40"), -- used on big icon or big title
   h4 = "Iosevka Regular 32",
+  h5 = "Material Design Icons Regular 20", -- icon for h6
   h6 = "Iosevka Regular 20",
   subtile_1 = "Iosevka Regular 12", -- used on text list
   subtile_2 = (height >= 1024 and "Iosevka Light 10" or "Iosevka Light 9"), -- used tasklist
