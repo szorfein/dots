@@ -7,7 +7,7 @@ local slider = require("utils.slider")
 
 local volume_root = class()
 
-function volume_root:init()
+function volume_root:init(args)
   self.mode = args.mode or "popup"
   self.slider = slider.horiz()
   self:make_widget()
@@ -86,8 +86,8 @@ end
 
 local volume_widget = class(volume_root)
 
-function volume_widget:init()
-  volume_root.init(self)
+function volume_widget:init(args)
+  volume_root.init(self, args)
   return self.w
 end
 

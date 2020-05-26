@@ -7,7 +7,7 @@ local slider = require("utils.slider")
 
 local brightness_root = class()
 
-function brightness_root:init()
+function brightness_root:init(args)
   self.mode = args.mode or "popup"
   self.slider = slider.horiz()
   self:make_widget()
@@ -84,8 +84,8 @@ end
 
 local brightness_widget = class(brightness_root)
 
-function brightness_widget:init()
-  brightness_root.init(self)
+function brightness_widget:init(args)
+  brightness_root.init(self, args)
   return self.w
 end
 
