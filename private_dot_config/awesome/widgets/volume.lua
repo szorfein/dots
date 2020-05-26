@@ -8,7 +8,37 @@ local slider = require("utils.slider")
 local volume_root = class()
 
 function volume_root:init()
+  self.mode = args.mode or "popup"
   self.slider = slider.horiz()
+  self:make_widget()
+  self:signals()
+end
+
+function volume_root:make_widget()
+  if self.mode == "slider" then
+    self:init_slider()
+  else
+    self:init_popup()
+  end
+end
+
+function volume_root:init_slider()
+  self.w = wibox.widget {
+    {
+      font.icon(""),
+      fg = M.x.secondary,
+      widget = wibox.container.background
+    },
+    {
+      self.slider,
+      margins = dpi(6),
+      widget = wibox.container.margin
+    },
+    layout = wibox.layout.fixed.horizontal
+  }
+end
+
+function volume_root:gen_popup()
   self.w = button({
     fg_icon = M.x.secondary,
     icon = font.icon(""),
@@ -16,11 +46,6 @@ function volume_root:init()
     layout = "horizontal",
     margins = dpi(4),
   })
-  self:gen_popup()
-  self:signals()
-end
-
-function volume_root:gen_popup()
   local w = awful.popup {
     widget = {
       {
