@@ -164,8 +164,6 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             require("widgets.music")(),
-            require("widgets.volume")(),
-            require("widgets.brightness")(),
             mytextclock,
             s.mylayoutbox,
         },
