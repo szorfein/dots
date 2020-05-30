@@ -4,7 +4,6 @@ local table = require("gears.table")
 local font = require("utils.font")
 local tooltip = require("utils.tooltip")
 local button = require("utils.button")
-local noti = require("utils.noti")
 
 local window_close = function(c)
   c:kill()
@@ -37,7 +36,6 @@ end
 
 client.connect_signal("request::titlebars", function(c)
 
-  noti.info(c.floating)
 -- buttons for the titlebar
   local buttons = table.join(
     awful.button({}, 1, function()

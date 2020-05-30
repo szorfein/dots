@@ -68,8 +68,9 @@ local w_title = font.subtile_1('')
 -- tag for web
 my_apps[2] = {
   title = "Web",
-  { name = "Github", icon = icons["github"], color = M.x.primary_variant_1, exec = function() web("https://github.com/szorfein") end },
-  { name = "Reddit", icon = icons["reddit"], color = M.x.primary, exec = function() web("https://reddit.com/u/szorfein") end }
+  { name = "Duck", icon = icons["duck"], color = M.x.primary_variant_1, exec = function() web("https://3g2upl4pq6kufc4m.onion/") end },
+  { name = "Github", icon = icons["github"], color = M.x.primary, exec = function() web("https://github.com/szorfein") end },
+  { name = "Reddit", icon = icons["reddit"], color = M.x.primary_variant_2, exec = function() web("https://reddit.com/u/szorfein") end }
 }
 
 function key_grabber()
@@ -220,6 +221,9 @@ function myapps:init(s)
   awful.tag.attached_connect_signal(s, "property::selected", function()
     update_app_drawer()
   end)
+
+  -- init once
+  update_app_drawer(1)
 end
 
 return myapps

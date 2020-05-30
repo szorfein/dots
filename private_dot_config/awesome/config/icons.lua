@@ -17,6 +17,7 @@ local icons = {
   scrot = "",
   github = "",
   reddit = "",
+  duck = "ﻝ",
   default = ""
 }
 
