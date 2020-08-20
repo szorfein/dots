@@ -6,11 +6,13 @@ DEST={{ .chezmoi.homedir }}
 # remove old links
 (cd $DOTS \
   && stow -D zsh -t $DEST \
+  && stow -D ncmpcpp -t $DEST \
   && stow -D vifm -t $DEST
 )
 
 # install new links
 (cd $DOTS \
   && stow zsh -t $DEST \
+  && stow ncmpcpp -t $DEST \
   && stow vifm -t $DEST
 )
