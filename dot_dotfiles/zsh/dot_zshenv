@@ -1,8 +1,9 @@
 export PATH=$HOME/bin:$HOME/.gems/bin:$PATH
-export TERMINAL=/usr/bin/xst
+export TERMINAL=xst
 
 # GPG
 export GPG_TTY=$(tty)
+export GPG_AGENT_INFO=""
 
 # Editor
 export EDITOR='vim'

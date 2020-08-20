@@ -5,10 +5,12 @@ DEST={{ .chezmoi.homedir }}
 
 # remove old links
 (cd $DOTS \
-  && stow -D zsh -t $DEST
+  && stow -D zsh -t $DEST \
+  && stow -D vifm -t $DEST
 )
 
 # install new links
 (cd $DOTS \
-  && stow zsh -t $DEST
+  && stow zsh -t $DEST \
+  && stow vifm -t $DEST
 )

@@ -17,8 +17,9 @@ ZSH_THEME="spaceship"
 # Plugin list in ~/.oh-my-zsh/plugins
 plugins=(git git-prompt ruby rails)
 
-# Disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+# Disable oh-my-zsh update
+DISABLE_UPDATE_PROMPT=true
+DISABLE_AUTO_UPDATE=true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -31,14 +32,6 @@ fi
 if [ -r $HOME/.zshenv ] ; then
     source $HOME/.zshenv
 fi
-
-# Bindkey fr
-#bindkey "\e[2~"  yank
-#bindkey "\e[3~"  delete-char
-#bindkey "\e[1~"  beginning-of-line
-#bindkey "\e[4~"  end-of-line
-#bindkey "\e[5~"  up-line-or-history
-#bindkey "\e[6~"  down-line-or-history
 
 # With Zsh and Termite
 if [[ $TERM == xterm-termite ]] ; then
@@ -80,3 +73,11 @@ transfer() {
   cat $tmpfile;
   rm -f $tmpfile;
 }
+
+# GPG with SSH
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ] ; then
+    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+
+gpg-connect-agent updatestartuptty /bye >/dev/null

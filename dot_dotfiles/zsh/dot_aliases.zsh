@@ -5,3 +5,4 @@ alias mpv='firejail mpv'
 alias ionic="~/node_modules/ionic/bin/ionic"
 alias ng="~/node_modules/@angular/cli/bin/ng"
 alias sqlmap="sqlmap --check-tor --random-agent"
+alias vifm=vifmrun
