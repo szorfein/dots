@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+DOTS={{ .chezmoi.homedir }}/.dotfiles
+DEST={{ .chezmoi.homedir }}
+
+# remove old links
+(cd $DOTS \
+  && stow -D zsh -t $DEST
+)
+
+# install new links
+(cd $DOTS \
+  && stow zsh -t $DEST
+)

@@ -1,0 +1,10 @@
+*.swp
+*.swo
+*.pyc
+ncmpcpp/.ncmpcpp/error.log
+gnupg/.gnupg/*.d
+gnupg/.gnupg/pub*.*
+gnupg/.gnupg/rand*
+gnupg/.gnupg/trust*
+mutt/.mutt/gpg.rc
+nnn/.config/nnn/.history

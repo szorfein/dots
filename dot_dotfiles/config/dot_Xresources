@@ -1,0 +1,83 @@
+!-------------------------------------------
+! XFT Settings gre
+     
+Xft.antialias:  true 
+Xft.autohint:   false 
+Xft.dpi:        96
+Xft.hinting:    true 
+Xft.hintstyle:  hintfull 
+Xft.lcdfilter:  lcddefault
+Xft.rgba:       rgb
+
+!-------------------------------------------
+! URXVT - Settings
+
+URxvt*depth:                        32
+URxvt*internalBorder:               3
+URxvt*dynamicColors:                on
+URxvt*urgentOnBell:                 true
+URxvt*borderLess:                   false
+URxvt*scrollBar:                    false
+URxvt*cursorBlink:                  true
+URxvt*cursorUnderline:              true
+URxvt*cursorColor:                  #737077
+URxvt*scrollColor:                  #151515
+URxvt*underlineURLs:                true
+
+URxvt*font: -*-dina-medium-r-*-*-*-90-*-*-*-*-*-*
+URxvt*italic: -*-dina-medium-*-*-*-*-90-*-*-*-*-*-*
+URxvt*boldFont: -*-dina-bold-r-*-*-*-90-*-*-*-*-*-*
+ 
+!--------------------------------------------
+! URxvt Colors
+
+URxvt.colorIT:                       #b291af
+URxvt.colorBD:                       #6f6776
+URxvt.colorUL:                       #e9cfd3
+
+!-------------------------------------------
+! Man pages colors
+
+*VT100.colorBDMode:                  true
+*VT100.colorBD:                      red
+*VT100.colorULMode:                  true
+*VT100.colorUL:                      cyan   
+*VT100.veryBoldColors:               6
+
+!-------------------------------------------
+! xclock
+
+xclock*majorColor:                  #9a875f
+xclock*minorColor:                  #9a875f
+xclock*minuteColor:                 #9a875f
+xclock*hourColor:                   #9a875f
+xclock*secondColor:                 #9a875f
+
+!-------------------------------------------
+! rofi
+
+rofi.lines:                         2
+rofi.color-enabled:                 true
+rofi.separator-style:               none 
+rofi.width:                         33
+rofi.line-padding:                  6
+rofi.hide-scrollbar:                True
+rofi.columns:                       2
+
+!-------------------------------------------
+! xst
+
+! ref: https://github.com/gnotclub/xst/blob/master/doc/Xresources
+st.termname:     st-256color
+st.shell:        /bin/zsh
+st.font:         Iosevka Term:style=Regular:pixelsize=14
+! Available cursor values: 2 4 6 7 = █ _ | ☃ ( 1 3 5 are blinking versions)
+st.cursorshape:   2
+st.bold_font:     1
+st.chscale:       1.0
+st.cwscale:       1.0
+
+!--------------------------------------------
+! General Colors
+
+#include ".colors/color"

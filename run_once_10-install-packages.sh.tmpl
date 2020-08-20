@@ -119,7 +119,7 @@ if hash emerge 2>/dev/null ; then
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
     weechat i3lock-color rofi youtube-dl papirus-icon-theme media-sound/mpc lightdm \
-    inotify-tools light $pkgs
+    inotify-tools light stow $pkgs
 
 elif hash pacman 2>/dev/null ; then
   ins="pacman -S --needed"
@@ -139,7 +139,7 @@ elif hash pacman 2>/dev/null ; then
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt imagemagick msmtp msmtp-mta \
     tmux weechat i3lock-color rofi youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter \
-    inotify-tools light $pkgs
+    inotify-tools light stow $pkgs
 
 elif hash apt-get 2>/dev/null ; then
   ins="apt-get install"
@@ -159,7 +159,7 @@ elif hash apt-get 2>/dev/null ; then
   sudo $ins gpg gpg-agent xclip pass vim zsh awesome mpd ncmpcpp xinit xserver-xorg-core \
     xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm neomutt imagemagick msmtp \
     msmtp-mta tmux weechat rofi youtube-dl papirus-icon-theme mpc lightdm \
-    inotify-tools $pkgs
+    inotify-tools stow $pkgs
 
   # set zsh
   chsh -s /usr/bin/zsh

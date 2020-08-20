@@ -1,0 +1,64 @@
+! Material theme
+
+! theme https://www.colorspire.com/
+! material color: https://material.io/inline-tools/color/
+! material: https://material.io/tools/color 
+
+! BG !
+#define theme0  #161325
+#define theme1  #1a1729
+#define theme2  #221f3a
+#define theme3  #28233d
+! FG !
+#define theme4  #d5c3e4
+#define theme5  #e3d2f5
+#define theme6  #f4edfa
+!! Primary, Secondary !!
+#define theme7  #8553b0
+#define theme8  #b59bce
+#define theme9  #6855cf
+#define theme10 #a39bed
+!! Alert !!
+#define theme11 #6c86a6
+#define theme12 #a4b8d2
+!! Others !!
+#define theme13 #c7a295
+#define theme14 #77bb7b
+#define theme15 #a1afff
+
+*background: theme1
+*foreground: theme4
+
+! Black
+*color0:  theme0
+*color8:  theme2
+
+! Red
+*color1:  theme11
+*color9:  theme12
+
+! Green
+*color2:  theme14
+*color10: theme14
+
+! Yellow
+*color3:  theme13
+*color11: theme13
+
+! Blue
+*color4:  theme15
+*color12: theme15
+
+! Magenta
+*color5:  theme9
+*color13: theme10
+
+! Cyan
+*color6:  theme7
+*color14: theme8
+
+! White
+*color7:  theme5
+*color15: theme6
+
+st.opacity: 250
