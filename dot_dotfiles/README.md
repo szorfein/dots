@@ -2,7 +2,7 @@
 
 ```txt                              
 bar               > awesome,polybar,lemonbar
-compositor        > compton
+compositor        > picom
 extra background  > pscircle
 fonts             > iosevka,roboto mono,liberation mono,material-icons,dina,ttf-anka-coder,NERD fonts
 image viewer      > feh

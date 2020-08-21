@@ -10,6 +10,7 @@ DEST={{ .chezmoi.homedir }}
   && stow -D vifm -t $DEST \
   && stow -D vim -t $DEST \
   && stow -D .x -t $DEST \
+  && stow -D picom -t $DEST \
   && stow -D theme-{{ .theme }} -t $DEST
 )
 
@@ -20,5 +21,6 @@ DEST={{ .chezmoi.homedir }}
   && stow vifm -t $DEST \
   && stow vim -t $DEST \
   && stow .x -t $DEST \
+  && stow picom -t $DEST \
   && stow theme-{{ .theme }} -t $DEST
 )
