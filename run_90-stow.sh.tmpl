@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+DOTS={{ .chezmoi.homedir }}/.dotfiles
+DEST={{ .chezmoi.homedir }}
+
+apply() {
+  # Remove old link
+  stow -D $1 -t $DEST
+
+  # Install new link
+  stow $1 -t $DEST
+}
+
+(cd $DOTS \
+  && apply zsh \
+  && apply ncmpcpp \
+  && apply vifm \
+  && apply vim \
+  && apply .x \
+  && apply picom \
+  && apply tmux \
+  && apply theme-{{ .theme }}
+)

@@ -19,7 +19,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 -- Material env globally
-M = require("theme.env")
+M = require("loaded-theme")
 
 local noti = require("utils.noti")
 local helper = require("utils.helper")
@@ -62,8 +62,8 @@ end
 
 -- Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-local theme_dir = os.getenv("HOME") .. "/.config/awesome/theme/"
-beautiful.init( theme_dir .. "theme.lua")
+local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
+beautiful.init( theme_dir .. "sci/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 require("config.app")
@@ -138,37 +138,8 @@ awful.screen.connect_for_each_screen(function(s)
     -- layouts
     require("layouts")(s)
 
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = require("widgets.layoutbox")(s, {})
-    -- Create a taglist widget
-    s.mytaglist = require("widgets.taglist")(s, {})
-
-    -- Create a tasklist widget
-    s.mytasklist = require("widgets.tasklist")(s, {})
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", height = dpi(28), screen = s })
-
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            spacing = dpi(4),
-            require("widgets.launcher")(),
-            s.mytaglist,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            require("widgets.music")(),
-            require("widgets.settings")(),
-            mytextclock,
-            s.mylayoutbox,
-        },
-    }
+    -- bar
+    require("bars.sci")(s)
 end)
 
 -- Mouse bindings
