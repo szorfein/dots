@@ -11,6 +11,13 @@ apply() {
   stow $1 -t $DEST
 }
 
+apply_theme() {
+  (cd themes \
+    && stow -D $1 -t $DEST \
+    && stow $1 -t $DEST
+  )
+}
+
 (cd $DOTS \
   && apply zsh \
   && apply ncmpcpp \
@@ -20,5 +27,5 @@ apply() {
   && apply picom \
   && apply tmux \
   && apply awesomewm \
-  && apply theme-{{ .theme }}
+  && apply_theme {{ .theme }}
 )

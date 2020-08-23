@@ -1,101 +1,126 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local keygrabber = require("awful.keygrabber")
-local btext = require("util.mat-button")
-local modal = require("util.modal")
-local helpers = require("helpers")
+local button = require("utils.button")
+local modal = require("utils.modal")
+local helper = require("utils.helper")
+local font = require("utils.font")
 
 -- keylogger
 local exit_screen_grabber
 
 function exit_screen_hide()
+  local s = awful.screen.focused()
   keygrabber.stop(exit_screen_grabber)
-  exit_screen.visible = false
+
+  s.exit_screen.visible = false
 end
 
-local poweroff_command = function() 
+local function poweroff_command()
   awful.spawn("sudo systemctl poweroff")
-  exit_screen_hide()
 end
 
-local poweroff = btext({ fg_icon = "error",
-  overlay = "error",
-  icon = "⭘",
-  text = "<b>P</b>oweroff",
+-- button poweroff
+local poweroff = button({
+  fg_icon = M.x.error,
+  icon = font.h1("⭘"),
+  text = font.button("Poweroff"),
   width = 110,
-  command = poweroff_command
+  command = poweroff_command,
 })
 
-local exit_command = function() 
+local function reboot_command()
+  awful.spawn("sudo systemctl reboot")
+end
+
+-- button reboot
+local reboot = button({
+  fg_icon = M.x.error_variant_1,
+  icon = font.h1("ﰇ"),
+  text = font.button("Reboot"),
+  width = 110,
+  command = reboot_command,
+})
+
+local function exit_command()
   awesome.quit()
 end
 
-local exit = btext({ fg_icon = "primary",
-  overlay = "primary",
-  icon = ">>",
-  text = "<b>E</b>xit",
+-- button exit
+local exit = button({
+  fg_icon = M.x.primary,
+  icon = font.h1(">>"),
+  text = font.button("Exit"),
   width = 110,
-  command = exit_command
+  command = exit_command,
 })
--- {{{ END Exit part
 
--- {{{ Lock part
-local lock_command = function() 
-  exit_screen_hide()
-  lock_screen_show()
+local function lock_command()
+    exit_screen_hide()
+    lock_screen_show()
 end
 
-local lock = btext({ fg_icon = "secondary",
-  overlay = "secondary",
-  icon = "",
-  text = "<b>L</b>ock",
+-- button lock
+local lock = button({
+  fg_icon = M.x.secondary,
+  icon = font.h1(""),
+  text = font.button("Lock"),
   width = 110,
-  command = lock_command
+  command = lock_command,
 })
 
--- exit_screen creation
-exit_screen = modal:init()
+local exit_root = class()
 
-function exit_screen_show()
-  local grabber = keygrabber {
-    keybindings = {
-      { {}, 'p', function() poweroff_command() end },
-      { {}, 'e', function() exit_command() end },
-      { {}, 'l', function() lock_command() end },
-      { {}, 'q', function() exit_screen_hide() end },
-    },
-    stop_key = "Escape",
-    stop_callback = function() exit_screen_hide() end,
-  }
+function exit_root:init(s)
 
-  if grabber.is_running and exit_screen.visible == false then
-    grabber:stop()
-  elseif exit_screen.visible == false then
-    grabber:stop()
+  -- exit_screen creation
+  s.exit_screen = modal:init()
+
+  function exit_screen_show()
+    local grabber = keygrabber {
+      keybindings = {
+        { {}, 'p', function() poweroff_command() end },
+        { {}, 'r', function() reboot_command() end },
+        { {}, 'e', function() exit_command() end },
+        { {}, 'l', function() lock_command() end },
+        { {}, 'q', function() exit_screen_hide() end },
+      },
+      stop_key = "Escape",
+      stop_callback = function() exit_screen_hide() end,
+    }
+
+    if grabber.is_running and s.exit_screen.visible == false then
+      grabber:stop()
+    elseif s.exit_screen.visible == false then
+      grabber:stop()
+    end
+
+    grabber:start()
+    s.exit_screen.visible = true
   end
 
-  grabber:start()
-  exit_screen.visible = true
+  -- buttons
+  modal:add_buttons(exit_screen_hide)
+
+  local w = wibox.widget {
+    {
+      {
+        poweroff,
+        reboot,
+        exit,
+        lock,
+        spacing = 12,
+        layout = wibox.layout.fixed.horizontal
+      },
+      margins = 20,
+      widget = wibox.container.margin
+    },
+    shape = helper.rrect(20),
+    bg = M.x.surface,
+    widget = wibox.container.background
+  }
+
+  modal:run_center(w)
 end
 
--- buttons
-modal:add_buttons(exit_screen_hide)
-
-local w = wibox.widget {
-  {
-    {
-      poweroff,
-      exit,
-      lock,
-      spacing = 12,
-      layout = wibox.layout.fixed.horizontal
-    },
-    margins = 20,
-    widget = wibox.container.margin
-  },
-  shape = helpers.rrect(20),
-  bg = M.x.surface,
-  widget = wibox.container.background
-}
-
-modal:run_center(w)
+return exit_root

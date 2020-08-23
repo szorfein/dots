@@ -59,8 +59,8 @@ change() {
   log "call change"
   log "operate - $dotfiles_dir"
   cd $dotfiles_dir
-  stow -D theme-$oldTheme -t ~
-  stow theme-$wantTheme -t ~
+  stow -D themes/$oldTheme -t ~
+  stow themes/$wantTheme -t ~
   xrdb -merge ~/.Xresources
   killall -USR1 xst # reload color from xst
   #awesome --replace

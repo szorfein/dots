@@ -11,6 +11,9 @@ return function(s)
   -- Nav drawer
   require("layouts.navigation-drawer")(s)
 
+  -- Logout screen
+  require("layouts.logout")(s)
+
   -- Lock screen
   require("layouts.lock_screen")
 end
