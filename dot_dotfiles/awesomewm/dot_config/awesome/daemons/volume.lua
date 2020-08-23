@@ -3,22 +3,21 @@
 local aspawn = require("awful.spawn")
 local awidget = require("awful.widget")
 local noti = require("util.noti")
-local env = require("env-config")
 
-if env.sound_system == "alsa" then
+if sound_system == "alsa" then
   local gtimer = require("gears.timer")
 
   local update_volume = function()
     aspawn.easy_async_with_shell(
       [[
-      amixer -D ]]..env.sound_card_alsa.. [[ sget Master | grep "\[" | head -n1
+      amixer -D ]]..sound_card.. [[ sget Master | grep "\[" | head -n1
       ]],
       function(stdout)
         local noti = require("util.noti")
         local volume = tonumber(stdout:match('(%d+)%%'))
 
         if not volume then
-          noti.warn("Can't find volume on: "..env.sound_card_alsa)
+          noti.warn("Can't find volume on: "..sound_card)
         end
         local is_muted = volume == 0 and 1 or 0
         awesome.emit_signal("daemon::volume", volume, is_muted)

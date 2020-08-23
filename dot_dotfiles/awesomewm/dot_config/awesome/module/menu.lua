@@ -17,26 +17,26 @@ beautiful.menu_bg_focus = M.x.primary
 -- Create a launcher widget and a main menu
 local myawesomemenu = {
   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-  { "manual", env.term .. env.term_call[2] .. "man awesome" },
+  { "manual", terminal .. terminal_call[2] .. "man awesome" },
   { "edit config", env.editor_cmd .. " " .. awesome.conffile },
   { "restart", awesome.restart },
   { "quit", function() exit_screen_show() end}
 }
 
 local myappmenu = {
-  { "ncmpcpp", env.term .. env.term_call[1] .. "music_n" .. env.term_call[2] .. "ncmpcpp" },
-  { "cava", env.term .. env.term_call[1] .. "music_c" .. env.term_call[2] .. "cava" },
-  { "brave", "brave-sec" },
+  { "ncmpcpp", terminal .. terminal_call[1] .. "music_n" .. terminal_call[2] .. "ncmpcpp" },
+  { "cava", terminal .. terminal_call[1] .. "music_c" .. terminal_call[2] .. "cava" },
+  { "web", web_browser },
   { "virtualbox", "firejail VirtualBox" },
-  { "weechat", env.term .. env.term_call[1] .. "chat" .. env.term_call[2] .. "weechat" },
-  { "mutt", env.term .. env.term_call[1] .. "mail" .. env.term_call[2] .. "mutt" },
-  { "ranger", env.term .. env.term_call[2] .. "ranger" },
+  { "weechat", terminal .. terminal_call[1] .. "chat" .. terminal_call[2] .. "weechat" },
+  { "mutt", terminal .. terminal_call[1] .. "mail" .. terminal_call[2] .. "mutt" },
+  { "ranger", terminal .. terminal_call[2] .. "ranger" },
   { "gimp", gimp }
 }
 
 local mypentestmenu = {
-  { "metasploit", env.term .. env.term_call[2] .. "msf" },
-  { "leaked", env.term .. env.term_call[2] .. "leaked.py" },
+  { "metasploit", terminal .. terminal_call[2] .. "msf" },
+  { "leaked", terminal .. terminal_call[2] .. "leaked.py" },
   { "burpsuite", burpsuite }
 }
 
@@ -49,7 +49,7 @@ local mygamemenu = {
 local mymainmenu = awful.menu({ items = 
   {
     { "awesome", myawesomemenu, beautiful.awesome_icon },
-    { "open terminal", env.term },
+    { "open terminal", terminal },
     { "apps", myappmenu },
     { "pentest tools", mypentestmenu },
     { "games", mygamemenu }

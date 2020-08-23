@@ -146,17 +146,17 @@ local pentest = btext({ fg_icon = "error", icon = "ﮊ",
 local buttons_widget = widget.box('vertical', { gimp,game,pentest })
 
 -- buttons path
-local image_cmd = function() launch_term(env.file_browser .. " ~/images") end
+local image_cmd = function() launch_term(file_browser .. " ~/images") end
 local image = btext({ fg_text = "primary", overlay = "primary",
   text = "IMAGES", command = image_cmd
 })
 
-local torrent_cmd = function() launch_term(env.file_browser .. " ~/torrents") end
+local torrent_cmd = function() launch_term(file_browser .. " ~/torrents") end
 local torrent = btext({ fg_text = "secondary", overlay = "secondary",
   text = "TORRENTS", command = torrent_cmd
 })
 
-local movie_cmd = function() launch_term(env.file_browser .. " ~/videos") end
+local movie_cmd = function() launch_term(file_browser .. " ~/videos") end
 local movie = btext({ fg_text = "error", overlay = "error",
   text = "MOVIES", command = movie_cmd
 })

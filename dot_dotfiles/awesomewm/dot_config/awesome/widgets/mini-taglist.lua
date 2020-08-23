@@ -46,8 +46,8 @@ function taglist_root:update_bg(item, tag, index)
     item.fg = M.x.on_background .. "B3" -- 100%
     item.bg = M.x.on_background .. "1F" -- 12%
   elseif tag.urgent then
-    item.fg = M.x.on_error .. "FF" -- 100%
-    item.bg = M.x.error .. "0A" -- 4%
+    item.fg = M.x.error .. "FF" -- 100%
+    item.bg = M.x.on_background .. "0A" -- 4%
   elseif #tag:clients() > 0 then
     item.fg = M.x.on_background .. "B3" -- 70%
     item.bg = M.x.on_background .. "0A" -- 4%

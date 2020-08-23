@@ -1,4 +1,4 @@
-local aspawn = require("awful.spawn")
+local spawn = require("awful.spawn")
 local ascreen = require("awful.screen")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
@@ -11,18 +11,22 @@ function app.start(cmd, is_shell, have_class, callback)
   local have_class = have_class or nil -- string
   if is_shell then
     if have_class then
-      aspawn.with_shell(env.term .. env.term_call[1] .. have_class .. env.term_call[2] .. cmd .. ' 2> /dev/null')
+      spawn.with_shell(terminal .. terminal_call[1] .. have_class .. terminal_call[2] .. cmd .. ' 2> /dev/null')
     else
-      aspawn.with_shell(env.term .. env.term_call[2] .. cmd .. ' 2> /dev/null')
+      spawn.with_shell(terminal_cmd .. cmd .. ' 2> /dev/null')
     end
   else
-    aspawn(cmd)
+    spawn(cmd)
   end
   if callback then callback() end
 end
 
+function app.term_with_class(cmd, class)
+  spawn.with_shell(terminal .. terminal_call[1] .. have_class .. terminal_call[2] .. cmd .. ' 2> /dev/null')
+end
+
 function app.shell_and_wait(cmd, callback)
-  aspawn(env.term .. env.term_call[2] .. "bash -c \"".. cmd .. " && read -p 'Press q to quit. ' -n 1\"")
+  spawn(terminal .. terminal_call[2] .. "bash -c \"".. cmd .. " && read -p 'Press q to quit. ' -n 1\"")
   if callback then callback() end
 end
 
@@ -52,14 +56,14 @@ function app.feh(path, callback_function)
   local s_width = screen.width / 2
   local s_height = screen.height / 2
   local cmd = "feh --scale-down --auto-zoom --image-bg \""..M.x.surface.."\" "..path.." -g "..s_width.."x"..s_height
-  aspawn.with_shell(cmd)
+  spawn.with_shell(cmd)
   if callback_function ~= nil then
     callback_function()
   end
 end
 
 function app.open_link(link, callback)
-  aspawn(env.web_browser .. " " .. tostring(link))
+  spawn(web_browser .. " " .. tostring(link))
   if callback then callback() end
 end
 

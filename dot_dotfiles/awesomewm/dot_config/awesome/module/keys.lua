@@ -152,7 +152,7 @@ keys.globalkeys = gtable.join(
   { description = "jump to urgent client", group = "client" }),
 
   -- Standard program
-  awful.key({ modkey, }, "Return", function() awful.spawn(env.term) end,
+  awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
   { description = "open a terminal", group = "launcher" }),
 
   awful.key({ modkey, "Control" }, "r", awesome.restart,
@@ -214,8 +214,8 @@ keys.globalkeys = gtable.join(
 
   -- Music Control (volume)
   awful.key({ altkey, "Control" }, "Up", function() 
-    if env.sound_system == "alsa" then
-      awful.spawn.with_shell("amixer -D "..env.sound_card_alsa.." sset Master 1%+")
+    if sound_system == "alsa" then
+      awful.spawn.with_shell("amixer -D "..sound_card.." sset Master 1%+")
     else
       awful.spawn.with_shell("pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +1%")
     end
@@ -223,8 +223,8 @@ keys.globalkeys = gtable.join(
   { description = "increase volume", group = "music" }),
 
   awful.key({ altkey, "Control" }, "Down", function() 
-    if env.sound_system == "alsa" then
-      awful.spawn.with_shell("amixer -D "..env.sound_card_alsa.." sset Master 1%-")
+    if sound_system == "alsa" then
+      awful.spawn.with_shell("amixer -D "..sound_card.." sset Master 1%-")
     else
       awful.spawn.with_shell("pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -1%")
     end

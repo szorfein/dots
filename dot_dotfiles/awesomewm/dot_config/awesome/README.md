@@ -42,6 +42,7 @@ I do not use many different fonts and tried to keep these dependences as small a
 | SpaceMono Nerd Font | miami, machine |
 
 ## File Structure
++ `config`: Everything that can be customized is here (programs used, value for monitoring, text icons, etc...).
 + `daemons`: Contains all tasks launched in the background, track cpu usage, network, volume, etc... and emit a signal used by widgets. Daemons are used for display notifications too. Many codes comes from the [vicious lib](https://github.com/vicious-widgets/vicious).
 + `icons`: Default icons used by all themes and all widgets.
 + `layouts`: Extra layouts displayed in awesome like `monitor_bar`, `start_screen`, `logout`, etc...
@@ -51,11 +52,12 @@ I do not use many different fonts and tried to keep these dependences as small a
 + `widgets`: All widgets here, each widget are customizable and have multiple forms (text, slider, horizontal bar, ...), i reuse same component for all forms.
 
 ## Configuration
-You can configure the app by change the file `env-config.lua`, you can change your:
+One thing can be required, you have to copied the file `config/env.lua.sample`.
 
-+ sound system `alsa` or `pulse`, default is `alsa`.
-+ number of cpu for the `monitor_bar`, default is `2`.
-+ network card to track, the default is `wlp2s0`.
+    $ cp ~/.config/awesome/config/env.lua.sample ~/.config/awesome/config/env.lua
+
++ `sound_system` `alsa` or `pulse`.
++ `network_card` to be monitored, the default is `lo`.
 
 The file should be enought documented to fill the rest, post an issue if not.  
 

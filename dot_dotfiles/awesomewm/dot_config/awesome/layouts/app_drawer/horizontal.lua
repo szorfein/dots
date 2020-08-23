@@ -36,7 +36,7 @@ local function exe_shell(cmd, class)
 end 
 
 local function exe_web(link)
-  app.start(env.web_browser .. " " .. link)
+  app.start(web_browser .. " " .. link)
   app_drawer_hide()
 end 
 
@@ -44,12 +44,12 @@ end
 -- <i></i> (italic) if you prefer
 my_apps[1] = {
   title = "Code",
-  { name = "<b>X</b>st", icon = icons["st"], exec = function() exe_app(env.term) end },
+  { name = "<b>X</b>st", icon = icons["st"], exec = function() exe_app(terminal) end },
   { name = "<b>T</b>mux", icon = icons["tilix"], exec = function() exe_shell("tmux") end },
   { name = "<b>V</b>im", icon = icons["neovim"], exec = function() exe_shell("vim") end  },
   { name = "<b>N</b>nn", icon = icons["filemanager"], exec = function() exe_shell("nnn") end  },
   keybindings = {
-    { {}, 'x', function() exe_app(env.term) end },
+    { {}, 'x', function() exe_app(terminal) end },
     { {}, 't', function() exe_shell("tmux") end },
     { {}, 'v', function() exe_shell("vim") end },
     { {}, 'n', function() exe_shell("nnn") end },
@@ -59,7 +59,7 @@ my_apps[1] = {
 my_apps[2] = {
   title = "Web",
   { name = "<b>B</b>rave", icon = icons["brave"], exec = function()
-    exe_app(env.web_browser) 
+    exe_app(web_browser)
   end },
   { name = "<b>G</b>ithub", icon = icons["github"], exec = function()
     exe_web("https://github.com/szorfein") 
@@ -83,7 +83,7 @@ my_apps[2] = {
     exe_web("https://www.privacytools.io/")
   end },
   keybindings = {
-    { {}, 'b', function() exe_app(env.web_browser) end },
+    { {}, 'b', function() exe_app(web_browser) end },
     { {}, 'g', function() exe_web("https://github.com/szorfein") end },
     { {}, 't', function() exe_web("https://twitter.com/szorfein") end },
     { {}, 'p', function() exe_web("https://protonirockerxow.onion/") end },
@@ -114,7 +114,7 @@ my_apps[4] = {
   { name = "<b>W</b>ireshark", icon = icons["wireshark"], exec = function() exe_app("wireshark") end },
   { name = "w<b>I</b>fite", icon = icons["wifite"], exec = function() exe_shell_and_wait("sudo wifite -c 10", app_drawer_hide) end },
   { name = "<b>R</b>eaver", icon = icons["reaver"], exec = function() exe_shell("reaver") end },
-  { name = "<b>N</b>map", icon = icons["nmap"], exec = function() app.shell_and_wait("sudo nmap -sS $(ip a | grep inet | grep "..env.net_device.." | awk '{print $2}')", app_drawer_hide) end },
+  { name = "<b>N</b>map", icon = icons["nmap"], exec = function() app.shell_and_wait("sudo nmap -sS $(ip a | grep inet | grep "..net_device.." | awk '{print $2}')", app_drawer_hide) end },
   { name = "ni<b>K</b>to", icon = icons["nikto"], exec = function() exe_shell("nikto") end },
   keybindings = {
     { {}, 'm', function() exe_shell("msfconsole") end },
@@ -123,7 +123,7 @@ my_apps[4] = {
     { {}, 'w', function() exe_app("wireshark") end },
     { {}, 'i', function() exe_shell_and_wait("sudo wifite -c 10", app_drawer_hide) end },
     { {}, 'r', function() exe_shell("reaver") end },
-    { {}, 'n', function() app.shell_and_wait("sudo nmap -sS $(ip a | grep inet | grep "..env.net_device.." | awk '{print $2}')", app_drawer_hide) end },
+    { {}, 'n', function() app.shell_and_wait("sudo nmap -sS $(ip a | grep inet | grep "..net_device.." | awk '{print $2}')", app_drawer_hide) end },
     { {}, 'k', function() exe_shell("nikto") end },
   }
 }

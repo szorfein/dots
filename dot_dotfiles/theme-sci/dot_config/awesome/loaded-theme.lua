@@ -7,6 +7,8 @@ local height = screen.focused().geometry.height
 
 local mytheme = {}
 
+mytheme.name = 'sci'
+
 mytheme.x = {
   background = xrdb.color0 or "#121212",
   surface = xrdb.color0 or "#000000",

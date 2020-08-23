@@ -5,6 +5,8 @@ local beautiful = require("beautiful")
 local sep = require("util.separators")
 local font = require("util.font")
 
+local hdds = disks or { "home" }
+
 -- root
 local disks_root = class()
 
@@ -36,7 +38,7 @@ function disks_root:make_widget()
 end
 
 function disks_root:make_all_arcchart()
-  for i=1, #env.disks do 
+  for i=1, #hdds do
     if i >= 2 then -- trick to add circle in circle in circle
       self.wbars[i] = widget.make_arcchart(self.wbars[i-1])
     else
@@ -49,7 +51,7 @@ function disks_root:make_arcchart()
   self.wtitle.font = M.f.body_2
   self:make_all_arcchart()
   local w = wibox.widget {
-    widget.box('horizontal', { self.wbars[#env.disks] }),
+    widget.box('horizontal', { self.wbars[#hdds] }),
     nil,
     widget.centered(self.wtitle, "vertical"),
     layout = wibox.layout.align.horizontal
@@ -57,7 +59,7 @@ function disks_root:make_arcchart()
   -- signal
   awesome.connect_signal("daemon::disks", function(fs_info)
     if fs_info ~= nil and fs_info[1] ~= nil then
-      for i=1, #env.disks do
+      for i=1, #hdds do
         self.wbars[i].value = fs_info[i].used_percent
       end
     end
@@ -78,9 +80,9 @@ function disks_root:make_progressbar_vert(bars, titles)
 end
 
 function disks_root:make_block()
-  for i = 1, #env.disks do
+  for i = 1, #hdds do
     self.wbars[i] = {}
-    self.wbars[i]["title"] = font.caption(env.disks[i], self.fg, M.t.medium)
+    self.wbars[i]["title"] = font.caption(hdds[i], self.fg, M.t.medium)
     self.wbars[i]["used_percent"] = widget.make_progressbar(_, self.bar_size, self.bar_colors[i])
     self.wbars[i]["size"] = font.caption("")
   end
@@ -88,7 +90,7 @@ function disks_root:make_block()
   local w
   if self.want_layout == 'horizontal' then
     w = wibox.widget{ layout = wibox.layout.fixed.vertical }
-    for i=1, #env.disks do
+    for i=1, #hdds do
       local t = self.wbars[i].title -- box
       local u = self.wbars[i].used_percent -- progressbar
       local s = self.wbars[i].size -- text size
@@ -104,7 +106,7 @@ function disks_root:make_block()
   elseif self.want_layout == 'vertical' then
     local wp = wibox.widget { layout = wibox.layout.fixed.horizontal } -- progressbar
     local wn = wibox.widget { layout = wibox.layout.fixed.horizontal } -- fs names
-    for i = 1, #env.disks do
+    for i = 1, #hdds do
       local n = font.caption(tostring(i), self.icon[2], M.t.medium)
       local t = self.wbars[i].title
       local u = widget.progressbar_layout(self.wbars[i].used_percent, self.want_layout)
@@ -115,7 +117,7 @@ function disks_root:make_block()
   end
   awesome.connect_signal("daemon::disks", function(fs_info)
     if fs_info ~= nil and fs_info[1] ~= nil then
-      for i=1, #env.disks do
+      for i=1, #hdds do
         self.wbars[i].used_percent.value = fs_info[i].used_percent
         self.wbars[i].size.markup = helpers.colorize_text(fs_info[i].size, M.x.primary)
       end

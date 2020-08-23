@@ -1,8 +1,8 @@
 local aspawn = require("awful.spawn")
 local gtimer = require("gears.timer")
-local env = require("env-config")
 
 local fs_info = {}
+local hdds = disks or { "home" }
 
 local function sformat_in_giga(value)
   return string.format("%.1f", value/1024^2)
@@ -12,7 +12,7 @@ local function disks_info()
   aspawn.with_line_callback('sh -c "df -kP"', { stdout = function(line)
     local s, u, a, p, m = line:match("^.-%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%%%s+([%p%w]+)")
     -- check if it's match with myfs and add to the table
-    for _, fs in pairs(env.disks) do
+    for _, fs in pairs(hdds) do
       if m ~= nil and m:match(fs) then
         if u and m then -- Handle 1st line and broken regexp
           fs_info[_] = {}

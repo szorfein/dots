@@ -5,7 +5,7 @@ local naughty = require("naughty")
 local helpers = require("helpers")
 local widget = require("util.widgets")
 
-local password = env.password
+local password = password or "awesome"
 
 local lock_screen_symbol = ""
 local lock_screen_fail_symbol = ""

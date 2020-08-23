@@ -75,8 +75,8 @@ function volume_root:make_slider()
   w.forced_height = 48
   -- Set value
   volume:connect_signal('property::value', function()
-    if env.sound_system == "alsa" then
-      aspawn.with_shell('amixer -D '..env.sound_card_alsa..' sset Master '..volume.value .. '%')
+    if sound_system == "alsa" then
+      aspawn.with_shell('amixer -D '..sound_card..' sset Master '..volume.value .. '%')
     else
       aspawn.with_shell('pactl set-sink-mute @DEFAULT_SINK@ false ; pactl set-sink-volume @DEFAULT_SINK@ ' .. volume.value .. '%')
     end

@@ -10,7 +10,7 @@ local ac_icon = beautiful.widget_battery_icon_ac or "臘"
 
 local function battery_info()
   local path_power="/sys/class/power_supply/"
-  local bat = env.battery or "BAT0"
+  local bat = battery or "BAT0"
   local fpath = path_power..bat
 
   local battery_state = {

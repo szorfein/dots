@@ -190,27 +190,27 @@ awful.rules.rules = {
         "Tor Browser"
       }
     },
-    properties = { screen = 1, tag = beautiful.tagnames[2] } 
+    properties = { tag = screen[1].tags[2] } 
   },
 
   { 
     rule = { class = "music*" },
-    properties = { screen = 1, tag = beautiful.tagnames[5] }
+    properties = { tag = screen[1].tags[5] }
   },
 
   {
     rule = { class = "Gimp" },
-    properties = { screen = 1, tag = beautiful.tagnames[8] }
+    properties = { tag = screen[1].tags[8] }
   },
 
   {
     rule = { class = "mail" },
-    properties = { screen = 1, tag = beautiful.tagnames[6] }
+    properties = { tag = screen[1].tags[6] }
   },
 
   {
     rule = { class = "chat" },
-    properties = { screen = 1, tag = beautiful.tagnames[6] } 
+    properties = { tag = screen[1].tags[6] }
   },
 
   {
@@ -219,7 +219,7 @@ awful.rules.rules = {
         "VirtualBox",
         "VirtualBox Manager"
       },
-    }, properties = { screen = 1, tag = beautiful.tagnames[9] }
+    }, properties = { tag = screen[1].tags[7] }
   },
 
   { 
@@ -228,6 +228,6 @@ awful.rules.rules = {
         "baldur.exe",
         "Wine"
       },
-    }, properties = { screen = 1, tag = beautiful.tagnames[10] }
+    }, properties = { tag = screen[1].tags[9] }
   }
 }

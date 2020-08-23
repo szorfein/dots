@@ -1,5 +1,4 @@
 local awful = require("awful")
-local gtable = require("gears.table")
 
 -- init table
 local mylayout = class()

@@ -10,10 +10,10 @@ function mybar:init(s)
   s.mylayoutbox = require("widgets.layoutbox")(s, {})
 
   -- Create a taglist widget
-  s.mytaglist = require("widgets.taglist")(s, {})
+  s.mytaglist = require("widgets.mini-taglist")(s, {})
  
   -- Create a tasklist widget
-  s.mytasklist = require("widgets.tasklist")(s, {})
+  s.mytasklist = require("widgets.mini-tasklist")(s, {})
   
   -- Create the wibox
   s.mywibox = awful.wibar({ position = "top", height = dpi(28), screen = s })

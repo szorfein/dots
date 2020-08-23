@@ -4,6 +4,8 @@ local helpers = require("helpers")
 local wibox = require("wibox")
 local font = require("util.font")
 
+local net_dev = network or "lo"
+
 -- beautiful vars
 local spacing = beautiful.widget_spacing or 1
 
@@ -46,7 +48,7 @@ end
 function network_root:make_ip()
   local w = widget.box_with_margin(self.want_layout, { self.wicon_net, self.wtext_1 }, spacing)
   awesome.connect_signal("daemon::network", function(net)
-    self.wtext_1.markup = helpers.colorize_text(net[env.net_device].name.." "..net[env.net_device].ip, self.fg)
+    self.wtext_1.markup = helpers.colorize_text(net[net_dev].name.." "..net[net_dev].ip, self.fg)
   end)
   return w
 end
@@ -54,8 +56,8 @@ end
 function network_root:make_text()
   local w = widget.box_with_margin(self.want_layout, { self.wicon_up, self.wtext_1, self.wicon_down, self.wtext_2 }, spacing)
   awesome.connect_signal("daemon::network", function(net)
-    self.wtext_1.markup = helpers.colorize_text(net[env.net_device].up, self.fg)
-    self.wtext_2.markup = helpers.colorize_text(net[env.net_device].down, self.fg)
+    self.wtext_1.markup = helpers.colorize_text(net[net_dev].up, self.fg)
+    self.wtext_2.markup = helpers.colorize_text(net[net_dev].down, self.fg)
   end)
   return w
 end
@@ -115,15 +117,14 @@ function network_root:make_block()
     w = self:make_progressbar_vert(p_up, p_down)
   end
   awesome.connect_signal("daemon::network", function(net)
-    if not net[env.net_device] then return end
-    local up = net[env.net_device].up
-    local down = net[env.net_device].down
+    local up = net[net_dev].up
+    local down = net[net_dev].down
     pu.value = up
     pd.value = down
-    ip.markup = helpers.colorize_text(net[env.net_device].ip, self.fg, M.t.medium)
+    ip.markup = helpers.colorize_text(net[net_dev].ip, self.fg, M.t.medium)
     self.wtext_1.markup = helpers.colorize_text(up.." B/s", self.fg)
     self.wtext_2.markup = helpers.colorize_text(down.." B/s", self.fg)
-    self.wtext.markup = helpers.colorize_text(env.net_device, self.fg, M.t.medium)
+    self.wtext.markup = helpers.colorize_text(net_dev, self.fg, M.t.medium)
   end)
   return w
 end
