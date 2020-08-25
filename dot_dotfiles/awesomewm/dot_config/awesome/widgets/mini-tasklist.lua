@@ -47,37 +47,37 @@ end
 
 local function update_icon(item, c)
   if c.class == "Firefox" or c.class == "Brave-browser" then
-    item.text = icons["web"]
+    item.text = icons.app["web"]
   elseif c.name == "neomutt" then
-    item.text = icons["neomutt"]
+    item.text = icons.app["neomutt"]
   elseif c.name == "weechat" then
-    item.text = icons["weechat"]
+    item.text = icons.app["weechat"]
   elseif c.name:match("ncmpcpp") then
-    item.text = icons["ncmpcpp"]
+    item.text = icons.app["ncmpcpp"]
   elseif c.name == "vifm" then
-    item.text = icons["vifm"]
+    item.text = icons.app["vifm"]
   elseif c.class == "feh" then
-    item.text = icons["feh"]
+    item.text = icons.app["feh"]
   elseif c.class == "mpv" then
-    item.text = icons["mpv"]
+    item.text = icons.app["mpv"]
   elseif c.name:match("paranoid") then
-    item.text = icons["paranoid"]
+    item.text = icons.app["paranoid"]
   elseif c.name:match("spior") then
-    item.text = icons["spior"]
+    item.text = icons.app["spior"]
   elseif c.name == "cava" then
-    item.text = icons["cava"]
+    item.text = icons.app["cava"]
   elseif c.name:match("VIM") then
-    item.text = icons["vim"]
+    item.text = icons.app["vim"]
   elseif c.class:match("VirtualBox") then
-    item.text = icons["virtualbox"]
+    item.text = icons.app["virtualbox"]
   elseif c.class == "Zathura" then
-    item.text = icons["zathura"]
+    item.text = icons.app["zathura"]
   elseif c.class == "Lutris" then
-    item.text = icons["lutris"]
+    item.text = icons.app["lutris"]
   elseif c.class:match("xst") then
-    item.text = icons["xst"]
+    item.text = icons.app["xst"]
   else
-    item.text = icons["default"]
+    item.text = icons.app["default"]
   end
 end
 

@@ -1,6 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local titlebar = require("util.titlebar")
 
 beautiful.titlebar_bg_focus = M.x.background
 beautiful.titlebar_bg = M.x.background

@@ -1,13 +1,14 @@
 local button = require("utils.button")
 local font = require("utils.font")
+local icons = require("config.icons")
 
 local launcher_root = class()
 
 function launcher_root:init()
   self.w = button({
     fg_icon = M.x.on_primary,
-    icon = font.icon(""),
-    command = app_drawer_toggle,
+    icon = font.icon(icons.widget.launcher),
+    command = nav_drawer_show,
     layout = "horizontal",
     rrect = 5,
     margins = dpi(2),

@@ -12,6 +12,7 @@ method = alsa
 {{ end }}
 {{ if eq .system.sound "pulseaudio" }}
 method = pulse
+source = auto
 {{ end }}
 {{ if eq .chezmoi.username "daggoth" }}
 source = hw:Pro
@@ -25,12 +26,7 @@ method = ncurses
 style = stereo
 
 [color]
-; gradient = 0 for xst, 3 for other terms
-gradient = 0
-{{ if eq .theme "sci" }}
-gradient_color_1 = '#4E88F3' #base
-gradient_color_2 = '#5DA6FF' #top
-{{ end }}
+foreground = cyan
 
 [smoothing]
 

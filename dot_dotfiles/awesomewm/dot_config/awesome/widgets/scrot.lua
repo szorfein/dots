@@ -1,15 +1,16 @@
 local awful = require("awful")
-local naughty = require("naughty")
-local beautiful = require("beautiful")
-local gtable = require("gears.table")
-local bicon = require("util.icon")
-
--- beautiful vars
-local fg = beautiful.widget_scrot_fg or M.x.on_background
-local icon = beautiful.widget_scrot_icon or ''
+local noti = require("utils.noti")
+local table = require("gears.table")
+local icons = require("config.icons")
+local button = require("utils.button")
+local font = require("utils.font")
 
 -- widget creation
-local scrot_icon = bicon({ icon = icon, fg = fg })
+local scrot_icon = button({
+  fg_icon = M.x.on_background,
+  icon = font.button(icons.widget.scrot),
+  command = nil
+})
 
 function take_scrot(time) 
   local time = time or 0
@@ -17,14 +18,11 @@ function take_scrot(time)
   if time >= 1 then
     title = "Screenshot taken in "..time.." sec(s)..."
   end
-  naughty.notify{
-    text = title,
-    timeout = 1
-  }
   awful.spawn.with_shell("scrot -d "..time.." -q 100")
+  noti.info(title)
 end
 
-scrot_icon:buttons(gtable.join(
+scrot_icon:buttons(table.join(
   awful.button({ }, 1, function() -- left click
     take_scrot() 
   end),

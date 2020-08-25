@@ -4,7 +4,7 @@ file=".config/awesome/loaded-theme.lua"
 dotsdir="$(file ~/$file | awk '{print $5}')"
 debug=false
 
-awesomeThemes="connected anonymous machine miami morpho worker beta"
+awesomeThemes="connected anonymous machine miami morpho worker beta sci"
 oldTheme=""
 oldPath=""
 dotfiles_dir=""
@@ -59,8 +59,8 @@ change() {
   log "call change"
   log "operate - $dotfiles_dir"
   cd $dotfiles_dir
-  stow -D themes/$oldTheme -t ~
-  stow themes/$wantTheme -t ~
+  stow -D $oldTheme -t ~
+  stow $wantTheme -t ~
   xrdb -merge ~/.Xresources
   killall -USR1 xst # reload color from xst
   #awesome --replace

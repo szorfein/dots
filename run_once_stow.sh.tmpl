@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+LAST_THEME="sci"
 DOTS={{ .chezmoi.homedir }}/.dotfiles
 DEST={{ .chezmoi.homedir }}
 
@@ -27,5 +28,15 @@ apply_theme() {
   && apply picom \
   && apply tmux \
   && apply awesomewm \
-  && apply_theme {{ .theme }}
+  && apply_theme $LAST_THEME
+)
+
+# wallpapers
+(cd $DOTS \
+  && ./install --images
+)
+
+# vimcolors
+(cd $DOTS \
+  && ./install --vim
 )

@@ -2,7 +2,7 @@ local wibox = require("wibox")
 local modal = require("util.modal")
 local awful = require("awful")
 local gtable = require("gears.table")
-local font = require("util.font")
+local font = require("utils.font")
 local bicon = require("util.icon")
 local mat_fg = require("util.mat-foreground")
 local mat_bg = require("util.mat-background")
@@ -16,7 +16,7 @@ function nav_drawer_hide()
   s.nav_drawer.visible = false
 end
 
-function naw_drawer_show()
+function nav_drawer_show()
   local s = awful.screen.focused()
   s.nav_drawer.visible = true
 end
@@ -24,7 +24,7 @@ end
 local function gen_menu(elements)
   local w = wibox.widget { layout = wibox.layout.fixed.vertical }
   for k,v in pairs(elements) do
-    local icon = font.button_v2(v[1])
+    local icon = font.icon(v[1])
     local text = font.body_2(v[2])
     local row = wibox.widget {
       {
@@ -66,16 +66,16 @@ local layout = gen_menu({
     s.start_screen.visible = not s.start_screen.visible
     nav_drawer_hide()
   end },
-  { "", "Monitor", function()
+  { "", "Monitor", function()
     local s = awful.screen.focused()
     s.monitor_bar.visible = not s.monitor_bar.visible
     nav_drawer_hide()
   end },
-  { "", "Lock", function()
+  { "", "Lock", function()
     lock_screen_show()
     nav_drawer_hide()
   end },
-  { "", "Logout", function()
+  { "", "Logout", function()
     exit_screen_show()
     nav_drawer_hide()
   end },

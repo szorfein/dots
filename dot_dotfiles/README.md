@@ -26,7 +26,7 @@ A list of dependendies can be found [here](https://raw.githubusercontent.com/szo
 - [support](#support)
 
 ## Installation for the last theme
-For the last [themes/worker](#screens), please, follow the procedure on the [wiki page](https://github.com/szorfein/dotfiles/wiki/theme-anonymous).  
+For the last [themes/worker](#screens), please, follow the procedure on the [wiki page](https://github.com/szorfein/dotfiles/wiki/theme-awesome).
 
 ## Stow
 If you are blocked with `stow` or need more explanations, see the [wiki page](https://github.com/szorfein/dotfiles/wiki/stow) before post an issue.  

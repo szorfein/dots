@@ -30,6 +30,7 @@ mytheme.x = {
 mytheme.f = {
   h1 = "Iosevka Light 60", -- used rarely on big icon or big title
   h4 = "Iosevka Regular 32",
+  h5 = "Material Design Icons Regular 20", -- icon for h6
   h6 = "Iosevka Regular 20",
   subtile_1 = "Iosevka Regular 13", -- used on text list
   body_1 = "Iosevka Term Regular 16", -- used on text body title

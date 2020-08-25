@@ -10,7 +10,6 @@ local pad = separators.pad
 local change_theme = require("widgets.button_change_theme")
 local desktop_ctrl = require("widgets.desktop-control")
 local scrot = require("widgets.scrot")
-local layouts = require("widgets.layouts")({})
 
 -- for the top
 
@@ -27,7 +26,7 @@ function mybar:init(s)
   s.mytasklist = require("widgets.tasklist")(s)
 
   -- Create a taglist widget for each screen
-  s.mytaglist = require("widgets.taglist")(s, { mode = "line", want_layout = 'flex' })
+  s.mytaglist = require("widgets.taglist")(s, { mode = "line", layout = 'flex' })
 
   -- Create the wibox with default options
   self.height = beautiful.wibar_height or dpi(56)
@@ -38,7 +37,9 @@ function mybar:init(s)
 
   -- Add widgets to the wibox
   s.mywibox:setup {
-    widget.box('horizontal', { pad(2), layouts }), -- left
+    widget.box('horizontal', { -- left
+      require("widgets.launcher")()
+    }),
     s.mytasklist, -- middle
     widget.box('horizontal', { change_theme, scrot, pad(2) }), -- right
     --expand ="none",

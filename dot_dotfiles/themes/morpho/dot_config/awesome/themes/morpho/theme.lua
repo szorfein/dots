@@ -3,17 +3,24 @@
 ---------------------------
 
 local theme_assets = require("beautiful.theme_assets")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
+
 local gfs = require("gears.filesystem")
-local gshape = require("gears.shape")
 local themes_path = gfs.get_themes_dir()
-local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.name .. "/layouts/"
-local xrdb = xresources.get_current_theme()
-local wibox = require("wibox")
-local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.name .. "/taglist/"
 
 local theme = {}
+
+theme.font          = M.f.overline
+
+theme.bg_normal     = M.x.background
+theme.bg_focus      = M.x.background .. M.e.dp01
+theme.bg_urgent     = M.x.error
+theme.bg_minimize   = M.x.background
+theme.bg_systray    = theme.bg_normal
+
+theme.fg_normal     = M.x.on_background .. "C2" -- 76%
+theme.fg_focus      = M.x.on_background
+theme.fg_urgent     = M.x.on_error
+theme.fg_minimize   = M.x.on_background .. "80" -- 50%
 
 theme.border_width  = dpi(1)
 theme.screen_margin = dpi(6)
@@ -38,9 +45,6 @@ theme.wibar_border_radius = dpi(0)
 theme.wibar_height = dpi(40)
 
 -- {{{ TAGLIST
-
--- Nerd Font icon here
-theme.tagnames = {" 1 "," 2 "," 3 "," 4 "," 5 "," 6 "," 7 "," 8 "," 9 "," 10 "}
 
 -- different color on each taglists
 theme.taglist_text_color_empty = {
@@ -95,11 +99,6 @@ theme.taglist_text_color_urgent = {
   M.x.error .. "7B",
 }
 
--- icon_taglist
-theme.ntags = 10
-
-theme.taglist_layout = wibox.layout.fixed.horizontal -- horizontal or vertical
-
 -- }}} TAGLIST END
 
 -- {{{ MENU
@@ -113,7 +112,7 @@ theme.wallpaper = os.getenv("HOME").."/images/"..M.name..".jpg"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-  theme.menu_height, M.x.secondary, M.x.on_secondary
+  theme.menu_height, M.x.primary, M.x.on_primary
 )
 
 -- Define the icon theme for application icons. If not set then the icons

@@ -4,16 +4,16 @@ local beautiful = require("beautiful")
 local noti = require("util.noti")
 local widget = require("util.widgets")
 local helpers = require("helpers")
-local gtable = require('gears.table')
+local table = require('gears.table')
 local icons = require("icons.default")
 local font = require("util.font")
-local bicon = require("util.icon")
 local app = require("util.app")
 local btext = require("util.mat-button")
+local ufont = require("utils.font")
+local iicon = require("config.icons")
+local button = require("utils.button")
 
 -- beautiful vars
-local icon = beautiful.widget_change_theme_icon or ''
-local icon_reload = beautiful.widget_change_theme_icon_reload or ''
 local fg = beautiful.widget_change_theme_fg or M.x.on_background
 local bg = beautiful.widget_change_theme_bg or M.x.background
 local l = beautiful.widget_change_theme_layout or 'horizontal'
@@ -23,15 +23,20 @@ local space = beautiful.widget_spacing or dpi(1)
 local padding = beautiful.widget_popup_padding or 1
 
 -- button creation
-local change = bicon({ icon = icon, fg = fg })
+local change = button({
+  fg_icon = M.x.on_background,
+  icon = ufont.icon(iicon.widget.change_theme),
+  command = nil,
+})
+
 local wi = widget.box(l, { change })
 
-local rld = bicon({ icon = icon_reload, fg = fg })
-rld:buttons(gtable.join(
-  awful.button({ }, 1, function()
-    awesome.restart()
-  end)
-))
+local rld = button({
+  fg_icon = M.x.on_background,
+  icon = lol.icon(iicon.widget.reload),
+  command = awesome.restart,
+  layout = "horizontal",
+})
 
 local function make_element(name)
   local change_script = function()
@@ -42,7 +47,7 @@ local function make_element(name)
     noti.info("Theme changed, Reload awesome for switch on "..name)
   end
   local element = wibox.widget {
-    widget.centered(widget.imagebox(80, icons[name])),
+    widget.centered(widget.imagebox(80, icons.app[name])),
     font.button(name, M.x.on_surface, M.t.medium),
     layout = wibox.layout.fixed.vertical
   }
@@ -111,7 +116,7 @@ local w = awful.popup {
 
 -- attach popup to widget
 w:bind_to_widget(change)
-change:buttons(gtable.join(
+change:buttons(table.join(
 awful.button({}, 3, function()
   w.visible = false
 end)

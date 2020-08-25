@@ -36,6 +36,7 @@ mytheme.f = {
   body_2 = "Space Mono Nerd Font Complete 14", -- used on text body
   -- for button, don't use a Mono variant because icons are too small
   -- issue: https://github.com/ryanoasis/nerd-fonts/issues/26
+  icon = "Material Design Icons Regular 15", -- used for icon
   button = "Space Mono Bold Nerd Font Complete 14", -- used on text button
   caption = "Space Mono Bold Nerd Font Complete 12", -- used on annotation
   overline = "Space Mono Nerd Font Complete Mono 10",

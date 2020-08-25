@@ -11,7 +11,6 @@ local mpc = require("widgets.music-player")({})
 local change_theme = require("widgets.button_change_theme")
 local desktop_ctrl = require("widgets.desktop-control")
 local scrot = require("widgets.scrot")
-local layouts = require("widgets.layouts")({})
 
 -- init tables
 local mybar = class()
@@ -34,7 +33,6 @@ function mybar:init(s)
   -- Add widgets to the wibox
   s.mywibox:setup {
     { -- Left widgets
-      layouts,
       layout = wibox.layout.align.horizontal
     },
     s.mytasklist, -- More or less Middle

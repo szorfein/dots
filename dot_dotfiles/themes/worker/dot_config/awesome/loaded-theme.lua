@@ -35,12 +35,14 @@ mytheme.x = {
 mytheme.f = {
   h1 = "Iosevka Light 60", -- used rarely on big icon or big title
   h4 = "Iosevka Regular 32",
+  h5 = "Material Design Icons Regular 20", -- icon for h6
   h6 = "Iosevka Regular 20",
   subtile_1 = "Iosevka Regular 12", -- used on text list
   body_1 = "Iosevka Term Regular 15", -- used on text body title
   body_2 = "Iosevka Term Light 13", -- used on text body
   -- for button, don't use a Mono variant because icons are too small
   -- issue: https://github.com/Powerlevel9k/powerlevel9k/issues/430
+  icon = "Material Design Icons Regular 15", -- used for icon
   button = "Iosevka Term Medium Nerd Font Complete 14", -- used on text button
   caption = "Iosevka Bold 12", -- used on annotation
   overline = "Iosevka Regular 10",

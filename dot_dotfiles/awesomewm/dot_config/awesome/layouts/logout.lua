@@ -5,6 +5,7 @@ local button = require("utils.button")
 local modal = require("utils.modal")
 local helper = require("utils.helper")
 local font = require("utils.font")
+local icons = require("config.icons")
 
 -- keylogger
 local exit_screen_grabber
@@ -23,7 +24,7 @@ end
 -- button poweroff
 local poweroff = button({
   fg_icon = M.x.error,
-  icon = font.h1("⭘"),
+  icon = font.h1(icons.widget.poweroff),
   text = font.button("Poweroff"),
   width = 110,
   command = poweroff_command,
@@ -36,7 +37,7 @@ end
 -- button reboot
 local reboot = button({
   fg_icon = M.x.error_variant_1,
-  icon = font.h1("ﰇ"),
+  icon = font.h1(icons.widget.reboot),
   text = font.button("Reboot"),
   width = 110,
   command = reboot_command,
@@ -49,7 +50,7 @@ end
 -- button exit
 local exit = button({
   fg_icon = M.x.primary,
-  icon = font.h1(">>"),
+  icon = font.h1(icons.widget.exit),
   text = font.button("Exit"),
   width = 110,
   command = exit_command,
@@ -63,7 +64,7 @@ end
 -- button lock
 local lock = button({
   fg_icon = M.x.secondary,
-  icon = font.h1(""),
+  icon = font.h1(icons.widget.lock),
   text = font.button("Lock"),
   width = 110,
   command = lock_command,

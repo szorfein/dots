@@ -61,17 +61,19 @@ forZsh() {
   ln -s  $SPACESHIP/spaceship.zsh-theme $OH_MY_ZSH/themes/spaceship.zsh-theme
 }
 
-pathogen() {
-  [[ ! -d ~/.vim/bundle ]] && mkdir -p $HOME/.vim/bundle
-  chk https://github.com/kaicataldo/material.vim ~/.vim/bundle/material.vim
-  chk https://github.com/szorfein/fantasy.vim ~/.vim/bundle/fantasy.vim
-  chk https://github.com/szorfein/darkest-space ~/.vim/bundle/darkest-space
-  chk https://github.com/szorfein/fromthehell.vim ~/.vim/bundle/fromthehell.vim
-  chk https://github.com/szorfein/lightline.vim ~/.vim/bundle/lightline.vim
-  chk https://github.com/edkolev/tmuxline.vim ~/.vim/bundle/tmuxline.vim
-  chk https://github.com/sainnhe/gruvbox-material ~/.vim/bundle/gruvbox-material
-}
+vimcolors() {
+  vim_dir=$HOME/.vim/pack/my-plugins/start
 
+  [ -d $vim_dir ] || mkdir -p $vim_dir
+  chk https://github.com/kaicataldo/material.vim $vim_dir/material.vim
+  chk https://github.com/szorfein/fantasy.vim $vim_dir/fantasy.vim
+  chk https://github.com/szorfein/darkest-space $vim_dir/darkest-space
+  chk https://github.com/szorfein/fromthehell.vim $vim_dir/fromthehell.vim
+  chk https://github.com/szorfein/lightline.vim $vim_dir/lightline.vim
+  chk https://github.com/edkolev/tmuxline.vim $vim_dir/tmuxline.vim
+  chk https://github.com/sainnhe/gruvbox-material $vim_dir/gruvbox-material
+  chk https://github.com/szorfein/sci.vim $vim_dir/sci
+}
 
 get_image() {
   img_name="$1"
@@ -128,7 +130,7 @@ banner() {
       "-z, --zsh    Download and install dependencies of zsh"
 
     printf "%s\n" \
-      "-v, --vim    Download and install dependencies of vim for pathogen"
+      "-v, --vim    Download and install vim colorscheme for vim"
 
     printf "%s\n" \
       "-h, --help   Display this really usefull message"
@@ -152,7 +154,7 @@ while [ "$#" -gt 0 ] ; do
       ;;
     -v | --vim)
       banner
-      pathogen
+      vimcolors
       shift
       ;;
     -i | --images)

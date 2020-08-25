@@ -1,1 +1,6 @@
+" Color
+packadd! darkest-space
 colorscheme darkest-space
+
+" Reload colorscheme
+map <F8> :update<CR>:colorscheme darkest-space<CR>

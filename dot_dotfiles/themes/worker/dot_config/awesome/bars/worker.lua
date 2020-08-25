@@ -9,7 +9,6 @@ local widget = require('util.widgets')
 local pad = separators.pad
 local desktop_ctrl = require("widgets.desktop-control")
 local music = require("widgets.music-player")({ mode = "song" })
-local layouts = require("widgets.layouts")({ mode = "menu" })
 local textclock = wibox.widget {
   font = M.f.h6,
   format = '<span foreground="'..M.x.on_background..'">%H:%M</span>',
@@ -55,7 +54,7 @@ function mybar:init(s)
     },
     { -- right
       {
-        widget.box('horizontal', { layouts, desktop_ctrl, pad(4), textclock }),
+        widget.box('horizontal', { desktop_ctrl, pad(4), textclock }),
         margins = 8,
         widget = wibox.container.margin
       },
