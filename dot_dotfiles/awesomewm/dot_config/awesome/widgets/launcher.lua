@@ -6,13 +6,12 @@ local launcher_root = class()
 
 function launcher_root:init()
   self.w = button({
-    fg_icon = M.x.on_primary,
+    fg_icon = M.x.primary,
     icon = font.icon(icons.widget.launcher),
     command = nav_drawer_show,
     layout = "horizontal",
     rrect = 5,
-    margins = dpi(2),
-    mode = "contained"
+    margins = dpi(8)
   })
 end
 

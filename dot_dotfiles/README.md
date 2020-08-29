@@ -40,7 +40,7 @@ Here all the vim plugins i use:
 |[colorizer](https://github.com/lilydjwg/colorizer) | colorize hexa code |[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) | used with tmux |
 |[indentLine](https://github.com/Yggdroot/indentLine) | display indentation level |[nerdtree](https://github.com/scrooloose/nerdtree) | tree explorer |
 |[lightline](https://github.com/itchyny/lightline.vim) | top, bottom bar |[vim-gitgutter](https://github.com/airblade/vim-gitgutter) | git diff in sign column |[nerdtree](https://github.com/scrooloose/nerdtree) | tree explorer |
-|[lightline-bufferline](https://github.com/mengelbrecht/lightline-bufferline) | extend lightline |[pathogen](https://github.com/tpope/vim-pathogen) | load vim plugins |
+|[lightline-bufferline](https://github.com/mengelbrecht/lightline-bufferline) | extend lightline | | |
 
 #### On gentoo (with [ninjatools](https://github.com/szorfein/ninjatools)):
     sudo emerge -av app-vim/lightline gitgutter nerdtree pathogen app-vim/ale vim-devicons app-vim/colorizer vim-tmux-navigator indentline lightline-bufferline

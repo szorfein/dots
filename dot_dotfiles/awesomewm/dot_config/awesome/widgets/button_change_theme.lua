@@ -23,19 +23,17 @@ local space = beautiful.widget_spacing or dpi(1)
 local padding = beautiful.widget_popup_padding or 1
 
 -- button creation
-local change = button({
+local w = button({
   fg_icon = M.x.on_background,
   icon = ufont.icon(iicon.widget.change_theme),
-  command = nil,
+  layout = "horizontal"
 })
-
-local wi = widget.box(l, { change })
 
 local rld = button({
   fg_icon = M.x.on_background,
-  icon = lol.icon(iicon.widget.reload),
+  icon = ufont.icon(iicon.widget.reload),
   command = awesome.restart,
-  layout = "horizontal",
+  layout = "horizontal"
 })
 
 local function make_element(name)
@@ -104,7 +102,7 @@ local popup_widget = wibox.widget {
   widget = wibox.container.background
 }
 
-local w = awful.popup {
+local popup = awful.popup {
   widget = popup_widget,
   visible = false, -- do not show at start
   ontop = true,
@@ -115,11 +113,11 @@ local w = awful.popup {
 }
 
 -- attach popup to widget
-w:bind_to_widget(change)
-change:buttons(table.join(
+popup:bind_to_widget(w)
+w:buttons(table.join(
 awful.button({}, 3, function()
   w.visible = false
 end)
 ))
 
-return wi
+return w

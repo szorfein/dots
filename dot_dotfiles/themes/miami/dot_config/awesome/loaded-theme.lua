@@ -8,15 +8,19 @@ mytheme.name = "miami"
 -- xrdb variables and fallback
 mytheme.x = {
   background = xrdb.color0 or "#121212",
-  foreground = xrdb.foreground or "#FDFDFD",
   surface = xrdb.color0 or "#000000",
   dark_primary = "#30222C", -- branded dark surface
 
-  primary = xrdb.color14 or "#52dcba", -- cyan
-  primary_variant = xrdb.color6 or "#009F6C", -- primary saturate (200-500)
-  error = xrdb.color9 or "#CF6673",
+  primary = xrdb.color6 or "#9afff9", -- cyan
+  primary_variant_1 = xrdb.color2 or "#88EFAC", -- primary analog
+  primary_variant_2 = xrdb.color4 or "#808FEC", -- primary analog
 
-  secondary = xrdb.color13 or "#BB86FC", -- magenta
+  secondary = xrdb.color5 or "#E686AC", -- magenta
+  secondary_variant_1 = xrdb.color3 or "#DBA68C", -- secondary analog
+  secondary_variant_2 = xrdb.color13 or "#EB86FC", -- secondary analog
+
+  error = xrdb.color9 or "#CF6673",
+  error_variant_1 = xrdb.color9 or "#BFA6B3",
 
   on_background = xrdb.color15 or "#ffffff", -- white
   on_surface = xrdb.color15, -- white

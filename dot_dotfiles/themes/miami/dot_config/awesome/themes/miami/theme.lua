@@ -108,8 +108,8 @@ theme.taglist_text_color_urgent = {
 
 -- }}} TAGLIST END
 
---theme.tasklist_bg_normal = M.x.on_background .. M.e.dp00
---theme.tasklist_bg_focus = M.x.on_background .. M.e.dp00
+theme.tasklist_bg_normal = M.x.on_background .. M.e.dp00
+theme.tasklist_bg_focus = M.x.on_background .. M.e.dp00
 
 -- {{{ MENU
 
@@ -137,13 +137,6 @@ theme.widget_spacing = dpi(19) -- space between each widgets
 -- popup (distance between the bar and the popup, 0 is pasted at the bar)
 theme.widget_popup_padding = dpi(3)
 
--- Wifi str
-theme.widget_wifi_str_fg = M.x.on_surface
-theme.widget_wifi_str_bg = M.x.background
-theme.widget_wifi_layout = 'horizontal' -- horizontal or vertical
-
--- Button mpc
-theme.widget_mpc_button_icon = { "ﱘ", M.x.on_background }
 
 -- progressbar colors
 theme.bar_color = M.x.primary

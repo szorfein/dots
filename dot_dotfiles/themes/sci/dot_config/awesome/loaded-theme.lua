@@ -30,7 +30,6 @@ mytheme.x = {
   on_primary = xrdb.color0 or "#111111", -- black
   on_secondary = xrdb.color0 or "#111111",  -- black
   on_error = xrdb.color0 or "#111111", -- black
-  on_surface = xrdb.color15 or "#ffffff"
 }
 
 -- fonts
