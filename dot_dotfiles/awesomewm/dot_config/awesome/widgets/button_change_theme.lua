@@ -45,7 +45,7 @@ local function make_element(name)
     noti.info("Theme changed, Reload awesome for switch on "..name)
   end
   local element = wibox.widget {
-    widget.centered(widget.imagebox(80, icons.app[name])),
+    widget.centered(widget.imagebox(90, icons[name])),
     font.button(name, M.x.on_surface, M.t.medium),
     layout = wibox.layout.fixed.vertical
   }
@@ -56,11 +56,11 @@ local function make_element(name)
 end
 
 local popup_anonymous = make_element("anonymous")
-local popup_connected = make_element("connected")
 local popup_miami = make_element("miami")
 local popup_machine = make_element("machine")
 local popup_morpho = make_element("morpho")
 local popup_worker = make_element("worker")
+local popup_sci = make_element("sci")
 
 local w_position -- the position of the popup depend of the wibar
 w_position = widget.check_popup_position(beautiful.wibar_position)
@@ -81,11 +81,11 @@ local popup_widget = wibox.widget {
       },
       {
         popup_anonymous,
-        popup_connected,
         popup_machine,
         popup_miami,
         popup_morpho,
         popup_worker,
+        popup_sci,
         forced_num_rows = 2,
         forced_num_cols = 3,
         spacing = 10,

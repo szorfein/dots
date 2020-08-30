@@ -3,7 +3,7 @@ local wibox = require("wibox")
 -- opacity for helper text and dark theme
 -- https://material.io/design/color/dark-theme.html#ui-application
 
-function widget_text(font, text)
+local function widget_text(font, text)
   return wibox.widget {
     align  = 'center',
     valign = 'center',

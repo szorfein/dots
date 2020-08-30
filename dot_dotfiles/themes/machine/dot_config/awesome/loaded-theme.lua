@@ -1,5 +1,9 @@
+local screen = require("awful.screen")
 local beautiful = require("beautiful")
 local xrdb = beautiful.xresources.get_current_theme()
+
+local width = screen.focused().geometry.width
+local height = screen.focused().geometry.height
 
 local mytheme = {}
 
@@ -8,38 +12,41 @@ mytheme.name = "machine"
 -- xrdb variables and fallback
 mytheme.x = {
   background = xrdb.color0 or "#121212",
-  foreground = xrdb.foreground or "#FDFDFD",
   surface = xrdb.color0 or "#000000",
   dark_primary = "#1E1A30", -- branded dark surface
 
-  primary = xrdb.color14 or "#52dcba", -- cyan
-  primary_variant = xrdb.color6 or "#009F6C", -- primary saturate (200-500)
-  error = xrdb.color9 or "#CF6673",
+  primary = xrdb.color6 or "#52dcba", -- cyan
+  primary_variant_1 = xrdb.color2 or "#88EFAC", -- primary analog
+  primary_variant_2 = xrdb.color4 or "#808FEC", -- primary analog
 
-  secondary = xrdb.color13 or "#BB86FC", -- magenta
+  secondary = xrdb.color5 or "#E686AC", -- magenta
+  secondary_variant_1 = xrdb.color3 or "#DBA68C", -- secondary analog
+  secondary_variant_2 = xrdb.color13 or "#EB86FC", -- secondary analog
 
-  on_background = xrdb.foreground or "#ffffff", -- white
+  error = xrdb.color1 or "#BF96B3",
+  error_variant_1 = xrdb.color9 or "#BFA6B3",
+
+  on_background = xrdb.color15 or "#ffffff", -- white
   on_surface = xrdb.color15,  -- white
   on_primary = xrdb.color0, -- black
   on_secondary = xrdb.color0,  -- black
-  on_error = xrdb.color0, -- white
-  on_surface = xrdb.color15
+  on_error = xrdb.color0 -- white
 }
 
 -- fonts
 mytheme.f = {
-  h1 = "Space Mono Nerd Font Complete 60", -- used rarely on big icon or big title
-  h4 = "Space Mono Nerd Font Complete 32",
-  h6 = "Space Mono Nerd Font Complete 20",
-  subtile_1 = "Space Mono Nerd Font Complete Mono 13", -- used on text list
-  body_1 = "Space Mono Bold Nerd Font Complete 16", -- used on text body title
-  body_2 = "Space Mono Nerd Font Complete 14", -- used on text body
-  -- for button, don't use a Mono variant because icons are too small
-  -- issue: https://github.com/ryanoasis/nerd-fonts/issues/26
+  h1 = "SpaceMono Nerd Font Mono 60", -- used rarely on big icon or big title
+  h4 = "SpaceMono Nerd Font Mono 32",
+  h5 = "Material Design Icons Regular 20", -- icon for h6
+  h6 = "SpaceMono Nerd Font Mono 20",
+  subtile_1 = "SpaceMono Nerd Font Mono 12", -- used on text list
+  subtile_2 = (height >= 1024 and "SpaceMono Nerd Font Mono 12" or "SpaceMono Nerd Font Mono 10"), -- used tasklist
+  body_1 = "SpaceMono Bold Nerd Font Mono 16", -- used on text body title
+  body_2 = "SpaceMono Nerd Font Mono 14", -- used on text body
   icon = "Material Design Icons Regular 15", -- used for icon
-  button = "Space Mono Bold Nerd Font Complete 14", -- used on text button
-  caption = "Space Mono Bold Nerd Font Complete 12", -- used on annotation
-  overline = "Space Mono Nerd Font Complete Mono 10",
+  button = "SpaceMono Nerd Font Mono Regular 14", -- used on text button
+  caption = "SpaceMono Nerd Font Mono Bold 12", -- used on annotation
+  overline = "SpaceMono Nerd Font Mono 10",
 }
 
 -- text emphasis

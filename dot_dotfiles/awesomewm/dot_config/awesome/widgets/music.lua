@@ -6,6 +6,7 @@ local shape = require("gears.shape")
 local surface = require("gears.surface")
 local noti = require("utils.noti")
 local progressbar = require("utils.progressbar")
+local helpers = require("helpers")
 
 local music_root = class()
 
@@ -21,7 +22,7 @@ function music_root:init()
     fg_icon = M.x.secondary,
     icon = font.icon(""),
     layout = "horizontal",
-    margins = dpi(4)
+    --margins = dpi(4)
   })
   self:gen_popup()
   self:signals()
@@ -31,30 +32,35 @@ function music_root:gen_popup()
   local w = awful.popup {
     widget = {
       {
-        self.progress,
-        self.cover,
-        layout = wibox.layout.fixed.vertical
-      },
-      {
         {
-          self.title,
-          self.artist,
-          forced_height = dpi(76),
+          self.progress,
+          self.cover,
           layout = wibox.layout.fixed.vertical
         },
-        margins = dpi(8),
-        widget = wibox.container.margin
-      },
-      {
-        nil,
-        require("widgets.mpc")({}),
+        {
+          {
+            self.title,
+            self.artist,
+            forced_height = dpi(76),
+            layout = wibox.layout.fixed.vertical
+          },
+          margins = dpi(8),
+          widget = wibox.container.margin
+        },
+        {
+          nil,
+          require("widgets.mpc")({}),
+          expand = "none",
+          layout = wibox.layout.align.horizontal
+        },
         expand = "none",
-        layout = wibox.layout.align.horizontal
+        forced_height = dpi(200),
+        forced_width = dpi(200),
+        layout = wibox.layout.align.vertical
       },
-      expand = "none",
-      forced_height = dpi(200),
-      forced_width = dpi(200),
-      layout = wibox.layout.align.vertical
+      shape = helpers.rrect(20),
+      bg = M.x.on_surface .. M.e.dp01,
+      widget = wibox.container.background
     },
     hide_on_right_click = true,
     visible = false,

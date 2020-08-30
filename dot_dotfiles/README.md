@@ -22,6 +22,7 @@ A list of dependendies can be found [here](https://raw.githubusercontent.com/szo
 - [vim](#vim)
 - [shell](#shell)
 - [wallpapers](#wallpapers)
+- [fonts](#fonts)
 - [screenshots](#screens)
 - [support](#support)
 
@@ -62,11 +63,21 @@ To recover all the wallpapers i used, you need to install `wget` and execute a:
 You have to launch this each time a new theme come.  
 It's all for the setup :)
 
+## Fonts
+For awesomewm, i use [RobotoMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/RobotoMono), [Iosevka Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka), [SpaceMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SpaceMono) and [MaterialDesign icons](https://github.com/Templarian/MaterialDesign-Webfont).  
+To install all the fonts (in `~/.local/share/fonts`), you can use my script too, for archlinux, you may prefer the install with AUR instead.
+
+    ./install --fonts
+
 ## Screens
 
 ### Awm
 
-**Last**:`themes/worker` **term**: xst, **vim-color**: [darkest-space](https://github.com/szorfein/darkest-space), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
+**Last**:`themes/sci` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
+
+![sci screenshot](https://raw.githubusercontent.com/szorfein/unix-portfolio/master/sci/logout.png)
+
+`themes/worker` **term**: xst, **vim-color**: [darkest-space](https://github.com/szorfein/darkest-space), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
 
 | monitor bar | app drawer |
 | --- | --- |
@@ -89,9 +100,6 @@ It's all for the setup :)
 
 `themes/anonymous` [term]: *xst* [vim-color] [darkest-space](https://github.com/szorfein/darkest-space), [font] [Nerd Font Iosevka](http://nerdfonts.com/#downloads).   
 ![Anonymous screenshot](https://github.com/szorfein/unix-portfolio/blob/master/anonymous/music.png "anonymous")  
-
-`themes/connected` **term**: xst, **vim-color**: [gruvbox material](https://github.com/sainnhe/gruvbox-material), **font**: [Nerd Roboto Mono](http://nerdfonts.com/#downloads).   
-![Connected screenshot](https://github.com/szorfein/unix-portfolio/blob/master/connected/ncmpcpp.png "connected")  
 
 ### Subtlewm
 

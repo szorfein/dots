@@ -4,6 +4,11 @@ set -ue
 
 GIT=$(which git)
 
+DIR_FONT=~/.local/share/fonts
+PV="2.1.0"
+PN_MATERIAL="MaterialDesign-Webfont"
+PV_MATERIAL="3.8.95"
+
 ###############################################################
 # Check deps
 
@@ -112,6 +117,39 @@ download_images() {
   filename= link= DEST=
 }
 
+check_fonts() {
+  [ -f "$2" ] || {
+    rm -rf "$1"
+    mkdir "$1"
+    curl -s -L -o "$2" "$3"
+    (cd "$1" \
+      && unzip ../"$2"
+    )
+  }
+}
+
+grab_fonts() {
+  [ -d $DIR_FONT ] || mkdir -p $DIR_FONT
+
+  echo "Nerd Fonts..."
+  (cd $DIR_FONT \
+    && check_fonts Iosevka "Iosevka-$PV.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/Iosevka.zip" \
+    && check_fonts RobotoMono "RobotoMono-$PV.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/RobotoMono.zip" \
+    && check_fonts SpaceMono "SpaceMono-$PV.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/SpaceMono.zip" \
+  )
+
+  echo "The Material font..."
+  (cd $DIR_FONT \
+    && rm -rf font-mat*.tar.gz \
+    && rm -rf $PN_MATERIAL* \
+    && curl -s -L -o font-material.tar.gz "https://github.com/Templarian/$PN_MATERIAL/archive/v$PV_MATERIAL.tar.gz" \
+    && tar xvf font-material.tar.gz \
+    && mv $PN_MATERIAL-$PV_MATERIAL/fonts/materialdesignicons-webfont.ttf $DIR_FONT \
+    && rm -rf $PN_MATERIAL*
+  )
+  fc-cache -vf $DIR_FONT
+}
+
 banner() {
   printf "%s\n" \
     '
@@ -130,18 +168,21 @@ banner() {
       "-z, --zsh    Download and install dependencies of zsh"
 
     printf "%s\n" \
-      "-v, --vim    Download and install vim colorscheme for vim"
+      "-v, --vim    Download and install all the vim colorscheme"
 
     printf "%s\n" \
-      "-h, --help   Display this really usefull message"
+      "-f, --fonts    Download and install all the fonts"
+
+    printf "%s\n" \
+      "-h, --help   Display this help"
     }
 
 ###############################################################
 # Command line options
 
 if [ "$#" -eq 0 ]; then
-  printf "%s\\n" "$prog_name: Argument required"
-  printf "%s\\n" "Try '$prog_name --help' for more information."
+  printf "%s\\n" "$0: Argument required"
+  printf "%s\\n" "Try '$0 --help' for more information."
   exit 1
 fi
 
@@ -162,13 +203,18 @@ while [ "$#" -gt 0 ] ; do
       download_images
       shift
       ;;
+    -f | --fonts)
+      banner
+      grab_fonts
+      shift
+      ;;
     -h | --help)
       usage
       shift
       ;;
     *)
       usage
-      printf "\\n%s\\n" "$prog_name: Invalid option '$1'"
+      printf "\\n%s\\n" "$0: Invalid option '$1'"
       exit 1
       ;;
   esac

@@ -16,8 +16,8 @@
 !! Primary, Secondary !!
 #define theme7  #937DB5
 #define theme8  #A997C8
-#define theme9  #4a65a2
-#define theme10 #657EB8
+#define theme9  #7a91c7
+#define theme10 #8ca0cf
 !! Alert !!
 #define theme11 #C3C5AA
 #define theme12 #CDCFBA

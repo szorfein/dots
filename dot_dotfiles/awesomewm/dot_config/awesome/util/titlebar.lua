@@ -5,7 +5,7 @@ local btext = require("util.mat-button")
 local beautiful = require("beautiful")
 
 local ncmpcpp = require("widgets.mpc")({ 
-  mode = "titlebar", font = M.f.h4, fg = "primary", overlay = "primary"
+  mode = "titlebar"
 })
 
 local titlebar = {}

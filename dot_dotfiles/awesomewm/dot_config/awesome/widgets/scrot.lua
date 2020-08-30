@@ -9,7 +9,7 @@ local font = require("utils.font")
 local scrot_icon = button({
   fg_icon = M.x.on_background,
   icon = font.button(icons.widget.scrot),
-  command = nil
+  layout = "horizontal"
 })
 
 function take_scrot(time) 

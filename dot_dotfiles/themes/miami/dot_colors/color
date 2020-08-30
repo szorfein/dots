@@ -26,5 +26,5 @@
 #define theme14 #b9c489
 #define theme15 #d79fda
 
-st.font: SpaceMono Nerd Font:style=Regular:pixelsize=13
+st.font: SpaceMono Nerd Font Mono:style=Regular:pixelsize=13
 st.opacity: 250

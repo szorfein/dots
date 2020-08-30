@@ -4,24 +4,24 @@ local beautiful = require("beautiful")
 local separators = require('util.separators')
 
 -- widgets load
-local pad = separators.pad
-local mpc = require("widgets.music-player")({})
 local change_theme = require("widgets.button_change_theme")
-local desktop_ctrl = require("widgets.desktop-control")
 local scrot = require("widgets.scrot")
 
 -- {{{ Wibar
-
 local mybar = class()
 
 -- Add the bar on each screen
 function mybar:init(s)
 
+  -- Create an imagebox widget which will contain an icon indicating which layout we're using.
+  -- We need one layoutbox per screen.
+  s.mylayoutbox = require("widgets.layoutbox")(s, {})
+  --
   -- Create a promptbox for each screen
   s.mypromptbox = awful.widget.prompt()
 
   -- Create a taglist for each screen
-  s.mytaglist = require("widgets.taglist")(s, { mode = "text", want_layout = "vertical" })
+  s.mytaglist = require("widgets.taglist")(s, { mode = "text", layout = "vertical" })
 
   -- Create the wibox with default options
   s.mywibox = awful.wibar({ position = beautiful.wibar_position, width = beautiful.wibar_size, screen = s })
@@ -30,7 +30,14 @@ function mybar:init(s)
   -- Add widgets to the wibox
   s.mywibox:setup {
     { -- Left widgets
-      layout = wibox.layout.fixed.vertical
+      nil,
+      {
+        require("widgets.launcher")(),
+        layout = wibox.layout.fixed.vertical
+      },
+      nil,
+      expand = "none",
+      layout = wibox.layout.align.horizontal
     },
     { -- More or less Middle
       s.mytaglist,
@@ -39,14 +46,15 @@ function mybar:init(s)
     { -- Right widgets
       nil,
       {
-        mpc,
+        require("widgets.music")(),
         change_theme,
-        desktop_ctrl,
         scrot,
+        s.mylayoutbox,
         layout = wibox.layout.fixed.vertical,
       },
+      nil,
       expand = "none",
-      layout = wibox.layout.align.horizontal,
+      layout = wibox.layout.align.horizontal
     },
     expand ="none",
     layout = wibox.layout.align.vertical

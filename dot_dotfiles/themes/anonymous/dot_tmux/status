@@ -8,8 +8,4 @@ setw -g window-status-current-format "#[bg=colour14,fg=colour0,noreverse]█▓�
 set -g status-left ''
 set -g status-right ''
 set -g status-justify right
-set-option -g pane-active-border-bg default
-set-option -g pane-active-border-fg "#222930"
-set-option -g pane-border-fg "#222930"
-set-option -g pane-border-bg default
 set -g status-bg default

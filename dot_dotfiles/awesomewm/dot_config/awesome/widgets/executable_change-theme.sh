@@ -4,7 +4,7 @@ file=".config/awesome/loaded-theme.lua"
 dotsdir="$(file ~/$file | awk '{print $5}')"
 debug=false
 
-awesomeThemes="connected anonymous machine miami morpho worker beta sci"
+awesomeThemes="anonymous machine miami morpho worker sci beta"
 oldTheme=""
 oldPath=""
 dotfiles_dir=""

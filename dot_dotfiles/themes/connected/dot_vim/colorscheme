@@ -1,4 +1,0 @@
-colorscheme gruvbox-material
-
-" update colorscheme with F8
-map <F8> :update<CR>:colorscheme gruvbox-material<CR>
