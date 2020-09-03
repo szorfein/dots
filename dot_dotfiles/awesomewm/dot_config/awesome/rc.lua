@@ -64,4 +64,6 @@ require("titlebars")
 require("module.signals")
 require("module.autostart")
 
-noti.info("theme "..M.name.." is loaded")
+awful.spawn.easy_async_with_shell("sh -c 'echo "..M.name.." >/tmp/awesome-theme'", function()
+  noti.info("theme "..M.name.." is loaded")
+end)

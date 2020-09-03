@@ -7,7 +7,7 @@ local widget = require('util.widgets')
 -- widgets load
 local pad = separators.pad
 local textclock = wibox.widget {
-  font = M.f.h6,
+  font = M.f.body_2,
   format = '<span foreground="'..M.x.on_background..'">%H:%M</span>',
   widget = wibox.widget.textclock
 }
@@ -58,6 +58,7 @@ function mybar:init(s)
       spacing = dpi(10),
       require("widgets.button_change_theme"),
       layouts,
+      require("widgets.settings")(),
       textclock,
       s.mylayoutbox
     },

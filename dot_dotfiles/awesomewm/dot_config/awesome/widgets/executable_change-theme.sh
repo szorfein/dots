@@ -72,6 +72,7 @@ change_theme() {
   detect_theme
   split
   change
+  echo $wantTheme > /tmp/awesome-theme
 }
 
 while [ "$#" -gt 0 ] ; do

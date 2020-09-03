@@ -27,4 +27,4 @@
 #define theme14 #82D681
 #define theme15 #00899e
 
-st.opacity: 230
+st.opacity: 240

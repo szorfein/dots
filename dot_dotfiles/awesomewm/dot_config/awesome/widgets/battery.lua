@@ -4,8 +4,6 @@ local widget = require("util.widgets")
 local helpers = require("helpers")
 local font = require("util.font")
 
-local battery = battery or nil
-
 -- beautiful vars
 local spacing = beautiful.widget_spacing or 1
 
@@ -80,9 +78,9 @@ function battery_root:make_progressbar()
   else
     w = widget.box_with_margin(self.want_layout, { self.wicon, wp }, 8)
   end
-  awesome.connect_signal("daemon::battery", function(state, percent)
+  awesome.connect_signal("daemon::battery", function(state, percent, name)
     p.value = percent
-    self.wtext.markup = helpers.colorize_text(battery, self.fg, M.t.medium)
+    self.wtext.markup = helpers.colorize_text(name:lower(), self.fg, M.t.medium)
   end)
   return w
 end

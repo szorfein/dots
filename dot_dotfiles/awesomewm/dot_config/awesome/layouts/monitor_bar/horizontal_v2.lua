@@ -54,7 +54,7 @@ local mybar = class()
 function mybar:init(s)
 
   -- bottom bar
-  s.monitor_bar = awful.wibar({ position = "bottom", width = dpi(1320), height = dpi(80), screen = s, type = "splash" })
+  s.monitor_bar = awful.wibar({ position = "bottom", height = dpi(80), screen = s })
   s.monitor_bar.bg = beautiful.wibar_bg
 
   -- widget to decorate 
@@ -94,7 +94,6 @@ function mybar:init(s)
       boxes(battery),
       boxes(brightness),
       --spacing = beautiful.widget_spacing,
-      expand = "none",
       layout = wibox.layout.fixed.horizontal
     },
     nil,

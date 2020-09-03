@@ -1,7 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local separators = require('util.separators')
 local widget = require('util.widgets')
 
@@ -39,13 +38,13 @@ function mybar:init(s)
       require("widgets.launcher")()
     }),
     s.mytasklist, -- middle
-    widget.box('horizontal', { change_theme, scrot, pad(2) }), -- right
+    widget.box('horizontal', { change_theme, scrot}, 10), -- right
     --expand ="none",
     layout = wibox.layout.align.horizontal
   }
 
   -- tagslist bar
-  s.mywibox_tags = awful.wibar({ screen = s, position = "top", height = dpi(4), bg = beautiful.wibar_bg, screen = s })
+  s.mywibox_tags = awful.wibar({ screen = s, position = "top", height = dpi(5), bg = beautiful.wibar_bg, screen = s })
   awful.placement.maximize_horizontally(s.mywibox_tags)
 
   s.mywibox_tags:setup {

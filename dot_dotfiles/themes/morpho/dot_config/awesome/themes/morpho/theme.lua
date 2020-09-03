@@ -13,13 +13,13 @@ theme.font          = M.f.overline
 
 theme.bg_normal     = M.x.background
 theme.bg_focus      = M.x.background .. M.e.dp01
-theme.bg_urgent     = M.x.error
+theme.bg_urgent     = M.x.background
 theme.bg_minimize   = M.x.background
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = M.x.on_background .. "C2" -- 76%
 theme.fg_focus      = M.x.on_background
-theme.fg_urgent     = M.x.on_error
+theme.fg_urgent     = M.x.error
 theme.fg_minimize   = M.x.on_background .. "80" -- 50%
 
 theme.border_width  = dpi(1)
@@ -42,7 +42,7 @@ theme.gravity_music_term = { 49, 12, 34, 68 }
 
 -- Top bar
 theme.wibar_border_radius = dpi(0)
-theme.wibar_height = dpi(40)
+theme.wibar_height = dpi(44)
 
 -- {{{ TAGLIST
 

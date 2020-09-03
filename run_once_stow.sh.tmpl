@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 
-LAST_THEME="sci"
+set -o errexit
+
+if cat /tmp/awesome-theme 2>/dev/null ; then
+  LAST_THEME="$(cat /tmp/awesome-theme)"
+else
+  LAST_THEME="sci"
+fi
+
 DOTS={{ .chezmoi.homedir }}/.dotfiles
 DEST={{ .chezmoi.homedir }}
 
@@ -13,6 +20,8 @@ apply() {
 }
 
 apply_theme() {
+  echo ""
+  echo "Applying themes/$LAST_THEME"
   (cd themes \
     && stow -D $1 -t $DEST \
     && stow $1 -t $DEST

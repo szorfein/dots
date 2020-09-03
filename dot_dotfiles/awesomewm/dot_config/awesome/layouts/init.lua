@@ -14,6 +14,9 @@ return function(s)
   -- Logout screen
   require("layouts.logout")(s)
 
+  -- Settings screen
+  require("layouts.settings")(s)
+
   -- Lock screen
   require("layouts.lock_screen")
 end
