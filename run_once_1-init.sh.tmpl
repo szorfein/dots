@@ -36,7 +36,7 @@ if hash emerge 2>/dev/null ; then
 fi
 
 # save the full path of systemctl
-SYSTEMCTL=$(which systemctl)
+SYSTEMCTL=$(whereis systemctl | awk '{print $2}')
 
 # make all buttons for the logout work - post an issue if you think it's not secure enough
 cat << EOF | sudo tee /etc/sudoers.d/dots

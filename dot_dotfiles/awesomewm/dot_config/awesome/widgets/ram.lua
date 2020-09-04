@@ -16,7 +16,7 @@ function ram_root:init(args)
   self.fg = args.fg or beautiful.widget_ram_fg or M.x.on_surface
   self.title = args.title or beautiful.widget_ram_title or { "RAM", beautiful.on_background }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, arcchart
-  self.want_layout = args.layout or beautiful.widget_ram_layout or 'horizontal' -- possible values: horizontal , vertical
+  self.layout = args.layout or beautiful.widget_ram_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
   self.bar_colors = args.bar_colors or beautiful.bar_color or beautiful.primary
   -- base widgets
@@ -37,7 +37,7 @@ function ram_root:make_widget()
 end
 
 function ram_root:make_text()
-  local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext }, spacing)
+  local w = widget.box_with_margin(self.layout, { self.wicon, self.wtext }, spacing)
   awesome.connect_signal("daemon::ram", function(mem)
     self.wtext.markup = helpers.colorize_text(mem.inuse_percent.."%", self.fg, M.t.medium)
   end)
@@ -73,18 +73,12 @@ end
 
 function ram_root:make_progressbar_vert(p)
   local w = wibox.widget {
-    {
-      nil,
-      widget.box('vertical', { self.wtitle, self.wtext }),
-      expand = "none",
-      layout = wibox.layout.align.vertical
-    },
-    {
-      nil,
-      widget.box('vertical', { p, self.wicon }),
-      expand = "none",
-      layout = wibox.layout.align.vertical
-    },
+    widget.centered(
+      widget.box('vertical', { self.wtitle, self.wtext }), "vertical"
+    ),
+    widget.centered(
+      widget.box('vertical', { p, self.wicon }), "vertical"
+    ),
     spacing = 15,
     layout = wibox.layout.fixed.horizontal
   }
@@ -93,12 +87,12 @@ end
 
 function ram_root:make_progressbar()
   local p = widget.make_progressbar(_, self.bar_size, self.bar_colors)
-  local wp = widget.progressbar_layout(p, self.want_layout)
+  local wp = widget.progressbar_layout(p, self.layout)
   local w
-  if self.want_layout == 'vertical' then
+  if self.layout == 'vertical' then
     w = self:make_progressbar_vert(wp)
   else
-    w = widget.box_with_margin(self.want_layout, { self.wicon, wp }, 8)
+    w = widget.box_with_margin(self.layout, { self.wicon, wp }, 8)
   end
   awesome.connect_signal("daemon::ram", function(mem)
     p.value = mem.inuse_percent

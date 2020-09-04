@@ -188,7 +188,6 @@ function widgets.make_progressbar(value, width, colors)
   local width = width or 100
   local colors = colors or M.x.error
   return wibox.widget {
-    max_value     = 100,
     value         = value,
     --forced_height = dpi(2),
     --forced_width  = dpi(100),

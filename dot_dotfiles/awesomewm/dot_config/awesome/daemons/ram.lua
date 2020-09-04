@@ -1,11 +1,11 @@
 local gtimer = require("gears.timer")
 local noti = require("util.noti")
+local io = { lines = io.lines }
 
 local function mem_info()
   local mem = { buf = {}, swp = {} }
 
-  local f = io.open("/proc/meminfo")
-  for line in f:lines() do
+  for line in io.lines("/proc/meminfo") do
     for k, v in string.gmatch(line, "([%a]+):[%s]+([%d]+).+") do
       if     k == "MemTotal"  then mem.total = math.floor(v/1024)
       elseif k == "MemFree"   then mem.buf.f = math.floor(v/1024)
@@ -17,7 +17,6 @@ local function mem_info()
       end
     end
   end
-  f:close()
 
   mem.free  = mem.buf.a
   mem.inuse = mem.total - mem.free

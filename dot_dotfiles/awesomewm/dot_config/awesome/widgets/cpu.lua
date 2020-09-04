@@ -15,7 +15,7 @@ function cpu_root:init(args)
   self.fg = args.fg or beautiful.widget_cpu_fg or M.x.on_background
   self.mode = args.mode or 'text' -- possible values: text, arcchart, progressbar, dotsbar
   self.want_layout = args.layout or beautiful.widget_cpu_layout or 'horizontal' -- possible values: horizontal , vertical
-  self.cpus = args.cpus or 2 -- number of cpu / core
+  self.cpus = args.cpus or cpu_core or 1 -- number of cpu / core
   self.title = args.title or beautiful.widget_cpu_title or { "CPU", M.x.on_background }
   self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.error
   -- base widgets
@@ -85,7 +85,7 @@ end
 
 function cpu_root:update_wbars(cpus)
   for i = 1, self.cpus do 
-    self.wbars[i].value = tostring(cpus[i+1]) -- the first entry do not count as a core
+    self.wbars[i].value = tostring(cpus[i]) -- the first entry do not count as a core
   end
 end
 
@@ -169,9 +169,9 @@ function cpu_root:make_dotsbar()
     local symbol = self.want_layout == "horizontal" and "" or ""
     freq.markup = helpers.colorize_text(cpus[1].."%", M.x.on_surface, M.t.medium)
     for c = 1, self.cpus do
-      local val = math.floor(cpus[c+1]/bar.divisor)
+      local val = math.floor(cpus[c]/bar.divisor)
       if self.want_layout == "horizontal" then
-        self.wfreqs[c].markup = helpers.colorize_text(cpus[c+1].."%", M.x.surface)
+        self.wfreqs[c].markup = helpers.colorize_text(cpus[c].."%", M.x.surface)
       end
       for i = 1, bar.size do
         local color = (val >= i and self.bar_colors or M.x.surface)

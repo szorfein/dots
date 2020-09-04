@@ -14,20 +14,18 @@ local volume_root = class()
 function volume_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_volume_fg or M.x.on_surface
-  self.bg = args.bg or beautiful.widget_volume_bg or M.x.surface
   self.icon = args.icon or beautiful.widget_volume_icon or { "", M.x.on_surface }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
   self.layout = args.layout or beautiful.widget_volume_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
   self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.primary
   self.title = args.title or beautiful.widget_volume_title or { "VOL", M.x.on_background }
-  self.title_size = args.title_size or 10
   -- base widgets
   self.wicon = font.button(self.icon[1], self.icon[2], M.t.medium)
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
   self.background = wibox.widget {
-    bg = self.bg,
+    bg = M.x.background,
     widget = wibox.container.background
   }
   self.w = self:make_widget()
@@ -61,7 +59,7 @@ function volume_root:make_text()
       if is_muted == 1 then
         self:update(volume, M.x.on_error, M.x.error)
       else
-        self:update(volume, self.fg, self.bg)
+        self:update(volume, self.fg, M.x.background)
       end
   end)
   return w

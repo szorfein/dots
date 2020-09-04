@@ -30,7 +30,7 @@ end
 local function screen_padding(nb)
   local s = screen.focused()
   local v = s.padding.top + nb
-  screen.padding(s, { top = v, right = v, bottom = v, left = v })
+  s.padding = { top = v, right = v, bottom = v, left = v }
 end
 
 local padding = wibox.widget {

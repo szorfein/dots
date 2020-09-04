@@ -1,27 +1,27 @@
--- terminal
+#!/usr/bin/env sh
+
+set -e
+
+DIR="${HOME}/.config/awesome/config"
+DEST="$DIR/env.lua"
+
+[ -d "$DIR" ] || mkdir -p "$DIR"
+
+cat <<EOF | tee "$DEST"
 terminal = os.getenv("TERMINAL") or "xst"
 terminal_cmd = terminal .. " -e "
-
--- editor
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
-
--- web browser
-{{ if eq .system.sound "alsa" }}
+{{- if eq .system.sound "alsa" }}
 web_browser = "brave-bin"
 {{ else }}
 web_browser = "firefox-bin"
 {{ end -}}
 
--- file browser
 file_browser = "vifm"
-
--- xst (<class> and <exec>)
 terminal_args = { " -c ", " -e " }
-
--- sound
 sound_system = "{{ .system.sound }}"
 sound_card = "{{ .system.soundcard }}"
-
--- password
+cpu_core = $(nproc) or 1
 password = "awesome"
+EOF

@@ -40,7 +40,9 @@ local function battery_info()
         present="$(cat $path/present)"
         stat="$(cat $path/status)"
         charge_now="$(cat $path/charge_now)"
+        [ -f "$path/energy_now" ] && charge_now="$(cat $path/energy_now)"
         charge_full="$(cat $path/charge_full)"
+        [ -f "$path/energy_full" ] && charge_full="$(cat $path/energy_full)"
         echo "$present@$stat@$charge_now@$charge_full@"
       '
       ]]

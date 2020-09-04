@@ -99,7 +99,7 @@ theme.taglist_layout = wibox.layout.fixed.horizontal -- horizontal or vertical
 
 -- {{{ MENU
 
-theme.menu_submenu_icon = themes_path..M.name.."/submenu.png"
+theme.menu_submenu_icon = themes_path.."default/submenu.png"
 theme.menu_height = dpi(16)
 theme.menu_width  = dpi(100)
 

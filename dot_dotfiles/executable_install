@@ -40,11 +40,7 @@ dl() {
 
 # Check if file exist else download ( arg1 = url | arg2 = path )
 chk() {
-  if [[ -d $2 ]] ; then
-    echo "$2 is found"
-  else
-    dl $1 $2
-  fi
+  [ -d $2 ] || dl $1 $2
 }
 
 forZsh() {

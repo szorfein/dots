@@ -1,19 +1,19 @@
-set font                        "Iosevka Term 9"
+set font                        "Iosevka Term Regular 9"
 
-set default-fg                  "#AABFAA" # grey_fg
-set default-bg                  "#121013" # grey
+set default-fg                  "#d3e4e2" # grey_fg
+set default-bg                  "#16171c" # grey
 
-set statusbar-fg                "#AABFAA" # grey_fg
-set statusbar-bg                "#0E0C0F" # grey_dark
+set statusbar-fg                "#d3e4e2" # grey_fg
+set statusbar-bg                "#18191e" # grey_dark
 
-set inputbar-bg                 "#7ACCA8" # primary
-set inputbar-fg                 "#1A181C" # primary_fg
+set inputbar-bg                 "#98cc70" # primary
+set inputbar-fg                 "#16171C" # primary_fg
 
-set notification-error-bg       "#AF2272" # error
-set notification-error-fg       "#121013" # error_fg
+set notification-error-bg       "#a360D6" # error
+set notification-error-fg       "#16171C" # error_fg
 
-set notification-warning-bg     "#B03388" # error_light
-set notification-warning-fg     "#121013" # error_fg
+set notification-warning-bg     "#bd90e1" # error_light
+set notification-warning-fg     "#16171C" # error_fg
 
 set highlight-color             "#2a4f81" #0A
 set highlight-active-color      "#1f1b3f" #0D

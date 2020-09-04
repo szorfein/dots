@@ -1,5 +1,6 @@
 -- function from vicious lib :)
-local gtimer = require("gears.timer")
+local timer = require("gears.timer")
+local io = { lines = io.lines }
 
 -- Initialize function tables
 local cpu_usage  = {}
@@ -8,8 +9,8 @@ local cpu_active = {}
 
 local function cpu_info()
   local cpu_lines = {}
-  local f = io.open("/proc/stat")
-  for line in f:lines() do
+
+  for line in io.lines("/proc/stat") do
     if string.sub(line, 1, 3) ~= "cpu" then break end
 
     cpu_lines[#cpu_lines+1] = {}
@@ -18,7 +19,6 @@ local function cpu_info()
       table.insert(cpu_lines[#cpu_lines], i)
     end
   end
-  f:close()
 
   -- init tables
   for i = #cpu_total + 1, #cpu_lines do
@@ -55,7 +55,7 @@ local function cpu_info()
 end
 
 -- update every 6 seconds
-gtimer {
+timer {
   timeout = 6,
   autostart = true,
   call_now = true,

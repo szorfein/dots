@@ -15,7 +15,7 @@ ctrlkey = "Control"
 local function updateScreenPadding(nb)
   local screen = awful.screen.focused()
   local v = screen.padding.top + nb
-  awful.screen.padding(screen, { top = v, right = v, bottom = v, left = v })
+  screen.padding = { top = v, right = v, bottom = v, left = v }
 end
 
 -- {{{ Key bindings
