@@ -4,6 +4,7 @@ local helpers = require("helpers")
 local wibox = require("wibox")
 local aspawn = require("awful.spawn")
 local font = require("util.font")
+local ufont = require("utils.font")
 
 -- beautiful vars
 local spacing = beautiful.widget_spacing or 1
@@ -14,14 +15,17 @@ local brightness_root = class()
 function brightness_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_brightness_fg or M.x.on_surface
-  self.icon = args.icon or beautiful.widget_brightness_icon or { "", M.x.on_surface }
+  self.icon = args.icon or beautiful.widget_brightness_icon or { "", M.x.on_surface }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
   self.layout = args.layout or beautiful.widget_brightness_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
   self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.primary
   self.title = args.title or beautiful.widget_brightness_title or { "BRI", M.x.on_background }
   -- base widgets
-  self.wicon = font.button(self.icon[1], self.icon[2], M.t.medium)
+  self.wicon = wibox.widget {
+    ufont.icon(self.icon[1]),
+    widget = require("utils.material.text")({ color = self.icon[2], lv = "medium" })
+  }
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
   self.widget = self:make_widget()
@@ -65,12 +69,27 @@ end
 
 function brightness_root:make_progressbar_vert(p)
   local w = wibox.widget {
-    widget.centered(
-      widget.box('vertical', { self.wtitle, self.wtext }), "vertical"
-    ),
-    widget.centered(
-      widget.box('vertical', { p, self.wicon }), "vertical"
-    ),
+    {
+      nil,
+      {
+        self.wtitle,
+        {
+          self.wicon,
+          self.wtext,
+          spacing = dpi(4),
+          layout = wibox.layout.fixed.horizontal
+        },
+        layout = wibox.layout.fixed.vertical
+      },
+      expand = "none",
+      layout = wibox.layout.align.vertical
+    },
+    {
+      nil,
+      widget.box('horizontal', { p }, 2),
+      expand = "none",
+      layout = wibox.layout.align.vertical
+    },
     spacing = 15,
     layout = wibox.layout.fixed.horizontal
   }

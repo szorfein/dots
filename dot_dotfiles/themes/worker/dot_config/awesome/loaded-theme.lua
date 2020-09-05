@@ -60,12 +60,12 @@ mytheme.t = {
 -- elevation overlay transparency in hexa code
 -- https://material.io/design/color/dark-theme.html#properties
 mytheme.e = {
-  dp00 = "00",
-  dp01 = "0D",
-  dp02 = "12",
-  dp03 = "14",
-  dp04 = "17",
-  dp06 = "1C",
+  dp00 = "00", -- 0%
+  dp01 = "0D", -- 5%
+  dp02 = "12", -- 7%
+  dp03 = "14", -- 8%
+  dp04 = "17", -- 9%
+  dp06 = "1C", -- 11%
 }
 
 return mytheme

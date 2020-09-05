@@ -3,6 +3,7 @@ local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local helpers = require("helpers")
 local font = require("util.font")
+local ufont = require("utils.font")
 
 -- beautiful vars
 local spacing = beautiful.widget_spacing or 1
@@ -15,7 +16,7 @@ function cpu_root:init(args)
   self.fg = args.fg or beautiful.widget_cpu_fg or M.x.on_background
   self.mode = args.mode or 'text' -- possible values: text, arcchart, progressbar, dotsbar
   self.want_layout = args.layout or beautiful.widget_cpu_layout or 'horizontal' -- possible values: horizontal , vertical
-  self.cpus = args.cpus or cpu_core or 1 -- number of cpu / core
+  self.cpus = cpu_core or 1 -- number of cpu / core
   self.title = args.title or beautiful.widget_cpu_title or { "CPU", M.x.on_background }
   self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.error
   -- base widgets
@@ -106,7 +107,11 @@ function cpu_root:make_progressbar()
 end
 
 function cpu_root:dotsbar_vert(freq)
-  local t = wibox.widget.textbox(self.cpus.." Cores")
+
+  local t = wibox.widget {
+    ufont.caption(self.cpus.." Cores"),
+    widget = require("utils.material.text")({ color = M.x.on_background, lv = "medium" })
+  }
   local wb = wibox.widget { layout = wibox.layout.fixed.horizontal, spacing = 4 }
   for i = 1, self.cpus do
     wb:add(widget.box_with_bg(self.want_layout, self.wbars[i], -10, M.x.surface .. "66"))

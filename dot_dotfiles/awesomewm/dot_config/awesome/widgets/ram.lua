@@ -3,6 +3,7 @@ local widget = require("util.widgets")
 local helpers = require("helpers")
 local wibox = require("wibox")
 local font = require("util.font")
+local ufont = require("utils.font")
 
 -- beautiful vars
 local spacing = beautiful.widget_spacing or 1
@@ -12,15 +13,18 @@ local ram_root = class()
 
 function ram_root:init(args)
   -- options
-  self.icon = args.icon or beautiful.widget_ram_icon or { "", M.x.on_surface }
+  self.icon = args.icon or beautiful.widget_ram_icon or { "", M.x.on_surface }
   self.fg = args.fg or beautiful.widget_ram_fg or M.x.on_surface
   self.title = args.title or beautiful.widget_ram_title or { "RAM", beautiful.on_background }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, arcchart
-  self.layout = args.layout or beautiful.widget_ram_layout or 'horizontal' -- possible values: horizontal , vertical
+  self.want_layout = args.layout or beautiful.widget_ram_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
   self.bar_colors = args.bar_colors or beautiful.bar_color or beautiful.primary
   -- base widgets
-  self.wicon = font.button(self.icon[1], self.icon[2], M.t.medium)
+  self.wicon = wibox.widget {
+    ufont.icon(self.icon[1]),
+    widget = require("utils.material.text")({ color = self.icon[2], lv = "medium" })
+  }
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
   self.widget = self:make_widget()
@@ -37,7 +41,7 @@ function ram_root:make_widget()
 end
 
 function ram_root:make_text()
-  local w = widget.box_with_margin(self.layout, { self.wicon, self.wtext }, spacing)
+  local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext }, spacing)
   awesome.connect_signal("daemon::ram", function(mem)
     self.wtext.markup = helpers.colorize_text(mem.inuse_percent.."%", self.fg, M.t.medium)
   end)
@@ -73,12 +77,27 @@ end
 
 function ram_root:make_progressbar_vert(p)
   local w = wibox.widget {
-    widget.centered(
-      widget.box('vertical', { self.wtitle, self.wtext }), "vertical"
-    ),
-    widget.centered(
-      widget.box('vertical', { p, self.wicon }), "vertical"
-    ),
+    {
+      nil,
+      {
+        self.wtitle,
+        {
+          self.wicon,
+          self.wtext,
+          spacing = dpi(4),
+          layout = wibox.layout.fixed.horizontal
+        },
+        layout = wibox.layout.fixed.vertical
+      },
+      expand = "none",
+      layout = wibox.layout.align.vertical
+    },
+    {
+      nil,
+      widget.box('vertical', { p }),
+      expand = "none",
+      layout = wibox.layout.align.vertical
+    },
     spacing = 15,
     layout = wibox.layout.fixed.horizontal
   }
@@ -87,12 +106,12 @@ end
 
 function ram_root:make_progressbar()
   local p = widget.make_progressbar(_, self.bar_size, self.bar_colors)
-  local wp = widget.progressbar_layout(p, self.layout)
+  local wp = widget.progressbar_layout(p, self.want_layout)
   local w
-  if self.layout == 'vertical' then
+  if self.want_layout == 'vertical' then
     w = self:make_progressbar_vert(wp)
   else
-    w = widget.box_with_margin(self.layout, { self.wicon, wp }, 8)
+    w = widget.box_with_margin(self.want_layout, { self.wicon, wp }, 8)
   end
   awesome.connect_signal("daemon::ram", function(mem)
     p.value = mem.inuse_percent

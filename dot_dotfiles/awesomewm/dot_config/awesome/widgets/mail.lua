@@ -4,7 +4,7 @@ local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local helpers = require("helpers")
 local font = require("util.font")
-local tooltip = require("util.tooltip")
+local tooltip = require("utils.tooltip")
 local font = require("util.font")
 
 -- beautiful vars

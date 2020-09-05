@@ -3,6 +3,7 @@ local widget = require("util.widgets")
 local helpers = require("helpers")
 local wibox = require("wibox")
 local font = require("util.font")
+local ufont = require("utils.font")
 
 local net_dev = network or "lo"
 
@@ -16,18 +17,22 @@ function network_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_network_fg or M.x.on_surface
   --self.bg = args.bg or beautiful.widget_network_bg or M.x.surface
-  self.icon_up = args.icon_up or beautiful.widget_network_icon_up or { "ﲗ", M.x.on_surface }
-  self.icon_down = args.icon_down or beautiful.widget_network_icon_down or { "ﲐ", M.x.on_surface }
-  self.icon_ip = args.icon_ip or beautiful.widget_network_icon_ip or { "", M.x.on_background }
+  self.icon = args.icon or beautiful.widget_network_icon or { "", M.x.on_surface }
+  self.icon_ip = args.icon_ip or beautiful.widget_network_icon_ip or { "", M.x.on_background }
   self.title = args.title or beautiful.widget_network_title or { "NET", M.x.on_background }
   self.mode = args.mode or 'text' -- possible values: ip, text
   self.want_layout = args.layout or beautiful.widget_network_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 100
   self.bar_colors = args.bar_colors or beautiful.bar_colors_network or { M.x.primary, M.x.primary }
   -- base widgets
-  self.wicon_up = font.button(self.icon_up[1], self.icon_up[2])
-  self.wicon_down = font.button(self.icon_down[1], self.icon_down[2])
-  self.wicon_net = font.button(self.icon_ip[1], self.icon_ip[2])
+  self.wicon = wibox.widget {
+    ufont.icon(self.icon[1]),
+    widget = require("utils.material.text")({ color = self.icon[2], lv = "medium" })
+  }
+  self.wicon_net = wibox.widget {
+    ufont.icon(self.icon_ip[1]),
+    widget = require("utils.material.text")({ color = self.icon_ip[2], lv = "medium" })
+  }
   self.wtext = font.button("")
   self.wtext_1 = font.button("")
   self.wtext_2 = font.button("")
@@ -54,7 +59,7 @@ function network_root:make_ip()
 end
 
 function network_root:make_text()
-  local w = widget.box_with_margin(self.want_layout, { self.wicon_up, self.wtext_1, self.wicon_down, self.wtext_2 }, spacing)
+  local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext_1, self.wtext_2 }, spacing)
   awesome.connect_signal("daemon::network", function(net)
     self.wtext_1.markup = helpers.colorize_text(net[net_dev].up, self.fg)
     self.wtext_2.markup = helpers.colorize_text(net[net_dev].down, self.fg)
@@ -66,18 +71,22 @@ function network_root:make_progressbar_vert(p_up, p_down)
   local w = wibox.widget {
     {
       nil,
-      widget.box('vertical', { self.wtitle, self.wtext }),
+      {
+        self.wtitle,
+        {
+          self.wicon,
+          self.wtext,
+          spacing = dpi(4),
+          layout = wibox.layout.fixed.horizontal
+        },
+        layout = wibox.layout.fixed.vertical
+      },
       expand = "none",
       layout = wibox.layout.align.vertical
     },
     {
       nil,
-      {
-        widget.box('vertical', { p_up, self.wicon_up }),
-        widget.box('vertical', { p_down, self.wicon_down }),
-        spacing = 2,
-        layout = wibox.layout.fixed.horizontal
-      },
+      widget.box('horizontal', { p_up, p_down }, 2),
       expand = "none",
       layout = wibox.layout.align.vertical
     },
@@ -93,7 +102,7 @@ function network_root:make_block()
   local pd = widget.make_progressbar(_, self.bar_size, self.bar_colors[2])
   pd.max_value = 80000
   local w
-  local ip = font.body_text("")
+  local ip = ufont.caption("")
   if self.want_layout == 'horizontal' then
     local space = 8
     w = wibox.widget {
@@ -102,12 +111,25 @@ function network_root:make_block()
         widget = widget.progressbar_margin_horiz()
       },
       {
-        widget.box(self.want_layout, { self.wicon_up, pu, self.wtext_1 }, space),
-        widget = widget.progressbar_margin_horiz()
-      },
-      {
-        widget.box(self.want_layout, { self.wicon_down, pd, self.wtext_2 }, space),
-        widget = widget.progressbar_margin_horiz()
+        {
+          nil,
+          self.wicon,
+          nil,
+          expand = "none",
+          layout = wibox.layout.align.vertical
+        },
+        {
+          {
+            pu,
+            widget = widget.progressbar_margin_horiz()
+          },
+          {
+            pd,
+            widget = widget.progressbar_margin_horiz()
+          },
+          layout = wibox.layout.fixed.vertical
+        },
+        layout = wibox.layout.fixed.horizontal
       },
       layout = wibox.layout.fixed.vertical
     }
