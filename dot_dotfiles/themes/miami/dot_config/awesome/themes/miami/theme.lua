@@ -108,12 +108,14 @@ theme.taglist_text_color_urgent = {
 
 -- }}} TAGLIST END
 
-theme.tasklist_bg_normal = M.x.on_background .. M.e.dp00
-theme.tasklist_bg_focus = M.x.on_background .. M.e.dp00
+theme.tasklist_bg_normal = M.x.background .. M.e.dp00
+theme.tasklist_fg_normal = M.x.on_background .. "B3" -- 70%
+theme.tasklist_bg_focus = M.x.background .. M.e.dp00
+theme.tasklist_fg_focus = M.x.on_background
 
 -- {{{ MENU
 
-theme.menu_submenu_icon = themes_path..M.name.."/submenu.png"
+theme.menu_submenu_icon = themes_path.."default/submenu.png"
 theme.menu_height = dpi(16)
 theme.menu_width  = dpi(100)
 

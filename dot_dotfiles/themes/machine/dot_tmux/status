@@ -1,20 +1,8 @@
 # Erase default options
 
-# Colour
-COLOUR_BG="#070c15"
-
 set-option -g status-position bottom
-setw -g window-status-format "#[fg=colour0,bg=$COLOUR_BG]#[fg=colour10,bg=colour0] #I #[fg=colour10,bg=colour0] #W #[fg=colour0,bg=$COLOUR_BG]"
-setw -g window-status-current-format "#[fg=colour8,bg=$COLOUR_BG]#[bg=colour8]#[fg=colour7,bg=colour8] #I #[fg=colour7,bg=colour8] #{pane_current_path} #[fg=colour7,bg=colour8] #W #[fg=colour8,bg=$COLOUR_BG]"
+setw -g window-status-format "#[fg=colour0,bg=black]#[fg=colour10,bg=colour0] #I #[fg=colour10,bg=colour0] #W #[fg=colour0,bg=black]"
+setw -g window-status-current-format "#[fg=colour8,bg=black]#[bg=colour8]#[fg=black,bg=colour8] #I #[fg=black,bg=colour8] #{pane_current_path} #[fg=black,bg=colour8] #W #[fg=colour8,bg=black]"
 set -g status-left "#[fg=colour0,bg=default]#[fg=colour15,bg=colour0] #S #[fg=colour14,bg=colour0,nobold,nounderscore,noitalics]>> #[fg=colour0,bg=default]"
 set -g status-right '#[fg=yellow,bg=default]#[fg=yellow,bg=colour0] ﮊ #[fg=yellow,bg=default]'
 set -g status-justify left
-set -g pane-active-border-style "fg=black,bg=default"
-set -g status-style "fg=default,bg=default"
-
-setw -g window-status-activity-attr "none"
-setw -g window-status-activity-style "fg=colour27,bg=colour234,none"
-setw -g window-status-separator " "
-setw -g window-status-style "fg=colour39,bg=colour234,none"
-set -g pane-active-border-style "fg=$COLOUR_BG" # hide border
-set -g pane-border-style "fg=$COLOUR_BG" # hide border

@@ -17,8 +17,9 @@ client.connect_signal("request::titlebars", function(c)
     nil, -- Left
     { -- Middle
       -- Title
+      nil,
       buttons = titlebar.button(c),
-      widget = titlebar.title(c),
+      layout = wibox.layout.flex.horizontal
     },
     { -- Right
       titlebar.button_minimize(c),

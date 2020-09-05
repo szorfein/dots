@@ -8,9 +8,12 @@ local font = require("util.font")
 local helper = require("utils.helper")
 local app = require("util.app")
 local modal = require("util.modal")
-local io = { lines = io.lines }
 local button = require("utils.button")
 local ufont = require("utils.font")
+local io = {
+  open = io.open,
+  lines = io.lines
+}
 
 local function start_screen_hide()
   local s = awful.screen.focused()
@@ -208,8 +211,13 @@ local todo_list = wibox.layout.fixed.vertical()
 local remove_todo
 
 local function update_history()
-
   local lines = {}
+
+  -- ensure the file exist
+  local history = io.open(history_file, "r")
+  if history == nil then return end
+  history:close()
+
   todo_list:reset()
   for line in io.lines(history_file) do
     table.insert(lines, line)
