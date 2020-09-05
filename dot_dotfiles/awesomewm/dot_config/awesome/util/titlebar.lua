@@ -1,7 +1,8 @@
 local awful = require("awful")
 local gtable = require("gears.table")
 local wibox = require("wibox")
-local btext = require("util.mat-button")
+local button = require("utils.button")
+local font = require("utils.font")
 local beautiful = require("beautiful")
 
 local ncmpcpp = require("widgets.mpc")({ 
@@ -47,8 +48,8 @@ function titlebar.ncmpcpp(c, size)
 end
 
 local function gen_button(c, icon, fg, cmd)
-  return btext({ 
-    text = icon, fg_text = fg, overlay = fg, command = function()
+  return button({
+    fg_icon = fg, icon = font.button(icon), command = function()
       cmd(c)
     end
   })
@@ -56,7 +57,7 @@ end
 
 function titlebar.button_close(c)
   local close = function() c:kill() end
-  return gen_button(c, '', "error", close)
+  return gen_button(c, '', M.x.error, close)
 end
 
 function titlebar.button_maximize(c)
@@ -64,14 +65,14 @@ function titlebar.button_maximize(c)
     c.maximized = not c.maximized
     c:raise()
   end
-  return gen_button(c, '', "primary", maximize)
+  return gen_button(c, '', M.x.primary, maximize)
 end
 
 function titlebar.button_minimize(c)
   local minimize = function()
     c.minimized = true
   end
-  return gen_button(c, '', "secondary", minimize)
+  return gen_button(c, '', M.x.secondary, minimize)
 end
 
 function titlebar.title(c)

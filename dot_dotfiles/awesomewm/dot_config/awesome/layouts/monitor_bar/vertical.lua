@@ -2,18 +2,10 @@ local wibox = require("wibox")
 local awful = require("awful")
 local gtable = require("gears.table")
 local widget = require("util.widgets")
-local separator = require("util.separators")
 local beautiful = require("beautiful")
-local helpers = require("helpers")
 local font = require("util.font")
-local btext = require("util.mat-button")
-
--- beautiful var
-local fg = "#ffffff"
-local bg = "#651030"
-local l = "horizontal"
-
-local pad = separator.pad(3)
+local button = require("utils.button")
+local ufont = require("utils.font")
 
 -- Setting titles
 local monitors_title = font.body_title('Monitors', M.x.on_surface, M.t.high)
@@ -40,12 +32,12 @@ function mybar:init(s)
     exit_screen_show()
     s.monitor_bar.visible = false
   end
-  local exit = btext({ fg_icon = "on_error", icon = "",
-    font_icon = M.f.button,
-    fg_text = "on_error", text = "LOGOUT",
-    bg = "error", mode = "contained",
-    spacing = 10,
-    overlay = "on_error", command = hide_monitor, layout = "horizontal"
+  local exit = button({
+    fg_icon = M.x.on_error,
+    icon = ufont.button(" LOGOUT"),
+    bg = M.x.error,
+    mode = "contained",
+    command = hide_monitor
   })
 
   local wibar_pos = beautiful.wibar_position or "top"

@@ -16,6 +16,7 @@ naughty.config.presets.normal = {
   fg = M.x.on_surface,
   bg = M.x.surface,
   margin = 16,
+  border_color = M.x.secondary_variant_2,
   shape = helper.rrect(6),
 }
 
@@ -43,6 +44,15 @@ end
 
 function noti.error(msg)
   naughty.notify({
+    text = tostring(msg),
+    position = "top_right",
+    preset = naughty.config.presets.normal
+  })
+end
+
+function noti.warn(msg)
+  naughty.notify({
+    title = "Warning",
     text = tostring(msg),
     position = "top_right",
     preset = naughty.config.presets.normal

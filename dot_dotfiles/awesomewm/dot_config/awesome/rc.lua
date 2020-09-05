@@ -31,7 +31,7 @@ beautiful.init( theme_dir .. M.name .. "/theme.lua" )
 
 pcall(require, "config.env") -- user settings globally
 
-local noti = require("util.noti")
+local noti = require("utils.noti")
 
 require("module.notifications")
 require("module.layout")
@@ -65,5 +65,6 @@ require("module.signals")
 require("module.autostart")
 
 awful.spawn.easy_async_with_shell("sh -c 'echo "..M.name.." >/tmp/awesome-theme'", function()
-  noti.info("theme "..M.name.." is loaded")
+  local icon = "<span foreground='" .. M.x.primary .. "'> ※ </span>"
+  noti.info(icon .. "theme "..M.name.." is loaded" .. icon)
 end)

@@ -44,7 +44,7 @@ mytheme.f = {
   body_1 = "Iosevka Term Regular 16", -- used on text body title
   body_2 = "Iosevka Term Light 14", -- used on text body
   icon = "Material Design Icons Regular 15", -- used for icon
-  button = "Iosevka Term Nerd Font Complete 14", -- used on text button
+  button = "Iosevka Term Regular 15", -- used on text button
   caption = "Iosevka Bold 12", -- used on annotation
   overline = "Iosevka Regular 10",
 }

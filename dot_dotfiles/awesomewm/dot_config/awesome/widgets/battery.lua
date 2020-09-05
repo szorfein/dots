@@ -49,7 +49,7 @@ function battery_root:make_text()
     widget = self.background
   }
   awesome.connect_signal("daemon::battery", function(state, percent)
-    self.wicon.markup = helpers.colorize_text(state[1], state[2])
+    self.wicon.markup = helpers.colorize_text(state, M.x.secondary)
     self.wtext.markup = helpers.colorize_text(percent..'%', self.fg)
   end)
   return w

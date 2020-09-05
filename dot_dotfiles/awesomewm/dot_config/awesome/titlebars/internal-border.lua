@@ -2,7 +2,6 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local font = require("util.font")
-local btext = require("util.mat-button")
 local titlebar = require("util.titlebar")
 
 -- vars

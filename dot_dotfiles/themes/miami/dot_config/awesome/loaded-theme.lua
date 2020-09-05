@@ -32,15 +32,15 @@ mytheme.x = {
 
 -- fonts
 mytheme.f = {
-  h1 = "SpaceMono Nerd Font Mono 60", -- used rarely on big icon or big title
+  h1 = "SpaceMono Nerd Font Mono 58", -- used rarely on big icon or big title
   h4 = "SpaceMono Nerd Font 32",
   h5 = "Material Design Icons Regular 20", -- icon for h6
   h6 = "SpaceMono Nerd Font Mono Regular 20",
   subtile_1 = "SpaceMono Nerd Font Mono 12", -- used on text list
-  body_1 = "SpaceMono Nerd Font Mono Bold 16", -- used on text body title
-  body_2 = "SpaceMono Nerd Font 14", -- used on text body
+  body_1 = "SpaceMono Nerd Font Mono Regular 14", -- used on text body title
+  body_2 = "SpaceMono Nerd Font Regular 12", -- used on text body
   icon = "Material Design Icons Regular 15", -- used for icon
-  button = "SpaceMono Nerd Font Mono Regular 13", -- used on text button
+  button = "SpaceMono Nerd Font Bold 12", -- used on text button
   caption = "SpaceMono Nerd Font Mono Bold 12", -- used on annotation
   overline = "SpaceMono Nerd Font Mono 10",
 }

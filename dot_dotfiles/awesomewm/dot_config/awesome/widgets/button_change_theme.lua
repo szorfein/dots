@@ -1,23 +1,16 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local beautiful = require("beautiful")
-local noti = require("util.noti")
+local noti = require("utils.noti")
 local widget = require("util.widgets")
-local helpers = require("helpers")
+local helper = require("utils.helper")
 local table = require('gears.table')
 local icons = require("icons.default")
 local font = require("util.font")
 local app = require("util.app")
-local btext = require("util.mat-button")
 local ufont = require("utils.font")
 local iicon = require("config.icons")
 local button = require("utils.button")
-
--- beautiful vars
-local fg = beautiful.widget_change_theme_fg or M.x.on_background
-local bg = beautiful.widget_change_theme_bg or M.x.background
-local l = beautiful.widget_change_theme_layout or 'horizontal'
-local space = beautiful.widget_spacing or dpi(1)
 
 -- add a little margin to avoid the popup pasted on the wibar
 local padding = beautiful.widget_popup_padding or 1
@@ -49,8 +42,8 @@ local function make_element(name)
     font.button(name, M.x.on_surface, M.t.medium),
     layout = wibox.layout.fixed.vertical
   }
-  local w = btext({
-    command = change_script, wtext = element, overlay = "on_surface"
+  local w = button({
+    command = change_script, fg_icon = M.x.on_surface, icon = element
   })
   return w
 end
@@ -97,7 +90,7 @@ local popup_widget = wibox.widget {
     left = 24, right = 24,
     widget = wibox.container.margin
   },
-  shape = helpers.rrect(20),
+  shape = helper.rrect(20),
   bg = M.x.on_surface .. M.e.dp01,
   widget = wibox.container.background
 }

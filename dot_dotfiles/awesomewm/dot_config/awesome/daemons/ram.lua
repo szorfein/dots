@@ -27,10 +27,11 @@ local function mem_info()
   mem.inuse_percent = math.floor((mem.total - mem.free) / (mem.total) * 100 + 0.5 )
 
   if mem.inuse_percent >= 90 then
-    noti.warn("Memory usage soon full : "..tostring(mem.inuse_percent).."%")
+    local msg = tostring(mem.inuse_percent)
+    noti.warn("Memory usage soon full : "..msg.."%")
   end
 
-  awesome.emit_signal("daemon::ram", mem )
+  awesome.emit_signal("daemon::ram", mem)
 end
 
 gtimer {

@@ -1,14 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
-local separators = require('util.separators')
-local widget = require('util.widgets')
-
--- widgets load
-local pad = separators.pad
-local scrot = require("widgets.scrot")
-local change_theme = require("widgets.button_change_theme")
 
 -- init tables
 local mybar = class()
@@ -36,15 +28,16 @@ function mybar:init(s)
   s.mywibox:setup {
     { -- Left widgets
       require("widgets.launcher")(),
-      layout = wibox.layout.align.horizontal
+      layout = wibox.layout.fixed.horizontal
     },
     s.mytasklist, -- More or less Middle
     { -- Right widgets
       require("widgets.music")(),
-      change_theme,
-      scrot,
+      require("widgets.button_change_theme"),
+      require("widgets.settings")(),
+      require("widgets.scrot"),
       s.mylayoutbox,
-      spacing = dpi(4),
+      spacing = dpi(5),
       layout = wibox.layout.fixed.horizontal
     },
     expand ="none",

@@ -21,8 +21,7 @@ function music_root:init()
   self.w = button({
     fg_icon = M.x.secondary,
     icon = font.icon(""),
-    layout = "horizontal",
-    --margins = dpi(4)
+    layout = "horizontal"
   })
   self:gen_popup()
   self:signals()
@@ -34,14 +33,23 @@ function music_root:gen_popup()
       {
         {
           self.progress,
-          self.cover,
           layout = wibox.layout.fixed.vertical
         },
         {
           {
-            self.title,
-            self.artist,
-            forced_height = dpi(76),
+            {
+              self.title,
+              forced_height = dpi(30),
+              widget = wibox.container.margin
+            },
+            {
+              self.artist,
+              forced_height = dpi(30),
+              left = dpi(7),
+              right = dpi(7),
+              widget = wibox.container.margin
+            },
+            spacing = dpi(5),
             layout = wibox.layout.fixed.vertical
           },
           margins = dpi(8),
@@ -72,9 +80,7 @@ end
 
 function music_root:signals()
   awesome.connect_signal("daemon::mpd_infos", function(title, artist)
-    self.title.text = #title > 20
-      and string.sub(title, 1, 20)
-      or title
+    self.title.text = title or ''
     if not (artist == nil or artist == '') then
       self.artist.text = "by " .. artist
     else

@@ -149,34 +149,41 @@ function music_player_root:make_popup()
 end
 
 -- update
-function music_player_root:updates(mpd)
+function music_player_root:updates(title, artist)
   -- default value
-  local img = mpd.cover ~= "nil" and mpd.cover or icons["default_cover"]
-  local artist = mpd.artist ~= nil and mpd.artist or 'Unknown'
-  local title = mpd.title ~= nil and mpd.title or 'Unknown'
-  local title_cut = #title > 20
-    and string.sub(title, 1, 20)
-    or title
+  local title = title ~= nil and title or 'Unknown'
+  local artist = artist ~= nil and artist or 'Unknown'
 
-  self.cover.image = img
-  self.title.markup = helpers.colorize_text(title_cut, M.x.error)
+  self.title.markup = helpers.colorize_text(title:sub(1,20), M.x.error)
   self.artist.markup = helpers.colorize_text("By "..artist, M.x.primary)
 end
 
-function music_player_root:update_time(mpd)
-  self.time_pasted.markup = helpers.colorize_text(mpd.full_time, M.x.secondary)
+function music_player_root:update_time(time)
+  if time then
+    self.time_pasted.markup = helpers.colorize_text(time, M.x.secondary)
+  end
+end
+
+function music_player_root:update_cover(cover)
+  if cover then
+    local img = cover or icons["default_cover"]
+    self.cover.image = img
+  end
 end
 
 -- signals
 function music_player_root:signals()
-  awesome.connect_signal("daemon::mpd", function(mpd)
-    if mpd.cover then
+  awesome.connect_signal("daemon::mpd_infos", function(title, artist)
+    if title and artist then
       --naughty.notify({ text = tostring(mpd.cover) })
-      self:updates(mpd)
+      self:updates(title, artist)
     end
   end)
-  awesome.connect_signal("daemon::mpd_time", function(mpd)
-    self:update_time(mpd)
+  awesome.connect_signal("daemon::mpd_cover", function(cover)
+    self:update_cover(cover)
+  end)
+  awesome.connect_signal("daemon::mpd_time", function(time)
+    self:update_time(time)
   end)
 end
 

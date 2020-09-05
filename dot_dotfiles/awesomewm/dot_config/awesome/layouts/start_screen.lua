@@ -3,12 +3,14 @@ local gtable = require("gears.table")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local widget = require("util.widgets")
-local button = require("util.buttons")
+local buttons = require("util.buttons")
 local font = require("util.font")
-local helpers = require("helpers")
+local helper = require("utils.helper")
 local app = require("util.app")
-local btext = require("util.mat-button")
 local modal = require("util.modal")
+local io = { lines = io.lines }
+local button = require("utils.button")
+local ufont = require("utils.font")
 
 local function start_screen_hide()
   local s = awful.screen.focused()
@@ -49,10 +51,8 @@ local function rss_links(rss, feed_name, w)
   local f, s, b
   for i = 1, max_feeds do
     f = function() open_link(rss[feed_name].link[i]) end
-    s = #rss[feed_name].title[i] > 26 and -- cut the text if too long
-      string.sub(rss[feed_name].title[i], 1, 26) .. "..." or
-      rss[feed_name].title[i]
-    b = button.text_list(s, f, "on_surface")
+    s = string.sub(rss[feed_name].title[i], 1, 26)
+    b = buttons.text_list(s, f, "on_surface")
     b.forced_width = 310
     w:add(b)
   end
@@ -131,78 +131,100 @@ local launch_term = function(cmd)
 end
 
 -- buttons apps
-local gimp_cmd = function() exec_prog("gimp") end
-local gimp = btext({ fg_icon = "primary", icon = "",
-  overlay = "primary", command = gimp_cmd })
+local gimp = button({
+  fg_icon = M.x.primary,
+  icon = ufont.h1(""),
+  height = dpi(120),
+  command = function() exec_prog("gimp") end
+})
 
-local game_cmd = function() exec_prog("lutris") end
-local game = btext({ fg_icon = "secondary", icon = "",
-  overlay = "secondary", command = game_cmd })
+local game = button({
+  fg_icon = M.x.secondary,
+  icon = ufont.h1(""),
+  height = dpi(120),
+  command = function() exec_prog("lutris") end
+})
 
-local pentest_cmd = function() launch_term("msfconsole") end
-local pentest = btext({ fg_icon = "error", icon = "ﮊ",
-  overlay = "error", command = pentest_cmd })
+local pentest = button({
+  fg_icon = M.x.error,
+  icon = ufont.h1("ﮊ"),
+  height = dpi(120),
+  command = function() launch_term("msfconsole") end
+})
 
-local buttons_widget = widget.box('vertical', { gimp,game,pentest })
+local buttons_widget = widget.box('vertical', { gimp, game, pentest })
 
 -- buttons path
-local image_cmd = function() launch_term(file_browser .. " ~/images") end
-local image = btext({ fg_text = "primary", overlay = "primary",
-  text = "IMAGES", command = image_cmd
+local image = button({
+  fg_icon = M.x.primary,
+  text = ufont.button("IMAGES"),
+  command = function() launch_term(file_browser .. " ~/images") end
 })
 
-local torrent_cmd = function() launch_term(file_browser .. " ~/torrents") end
-local torrent = btext({ fg_text = "secondary", overlay = "secondary",
-  text = "TORRENTS", command = torrent_cmd
+local torrent = button({
+  fg_icon = M.x.secondary,
+  text = ufont.button("TORRENTS"),
+  command = function() launch_term(file_browser .. " ~/torrents") end
 })
 
-local movie_cmd = function() launch_term(file_browser .. " ~/videos") end
-local movie = btext({ fg_text = "error", overlay = "error",
-  text = "MOVIES", command = movie_cmd
+local movie = button({
+  fg_icon = M.x.error,
+  text = ufont.button("MOVIES"),
+  command = function() launch_term(file_browser .. " ~/videos") end
 })
 
-local buttons_path_1_widget = widget.box('horizontal', { image,torrent }, 15)
+local buttons_path_1_widget = widget.box('horizontal', { image,torrent }, 10)
 local buttons_path_2_widget = widget.box('horizontal', { movie })
 
 -- buttons url
-local github_cmd = function() open_link("https://github.com/szorfein") end
-local github = btext({ fg_icon = "primary", icon = "",
-  overlay = "primary", command = github_cmd })
+local github = button({
+  fg_icon = M.x.primary,
+  icon = ufont.h1(""),
+  height = dpi(120),
+  command = function() open_link("https://github.com/szorfein") end
+})
 
-local twitter_cmd = function() open_link("https://twitter.com/szorfein") end
-local twitter = btext({ fg_icon = "secondary", icon = "",
-  overlay = "secondary", command = twitter_cmd })
+local twitter = button({
+  fg_icon = M.x.secondary,
+  icon = ufont.h1(""),
+  height = dpi(120),
+  command = function() open_link("https://twitter.com/szorfein") end
+})
 
-local reddit_cmd = function() open_link("https://reddit.com/user/szorfein") end
-local reddit = btext({ fg_icon = "error", icon = "",
-  overlay = "error", command = reddit_cmd })
+local reddit = button({
+  fg_icon = M.x.error,
+  icon = ufont.h1(""),
+  height = dpi(120),
+  command = function() open_link("https://reddit.com/user/szorfein") end
+})
 
 local buttons_url_widget = widget.box('vertical', { github, twitter, reddit })
 
 -- Minimal TodoList
 local todo_textbox = wibox.widget.textbox() -- to store the prompt
 local history_file = os.getenv("HOME").."/.todoslist"
-local todo_max = 6
+local todo_max = 4
 local todo_list = wibox.layout.fixed.vertical()
 local remove_todo
 
 local function update_history()
-  local history = io.open(history_file, "r")
-  if history == nil then return end
 
   local lines = {}
   todo_list:reset()
-  for line in history:lines() do
+  for line in io.lines(history_file) do
     table.insert(lines, line)
   end
-  history:close()
 
   for k,v in pairs(lines) do
     if k > todo_max or not v then return end
     local t = font.text_list(v)
     local f = function() remove_todo(v) end -- serve to store the actual line
-    local b = btext({ fg_text = "secondary", overlay = "secondary",
-      text = "", command = f })
+    local b = button({
+      fg_icon = M.x.secondary,
+      text = ufont.button(""),
+      margins = dpi(4),
+      command = f
+    })
     local w = widget.box('horizontal', { b, t })
     todo_list:add(w)
   end
@@ -210,7 +232,7 @@ end
 
 remove_todo = function(line)
   local line = string.gsub(line, "/", "\\/") -- if contain slash
-  local command = "[ -f "..history_file.." ] && sed -i '/"..line.."/d' "..history_file
+  local command = "sh -c '[ -f "..history_file.." ] && sed -i \"/"..line.."/d\" "..history_file.."'"
   awful.spawn.easy_async_with_shell(command, function()
     update_history()
   end)
@@ -220,33 +242,29 @@ local function exec_prompt()
   awful.prompt.run {
     prompt = " > ",
     fg = M.f.on_surface, 
-    history_path = os.getenv("HOME").."/.history_todo",
+    font = M.f.body_2,
+    history_path = history_file,
     textbox = todo_textbox,
     exe_callback = function(input)
       if not input or #input == 0 then return end
-      local command = "echo "..input.." >> "..history_file
-      awful.spawn.easy_async_with_shell(command, function()
-        update_history()
-      end)
+      update_history()
     end
   }
 end
 
-local todo_new = btext({ fg_icon = "on_secondary", icon = "",
-  font_icon = M.f.button,
-  fg_text = "on_secondary", text = " New task",
-  bg = "secondary",
+local todo_new = button({
+  fg_icon = M.x.on_secondary,
+  icon = ufont.button(" New task"),
+  bg = M.x.secondary_variant_1,
+  rrect = 24,
   mode = "contained",
-  spacing = 4,
-  rrect = 30,
-  overlay = "on_surface",
-  command = exec_prompt, layout = "horizontal"
+  command = exec_prompt,
 })
 
 local todo_widget = wibox.widget {
   todo_list,
-  widget.centered(widget.box("horizontal", { todo_new, todo_textbox })),
-  spacing = 12,
+  widget.centered(widget.box("vertical", { todo_new, todo_textbox }), "vertical"),
+  spacing = dpi(10),
   layout = wibox.layout.fixed.vertical
 }
 
@@ -266,7 +284,7 @@ local function boxes(w, width, height, margin)
       bg = M.x.surface,
       forced_height = dpi(height),
       forced_width = dpi(width),
-      shape = helpers.rrect(10),
+      shape = helper.rrect(10),
       widget = wibox.container.background
     },
     margins = dpi(margin),

@@ -10,7 +10,7 @@ function progressbar.horiz(color)
     forced_height = dpi(6),
     border_color = M.x.surface,
     color = color,
-    background_color = color .. "66", -- 40M
+    background_color = color .. "66", -- 40%
     widget = wibox.widget.progressbar
   }
 end

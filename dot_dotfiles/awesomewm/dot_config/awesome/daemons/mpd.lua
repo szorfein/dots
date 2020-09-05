@@ -1,42 +1,102 @@
-local aspawn = require("awful.spawn")
-local awidget = require("awful.widget")
-local naughty = require("naughty")
+local spawn = require('awful.spawn')
+local timer = require("gears.timer")
+local noti = require('utils.noti')
+local icons = require("icons.default")
 
-local function mpd_info()
-  local mpd = {}
-  -- you should modify the path of your musics directory
-  aspawn.easy_async_with_shell("~/.config/awesome/widgets/audio.sh music_details /opt/musics",
-  function(stdout)
+local start = true
+local msg_old = ""
 
-    mpd.cover, mpd.title, mpd.artist, mpd.status, mpd.album = stdout:match('img:%[(.*)%]%s?title:%[(.*)%]%s?artist:%[(.*)%]%s?state:%[(.*)%]%s?album:%[(.*)%]')
+local function music_cover()
+  local script = [[
+    MUSIC_DIR=$HOME/musics
+    CURR=$(mpc --format "%file%" current)
+    DIR="${CURR%/*}"
 
-    awesome.emit_signal("daemon::mpd", mpd)
+    covers=$(find "$MUSIC_DIR/$DIR" -maxdepth 1 -regex '.*\.\(jpe?g\|png\)' | head -n 1)
+
+    [ -f "$covers" ] || exit
+    echo "$covers"
+  ]]
+
+  spawn.easy_async_with_shell(script, function(stdout)
+
+    local cover = icons["default_cover"]
+    if not (stdout == nil or stdout == '') then
+      cover = stdout:gsub('%\n', '')
+    end
+
+    --noti.info("cover -> ".. cover)
+    awesome.emit_signal("daemon::mpd_cover", cover)
   end)
 end
 
-mpd_info()
+local music_infos = function()
+  spawn.easy_async_with_shell([[ mpc -f %title%@@%artist%@ current ]], function(stdout)
 
-local mpd_script = [[
-  sh -c '
-    mpc idleloop player
-  '
+    local title = stdout:match('(.*)@@') or ''
+    local artist = stdout:match('@@(.*)@') or ''
+
+    title = title:gsub('%\n', '')
+    artist = artist:gsub('%\n', '')
+
+    if not (title == '' or artist == '') then
+      local icon = "<span foreground='" .. M.x.primary .. "'> ♫  </span>"
+      local msg = icon .. tostring(title:sub(1, 20)) .. " by " .. tostring(artist)
+      if not start and msg ~= msg_old then noti.info(msg) end
+      msg_old = msg
+    end
+
+    awesome.emit_signal("daemon::mpd_infos", title, artist)
+    start = false
+  end)
+end
+
+local function music_time()
+  spawn.easy_async_with_shell([[
+    mpc status | awk 'NR==2 { split($4, a); print a[1]}' | tr -d '[\%\(\)]'
+  ]], function(stdout)
+
+    local time = 0
+    if stdout ~= nil then
+      time = tonumber(stdout)
+    end
+
+    awesome.emit_signal("daemon::mpd_time", time)
+  end)
+end
+
+local function update_all()
+  music_infos()
+  music_cover()
+end
+
+-- update time separately
+timer {
+  timeout = 5, autostart = true, call_now = true,
+  callback = function()
+    music_time()
+  end
+}
+
+-- init once
+update_all()
+
+local mpd_event_listener = [[
+  mpc idleloop player
 ]]
 
-aspawn.easy_async_with_shell("pgrep -fx 'mpc idleloop player' | xargs kill -9", function ()
-  aspawn.with_line_callback(mpd_script, {
+local kill_mpd_event_listener = [[
+  if pids=$(pgrep -fx "mpc idleloop player") ; then
+    for pid in $pids ; do
+      kill -9 "$pid" >/dev/null
+    done
+  end
+]]
+
+spawn.easy_async_with_shell(kill_mpd_event_listener, function()
+  spawn.with_line_callback(mpd_event_listener, {
     stdout = function(line)
-      mpd_info()
+      update_all()
     end
   })
-end)
-
--- emit a second signal to capture the pasted time on music
-awidget.watch('sh -c "mpc"', 2, function(widget, stdout)
-  local mpd = {}
-  mpd.time_total = stdout:match('%/([0-9]+:[0-9]+)') or 0
-  mpd.past_time = stdout:match('([0-9]+:[0-9]+)%/') or 0
-  mpd.past_time_percent = stdout:match('%(([0-9]+)%%%)') or 0
-  mpd.full_time = mpd.past_time .. "/"..mpd.time_total .. " ("..mpd.past_time_percent.."%)"
-
-  awesome.emit_signal("daemon::mpd_time", mpd)
 end)
