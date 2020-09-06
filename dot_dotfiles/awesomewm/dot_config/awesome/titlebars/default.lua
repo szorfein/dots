@@ -2,7 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local titlebar = require("util.titlebar")
-local mat_fg = require("util.mat-foreground")
+local mat_fg = require("utils.material.foreground")
 
 beautiful.titlebar_bg_focus = beautiful.titlebar_bg_focus or M.x.background
 beautiful.titlebar_bg = beautiful.titlebar_bg or M.x.background

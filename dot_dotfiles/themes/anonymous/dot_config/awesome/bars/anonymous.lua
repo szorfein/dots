@@ -1,9 +1,6 @@
 local awful = require("awful")
-local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local helpers = require("helpers")
-local separators = require('util.separators')
 local widget = require('util.widgets')
 
 -- widgets load
@@ -37,8 +34,6 @@ local my_date = widget.bg_rounded( beautiful.background, "#873075", date_widget 
 
 local launcher = require("widgets.launcher")()
 local my_launcher = widget.bg_rounded( M.x.on_background .. "0E", "#20252c", launcher, "button" )
-
-local my_change_theme = require("widgets.button_change_theme")
 
 -- widget redefined }}}
 
@@ -95,7 +90,7 @@ s.mywibox:setup {
       my_ram,
       my_battery,
       my_date,
-      my_change_theme,
+      require("widgets.change_theme"),
       scrot
     }
   }

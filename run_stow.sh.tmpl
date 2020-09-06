@@ -40,12 +40,7 @@ apply_theme() {
   && apply_theme $LAST_THEME
 )
 
-# wallpapers
+# wallpapers and vimcolor
 (cd $DOTS \
-  && ./install --images
-)
-
-# vimcolors
-(cd $DOTS \
-  && ./install --vim
+  && ./install --images --vim
 )

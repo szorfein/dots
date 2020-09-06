@@ -1,5 +1,5 @@
 local gtimer = require("gears.timer")
-local noti = require("util.noti")
+local noti = require("utils.noti")
 local io = { lines = io.lines }
 
 local function mem_info()

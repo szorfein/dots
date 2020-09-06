@@ -1,28 +1,12 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
 local widget = require("util.widgets")
 local helpers = require("helpers")
 local icons = require("icons.default")
-local gtable = require("gears.table")
 local font = require("util.font")
-local bicon = require("util.icon")
-local mat_bg = require("util.mat-background")
-
--- widget for the popup
-local mpc = require("widgets.mpc")({})
-local volume_bar = require("widgets.volume")({ mode = "slider" })
-
--- beautiful vars
-local bg = beautiful.widget_volume_bg or M.x.background
-local font_button = M.f.button
-local l = beautiful.widget_button_music_layout or 'horizontal'
-
--- for the popup
-local fg_p = M.x.on_surface
-local bg_p = M.x.surface
-local padding = beautiful.widget_popup_padding or 1
+local button = require("utils.button")
+local ufont = require("utils.font")
 
 local music_player_root = class()
 
@@ -36,7 +20,10 @@ function music_player_root:init(args)
   self.wposition = args.position or widget.check_popup_position(self.wibar_position)
   -- widgets
   --self.wicon = font.button(self.icon[1], self.icon[2])
-  self.wicon = bicon({ icon = self.icon[1], fg = self.icon[2] })
+  self.wicon = button({
+    fg_icon = self.icon[2],
+    icon = ufont.button(self.icon[1])
+  })
   self.title = font.button("")
   self.artist = font.caption("")
   self.cover = widget.imagebox(90)
@@ -47,10 +34,6 @@ end
 function music_player_root:make_widget()
   if self.mode == "block" then
     return self:make_block()
-  elseif self.mode == "song" then
-    return self:make_song()
-  else
-    return self:make_popup()
   end
 end
 
@@ -85,67 +68,6 @@ function music_player_root:make_block()
   }
   self:signals()
   return w
-end
-
-function music_player_root:create_popup(w)
-  self.cover.forced_height = dpi(200)
-  self.cover.forced_width = dpi(200)
-  self.cover.resize = true
-  --self.cover.clip_shape = helpers.rrect(20) -- do not work ?
-  self.title.forced_height = 20
-  local img = wibox.widget {
-    nil,
-    {
-      widget.centered(self.cover),
-      widget.centered(mpc),
-      spacing = dpi(8),
-      layout = wibox.layout.fixed.vertical
-    },
-    expand = "none",
-    layout = wibox.layout.align.horizontal
-  }
-  local desc = wibox.widget {
-    self.title,
-    self.artist,
-    self.time_pasted,
-    volume_bar,
-    spacing = dpi(5),
-    layout = wibox.layout.fixed.vertical
-  }
-  self.wpopup = awful.popup {
-    widget = {
-      {
-        {
-          img,
-          desc,
-          layout = wibox.layout.fixed.vertical
-        },
-        margins = dpi(14),
-        forced_width = dpi(270),
-        widget = wibox.container.margin
-      },
-      bg = M.x.on_surface .. M.e.dp01,
-      widget = wibox.container.background
-    },
-    visible = false, -- do not show at start
-    ontop = true,
-    hide_on_right_click = true,
-    preferred_positions = self.wposition,
-    offset = { y = padding, x = padding }, -- no pasted on the bar
-    bg = M.x.surface,
-    shape = helpers.rrect(15)
-  }
-
-  -- attach popup to widget
-  self.wpopup:bind_to_widget(w)
-end
-
-function music_player_root:make_popup()
-  -- widget creation
-  local button = self.wicon
-  self:create_popup(button)
-  self:signals()
-  return widget.box(layout, { button })
 end
 
 -- update
@@ -185,29 +107,6 @@ function music_player_root:signals()
   awesome.connect_signal("daemon::mpd_time", function(time)
     self:update_time(time)
   end)
-end
-
-function music_player_root:make_song()
-  local font = require("util.font")
-  local icon = font.button(self.icon[1], self.icon[2])
-  local w = wibox.widget {
-    {
-      {
-        icon,
-        self.title,
-        spacing = dpi(8),
-        layout = wibox.layout.fixed.horizontal
-      },
-      margins = dpi(12),
-      widget = wibox.container.margin
-    },
-    widget = mat_bg({ color = M.x.error })
-  }
-  self:create_popup(w)
-  self.wpopup.x = dpi(4)
-  self.wpopup.y = self.wibar_size + dpi(4)
-  self:signals()
-  return w
 end
 
 -- herit

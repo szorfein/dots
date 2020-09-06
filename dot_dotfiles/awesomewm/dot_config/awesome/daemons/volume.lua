@@ -1,7 +1,7 @@
 -- Create a signal: daemon::volume
 -- return values: volume [number], is_muted [0 or 1]
 local spawn = require("awful.spawn")
-local noti = require("util.noti")
+local noti = require("utils.noti")
 
 local volume_old = -1
 local msg_old = ""

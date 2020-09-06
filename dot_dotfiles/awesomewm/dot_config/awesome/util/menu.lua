@@ -2,7 +2,7 @@ local wibox = require("wibox")
 local awful = require("awful")
 local gtable = require("gears.table")
 local font = require("util.font")
-local mat_bg = require("util.mat-background")
+local mat_bg = require("utils.material.background")
 
 local root_menu = class()
 

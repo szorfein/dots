@@ -95,22 +95,18 @@ get_image() {
 
 download_images() {
   DEST=~/images
+
   [ -d ~/images ] || mkdir ~/images
-  filename=
-  link=
-  while read line; do
-    filename=$(echo ${line%-*} | tr -d " ")
-    link=$(echo ${line#*-} | tr -d " ")
-    if [ -f "${DEST}/${filename}.png" ] ; then
-      echo "file: $filename.png exist"
-    elif [ -f "${DEST}/${filename}.jpg" ] ; then
-      echo "file: $filename.jpg exist"
+  while read -r line; do
+    filename=$(echo "${line%-*}" | tr -d " ")
+    link=$(echo "${line#*-}" | tr -d " ")
+    if [ -f "${DEST}/${filename}.png" ] || [ -f "${DEST}/${filename}.jpg" ] ; then
+      :
     else
       echo "file: $filename no exist, download..."
       get_image $filename $link
     fi
   done < hidden-stuff/wallpapers-list.txt
-  filename= link= DEST=
 }
 
 check_fonts() {
@@ -149,17 +145,15 @@ grab_fonts() {
 banner() {
   printf "%s\n" \
     '
-      ▓█████▄  ▒█████  ▄▄▄█████▓  █████▒██▓ ██▓    ▓█████   ██████
-      ▒██▀ ██▌▒██▒  ██▒▓  ██▒ ▓▒▓██   ▒▓██▒▓██▒    ▓█   ▀ ▒██    ▒
-      ░██   █▌▒██░  ██▒▒ ▓██░ ▒░▒████ ░▒██▒▒██░    ▒███   ░ ▓██▄
-      ░▓█▄   ▌▒██   ██░░ ▓██▓ ░ ░▓█▒  ░░██░▒██░    ▒▓█  ▄   ▒   ██▒
-      ░▒████▓ ░ ████▓▒░  ▒██▒ ░ ░▒█░   ░██░░██████▒░▒████▒▒██████▒▒
-      ▒▒▓  ▒ ░ ▒░▒░▒░   ▒ ░░    ▒ ░   ░▓  ░ ▒░▓  ░░░ ▒░ ░▒ ▒▓▒ ▒ ░
+   @@@@@@@   @@@@@@  @@@@@@@ @@@@@@@@ @@@ @@@      @@@@@@@@  @@@@@@
+   @@!  @@@ @@!  @@@   @@!   @@!      @@! @@!      @@!      !@@    
+   @!@  !@! @!@  !@!   @!!   @!!!:!   !!@ @!!      @!!!:!    !@@!! 
+   !!:  !!! !!:  !!!   !!:   !!:      !!: !!:      !!:          !:!
+   :: :  :   : :. :     :     :       :   : ::.: : : :: ::: ::.: : 
       '
     }
 
   usage() {
-    banner
     printf "%s\n" \
       "-z, --zsh    Download and install dependencies of zsh"
 
@@ -167,7 +161,7 @@ banner() {
       "-v, --vim    Download and install all the vim colorscheme"
 
     printf "%s\n" \
-      "-f, --fonts    Download and install all the fonts"
+      "-f, --fonts  Download and install all the fonts"
 
     printf "%s\n" \
       "-h, --help   Display this help"
@@ -182,25 +176,23 @@ if [ "$#" -eq 0 ]; then
   exit 1
 fi
 
+banner
+
 while [ "$#" -gt 0 ] ; do
   case "$1" in
     -z | --zsh)
-      banner
       forZsh
       shift
       ;;
     -v | --vim)
-      banner
       vimcolors
       shift
       ;;
     -i | --images)
-      banner
       download_images
       shift
       ;;
     -f | --fonts)
-      banner
       grab_fonts
       shift
       ;;

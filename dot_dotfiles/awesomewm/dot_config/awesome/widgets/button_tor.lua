@@ -4,17 +4,21 @@ local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local helpers = require("helpers")
 local icons = require("icons.default")
-local bicon = require("util.icon")
+local button = require("utils.button")
 local font = require("util.font")
+local ufont = require("utils.font")
 
 -- beautiful vars
-local tor_icon = beautiful.widget_tor_icon or "﨩"
+local tor_icon = beautiful.widget_tor_icon or ""
 local fg_enable = beautiful.widget_tor_fg_enable or M.x.primary
 local fg_disable = beautiful.widget_tor_fg_disable or M.x.error
 local padding = beautiful.widget_popup_padding or dpi(1)
 
 -- widget creation
-local tor_widget = bicon({ icon = tor_icon, fg = fg_enable })
+local tor_widget = button({
+  fg_icon = M.x.primary,
+  icon = ufont.icon(tor_icon)
+})
 local tor_run = nil -- boolean
 local sep = font.caption("")
 sep.markup = helpers.colorize_text("---", M.x.on_surface, M.t.disabled)

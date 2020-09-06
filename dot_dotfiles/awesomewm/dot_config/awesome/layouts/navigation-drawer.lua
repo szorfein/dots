@@ -1,11 +1,11 @@
 local wibox = require("wibox")
-local modal = require("util.modal")
+local modal = require("utils.modal")
 local awful = require("awful")
 local gtable = require("gears.table")
 local font = require("utils.font")
 local bicon = require("util.icon")
-local mat_fg = require("util.mat-foreground")
-local mat_bg = require("util.mat-background")
+local mat_fg = require("utils.material.foreground")
+local mat_bg = require("utils.material.background")
 
 -- widgets
 local volume = require("widgets.volume")({ mode = "slider" })

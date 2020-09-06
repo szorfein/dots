@@ -56,7 +56,7 @@ function mybar:init(s)
     { -- right
       layout = wibox.layout.fixed.horizontal,
       spacing = dpi(10),
-      require("widgets.button_change_theme"),
+      require("widgets.change_theme"),
       layouts,
       require("widgets.settings")(),
       textclock,

@@ -9,7 +9,7 @@ local gshape = require("gears.shape")
 local app = require("util.app")
 local keygrabber = require("awful.keygrabber")
 local font = require("util.font")
-local mat_bg = require("util.mat-background")
+local mat_bg = require("utils.material.background")
 
 local ntags = 10
 

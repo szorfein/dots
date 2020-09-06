@@ -6,12 +6,18 @@ local beautiful = require("beautiful")
 local font = require("util.font")
 local button = require("utils.button")
 local ufont = require("utils.font")
+local mat_text = require("utils.material.text")
 
 -- Setting titles
-local monitors_title = font.body_title('Monitors', M.x.on_surface, M.t.high)
-monitors_title.align = "left"
-local settings_title = font.body_title('Settings', M.x.on_surface, M.t.high)
-settings_title.align = "left"
+local monitors_title = wibox.widget {
+  ufont.body_1("Monitor", "left"),
+  widget = mat_text({ color = M.x.on_surface, lv = "medium" })
+}
+
+local settings_title = wibox.widget {
+  ufont.body_1("Settings", "left"),
+  widget = mat_text({ color = M.x.on_surface, lv = "medium" })
+}
 
 -- import widgets
 local vol = require("widgets.volume")({ mode = "slider" })

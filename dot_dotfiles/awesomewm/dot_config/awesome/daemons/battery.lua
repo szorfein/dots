@@ -1,7 +1,7 @@
 local helpers = require("helpers")
 local beautiful = require("beautiful")
 local gtimer = require("gears.timer")
-local noti = require("util.noti")
+local noti = require("utils.noti")
 local spawn = require("awful.spawn")
 
 local unknown_icon = beautiful.widget_battery_icon_unknown or ""

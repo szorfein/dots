@@ -2,7 +2,7 @@ local wibox = require("wibox")
 local widget = require("util.widgets")
 local helpers = require("helpers")
 local font = require("util.font")
-local mat_bg = require("util.mat-background")
+local mat_bg = require("utils.material.background")
 
 -- opacity state for button dark theme
 -- https://material.io/design/color/dark-theme.html#states

@@ -4,7 +4,6 @@ local beautiful = require("beautiful")
 local separators = require('util.separators')
 
 -- widgets load
-local change_theme = require("widgets.button_change_theme")
 local scrot = require("widgets.scrot")
 
 -- {{{ Wibar
@@ -47,7 +46,7 @@ function mybar:init(s)
       nil,
       {
         require("widgets.music")(),
-        change_theme,
+        require("widgets.change_theme"),
         scrot,
         s.mylayoutbox,
         layout = wibox.layout.fixed.vertical,

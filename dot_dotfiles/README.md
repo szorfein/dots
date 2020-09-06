@@ -27,7 +27,12 @@ A list of dependendies can be found [here](https://raw.githubusercontent.com/szo
 - [support](#support)
 
 ## Installation for the last theme
-For the last [themes/worker](#screens), please, follow the procedure on the [wiki page](https://github.com/szorfein/dotfiles/wiki/theme-awesome).
+There are two way to install the last [themes/sci](#screens)
++ Fully scripted with [Chezmoi](https://www.chezmoi.io/), follow the instruction [here](https://github.com/szorfein/dots).
++ Or manually by following the [wiki page](https://github.com/szorfein/dotfiles/wiki/theme-awesome).
+
+The method with `chezmoi` only work with a theme for `awesomewm` and only for supported distrib Gentoo, Archlinux or Debian.  
+You can try on other distributions like Centos, Ubuntu... at your own risk and peril :)
 
 ## Stow
 If you are blocked with `stow` or need more explanations, see the [wiki page](https://github.com/szorfein/dotfiles/wiki/stow) before post an issue.  

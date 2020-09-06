@@ -34,7 +34,7 @@ function mybar:init(s)
       layout = wibox.layout.fixed.horizontal,
       wibox.widget.systray(),
       require("widgets.music")(),
-      require("widgets.button_change_theme"),
+      require("widgets.change_theme"),
       require("widgets.settings")(),
       mytextclock,
       s.mylayoutbox

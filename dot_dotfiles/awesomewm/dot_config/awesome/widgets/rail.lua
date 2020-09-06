@@ -1,6 +1,6 @@
 local gtable = require("gears.table")
 local awful = require("awful")
-local mat_bg = require("util.mat-background")
+local mat_bg = require("utils.material.background")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local helpers = require("helpers")
