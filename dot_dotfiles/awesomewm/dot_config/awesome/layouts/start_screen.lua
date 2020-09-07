@@ -3,13 +3,12 @@ local gtable = require("gears.table")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local widget = require("util.widgets")
-local buttons = require("util.buttons")
-local font = require("util.font")
 local helper = require("utils.helper")
 local app = require("util.app")
 local modal = require("utils.modal")
 local button = require("utils.button")
 local ufont = require("utils.font")
+local mat_text = require("utils.material.text")
 local io = {
   open = io.open,
   lines = io.lines
@@ -55,8 +54,12 @@ local function rss_links(rss, feed_name, w)
   for i = 1, max_feeds do
     f = function() open_link(rss[feed_name].link[i]) end
     s = string.sub(rss[feed_name].title[i], 1, 26)
-    b = buttons.text_list(s, f, "on_surface")
-    b.forced_width = 310
+    b = button({
+      icon = ufont.body_2(s),
+      command = f,
+      margins = 2,
+      width = dpi(310)
+    })
     w:add(b)
   end
 end
@@ -81,7 +84,10 @@ local theme_picture = wibox.widget {
   widget = theme_picture_container
 }
 
-local theme_name = font.h6(M.name, M.x.on_surface, 87)
+local theme_name = wibox.widget {
+  ufont.h6(M.name),
+  widget = mat_text({ lv = "high" })
+}
 local picture_widget = widget.box('vertical', { theme_picture, theme_name })
 
 -- quotes
@@ -97,8 +103,14 @@ local quotes = {
   "Fear stimulates my imagination.",
   "I'm living like there's no tomorrow, cause there isn't one."
 }
-local quote_title = font.h4("", M.x.on_surface, 38)
-local quote = font.body_text(quotes[math.random(#quotes)])
+local quote_title = wibox.widget {
+  ufont.h4(""),
+  widget = mat_text({ lv = "disabled" })
+}
+local quote = wibox.widget {
+  ufont.body_2(quotes[math.random(#quotes)]),
+  widget = mat_text({})
+}
 local quote_widget = widget.box("vertical", { quote_title, quote }, dpi(8))
 
 -- date
@@ -225,16 +237,21 @@ local function update_history()
 
   for k,v in pairs(lines) do
     if k > todo_max or not v then return end
-    local t = font.text_list(v)
     local f = function() remove_todo(v) end -- serve to store the actual line
     local b = button({
       fg_icon = M.x.secondary,
-      text = ufont.button(""),
+      fg_text = M.x.on_surface,
+      icon = ufont.button(""),
+      text = wibox.widget {
+        ufont.body_2(v),
+        widget = mat_text({})
+      },
       margins = dpi(4),
-      command = f
+      spacing = dpi(8),
+      command = f,
+      layout = "horizontal"
     })
-    local w = widget.box('horizontal', { b, t })
-    todo_list:add(w)
+    todo_list:add(b)
   end
 end
 

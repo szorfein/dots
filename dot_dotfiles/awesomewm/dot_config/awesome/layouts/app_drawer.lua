@@ -1,20 +1,18 @@
 local awful = require("awful")
 local gtable = require("gears.table")
 local wibox = require("wibox")
-local helpers = require("helpers")
+local helper = require("utils.helper")
 local widget = require("util.widgets")
-local beautiful = require("beautiful")
 local icons = require("icons.app_drawer")
-local gshape = require("gears.shape")
 local app = require("util.app")
 local keygrabber = require("awful.keygrabber")
-local font = require("util.font")
-local mat_bg = require("utils.material.background")
+local modal = require("utils.modal")
+local ufont = require("utils.font")
+local button = require("utils.button")
 
 local ntags = 10
 
 local w = wibox.widget { spacing = 18, layout = wibox.layout.fixed.horizontal }
-local wtitle = font.h6("")
 local app_drawer_grabber
 local my_apps = {}
 
@@ -40,14 +38,14 @@ local function exe_web(link)
   app_drawer_hide()
 end 
 
--- About the code <b></b> (bold), you can use <u></u> (underline) or even
+-- About the code  (bold), you can use <u></u> (underline) or even
 -- <i></i> (italic) if you prefer
 my_apps[1] = {
   title = "Code",
-  { name = "<b>X</b>st", icon = icons["st"], exec = function() exe_app(terminal) end },
-  { name = "<b>T</b>mux", icon = icons["tilix"], exec = function() exe_shell("tmux") end },
-  { name = "<b>V</b>im", icon = icons["neovim"], exec = function() exe_shell("vim") end  },
-  { name = "<b>N</b>nn", icon = icons["filemanager"], exec = function() exe_shell("nnn") end  },
+  { name = "Xst", icon = icons["st"], exec = function() exe_app(terminal) end },
+  { name = "Tmux", icon = icons["tilix"], exec = function() exe_shell("tmux") end },
+  { name = "Vim", icon = icons["neovim"], exec = function() exe_shell("vim") end  },
+  { name = "Nnn", icon = icons["filemanager"], exec = function() exe_shell("nnn") end  },
   keybindings = {
     { {}, 'x', function() exe_app(terminal) end },
     { {}, 't', function() exe_shell("tmux") end },
@@ -58,28 +56,28 @@ my_apps[1] = {
 
 my_apps[2] = {
   title = "Web",
-  { name = "<b>B</b>rave", icon = icons["brave"], exec = function()
+  { name = "Brave", icon = icons["brave"], exec = function()
     exe_app(web_browser)
   end },
-  { name = "<b>G</b>ithub", icon = icons["github"], exec = function()
+  { name = "Github", icon = icons["github"], exec = function()
     exe_web("https://github.com/szorfein") 
   end },
-  { name = "<b>T</b>witter", icon = icons["twitter"], exec = function()
+  { name = "Twitter", icon = icons["twitter"], exec = function()
     exe_web("https://twitter.com/szorfein") 
   end },
-  { name = "<b>P</b>rotonmail", icon = icons["protonmail"], exec = function()
+  { name = "Protonmail", icon = icons["protonmail"], exec = function()
     exe_web("https://protonirockerxow.onion/")
   end },
-  { name = "<b>Y</b>outube", icon = icons["youtube"], exec = function()
+  { name = "Youtube", icon = icons["youtube"], exec = function()
     exe_web("https://www.youtube.com")
   end },
-  { name = "r<b>E</b>ddit", icon = icons["reddit"], exec = function()
+  { name = "rEddit", icon = icons["reddit"], exec = function()
     exe_web("https://www.reddit.com/u/szorfein")
   end },
-  { name = "exploit-<b>D</b>b", icon = icons["exploit-db"], exec = function()
+  { name = "exploit-Db", icon = icons["exploit-db"], exec = function()
     exe_web("https://www.exploit-db.com/")
   end },
-  { name = "pr<b>I</b>vacytools", icon = icons["privacy"], exec = function()
+  { name = "prIvacytools", icon = icons["privacy"], exec = function()
     exe_web("https://www.privacytools.io/")
   end },
   keybindings = {
@@ -96,9 +94,9 @@ my_apps[2] = {
 
 my_apps[3] = {
   title = "web-dev",
-  { name = "<b>R</b>uby", icon = icons["ruby"], exec = function() exe_shell("nnn ~/Downloads/Book/RUBY") end },
-  { name = "<b>S</b>wift", icon = icons["swift"], exec = function() exe_shell("nnn ~/Downloads/Book/SWIFT") end },
-  { name = "se<b>L</b>inux", icon = icons["selinux"], exec = function() exe_shell("nnn ~/Downloads/Book/LINUX") end },
+  { name = "Ruby", icon = icons["ruby"], exec = function() exe_shell("nnn ~/Downloads/Book/RUBY") end },
+  { name = "Swift", icon = icons["swift"], exec = function() exe_shell("nnn ~/Downloads/Book/SWIFT") end },
+  { name = "seLinux", icon = icons["selinux"], exec = function() exe_shell("nnn ~/Downloads/Book/LINUX") end },
   keybindings = {
     { {}, 'r', function() exe_shell("nnn ~/Downloads/Book/RUBY") end },
     { {}, 's', function() exe_shell("nnn ~/Downloads/Book/SWIFT") end },
@@ -108,14 +106,14 @@ my_apps[3] = {
 
 my_apps[4] = {
   title = "hack",
-  { name = "<b>M</b>etasploit", icon = icons["metasploit"], exec = function() exe_shell("msfconsole") end },
-  { name = "<b>H</b>ydra", icon = icons["hydra"], exec = function() exe_shell("hydra") end },
-  { name = "wp<b>S</b>can", icon = icons["wpscan"], exec = function() exe_shell("wpscan") end },
-  { name = "<b>W</b>ireshark", icon = icons["wireshark"], exec = function() exe_app("wireshark") end },
-  { name = "w<b>I</b>fite", icon = icons["wifite"], exec = function() exe_shell_and_wait("sudo wifite -c 10", app_drawer_hide) end },
-  { name = "<b>R</b>eaver", icon = icons["reaver"], exec = function() exe_shell("reaver") end },
-  { name = "<b>N</b>map", icon = icons["nmap"], exec = function() app.shell_and_wait("sudo nmap -sS $(ip a | grep inet | grep "..net_device.." | awk '{print $2}')", app_drawer_hide) end },
-  { name = "ni<b>K</b>to", icon = icons["nikto"], exec = function() exe_shell("nikto") end },
+  { name = "Metasploit", icon = icons["metasploit"], exec = function() exe_shell("msfconsole") end },
+  { name = "Hydra", icon = icons["hydra"], exec = function() exe_shell("hydra") end },
+  { name = "wpScan", icon = icons["wpscan"], exec = function() exe_shell("wpscan") end },
+  { name = "Wireshark", icon = icons["wireshark"], exec = function() exe_app("wireshark") end },
+  { name = "wIfite", icon = icons["wifite"], exec = function() exe_shell_and_wait("sudo wifite -c 10", app_drawer_hide) end },
+  { name = "Reaver", icon = icons["reaver"], exec = function() exe_shell("reaver") end },
+  { name = "Nmap", icon = icons["nmap"], exec = function() app.shell_and_wait("sudo nmap -sS $(ip a | grep inet | grep "..net_device.." | awk '{print $2}')", app_drawer_hide) end },
+  { name = "niKto", icon = icons["nikto"], exec = function() exe_shell("nikto") end },
   keybindings = {
     { {}, 'm', function() exe_shell("msfconsole") end },
     { {}, 'h', function() exe_shell("hydra") end },
@@ -130,10 +128,10 @@ my_apps[4] = {
 
 my_apps[5] = {
   title = "music",
-  { name = "<b>N</b>cmpcpp", icon = icons["mpd"], exec = function() exe_shell("ncmpcpp") end },
-  { name = "<b>C</b>ava", icon = icons["terminal"], exec = function() exe_shell("cava") end },
-  { name = "<b>M</b>pv", icon = icons["mpv"], exec = function() exe_shell("mpv ~/videos", "miniterm") end },
-  { name = "<b>S</b>ound", icon = icons["sound"], exec = function() exe_shell("alsamixer") end },
+  { name = "Ncmpcpp", icon = icons["mpd"], exec = function() exe_shell("ncmpcpp") end },
+  { name = "Cava", icon = icons["terminal"], exec = function() exe_shell("cava") end },
+  { name = "Mpv", icon = icons["mpv"], exec = function() exe_shell("mpv ~/videos", "miniterm") end },
+  { name = "Sound", icon = icons["sound"], exec = function() exe_shell("alsamixer") end },
   keybindings = {
     { {}, 'n', function() exe_shell("ncmpcpp") end },
     { {}, 'c', function() exe_shell("cava") end },
@@ -144,9 +142,9 @@ my_apps[5] = {
 
 my_apps[6] = {
   title = "chat",
-  { name = "<b>W</b>eechat", icon = icons["irc-chat"], exec = function() exe_shell("weechat") end },
-  { name = "<b>N</b>eomutt", icon = icons["mail"], exec = function() exe_shell("neomutt") end },
-  { name = "<b>S</b>ignal", icon = icons["signal"], exec = function() exe_app("signal") end },
+  { name = "Weechat", icon = icons["irc-chat"], exec = function() exe_shell("weechat") end },
+  { name = "Neomutt", icon = icons["mail"], exec = function() exe_shell("neomutt") end },
+  { name = "Signal", icon = icons["signal"], exec = function() exe_app("signal") end },
   keybindings = {
     { {}, 'w', function() exe_shell("weechat") end },
     { {}, 'n', function() exe_shell("neomutt") end },
@@ -156,8 +154,8 @@ my_apps[6] = {
 
 my_apps[7] = {
   title = "document",
-  { name = "<b>L</b>ibreoffice", icon = icons["writter"], exec = function() exe_app("libreoffice-writter") end },
-  { name = "<b>Z</b>athura", icon = icons["zathura"], exec = function() exe_app("zathura") end },
+  { name = "Libreoffice", icon = icons["writter"], exec = function() exe_app("libreoffice-writter") end },
+  { name = "Zathura", icon = icons["zathura"], exec = function() exe_app("zathura") end },
   keybindings = {
     { {}, 'v', function() exe_app("libreoffice") end },
     { {}, 'z', function() exe_app("zathura") end },
@@ -166,10 +164,10 @@ my_apps[7] = {
 
 my_apps[8] = {
   title = "image",
-  { name = "<b>G</b>imp", icon = icons["gimp"], exec = function() exe_app("gimp") end },
-  { name = "<b>W</b>allpapers", icon = icons["images"], exec = function() app.feh("~/images", app_drawer_hide) end },
-  { name = "<b>I</b>magemagick", icon = icons["imagemagick"], exec = function() exe_shell("imagemagick") end },
-  { name = "<b>S</b>crot", icon = icons["photo"], exec = function() exe_app("scrot -q 100 -d 3") end },
+  { name = "Gimp", icon = icons["gimp"], exec = function() exe_app("gimp") end },
+  { name = "Wallpapers", icon = icons["images"], exec = function() app.feh("~/images", app_drawer_hide) end },
+  { name = "Imagemagick", icon = icons["imagemagick"], exec = function() exe_shell("imagemagick") end },
+  { name = "Scrot", icon = icons["photo"], exec = function() exe_app("scrot -q 100 -d 3") end },
   keybindings = {
     { {}, 'g', function() exe_app("gimp") end },
     { {}, 'w', function() app.feh("~/images", app_drawer_hide) end },
@@ -181,10 +179,10 @@ my_apps[8] = {
 
 my_apps[9] = {
   title = "vm",
-  { name = "<b>Q</b>emu", icon = icons["qemu"], exec = function() exe_shell("qemu") end },
-  { name = "<b>V</b>irtualbox", icon = icons["virtualbox"], exec = function() exe_app("VirtualBox") end },
+  { name = "Qemu", icon = icons["qemu"], exec = function() exe_shell("qemu") end },
+  { name = "Virtualbox", icon = icons["virtualbox"], exec = function() exe_app("VirtualBox") end },
   -- VBoxManage list vms ( to list all your vm )
-  { name = "<b>A</b>chlinux", icon = icons["arch"], exec = function() exe_app("VBoxManage startvm archbasic") end },
+  { name = "Archlinux", icon = icons["arch"], exec = function() exe_app("VBoxManage startvm archbasic") end },
   keybindings = {
     { {}, 'q', function() exe_shell("qemu-x86_64") end },
     { {}, 'v', function() exe_app("VirtualBox") end },
@@ -194,10 +192,10 @@ my_apps[9] = {
 
 my_apps[10] = {
   title = "games",
-  { name = "<b>L</b>utris", icon = icons["lutris"], exec = function() exe_app("lutris") end },
-  { name = "<b>S</b>team", icon = icons["steam"], exec = function() exe_app("Steam") end },
-  { name = "<b>D</b>ontstarve", icon = icons["dontstarve"], exec = function() exe_app("lutris") end },
-  { name = "<b>W</b>arzone2100", icon = icons["warzone2100"], exec = function() exe_app("warzone2100") end },
+  { name = "Lutris", icon = icons["lutris"], exec = function() exe_app("lutris") end },
+  { name = "Steam", icon = icons["steam"], exec = function() exe_app("Steam") end },
+  { name = "Dontstarve", icon = icons["dontstarve"], exec = function() exe_app("lutris") end },
+  { name = "Warzone2100", icon = icons["warzone2100"], exec = function() exe_app("warzone2100") end },
   keybindings = {
     { {}, 'l', function() exe_app("lutris") end },
     { {}, 's', function() exe_app("Steam") end },
@@ -228,25 +226,22 @@ local function gen_menu(index)
   if not my_apps[index] then return end
   w:reset()
   for _,v in ipairs(my_apps[index]) do
-    local app_icon = widget.imagebox(48, v.icon)
-    wtitle.markup = helpers.colorize_text(my_apps[index].title, M.x.on_background)
-    app_icon:buttons(gtable.join(
-      awful.button({}, 1, function() v.exec() end)
-    ))
-    local app_name = font.caption(v.name, M.x.on_background)
-    w:add(wibox.widget {
-      {
-        {
-          widget.centered(app_icon),
-          app_name,
-          layout = wibox.layout.fixed.vertical
-        },
-        margins = 10,
-        widget = wibox.container.margin
-      },
-      widget = mat_bg({ color = M.x.on_surface, shape = helpers.rrect(14) })
+
+    local app_icon = button({
+      icon = widget.centered(widget.imagebox(48, v.icon)),
+      text = ufont.caption(v.name),
+      fg_icon = M.x.on_surface,
+      fg_text = M.x.on_surface,
+      margins = 20,
+      spacing = 10,
+      command = function() 
+        v.exec()
+      end
     })
+
+    w:add(app_icon)
   end
+
   key_grabber(my_apps[index])
 end
 
@@ -274,12 +269,7 @@ local myapps = class()
 
 function myapps:init(s)
 
-  s.app_drawer = wibox({ visible = false, ontop = true, type = "dock", position = "top", screen = s })
-  s.app_drawer.bg = M.x.surface .. "fc"
-  s.app_drawer.x = 0
-  s.app_drawer.y = beautiful.wibar_height or dpi(56) -- assume the wibar is top or bottom
-  s.app_drawer.height = 110
-  s.app_drawer.width = s.geometry.width
+  s.app_drawer = modal:init(s)
 
   s.app_drawer:buttons(gtable.join(
     -- Middle click - Hide app_drawer
@@ -292,11 +282,20 @@ function myapps:init(s)
     end)
   ))
 
-  s.app_drawer:setup {
+  local w = wibox.widget {
     nil,
     {
       nil,
-      w,
+      {
+        {
+          w,
+          margins = dpi(10),
+          widget = wibox.container.margin
+        },
+        bg = M.x.surface,
+        shape = helper.rrect(20),
+        widget = wibox.container.background
+      },
       expand = "none",
       layout = wibox.layout.align.vertical
     },
@@ -304,9 +303,7 @@ function myapps:init(s)
     layout = wibox.layout.align.horizontal
   }
 
-  awful.tag.attached_connect_signal(s, "property::selected", function()
-    update_app_drawer()
-  end)
+  modal:run_center(w)
 end
 
 return myapps
