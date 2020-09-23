@@ -10,10 +10,6 @@ local wifi_str = require("widgets.wifi_str")
 local tagslist = require("taglists.anonymous")
 
 -- {{{ Redefine widgets with a background
-
-local mpc_button = require('widgets.music')({})
-local my_mpc_button = widget.bg_rounded( beautiful.background, "#873076", mpc_button )
-
 local mpc = require("widgets.mpc")({})
 local my_mpc = widget.bg_rounded( beautiful.background, "#3b6f6f", mpc )
 
@@ -72,7 +68,6 @@ s.mywibox:setup {
       s.mytaglist,
       --s.mypromptbox,
       --distrib_icon,
-      my_mpc_button,
       --wifi_str_widget,
       wibox.widget.systray(),
     },

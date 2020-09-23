@@ -1,0 +1,29 @@
+! Links
+! material color: https://material.io/inline-tools/color/
+! theme maker: https://coolors.co
+! Contrast Ratio: https://contrast-ratio.com/
+! search triadic, complementary, etc: https://htmlcolorcodes.com/color-picker/
+! colors: https://mycolor.space/
+! mix colors: https://colordesigner.io/color-mixer
+
+! BG !
+#define theme0  #0a121d
+#define theme1  #0a121d
+#define theme2  #0a121d
+#define theme3  #0a121d
+! FG !
+#define theme4  #dbe7f7
+#define theme5  #e5eef9
+#define theme6  #e9f2ff
+! Primary, Secondary !
+#define theme7  #bd1df0
+#define theme8  #c32ef5
+#define theme9  #9f59e5
+#define theme10 #a460e8
+! Alert !
+#define theme11 #60e899
+#define theme12 #60e899
+! Others ! (yellow, green, blue)
+#define theme13 #CAA3D4
+#define theme14 #FFE8FF
+#define theme15 #5EBAB1

@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+set -o errexit
 
 # Script to download musics on youtube
 # Dep: youtube-dl
@@ -18,6 +20,8 @@ RANDOM=$$$(date +%s)
 rand=$[$RANDOM % ${#agentsList[@]}]
 agent="${agentsList[$rand]}"
 
+[ -d $WORKDIR ] || mkdir -p $WORKDIR
+
 cd $WORKDIR
 echo "Downloading $LINK_MUSIC..."
 TOR_PORT=$(grep -i socksport /etc/tor/torrc | head -n 1 | awk '{print $2}')
@@ -26,7 +30,7 @@ TOR_PORT=$(grep -i socksport /etc/tor/torrc | head -n 1 | awk '{print $2}')
 youtube-dl \
   --user-agent "$agent" \
   --add-metadata \
-  -o '%(title)s.%(ext)s' \
+  -o '%(title)s/%(title)s.%(ext)s' \
   -f 'bestaudio' \
   --no-playlist \
   --write-thumbnail \

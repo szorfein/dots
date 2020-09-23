@@ -8,11 +8,11 @@ local icon_name = {
   "tor_restart",
   "default_cover",
   "sci",
-  "machine",
   "miami",
   "anonymous",
   "morpho",
-  "worker"
+  "worker",
+  "lines"
 }
 
 for _,v in pairs(icon_name) do

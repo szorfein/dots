@@ -5,7 +5,7 @@ set -o errexit
 if cat /tmp/awesome-theme 2>/dev/null ; then
   LAST_THEME="$(cat /tmp/awesome-theme)"
 else
-  LAST_THEME="sci"
+  LAST_THEME="lines"
 fi
 
 DOTS={{ .chezmoi.homedir }}/.dotfiles

@@ -43,7 +43,6 @@ function mybar:init(s)
       layout = wibox.layout.fixed.horizontal,
       spacing = dpi(10),
       require("widgets.launcher")(),
-      require("widgets.music")()
     },
     { -- middle
       {

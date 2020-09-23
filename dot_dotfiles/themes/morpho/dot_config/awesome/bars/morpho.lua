@@ -32,7 +32,6 @@ function mybar:init(s)
     },
     s.mytasklist, -- middle
     {
-      require("widgets.music")(),
       require("widgets.change_theme"),
       require("widgets.settings")(),
       require("widgets.scrot"),

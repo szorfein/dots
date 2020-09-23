@@ -92,7 +92,7 @@ _Note that the plugins are separated by whitespace (spaces, tabs, new lines...).
 
 #### Using Plugins
 
-Each plugin includes a __README__, documenting it. This README should show the aliases (if the plugin adds any) and extra goodies that are inclued in that particular plugin.
+Each plugin includes a __README__, documenting it. This README should show the aliases (if the plugin adds any) and extra goodies that are included in that particular plugin.
 
 ### Themes
 
@@ -139,10 +139,10 @@ ZSH_THEME_RANDOM_CANDIDATES=(
 )
 ```
 
-If you only know which themes you don't like, you can add them similarly to a blacklist:
+If you only know which themes you don't like, you can add them similarly to an ignored list:
 
 ```shell
-ZSH_THEME_RANDOM_BLACKLIST=(pygmalion tjkirch_mod)
+ZSH_THEME_RANDOM_IGNORED=(pygmalion tjkirch_mod)
 ```
 
 ### FAQ

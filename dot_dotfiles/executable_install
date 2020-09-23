@@ -139,6 +139,14 @@ grab_fonts() {
     && mv $PN_MATERIAL-$PV_MATERIAL/fonts/materialdesignicons-webfont.ttf $DIR_FONT \
     && rm -rf $PN_MATERIAL*
   )
+
+  echo "Dafont"
+  (cd $DIR_FONT \
+    && rm -rf cyberpunk* \
+    && curl -s -L -o cyberpunk.zip "https://dl.dafont.com/dl/?f=cyberpunks" \
+    && mkdir cyberpunk \
+    && cd cyberpunk \
+    && unzip ../cyberpunk.zip)
   fc-cache -vf $DIR_FONT
 }
 
@@ -156,6 +164,9 @@ banner() {
   usage() {
     printf "%s\n" \
       "-z, --zsh    Download and install dependencies of zsh"
+
+    printf "%s\n" \
+      "-i, --images    Download all the wallpapers."
 
     printf "%s\n" \
       "-v, --vim    Download and install all the vim colorscheme"

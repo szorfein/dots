@@ -31,10 +31,18 @@ set ttyfast
 set binary
 
 " Tabs, May be overwritten by autocmd rules
-set shiftwidth=2
-set softtabstop=0
-set tabstop=2
+" tips: https://codefaster.substack.com/p/fast-typing-vi
 set expandtab
+set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2
+autocmd FileType python setlocal ts=4 sts=4 sw=4
+
+" Add a showbreak character when line wrapping long time
+set showbreak=↪\ 
+
+" Explicitly render different types of whitespace differently
+" and render trailing spaces.
+set list listchars=tab:→\ ,nbsp:␣,trail:•
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")

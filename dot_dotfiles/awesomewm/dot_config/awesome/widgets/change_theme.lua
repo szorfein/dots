@@ -69,11 +69,11 @@ local popup_widget = wibox.widget {
       },
       {
         make_element("anonymous"),
-        make_element("machine"),
         make_element("miami"),
         make_element("morpho"),
         make_element("worker"),
         make_element("sci"),
+        make_element("lines"),
         forced_num_rows = 2,
         forced_num_cols = 3,
         spacing = 10,

@@ -45,7 +45,6 @@ function mybar:init(s)
     { -- Right widgets
       nil,
       {
-        require("widgets.music")(),
         require("widgets.change_theme"),
         scrot,
         s.mylayoutbox,

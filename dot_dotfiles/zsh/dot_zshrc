@@ -10,6 +10,8 @@
 #    ░                                  ░        
 
 
+set -o vi
+
 # Themes are into ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each time
 ZSH_THEME="spaceship"

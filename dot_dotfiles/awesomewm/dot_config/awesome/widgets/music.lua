@@ -28,54 +28,48 @@ function music_root:init()
 end
 
 function music_root:gen_popup()
-  local w = awful.popup {
-    widget = {
+  self.w = wibox.widget {
+    {
+      {
+        self.progress,
+        layout = wibox.layout.fixed.vertical
+      },
       {
         {
-          self.progress,
+          self.cover,
+          {
+            self.title,
+            forced_height = dpi(30),
+            widget = wibox.container.margin
+          },
+          {
+            self.artist,
+            forced_height = dpi(30),
+            left = dpi(7),
+            right = dpi(7),
+            widget = wibox.container.margin
+          },
+          spacing = dpi(5),
           layout = wibox.layout.fixed.vertical
         },
-        {
-          {
-            {
-              self.title,
-              forced_height = dpi(30),
-              widget = wibox.container.margin
-            },
-            {
-              self.artist,
-              forced_height = dpi(30),
-              left = dpi(7),
-              right = dpi(7),
-              widget = wibox.container.margin
-            },
-            spacing = dpi(5),
-            layout = wibox.layout.fixed.vertical
-          },
-          margins = dpi(8),
-          widget = wibox.container.margin
-        },
-        {
-          nil,
-          require("widgets.mpc")({}),
-          expand = "none",
-          layout = wibox.layout.align.horizontal
-        },
-        expand = "none",
-        forced_height = dpi(200),
-        forced_width = dpi(200),
-        layout = wibox.layout.align.vertical
+        margins = dpi(8),
+        widget = wibox.container.margin
       },
-      shape = helpers.rrect(20),
-      bg = M.x.on_surface .. M.e.dp01,
-      widget = wibox.container.background
+      {
+        nil,
+        require("widgets.mpc")({}),
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+      },
+      expand = "none",
+      forced_height = dpi(480),
+      --forced_width = dpi(200),
+      layout = wibox.layout.align.vertical
     },
-    hide_on_right_click = true,
-    visible = false,
-    ontop = true,
-    bg = M.x.surface,
+    shape = helpers.rrect(20),
+    bg = M.x.on_surface .. M.e.dp01,
+    widget = wibox.container.background
   }
-  w:bind_to_widget(self.w)
 end
 
 function music_root:signals()

@@ -3,13 +3,11 @@ local modal = require("utils.modal")
 local awful = require("awful")
 local gtable = require("gears.table")
 local font = require("utils.font")
-local bicon = require("util.icon")
+local button = require("utils.button")
+local ufont = require("utils.font")
 local mat_fg = require("utils.material.foreground")
 local mat_bg = require("utils.material.background")
-
--- widgets
-local volume = require("widgets.volume")({ mode = "slider" })
-local brightness = require("widgets.brightness")({ mode = "slider" })
+local beautiful = require("beautiful")
 
 function nav_drawer_hide()
   local s = awful.screen.focused()
@@ -22,39 +20,14 @@ function nav_drawer_show()
 end
 
 local function gen_menu(elements)
-  local w = wibox.widget { layout = wibox.layout.fixed.vertical }
+  local w = wibox.widget { layout = wibox.layout.fixed.horizontal }
   for k,v in pairs(elements) do
-    local icon = font.icon(v[1])
     local text = font.body_2(v[2])
-    local row = wibox.widget {
-      {
-        {
-          {
-            {
-              {
-                icon,
-                text,
-                spacing = 22,
-                layout = wibox.layout.fixed.horizontal
-              },
-              nil,
-              nil,
-              layout = wibox.layout.align.horizontal
-            },
-            forced_height = 48,
-            margins = 16,
-            widget = wibox.container.margin,
-          },
-          widget = mat_fg({ color = M.x.on_surface, focus = M.x.primary }),
-        },
-        widget = mat_bg({ color = M.x.primary })
-      },
-      bg = M.x.surface,
-      widget = wibox.container.background
-    }
-    row:buttons(gtable.join(
-      awful.button({}, 1, v[3])
-    ))
+    local row = button({
+      icon = font.h5(v[1]),
+      --height = dpi(60),
+      command = v[3]
+    })
     w:add(row)
   end
   return w
@@ -75,22 +48,27 @@ local layout = gen_menu({
     lock_screen_show()
     nav_drawer_hide()
   end },
-  { "", "Logout", function()
+})
+
+local logout = button({
+  fg_icon = M.x.error,
+  icon = ufont.h5(""),
+  command = function()
     exit_screen_show()
     nav_drawer_hide()
-  end },
+  end
 })
 
 local header = wibox.widget {
-  bicon({ icon = "", fg = M.x.on_surface, command = nav_drawer_hide }),
-  layout = wibox.layout.fixed.horizontal
+  button({
+    icon = ufont.body_2(""),
+    command = nav_drawer_hide
+  }),
+  nil,
+  nil,
+  expand = "none",
+  layout = wibox.layout.align.horizontal
 }
-
--- labels
-local label_layout = font.subtile_1("Layouts")
-label_layout.align = "left"
-local label_setting = font.subtile_1("Settings")
-label_setting.align = "left"
 
 local sep = wibox.widget {
   orientation = "horizontal",
@@ -107,50 +85,48 @@ function nav_drawer:init(s)
   s.nav_drawer = modal:init(s)
   modal:add_buttons(nav_drawer_hide)
 
+  local layout_widget = wibox.widget {
+    layout,
+    spacing = 10,
+    layout = wibox.layout.fixed.vertical
+  }
+
   local w = wibox.widget {
     {
       {
         {
           header,
-          forced_height = 56,
+          forced_height = beautiful.wibar_size or dpi(36),
           widget = wibox.container.margin
         },
-        { 
+          --spacing_widget = sep,
+          --spacing = 1,
+        {
           {
-            layout = wibox.layout.fixed.vertical
+            nil,
+            layout_widget,
+            nil,
+            expand = "none",
+            layout = wibox.layout.align.horizontal
           },
-          { -- layout
-            {
-              label_layout,
-              margins = 16,
-              widget = wibox.container.margin
-            },
-            layout,
-            layout = wibox.layout.fixed.vertical
+          {
+            require("widgets.music")(),
+            margins = 8,
+            widget = wibox.container.margin
           },
-          { -- settings
-            {
-              label_setting,
-              left = 16, top = 16,
-              widget = wibox.container.margin
-            },
-            {
-              {
-                volume,
-                brightness,
-                layout = wibox.layout.fixed.vertical
-              },
-              margins = 16,
-              widget = wibox.container.margin
-            },
-            layout = wibox.layout.fixed.vertical
+          {
+            nil,
+            logout,
+            forced_width = dpi(40),
+            expand = "none",
+            layout = wibox.layout.align.horizontal
           },
-          spacing_widget = sep,
-          spacing = 1,
+          spacing = dpi(20),
           layout = wibox.layout.fixed.vertical
         },
         nil,
         forced_width = 256,
+        expand = "none",
         layout = wibox.layout.align.vertical
       },
       widget = wibox.container.margin

@@ -78,7 +78,11 @@ To install all the fonts (in `~/.local/share/fonts`), you can use my script too,
 
 ### Awm
 
-**Last**:`themes/sci` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
+**Last**:`themes/lines` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
+
+![lines screenshot](https://github.com/szorfein/unix-portfolio/raw/master/lines/monitor.png)
+
+`themes/sci` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
 
 ![sci screenshot](https://raw.githubusercontent.com/szorfein/unix-portfolio/master/sci/logout.png)
 
@@ -99,9 +103,6 @@ To install all the fonts (in `~/.local/share/fonts`), you can use my script too,
 | start\_screen widget | terms (xst) - lightline.vim - tmux |
 | --- | --- |
 | ![miami screenshot](https://github.com/szorfein/unix-portfolio/raw/master/miami/start_screen.png "miami start screen")| ![terms](https://github.com/szorfein/unix-portfolio/raw/master/miami/terms.png "miami terms")|
-
-`themes/machine` **term**:*xst*, **vim-color**: [darkest-space](https://github.com/szorfein/darkest-space), **font**: [Space Mono Nerd Font](http://nerdfonts.com/#downloads).   
-![Machine screenshot](https://github.com/szorfein/unix-portfolio/raw/master/machine/monitoring.png "machine")  
 
 `themes/anonymous` [term]: *xst* [vim-color] [darkest-space](https://github.com/szorfein/darkest-space), [font] [Nerd Font Iosevka](http://nerdfonts.com/#downloads).   
 ![Anonymous screenshot](https://github.com/szorfein/unix-portfolio/blob/master/anonymous/music.png "anonymous")  

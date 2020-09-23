@@ -1,4 +1,8 @@
-export PATH=$HOME/bin:$HOME/.gems/bin:$PATH
+export PATH=$HOME/bin:$PATH
+if hash ruby 2>/dev/null ; then
+  export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+fi
+
 export TERMINAL=xst
 
 # GPG
@@ -6,8 +10,9 @@ export GPG_TTY=$(tty)
 export GPG_AGENT_INFO=""
 
 # Editor
-export EDITOR='vim'
-export SUDO_EDITOR='vim'
+export VISUAL=vim
+export EDITOR=$VISUAL
+export SUDO_EDITOR=$VISUAL
 
 # nnn
 [ -f ~/.config/nnn/plugins/nuke ] && export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
@@ -28,8 +33,6 @@ export ZSH=$HOME/.oh-my-zsh
 # Hacking Tools
 export HYDRA_PROXY_HTTP="$HTTP_PROXY"
 
-# Ruby | Rails
-export GEM_HOME=$HOME/.gems
 # export RB_USER_INSTALL='true'
 # export RAILSLAB_U=""
 # export SHAKEN_U=""

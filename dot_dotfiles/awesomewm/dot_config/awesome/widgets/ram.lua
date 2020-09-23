@@ -4,6 +4,7 @@ local helpers = require("helpers")
 local wibox = require("wibox")
 local font = require("util.font")
 local ufont = require("utils.font")
+local mat_text = require("utils.material.text")
 
 -- beautiful vars
 local spacing = beautiful.widget_spacing or 1
@@ -49,28 +50,17 @@ function ram_root:make_text()
 end
 
 function ram_root:make_arcchart()
-  self.wtitle.font = M.f.body_2
   local arc = widget.make_arcchart()
-  local w = wibox.widget {
-    { -- left
-      nil,
-      {
-        nil,
-        self.wtitle,
-        self.wtext,
-        layout = wibox.layout.fixed.vertical
-      },
-      nil,
-      layout = wibox.layout.align.vertical
-    },
-    nil, -- nothing to center
-    arc, -- right
-    layout = wibox.layout.align.horizontal
+  local mtext = wibox.widget {
+    self.wtext,
+    widget = mat_text({ lv = "medium" })
   }
+  arc.widget = mtext -- include text in the arc widget
+  local w = arc
   awesome.connect_signal("daemon::ram", function(mem)
     arc.max_value = mem.total
     arc.values = { mem.inuse, mem.swp.inuse }
-    self.wtext.markup = helpers.colorize_text(tostring(mem.inuse_percent).."%", M.x.primary)
+    self.wtext.text = tostring(mem.inuse_percent).."%"
   end)
   return w
 end

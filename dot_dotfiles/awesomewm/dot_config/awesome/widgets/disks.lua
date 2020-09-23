@@ -5,6 +5,7 @@ local beautiful = require("beautiful")
 local sep = require("util.separators")
 local font = require("util.font")
 local ufont = require("utils.font")
+local mat_text = require("utils.material.text")
 
 local hdds = disks or { "home" }
 
@@ -52,14 +53,8 @@ function disks_root:make_all_arcchart()
 end
 
 function disks_root:make_arcchart()
-  self.wtitle.font = M.f.body_2
   self:make_all_arcchart()
-  local w = wibox.widget {
-    widget.box('horizontal', { self.wbars[#hdds] }),
-    nil,
-    widget.centered(self.wtitle, "vertical"),
-    layout = wibox.layout.align.horizontal
-  }
+  local w = self.wbars[#hdds]
   -- signal
   awesome.connect_signal("daemon::disks", function(fs_info)
     if fs_info ~= nil and fs_info[1] ~= nil then

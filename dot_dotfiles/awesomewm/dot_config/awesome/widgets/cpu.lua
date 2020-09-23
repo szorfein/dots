@@ -4,6 +4,7 @@ local widget = require("util.widgets")
 local helpers = require("helpers")
 local font = require("util.font")
 local ufont = require("utils.font")
+local mat_text = require("utils.material.text")
 
 -- beautiful vars
 local spacing = beautiful.widget_spacing or 1
@@ -60,25 +61,15 @@ function cpu_root:make_all_arcchart()
 end
 
 function cpu_root:make_arcchart()
-  self.wtitle.font = M.f.body_2
   self:make_all_arcchart()
-  local w = wibox.widget {
-    widget.box('horizontal', { self.wbars[self.cpus] } ), -- left
-    nil, -- nothing to middle
-    { -- right
-      nil,
-      {
-        self.wtitle,
-        self.wtext,
-        layout = wibox.layout.fixed.vertical
-      },
-      nil,
-      layout = wibox.layout.align.vertical
-    },
-    layout = wibox.layout.align.horizontal
+  local mtext = wibox.widget {
+    self.wtext,
+    widget = mat_text({ lv = "medium" })
   }
+  self.wbars[1].widget = mtext
+  local w = self.wbars[self.cpus]
   awesome.connect_signal("daemon::cpu", function(cpus)
-    self.wtext.markup = helpers.colorize_text(cpus[1].."%", M.x.primary)
+    self.wtext.text = cpus[1].."%"
     self:update_wbars(cpus)
   end)
   return w

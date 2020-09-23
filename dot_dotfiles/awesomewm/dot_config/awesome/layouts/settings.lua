@@ -75,12 +75,12 @@ local box = function(w)
   return wibox.widget {
     {
       w,
-      bg = M.x.on_surface .. "03", -- 1%
-      shape = helper.rrect(4),
-      widget = wibox.container.background
+      margins = dpi(8),
+      widget = wibox.container.margin
     },
-    margins = dpi(10),
-    widget = wibox.container.margin
+    bg = M.x.on_surface .. "03", -- 1%
+    shape = helper.rrect(4),
+    widget = wibox.container.background
   }
 end
 
@@ -110,29 +110,33 @@ function myapps:init(s)
   ))
 
   s.settings:setup {
-    nil,
     {
-      font.subtile_1("Pads"),
-      box({
-        padding,
+      nil,
+      {
+        font.subtile_1("Pads, Gaps"),
+        box({
+          nil,
+          {
+            padding,
+            gapping,
+            layout = wibox.layout.fixed.horizontal
+          },
+          expand = "none",
+          layout = wibox.layout.align.horizontal
+        }),
+        font.subtile_1("Others"),
+        box({
+          require("widgets.volume")({ mode = "slider" }),
+          require("widgets.brightness")({ mode = "slider" }),
+          layout = wibox.layout.fixed.vertical
+        }),
         layout = wibox.layout.fixed.vertical
-      }),
-      font.subtile_1("Gaps"),
-      box({
-        gapping,
-        layout = wibox.layout.fixed.vertical
-      }),
-      font.subtile_1("Others"),
-      box({
-        require("widgets.volume")({ mode = "slider" }),
-        require("widgets.brightness")({ mode = "slider" }),
-        spacing = dpi(8),
-        layout = wibox.layout.fixed.vertical
-      }),
-      layout = wibox.layout.fixed.vertical
+      },
+      expand = "none",
+      layout = wibox.layout.align.vertical
     },
-    expand = "none",
-    layout = wibox.layout.align.vertical
+    margins = 10,
+    widget = wibox.container.margin
   }
 end
 

@@ -4,7 +4,7 @@ file=".config/awesome/loaded-theme.lua"
 dotsdir="$(file ~/$file | awk '{print $5}')"
 debug=false
 
-awesomeThemes="anonymous machine miami morpho worker sci beta"
+awesomeThemes="anonymous machine miami morpho worker sci lines"
 oldTheme=""
 oldPath=""
 dotfiles_dir=""
@@ -80,7 +80,7 @@ while [ "$#" -gt 0 ] ; do
     -c | --change) wantTheme="$2" && trap change_theme EXIT
       shift ; shift ;;
     -d | --debug) debug=true ; shift ;;
-    *) die "Unknown args $1, usage: $0 [--change] [theme-name]\nthemes available: connected anonymous machine miami morpho" ;;
+    *) die "Unknown args $1, usage: $0 [--change] [theme-name]\nthemes available: $awesomeThemes" ;;
   esac
 done
 
