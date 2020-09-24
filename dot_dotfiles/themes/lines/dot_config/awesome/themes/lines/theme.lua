@@ -37,7 +37,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
     taglist_square_size, theme.fg_normal
 )
 
-theme.general_padding = { top = 0, bottom = 15, left = 15, right = 15 }
+theme.general_padding = { top = 5, bottom = 14, left = 5, right = 14 }
 
 -- Border radius on floating client
 theme.border_radius = dpi(14)

@@ -4,11 +4,12 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local font = require("utils.font")
 
-local tags = beautiful.tags or { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+local tags = beautiful.tags or { "", "", "", "ﻝ", "", "", "", "", ""}
 
 local taglist_root = class()
 
 function taglist_root:init(args)
+  self.layout = args.layout or 'horizontal'
   self.template = self:select_template()
   self.buttons = self:make_buttons()
 end
@@ -47,7 +48,7 @@ end
 
 function taglist_root:update_bg(item, tag, index)
   if tag.selected then
-    item.fg = M.x.on_background .. "B3" -- 100%
+    item.fg = M.x.on_background .. "FF" -- 100%
     item.bg = M.x.on_background .. "1F" -- 12%
   elseif tag.urgent then
     item.fg = M.x.error .. "FF" -- 100%
@@ -96,6 +97,11 @@ function taglist_widget:init(s, args)
     screen = s,
     filter = awful.widget.taglist.filter.all,
     buttons = self.buttons,
+    style = { font = M.f.icon },
+    layout = {
+      spacing = dpi(7),
+      layout = wibox.layout.fixed[self.layout]
+    },
     widget_template = self.template
   }
   return w
