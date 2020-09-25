@@ -20,13 +20,16 @@ function nav_drawer_show()
 end
 
 local function gen_menu(elements)
-  local w = wibox.widget { layout = wibox.layout.fixed.horizontal }
+  local w = wibox.widget { layout = wibox.layout.grid, forced_num_cols = 4, forced_num_rows = 2, expand = true, homogeneous = true, spacing = 5 }
   for k,v in pairs(elements) do
-    local text = font.body_2(v[2])
     local row = button({
-      icon = font.h5(v[1]),
+      icon = font.icon(v[1]),
+      --text = font.button(v[2]),
+      layout = "horizontal",
+      spacing = dpi(5),
       --height = dpi(60),
-      command = v[3]
+      command = v[3],
+      mode = 'outlined'
     })
     w:add(row)
   end
@@ -34,7 +37,7 @@ local function gen_menu(elements)
 end
 
 local layout = gen_menu({
-  { "", "Start Screen", function()
+  { "", "Start", function()
     local s = awful.screen.focused()
     s.start_screen.visible = not s.start_screen.visible
     nav_drawer_hide()
@@ -48,6 +51,10 @@ local layout = gen_menu({
     lock_screen_show()
     nav_drawer_hide()
   end },
+  { "", "Shot", function()
+    awful.spawn.with_shell("scrot -d 5 -q 100")
+    nav_drawer_hide()
+  end },
 })
 
 local logout = button({
@@ -56,7 +63,8 @@ local logout = button({
   command = function()
     exit_screen_show()
     nav_drawer_hide()
-  end
+  end,
+  mode = 'outlined'
 })
 
 local header = wibox.widget {

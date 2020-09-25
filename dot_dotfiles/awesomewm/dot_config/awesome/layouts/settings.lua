@@ -84,18 +84,28 @@ local box = function(w)
   }
 end
 
+local header = wibox.widget {
+  nil,
+  nil,
+  button({
+    icon = font.body_2(""),
+    command = function() settings_hide() end
+  }),
+  expand = "none",
+  layout = wibox.layout.align.horizontal
+}
+
 local myapps = class()
 
 function myapps:init(s)
-  self.height = screen.focused().geometry.height
-  self.width = screen.focused().geometry.width
+  self.height = s.geometry.height
+  self.width = s.geometry.width
 
-  s.settings = wibox({ visible = false, ontop = true, type = "dock", position = "top", screen = s })
+  s.settings = awful.wibar({ visible = false, width = dpi(230), position = "right", screen = s })
   s.settings.bg = M.x.surface
-  s.settings.x = self.width - dpi(256)
-  s.settings.y = dpi(32)
-  s.settings.height = dpi(400)
-  s.settings.width = dpi(250)
+  s.settings.x = self.width - dpi(230)
+  s.settings.y = 0
+  s.settings.height = self.height
   s.settings.shape = helper.rrect(10)
 
   s.settings:buttons(table.join(
@@ -111,6 +121,8 @@ function myapps:init(s)
 
   s.settings:setup {
     {
+      header,
+      {
       nil,
       {
         font.subtile_1("Pads, Gaps"),
@@ -131,9 +143,12 @@ function myapps:init(s)
           layout = wibox.layout.fixed.vertical
         }),
         layout = wibox.layout.fixed.vertical
+
       },
       expand = "none",
       layout = wibox.layout.align.vertical
+    },
+    layout = wibox.layout.fixed.vertical
     },
     margins = 10,
     widget = wibox.container.margin

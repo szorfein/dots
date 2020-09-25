@@ -1,6 +1,6 @@
 " Color
-packadd! sci
-colorscheme sci
+packadd! vamp
+colorscheme vamp
 
 " Reload colorscheme
-map <F8> :update<CR>:colorscheme sci<CR>
+map <F8> :update<CR>:colorscheme vamp<CR>

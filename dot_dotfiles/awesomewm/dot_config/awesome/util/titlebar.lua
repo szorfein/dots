@@ -1,9 +1,11 @@
 local awful = require("awful")
 local gtable = require("gears.table")
+local shape = require("gears.shape")
 local wibox = require("wibox")
 local button = require("utils.button")
 local font = require("utils.font")
 local beautiful = require("beautiful")
+local helper = require("utils.helper")
 
 local ncmpcpp = require("widgets.mpc")({ 
   mode = "titlebar"
@@ -85,6 +87,33 @@ function titlebar.title(c)
     w = wibox.widget.textbox("")
   end
   return w
+end
+
+function titlebar.enable_rounding()
+  -- Apply rounded corners to clients if needed
+  if beautiful.border_radius and beautiful.border_radius > 0 then
+    client.connect_signal("manage", function (c, startup)
+      if not c.fullscreen and not c.maximized then
+        c.shape = helper.rrect(beautiful.border_radius)
+      end
+    end)
+
+    -- Fullscreen and maximized clients should not have rounded corners
+    local function no_round_corners (c)
+      if c.fullscreen or c.maximized then
+        c.shape = shape.rectangle
+      else
+        c.shape = helper.rrect(beautiful.border_radius)
+      end
+    end
+
+    client.connect_signal("property::fullscreen", no_round_corners)
+    client.connect_signal("property::maximized", no_round_corners)
+
+    beautiful.snap_shape = helper.rrect(beautiful.border_radius * 2)
+  else
+    beautiful.snap_shape = shape.rectangle
+  end
 end
 
 return titlebar

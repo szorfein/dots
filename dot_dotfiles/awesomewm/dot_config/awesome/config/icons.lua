@@ -1,3 +1,7 @@
+-- These icons use Material Design Icon
+-- You can view these icon with:
+-- xfd -fa "Material Design Icons:style=Regular:pixelsize=20"
+-- Each icons has a code, use echo to look, ex with: echo -e "\uf34d"
 local icons = {}
 
 icons.app = {

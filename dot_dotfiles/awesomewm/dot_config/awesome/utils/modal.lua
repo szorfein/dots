@@ -11,7 +11,7 @@ function modal:init(s)
   self.screen = s or screen.focused()
   self.height = screen.focused().geometry.height
   self.w = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "splash", screen = self.screen })
-  self.w.bg = M.x.on_surface .. M.e.dp01
+  self.w.bg = M.x.on_surface .. "0A" -- 4%
   self.w.width = screen.focused().geometry.width
   self.w.height = self.height
   return self.w

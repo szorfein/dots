@@ -4,11 +4,11 @@
 bar               > awesome,polybar,lemonbar
 compositor        > picom
 extra background  > pscircle
-fonts             > iosevka,roboto mono,liberation mono,material-icons,dina,ttf-anka-coder,NERD fonts
+fonts             > iosevka nerd font,material-icons,ttf-anka-coder
 image viewer      > feh
 irc               > weechat
 multimedia        > mpv,ncmpcpp,mpc,alsa
-program launcher  > rofi,dmenu
+program launcher  > awesome,rofi,dmenu
 PDF viewer        > zathura
 terms             > xst
 wm                > awesome,subtle,i3-gaps
@@ -69,7 +69,7 @@ You have to launch this each time a new theme come.
 It's all for the setup :)
 
 ## Fonts
-For awesomewm, i use [RobotoMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/RobotoMono), [Iosevka Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka), [SpaceMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SpaceMono) and [MaterialDesign icons](https://github.com/Templarian/MaterialDesign-Webfont).  
+For awesomewm, i use [Iosevka Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka), [SpaceMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SpaceMono) and [MaterialDesign icons](https://github.com/Templarian/MaterialDesign-Webfont).  
 To install all the fonts (in `~/.local/share/fonts`), you can use my script too, for archlinux, you may prefer the install with AUR instead.
 
     ./install --fonts
@@ -78,7 +78,7 @@ To install all the fonts (in `~/.local/share/fonts`), you can use my script too,
 
 ### Awm
 
-**Last**:`themes/lines` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
+**Last**:`themes/lines` **term**: xst, **vim-color**: [vamp](https://github.com/szorfein/vamp.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
 
 ![lines screenshot](https://github.com/szorfein/unix-portfolio/raw/master/lines/monitor.png)
 

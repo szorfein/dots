@@ -175,8 +175,8 @@ function widgets.make_arcchart(w)
     paddings = 2,
     value = 1,
     --rounded_edge = true,
-    forced_height = dpi(150),
-    forced_width = dpi(150),
+    forced_height = dpi(140),
+    forced_width = dpi(140),
     thickness = dpi(4),
     start_angle = 4.71238898, -- 2pi*3/4
     w

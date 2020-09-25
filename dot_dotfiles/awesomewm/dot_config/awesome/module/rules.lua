@@ -176,7 +176,8 @@ awful.rules.rules = {
   {
     rule_any = {
       class = {
-        "Zathura" 
+        "Zathura",
+        "VirtualBox Machine",
       },
     }, properties = { maximized = true } 
   },
@@ -219,7 +220,7 @@ awful.rules.rules = {
         "VirtualBox",
         "VirtualBox Manager"
       },
-    }, properties = { tag = screen[1].tags[7] }
+    }, properties = { tag = screen[1].tags[9] }
   },
 
   { 

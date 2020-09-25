@@ -66,14 +66,11 @@ vimcolors() {
   vim_dir=$HOME/.vim/pack/my-plugins/start
 
   [ -d $vim_dir ] || mkdir -p $vim_dir
-  chk https://github.com/kaicataldo/material.vim $vim_dir/material.vim
-  chk https://github.com/szorfein/fantasy.vim $vim_dir/fantasy.vim
-  chk https://github.com/szorfein/darkest-space $vim_dir/darkest-space
   chk https://github.com/szorfein/fromthehell.vim $vim_dir/fromthehell.vim
   chk https://github.com/szorfein/lightline.vim $vim_dir/lightline.vim
   chk https://github.com/edkolev/tmuxline.vim $vim_dir/tmuxline.vim
-  chk https://github.com/sainnhe/gruvbox-material $vim_dir/gruvbox-material
   chk https://github.com/szorfein/sci.vim $vim_dir/sci
+  chk https://github.com/szorfein/vamp.vim $vim_dir/vamp
 }
 
 get_image() {

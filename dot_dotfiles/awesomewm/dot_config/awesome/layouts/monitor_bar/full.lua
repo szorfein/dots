@@ -129,6 +129,7 @@ function mybar:init(s)
             layout = wibox.layout.align.horizontal
           },
           spacing = 15,
+          forced_width = 220,
           layout = wibox.layout.fixed.vertical
         },
         right = 60,

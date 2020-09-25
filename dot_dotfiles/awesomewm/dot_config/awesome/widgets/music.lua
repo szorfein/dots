@@ -57,7 +57,7 @@ function music_root:gen_popup()
       },
       {
         nil,
-        require("widgets.mpc")({}),
+        require("widgets.mpc")({ mode = 'titlebar' }),
         expand = "none",
         layout = wibox.layout.align.horizontal
       },

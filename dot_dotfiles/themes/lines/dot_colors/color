@@ -8,22 +8,22 @@
 
 ! BG !
 #define theme0  #0a121d
-#define theme1  #131a24
-#define theme2  #171e28
-#define theme3  #1a222c
+#define theme1  #0c141f
+#define theme2  #0e1724
+#define theme3  #0f1927
 ! FG !
 #define theme4  #dbe7f7
 #define theme5  #e5eef9
 #define theme6  #e9f2ff
 ! Primary, Secondary !
-#define theme7  #C32EF5
-#define theme8  #A400D7
-#define theme9  #a865cb
-#define theme10 #8d5fd0
+#define theme7  #b051dd
+#define theme8  #9234bf
+#define theme9  #cc57be
+#define theme10 #ac389c
 ! Alert !
-#define theme11 #60e899
-#define theme12 #60e899
+#define theme11 #90c882
+#define theme12 #90d0ba
 ! Others ! (yellow, green, blue)
-#define theme13 #ed295b
-#define theme14 #e127b2
-#define theme15 #8762f5
+#define theme13 #dd5376
+#define theme14 #dd55bb
+#define theme15 #8669dd

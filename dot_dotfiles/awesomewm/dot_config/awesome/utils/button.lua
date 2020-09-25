@@ -47,6 +47,8 @@ end
 function mat_button:make_widget()
   if self.mode == "contained" then
     return self:init_contained()
+  elseif self.mode == "outlined" then
+    return self:init_outlined()
   else
     return self:init_text()
   end
@@ -69,6 +71,21 @@ function mat_button:init_contained()
     },
     margins = self.margins,
     widget = wibox.container.margin
+  }
+end
+
+function mat_button:init_outlined()
+  return wibox.widget {
+    {
+      {
+        self.icon,
+        widget = mat_fg({ color = self.fg_icon }),
+      },
+      widget = self.margin
+    },
+    shape_border_width = 1,
+    --shape_border_color = self.fg_icon,
+    widget = mat_bg({ color = self.fg_icon, shape = helper.rrect(self.rrect) }),
   }
 end
 
