@@ -1,5 +1,5 @@
 # Status 
-set -g status-right '#[fg=cyan]  sci '
+set -g status-right '#[fg=cyan]  lines '
 set -g status-justify left
 
 # Window Status

@@ -139,11 +139,8 @@ grab_fonts() {
 
   echo "Dafont"
   (cd $DIR_FONT \
-    && rm -rf cyberpunk* \
-    && curl -s -L -o cyberpunk.zip "https://dl.dafont.com/dl/?f=cyberpunks" \
-    && mkdir cyberpunk \
-    && cd cyberpunk \
-    && unzip ../cyberpunk.zip)
+    && check_fonts cyberpunk "cyberpunk.zip" "https://dl.dafont.com/dl/?f=cyberpunks") 
+
   fc-cache -vf $DIR_FONT
 }
 

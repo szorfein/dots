@@ -78,7 +78,7 @@ local box = function(w)
       margins = dpi(8),
       widget = wibox.container.margin
     },
-    bg = M.x.on_surface .. "03", -- 1%
+    bg = M.x.on_surface .. "05", -- 2%
     shape = helper.rrect(4),
     widget = wibox.container.background
   }
@@ -106,7 +106,7 @@ function myapps:init(s)
   s.settings.x = self.width - dpi(230)
   s.settings.y = 0
   s.settings.height = self.height
-  s.settings.shape = helper.rrect(10)
+  s.settings.shape = helper.rrect(50)
 
   s.settings:buttons(table.join(
     -- Middle click - Hide settings

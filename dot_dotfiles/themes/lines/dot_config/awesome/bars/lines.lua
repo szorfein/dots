@@ -58,6 +58,7 @@ function mybar:init(s)
   -- Add widgets to the wibox
   s.mywibox:setup {
     layout = wibox.layout.align.horizontal,
+    expand = "none",
     {
       {
         require("widgets.launcher")(),
@@ -67,7 +68,17 @@ function mybar:init(s)
       bg = M.x.background,
       widget = wibox.container.background
     },
-    nil,
+    {
+      {
+        require("widgets.wifi")({ layout = "horizontal", mode = "progressbar" }),
+        require("widgets.battery")({ layout = "horizontal", mode = "progressbar" }),
+        require("widgets.brightness")({ layout = "horizontal", mode = "progressbar" }),
+        layout = wibox.layout.fixed.horizontal
+      },
+      top = 3,
+      bottom = 3,
+      widget = wibox.container.margin
+    },
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       spacing = dpi(8),

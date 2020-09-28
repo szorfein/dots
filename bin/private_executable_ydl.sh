@@ -30,7 +30,7 @@ TOR_PORT=$(grep -i socksport /etc/tor/torrc | head -n 1 | awk '{print $2}')
 youtube-dl \
   --user-agent "$agent" \
   --add-metadata \
-  -o '%(title)s.%(ext)s' \
+  -o '%(title)s/%(title)s.%(ext)s' \
   -f 'bestaudio' \
   --no-playlist \
   --write-thumbnail \

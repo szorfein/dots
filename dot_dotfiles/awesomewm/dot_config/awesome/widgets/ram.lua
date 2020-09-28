@@ -20,7 +20,7 @@ function ram_root:init(args)
   self.mode = args.mode or 'text' -- possible values: text, progressbar, arcchart
   self.want_layout = args.layout or beautiful.widget_ram_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
-  self.bar_colors = args.bar_colors or beautiful.bar_color or beautiful.primary
+  self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.primary
   -- base widgets
   self.wicon = wibox.widget {
     ufont.icon(self.icon[1]),

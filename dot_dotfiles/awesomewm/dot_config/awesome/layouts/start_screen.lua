@@ -27,9 +27,11 @@ local function open_link(url)
   app.open_link(url, start_screen_hide)
 end
 
-local max_feeds = 7
-local feed_width = 380
-local feed_height = 345
+local max_feeds = 6
+local feed_width = 370
+local feed_height = 320
+local todo_width = feed_width
+local todo_height = 250
 
 -- base for rss
 local rss_threatpost = wibox.widget {
@@ -242,10 +244,7 @@ local function update_history()
       fg_icon = M.x.secondary,
       fg_text = M.x.on_surface,
       icon = ufont.button(""),
-      text = wibox.widget {
-        ufont.body_2(v),
-        widget = mat_text({})
-      },
+      text = ufont.body_2(v),
       margins = dpi(4),
       spacing = dpi(8),
       command = f,
@@ -280,24 +279,47 @@ end
 local todo_new = button({
   fg_icon = M.x.on_secondary,
   icon = ufont.button(" New task"),
-  bg = M.x.secondary_variant_1,
+  bg = M.x.secondary_variant_2,
   rrect = 24,
+  margins = 15,
   mode = "contained",
   command = exec_prompt,
 })
 
 local todo_widget = wibox.widget {
-  todo_list,
-  widget.centered(widget.box("vertical", { todo_new, todo_textbox }), "vertical"),
-  spacing = dpi(10),
-  layout = wibox.layout.fixed.vertical
+  {
+    {
+      todo_list,
+      left = 20,
+      right = 20,
+      top = 14,
+      widget = wibox.container.margin
+    },
+    nil,
+    {
+      todo_textbox,
+      {
+        widget.centered(todo_new),
+        bottom = 12,
+        widget = wibox.container.margin
+      },
+      layout = wibox.layout.fixed.vertical
+    },
+    spacing = dpi(10),
+    expand = "none",
+    layout = wibox.layout.align.vertical
+  },
+  bg = M.x.surface,
+  forced_height = todo_height - 20,
+  forced_width = todo_width - 20,
+  widget = wibox.container.background
 }
 
 update_history() -- init once the todo
 
-local function boxes(w, width, height, margin)
+local function boxes(w, width, height)
   local width, height = width, height or 1, 1
-  local margin = margin or 1
+  local margin = 3
   local boxed_widget = wibox.widget {
     {
       widget.centered(
@@ -309,7 +331,7 @@ local function boxes(w, width, height, margin)
       bg = M.x.surface,
       forced_height = dpi(height),
       forced_width = dpi(width),
-      shape = helper.rrect(10),
+      shape = helper.rrect(20),
       widget = wibox.container.background
     },
     margins = dpi(margin),
@@ -318,6 +340,47 @@ local function boxes(w, width, height, margin)
   }
   return boxed_widget
 end
+
+-- Calendar
+
+local styles = {}
+styles.focus   = {
+  padding  = 2,
+  fg_color = M.x.primary,
+  markup   = function(t) return '<b>' .. t .. '</b>' end,
+}
+
+local function decorate_cell(widget, flag, date)
+  local props = styles[flag] or {}
+  if props.markup and widget.get_text and widget.set_markup then
+    widget:set_markup(props.markup(widget:get_text()))
+  end
+  local ret = wibox.widget {
+    {
+      widget,
+      margins = (props.padding or 0) + (props.border_width or 0),
+      widget  = wibox.container.margin
+    },
+    shape              = props.shape,
+    shape_border_color = M.x.primary_variant_1,
+    shape_border_width = props.border_width or 0,
+    fg                 = props.fg_color or M.x.on_surface .. "B3", -- 70%
+    bg                 = props.bg_color or M.x.surface .. M.e.dp01,
+    widget             = wibox.container.background
+  }
+  return ret
+end
+
+local calendar = wibox.widget {
+  date         = os.date('*t'),
+  font         = M.f.caption,
+  fn_embed = decorate_cell,
+
+  spacing      = 8,
+  week_numbers = false,
+  start_sunday = false,
+  widget       = wibox.widget.calendar.month
+}
 
 local startscreen = class()
 
@@ -331,29 +394,31 @@ function startscreen:init(s)
 
   local w = wibox.widget {
     {
-      boxes(date_widget, 100, 120, 1),
-      boxes(buttons_widget, 100, 376, 1),
+      boxes(date_widget, 100, 120),
+      boxes(buttons_widget, 100, 376),
       layout = wibox.layout.fixed.vertical
     },
     widget.centered(
     {
-      boxes(picture_widget, 210, 200, 1),
-      boxes(quote_widget, 210, 200, 1),
+      boxes(picture_widget, 210, 210),
+      boxes(quote_widget, 210, 210),
       layout = wibox.layout.fixed.vertical
     }, "vertical"),
     {
-      boxes(rss_widgets, feed_width, feed_height, 1),
+      boxes(rss_widgets, feed_width, feed_height),
+      boxes(todo_widget, todo_width, todo_height),
       layout = wibox.layout.fixed.vertical
     },
     widget.centered(
     {
-      boxes(todo_widget, 210, 250, 1),
-      boxes(buttons_path_1_widget, 210, 80, 1),
-      boxes(buttons_path_2_widget, 210, 80, 1),
+      boxes(calendar, 210, 260),
+      boxes(buttons_path_1_widget, 210, 80),
+      boxes(buttons_path_2_widget, 210, 80),
       layout = wibox.layout.fixed.vertical
     }, "vertical"),
     {
-      boxes(buttons_url_widget, 100, 376, 1),
+      boxes(buttons_url_widget, 100, 376),
+      boxes(wibox.widget { layout = wibox.layout.fixed.vertical }, 100, 120),
       layout = wibox.layout.fixed.vertical
     },
     layout = wibox.layout.fixed.horizontal

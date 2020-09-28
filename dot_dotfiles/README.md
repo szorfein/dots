@@ -1,17 +1,16 @@
 ## Setup
 
 ```txt                              
-bar               > awesome,polybar,lemonbar
+bar               > awesome
 compositor        > picom
-extra background  > pscircle
 fonts             > iosevka nerd font,material-icons,ttf-anka-coder
 image viewer      > feh
 irc               > weechat
 multimedia        > mpv,ncmpcpp,mpc,alsa
-program launcher  > awesome,rofi,dmenu
+program launcher  > awesome
 PDF viewer        > zathura
 terms             > xst
-wm                > awesome,subtle,i3-gaps
+wm                > awesome
 mails             > offlineimap,msmtp and neomutt
 ```
 A list of dependendies can be found [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/hidden-stuff/dependencies-list.txt) if need. For an old wallpaper, search [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/hidden-stuff/wallpapers-list.txt).
@@ -27,8 +26,8 @@ A list of dependendies can be found [here](https://raw.githubusercontent.com/szo
 - [support](#support)
 
 ## Installation for the last theme
-There are two way to install the last [themes/sci](#screens)
-+ Fully scripted with [Chezmoi](https://www.chezmoi.io/), follow the instruction [here](https://github.com/szorfein/dots).
+There are two way to install the last [themes/lines](#screens)
++ Fully scripted with [chezmoi](https://www.chezmoi.io/), follow the instruction [here](https://github.com/szorfein/dots).
 + Or manually by following the [wiki page](https://github.com/szorfein/dotfiles/wiki/theme-awesome).
 
 The method with `chezmoi` only work with a theme for `awesomewm` and only for supported distrib Gentoo, Archlinux or Debian.  
@@ -81,31 +80,20 @@ To install all the fonts (in `~/.local/share/fonts`), you can use my script too,
 **Last**:`themes/lines` **term**: xst, **vim-color**: [vamp](https://github.com/szorfein/vamp.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
 
 ![lines screenshot](https://github.com/szorfein/unix-portfolio/raw/master/lines/monitor.png)
-
-`themes/sci` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
-
-![sci screenshot](https://raw.githubusercontent.com/szorfein/unix-portfolio/master/sci/logout.png)
-
-`themes/worker` **term**: xst, **vim-color**: [darkest-space](https://github.com/szorfein/darkest-space), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
-
-| monitor bar | app drawer |
-| --- | --- |
-| ![monitor-bar](https://github.com/szorfein/unix-portfolio/raw/master/worker/monitor_bar.png) | ![app-drawer](https://github.com/szorfein/unix-portfolio/raw/master/worker/app_drawer.png) |
+![lines 2](https://github.com/szorfein/unix-portfolio/raw/master/lines/full.png)
+![lines 3](https://github.com/szorfein/unix-portfolio/raw/master/lines/start-screen.png)
 
 `themes/morpho` **term**: xst, **vim-color**: [darkest-space](https://github.com/szorfein/darkest-space), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
 
-| clean | start screen |
-| --- | --- |
-| ![clean](https://github.com/szorfein/unix-portfolio/raw/master/morpho/clean.png "morpho clean")| ![start\_screen](https://github.com/szorfein/unix-portfolio/raw/master/morpho/start_screen.png "morpho start screen")|
+| clean |
+| --- |
+| ![clean](https://github.com/szorfein/unix-portfolio/raw/master/morpho/clean.png "morpho clean") |
 
 `themes/miami` **term**: xst, **vim-color**: [fromthehell](https://github.com/szorfein/fromthehell.vim), **font**: [Space Mono Nerd Font](http://nerdfonts.com/#downloads).
 
-| start\_screen widget | terms (xst) - lightline.vim - tmux |
-| --- | --- |
-| ![miami screenshot](https://github.com/szorfein/unix-portfolio/raw/master/miami/start_screen.png "miami start screen")| ![terms](https://github.com/szorfein/unix-portfolio/raw/master/miami/terms.png "miami terms")|
-
-`themes/anonymous` [term]: *xst* [vim-color] [darkest-space](https://github.com/szorfein/darkest-space), [font] [Nerd Font Iosevka](http://nerdfonts.com/#downloads).   
-![Anonymous screenshot](https://github.com/szorfein/unix-portfolio/blob/master/anonymous/music.png "anonymous")  
+| terms (xst) - lightline.vim - tmux |
+| --- |
+| ![miami screenshot](https://github.com/szorfein/unix-portfolio/raw/master/miami/terms.png "Miami") |
 
 ### Subtlewm
 
@@ -115,13 +103,7 @@ To install all the fonts (in `~/.local/share/fonts`), you can use my script too,
 `themes/sombra` [term]: *kitty* [vim-color] [material.vim](https://github.com/kaicataldo/material.vim.git), [font] [Anka/Coder](https://code.google.com/archive/p/anka-coder-fonts).   
 ![Sombra screenshot](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshots/sombra.jpg "sombra")  
 
-`themes/empire`, [wm]:*subtle* or *i3*. [term]: *termite* or *kitty*. [vim-color] [fromthehell.vim](https://github.com/szorfein/fromthehell.vim) [font] [Iosevka Term](https://github.com/be5invis/Iosevka).  
-![Empire screenshot](https://github.com/szorfein/unix-portfolio/raw/master/empire/full.png "empire")
-
 ### i3wm
-
-`themes/madness`, [wm]: *i3* or *subtle*. [term]: *termite* or *kitty*. [vim-color] [darkest-space](https://github.com/szorfein/darkest-space) [font] [dina](http://www.donationcoder.com/Software/Jibz/Dina/index.html).  
-![Madness screenshot](https://github.com/szorfein/unix-portfolio/raw/master/madness/start.png "madness")
 
 `themes/city`, [wm]: *i3* or *subtle*. [term]: *termite* or *kitty*. [vim-color] [darkest-space](https://github.com/szorfein/darkest-space)
 ![City screenshot](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshots/city.jpg "city")
