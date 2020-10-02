@@ -117,6 +117,17 @@ if hash emerge 2>/dev/null ; then
   euse_pkg x11-misc/lightdm gtk
   euse_pkg x11-misc/lightdm non_root
 
+  # add unstable
+  unstable_dir=/etc/portage/package.accept_keywords
+  [ -d "$unstable_dir" ] || sudo mkdir -p "$unstable_dir"
+  cat << EOF | sudo tee "$unstable_dir"/dots
+x11-terms/xst
+media-fonts/nerd-fonts-iosevka
+media-sound/cava
+x11-misc/i3lock-color
+dev-libs/light
+EOF
+
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
     weechat i3lock-color rofi youtube-dl papirus-icon-theme media-sound/mpc lightdm \

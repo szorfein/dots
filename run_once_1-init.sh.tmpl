@@ -26,13 +26,11 @@ if hash emerge 2>/dev/null ; then
   REPO=/var/db/repos
   CONF=/etc/portage/repos.conf
 
-  [ -d $REPO/ninjatools ] || mkdir -p $REPO/ninjatools
+  [ -d $REPO/ninjatools ] || sudo mkdir -p $REPO/ninjatools
 
-  [ -d $REPO/ninjatools ] || {
-    [ -d $CONF ] || mkdir -p $CONF
-    sudo curl -L -o /etc/portage/repos.conf/ninjatools.conf https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
-    sudo emaint sync -r ninjatools
-  }
+  [ -d $CONF ] || sudo mkdir -p $CONF
+  sudo curl -L -o /etc/portage/repos.conf/ninjatools.conf https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
+  sudo emaint sync -r ninjatools
 fi
 
 # save the full path of systemctl

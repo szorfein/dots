@@ -63,7 +63,7 @@ Why i switch on chezmoi?
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
 With `emerge` (gentoo):
 
-    $ sudo emerge -av sudo git vim
+    # emerge -av sudo dev-vcs/git vim
     $ curl -sfL https://git.io/chezmoi | sh
 
 With `pacman` (arch,...):
