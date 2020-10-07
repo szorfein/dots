@@ -42,11 +42,10 @@ cat << EOF | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf
 [greeter]
 
 # Appearance
-#icon-theme-name = Papyrus-Dark
-background = #101010
-#background = /usr/share/pixmaps/lock_saturate.jpg
-#background = /home/$USER/images/bg.jpg
-theme-name=Adwaita-dark
+icon-theme-name = Papyrus-Dark
+font-name = Iosevka Term Medium 12
+background = #222222
+theme-name = Adapta-Nokto-Eta
 user-background = false
 transition-duration = 500
 transition-type = ease-in-out
@@ -56,7 +55,7 @@ default-user-image =
 hide-user-image = true
 
 # Panel
-indicators =
+indicators = ~session;~spacer;~spacer;~layout;~~ ;~clock
 
 # Security
 allow-debugging = false

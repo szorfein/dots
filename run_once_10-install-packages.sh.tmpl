@@ -126,12 +126,13 @@ media-fonts/nerd-fonts-iosevka
 media-sound/cava
 x11-misc/i3lock-color
 dev-libs/light
+x11-wm/awesome
 EOF
 
   sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
     weechat i3lock-color rofi youtube-dl papirus-icon-theme media-sound/mpc lightdm \
-    inotify-tools light stow $pkgs
+    inotify-tools light stow adapta-gtk-theme $pkgs
 
 elif hash pacman 2>/dev/null ; then
   ins="pacman -Syy --needed"
@@ -151,7 +152,7 @@ elif hash pacman 2>/dev/null ; then
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
     feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt imagemagick msmtp msmtp-mta \
     tmux weechat i3lock-color rofi youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter \
-    inotify-tools light stow unzip $pkgs
+    inotify-tools light stow unzip adapta-gtk-theme $pkgs
 
 elif hash apt-get 2>/dev/null ; then
   ins="apt-get install"
