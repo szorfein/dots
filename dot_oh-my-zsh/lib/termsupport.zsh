@@ -17,7 +17,7 @@ function title {
   : ${2=$1}
 
   case "$TERM" in
-    cygwin|xterm*|putty*|rxvt*|konsole*|ansi|mlterm*)
+    cygwin|xterm*|putty*|rxvt*|konsole*|ansi|mlterm*|alacritty|st*)
       print -Pn "\e]2;${2:q}\a" # set window name
       print -Pn "\e]1;${1:q}\a" # set tab name
       ;;
@@ -42,7 +42,7 @@ function title {
 }
 
 ZSH_THEME_TERM_TAB_TITLE_IDLE="%15<..<%~%<<" #15 char left truncated PWD
-ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
+ZSH_THEME_TERM_TITLE_IDLE="%n@%m:%~"
 # Avoid duplication of directory in terminals with independent dir display
 if [[ "$TERM_PROGRAM" == Apple_Terminal ]]; then
   ZSH_THEME_TERM_TITLE_IDLE="%n@%m"

@@ -69,7 +69,7 @@ if hash emerge 2>/dev/null ; then
   euse_global speex
   euse_global libsamplerate
 
-  pkgs="alsa-utils tap-plugins swh-plugins libsamplerate ladspa-cmt caps-plugins ladspa-bs2b alsa-plugins brave-bin"
+  pkgs="alsa-utils tap-plugins swh-plugins libsamplerate cmt-plugins caps-plugins ladspa-bs2b alsa-plugins brave-bin"
 
   {{ end }}
 
@@ -104,9 +104,12 @@ if hash emerge 2>/dev/null ; then
   # vifm 
   euse_pkg dev-python/pillow jpeg
 
-  # rofi
-  euse_pkg x11-libs/pango X
-  euse_pkg x11-misc/rofi windowmode
+  # xorg
+  euse_pkg dev-cpp/gtkmm X 
+  euse_pkg x11-libs/cairo X
+  euse_pkg x11-libs/cairo aqua
+  euse_pkg dev-cpp/cairomm X
+  euse_pkg dev-cpp/cairomm aqua
 
   # mpv driver
   euse_pkg media-video/ffmpeg openh264
