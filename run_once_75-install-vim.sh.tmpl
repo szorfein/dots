@@ -38,7 +38,7 @@ vim_dir=$HOME/.vim/pack/my-plugins/start
 
 [ -d $vim_dir ] || mkdir -p $vim_dir
 
-ALE_PV="2.6.0" # https://github.com/dense-analysis/ale/releases
+ALE_PV="3.0.0" # https://github.com/dense-analysis/ale/releases
 DEVICON_PV="0.11.0" # https://github.com/ryanoasis/vim-devicons/releases
 
 # utils
@@ -51,8 +51,5 @@ dll_git https://github.com/itchyny/lightline.vim lightline
 dll_git https://github.com/mengelbrecht/lightline-bufferline lightline-bufferline
 dll_git https://github.com/airblade/vim-gitgutter.git vim-gitgutter
 dll_git https://github.com/christoomey/vim-tmux-navigator vim-tmux-navigator
-
-# colors
-dll_git https://github.com/szorfein/{{ .theme }}.vim {{ .theme }}
 
 trap bye EXIT

@@ -19,23 +19,6 @@ build_aur() {
   )
 }
 
-add_material_font() {
-  PN="MaterialDesign-Webfont"
-  PV="3.8.95"
-
-  [ -d ~/.local/share/fonts ] || mkdir -p ~/.local/share/fonts
-  [ -d ~/builds ] || mkdir ~/builds
-
-  (cd ~/builds \
-     && rm -rf font-mat*.tar.gz \
-     && rm -rf $PN* \
-     && curl -L -o font-material.tar.gz https://github.com/Templarian/$PN/archive/v$PV.tar.gz \
-     && tar xvf font-material.tar.gz \
-     && mv $PN-$PV/fonts/materialdesignicons-webfont.ttf ~/.local/share/fonts/ \
-     && fc-cache -vf ~/.local/share/fonts/
-  )
-}
-
 msg() {
   echo ""
   echo "$cyan--------------------------------------------------$endc"
@@ -51,9 +34,7 @@ bye() {
 
 msg "Execute $0..."
 
-if hash emerge 2>/dev/null ; then
-  add_material_font
-elif hash pacman 2>/dev/null ; then
+if hash pacman 2>/dev/null ; then
   ins="pacman -S --noconfirm --needed"
 
   {{ if eq .system.sound "alsa" }}
@@ -67,7 +48,6 @@ elif hash pacman 2>/dev/null ; then
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/nerd-fonts-iosevka.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
   build_aur https://aur.archlinux.org/cgit/aur.git/snapshot/python-ueberzug.tar.gz
-  add_material_font
 
 elif hash apt-get 2>/dev/null ; then
   ins="apt-get install -y"
@@ -144,8 +124,6 @@ elif hash apt-get 2>/dev/null ; then
       && ./configure --prefix=/usr --sysconfdir=/etc \
       && sudo make DESTDIR=/ install
   )
-
-  add_material_font
 
   # light
   PN="light"
