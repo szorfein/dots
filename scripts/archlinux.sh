@@ -75,6 +75,7 @@ main() {
   "$PULSE" && install_pulse
   "$ALSA" && install_alsa
   "$EXTRA" && install_extra_deps
+  exit 0
 }
 
 main "$@"
