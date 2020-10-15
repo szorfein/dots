@@ -6,37 +6,6 @@ cyan=$'\e[0;96m'
 white=$'\e[0;97m'
 endc=$'\e[0m'
 
-install_packages() {
-  pkg=${2:-$1}
-  if ! hash $1 2>/dev/null ; then
-    sudo $ins $pkg
-  fi
-}
-
-euse_pkg() {
-  if ! grep -q $2 /etc/portage/package.use/${1#*/} 2>/dev/null ; then
-    sudo euse -p $1 -E $2
-  fi
-}
-
-euse_pkg_disable() {
-  if ! grep -q "\-$2" /etc/portage/package.use/${1#*/} 2>/dev/null ; then
-    sudo euse -p $1 -D $2
-  fi
-}
-
-euse_global() {
-  if ! grep -q $1 /etc/portage/make.conf ; then
-    sudo euse -E $1
-  fi
-}
-
-euse_global_disable() {
-  if ! grep -q "\-$1\|\-\*" /etc/portage/make.conf 2>/dev/null ; then
-    sudo euse -D $1
-  fi
-}
-
 msg() {
   echo "$cyan--------------------------------------------------$endc"
   echo "$cyan-->$white $1 $endc"
@@ -52,134 +21,59 @@ bye() {
 msg "Execute $0..."
 
 if hash emerge 2>/dev/null ; then
-  ins="emerge -av --changed-use"
 
-  # env
-  install_packages euse gentoolkit
-  euse_global_disable deprecated
-  euse_global zsh-completion
-  euse_global vim-syntax
-  euse_global jpeg
+  . {{ .chezmoi.sourceDir }}/scripts/gentoo.sh --deps
 
   {{ if eq .system.sound "alsa" }}
 
-  euse_global alsa
-  euse_global ffmpeg
-  euse_global ladspa 
-  euse_global speex
-  euse_global libsamplerate
-
-  pkgs="alsa-utils tap-plugins swh-plugins libsamplerate cmt-plugins caps-plugins ladspa-bs2b alsa-plugins brave-bin"
+  . {{ .chezmoi.sourceDir }}/scripts/gentoo.sh --sound-alsa
 
   {{ end }}
 
   {{ if eq .system.sound "pulseaudio" }}
 
-  euse_global pulseaudio
-  pkgs="pulseaudio firefox-bin"
+  . {{ .chezmoi.sourceDir }}/scripts/gentoo.sh --sound-pulse
 
   {{ end }}
-
-  # for vim
-  euse_pkg app-editors/vim X
-
-  # for pass
-  euse_pkg app-admin/pass X
-
-  # ncmpcpp
-  euse_pkg media-sound/ncmpcpp taglib
-  euse_pkg dev-libs/boost icu
-
-  # mpd
-  euse_pkg_disable media-sound/mpd network
-
-  euse_pkg media-gfx/imagemagick jpeg
-  euse_pkg media-video/mpv cli
-
-  # neomutt
-  euse_pkg mail-client/neomutt gpgme
-  euse_pkg mail-client/neomutt gdbm
-  euse_pkg mail-mta/msmtp sasl
-
-  # vifm 
-  euse_pkg dev-python/pillow jpeg
-
-  # xorg
-  euse_pkg dev-cpp/gtkmm X 
-  euse_pkg x11-libs/cairo X
-  euse_pkg x11-libs/cairo aqua
-  euse_pkg dev-cpp/cairomm X
-  euse_pkg dev-cpp/cairomm aqua
-
-  # mpv driver
-  euse_pkg media-video/ffmpeg openh264
-  euse_pkg media-video/ffmpeg vpx
-
-  # lightdm
-  euse_pkg_disable x11-misc/lightdm gnome
-  euse_pkg x11-misc/lightdm gtk
-  euse_pkg x11-misc/lightdm non_root
-
-  # add unstable
-  unstable_dir=/etc/portage/package.accept_keywords
-  [ -d "$unstable_dir" ] || sudo mkdir -p "$unstable_dir"
-  cat << EOF | sudo tee "$unstable_dir"/dots
-x11-terms/xst
-media-fonts/nerd-fonts-iosevka
-media-sound/cava
-x11-misc/i3lock-color
-dev-libs/light
-x11-wm/awesome
-EOF
-
-  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst nerd-fonts-iosevka \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt msmtp tmux cava ueberzug \
-    weechat i3lock-color rofi youtube-dl papirus-icon-theme media-sound/mpc lightdm \
-    inotify-tools light stow adapta-gtk-theme $pkgs
 
 elif hash pacman 2>/dev/null ; then
-  ins="pacman -Syy --needed"
+
+  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh --deps
 
   {{ if eq .system.sound "alsa" }}
 
-  pkgs="alsa-utils alsa-plugins ladspa swh-plugins libsamplerate"
+  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh --sound-alsa
 
   {{ end }}
 
   {{ if eq .system.sound "pulseaudio" }}
 
-  pkgs="pulseaudio firefox"
+  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh --sound-pulse
 
   {{ end }}
 
-  sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server base-devel wget \
-    feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm neomutt imagemagick msmtp msmtp-mta \
-    tmux weechat i3lock-color rofi youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter \
-    inotify-tools light stow unzip adapta-gtk-theme $pkgs
+  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh --extra-deps
 
 elif hash apt-get 2>/dev/null ; then
-  ins="apt-get install"
+
+  . {{ .chezmoi.sourceDir }}/scripts/debian.sh --deps
 
   {{ if eq .system.sound "alsa" }}
 
-  pkgs="alsa-utils"
+  . {{ .chezmoi.sourceDir }}/scripts/debian.sh --sound-alsa
 
   {{ end }}
 
   {{ if eq .system.sound "pulseaudio" }}
 
-  pkgs="pulseaudio firefox-esr"
+  . {{ .chezmoi.sourceDir }}/scripts/debian.sh --sound-pulse
 
   {{ end }}
 
-  sudo $ins gpg gpg-agent xclip pass vim zsh awesome mpd ncmpcpp xinit xserver-xorg-core \
-    xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm neomutt imagemagick msmtp \
-    msmtp-mta tmux weechat rofi youtube-dl papirus-icon-theme mpc lightdm \
-    inotify-tools stow $pkgs
+  . {{ .chezmoi.sourceDir }}/scripts/debian.sh --extra-deps
 
   # set zsh
   chsh -s /usr/bin/zsh
-
 fi
 
 trap bye EXIT
