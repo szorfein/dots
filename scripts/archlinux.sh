@@ -40,7 +40,7 @@ install_alsa() {
 }
 
 install_extra_deps() {
-  $aur xst nerd-fonts-iosevka cava python-ueberzug
+  $aur xst-git nerd-fonts-iosevka cava python-ueberzug
 }
 
 usage() {

@@ -33,7 +33,7 @@ unstable_pkgs() {
   unstable_dir=/etc/portage/package.accept_keywords
   [ -d "$unstable_dir" ] || sudo mkdir -p "$unstable_dir"
   cat << EOF | sudo tee "$unstable_dir"/dots
-x11-terms/xst
+=x11-terms/xst-9999 **
 media-fonts/nerd-fonts-iosevka
 media-sound/cava
 x11-misc/i3lock-color

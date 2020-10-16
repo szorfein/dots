@@ -49,7 +49,7 @@ install_extra_deps() {
 
   # xst
   PN="xst"
-  PV="0.8.4"
+  PV="master"
 
   ( cd ~/builds \
     && curl -L -o "$PN"-"$PV".tar.gz https://github.com/gnotclub/xst/archive/v"$PV".tar.gz \
