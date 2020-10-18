@@ -13,18 +13,18 @@ DEST={{ .chezmoi.homedir }}
 
 apply() {
   # Remove old link
-  stow -D $1 -t $DEST
+  stow -D "$1"
 
   # Install new link
-  stow $1 -t $DEST
+  stow "$1"
 }
 
 apply_theme() {
   echo ""
   echo "Applying themes/$LAST_THEME"
   (cd themes \
-    && stow -D $1 -t $DEST \
-    && stow $1 -t $DEST
+    && stow -D "$1" -t "$DEST" \
+    && stow "$1" -t "$DEST"
   )
 }
 
@@ -37,7 +37,7 @@ apply_theme() {
   && apply picom \
   && apply tmux \
   && apply awesomewm \
-  && apply_theme $LAST_THEME
+  && apply_theme "$LAST_THEME"
 )
 
 # wallpapers and vimcolor

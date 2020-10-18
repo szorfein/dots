@@ -3,15 +3,16 @@
 set -o errexit -o nounset
 
 ins="pacman -S --noconfirm --needed"
-aur="yay -a"
 
-build_yay() {
-  PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz"
-  PKG_NAME=${PKG_URL##*/} # e.g yay.tar.gz
-  PKG=${PKG_NAME%%.*} # e.g yay
-  [ -d "$HOME"/build ] || mkdir -p "$HOME"/build
-  ( cd "$HOME"/build \
-    && curl -o "$PKG_NAME" -L $PKG_URL \
+build() {
+  PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
+  PKG_NAME="${PKG_URL##*/}" # e.g yay.tar.gz
+  PKG="${PKG_NAME%%.*}" # e.g yay
+  BUILD_DIR="$HOME/build/$PKG"
+  [ -d "$BUILD_DIR" ] || mkdir -p "$BUILD_DIR"
+  [ -d "$BUILD_DIR" ] && rm -rf "$BUILD_DIR"/*
+  ( cd "$BUILD_DIR" \
+    && curl -o "$PKG_NAME" -L "$PKG_URL" \
     && tar xvf "$PKG_NAME" \
     && cd "$PKG" \
     && makepkg -si --noconfirm
@@ -24,8 +25,6 @@ install_deps() {
     neomutt imagemagick msmtp msmtp-mta tmux weechat i3lock-color rofi \
     youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools \
     light stow unzip arc-gtk-theme
-
-  if ! hash yay 2>/dev/null; then build_yay ; fi
 }
 
 install_pulse() {
@@ -36,11 +35,13 @@ install_pulse() {
 install_alsa() {
   pkgs="alsa-utils alsa-plugins ladspa swh-plugins libsamplerate"
   sudo $ins $pkgs
-  $aur brave-bin
+  build brave-bin
 }
 
 install_extra_deps() {
-  $aur xst-git nerd-fonts-iosevka cava python-ueberzug
+  for pkg in xst-git nerd-fonts-iosevka cava python-ueberzug ; do
+    build "$pkg"
+  done
 }
 
 usage() {
