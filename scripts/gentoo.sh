@@ -40,6 +40,7 @@ x11-misc/i3lock-color
 dev-libs/light
 x11-wm/awesome
 www-client/brave-bin
+net-mail/fdm
 EOF
 }
 
