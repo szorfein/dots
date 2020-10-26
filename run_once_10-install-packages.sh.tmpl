@@ -73,9 +73,6 @@ elif hash apt-get 2>/dev/null ; then
   {{ end }}
 
   . {{ .chezmoi.sourceDir }}/scripts/debian.sh --extra-deps
-
-  # set zsh
-  chsh -s /usr/bin/zsh
 fi
 
 trap bye EXIT

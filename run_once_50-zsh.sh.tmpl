@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+set -o errexit -o nounset -o pipefail
+
+destdir=~/.oh-my-zsh/custom/themes/spaceship-prompt
+
+echo "Execute $0..."
+
+ln -sf ${destdir}/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
+
+zsh=$(whereis zsh | awk '{print $2}')
+chsh -s "$zsh"

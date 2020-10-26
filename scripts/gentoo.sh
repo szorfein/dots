@@ -39,6 +39,7 @@ media-sound/cava
 x11-misc/i3lock-color
 dev-libs/light
 x11-wm/awesome
+www-client/brave-bin
 EOF
 }
 
@@ -64,6 +65,8 @@ install_deps() {
 
   # mpd
   euse_pkg_disable media-sound/mpd network
+  euse_pkg_disable media-sound/mpd ipv6
+  euse_pkg media-sound/mpd libsamplerate
 
   euse_pkg media-gfx/imagemagick jpeg
   euse_pkg media-video/mpv cli
@@ -76,11 +79,6 @@ install_deps() {
   # vifm 
   euse_pkg dev-python/pillow jpeg
 
-  # xorg
-  euse_pkg dev-cpp/gtkmm X 
-  euse_pkg x11-libs/cairo X
-  euse_pkg dev-cpp/cairomm X
-
   # mpv driver
   euse_pkg media-video/ffmpeg openh264
   euse_pkg media-video/ffmpeg vpx
@@ -90,8 +88,8 @@ install_deps() {
   euse_pkg x11-misc/lightdm gtk
   euse_pkg x11-misc/lightdm non_root
 
-  sudo $ins gnupg pass vim zsh awesome mpd ncmpcpp xinit xorg-server xst \
-    nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm \
+  sudo $ins gnupg pass vim zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst \
+    nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf \
     neomutt msmtp tmux cava ueberzug weechat i3lock-color rofi youtube-dl \
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow \
     arc-theme
