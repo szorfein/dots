@@ -22,7 +22,7 @@ build() {
 install_deps() {
   sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server \
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm \
-    neomutt imagemagick msmtp msmtp-mta tmux weechat i3lock-color rofi \
+    neomutt imagemagick msmtp msmtp-mta tmux weechat rofi \
     youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools \
     light stow unzip arc-gtk-theme
 }
@@ -39,7 +39,7 @@ install_alsa() {
 }
 
 install_extra_deps() {
-  for pkg in xst-git nerd-fonts-iosevka cava python-ueberzug ; do
+  for pkg in xst-git nerd-fonts-iosevka cava python-ueberzug i3lock-color ; do
     build "$pkg"
   done
 }

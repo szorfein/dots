@@ -22,57 +22,30 @@ bye() {
 
 msg "Execute $0..."
 
+args="--deps"
+
+{{ if eq .system.sound "alsa" }}
+args="$args --sound-alsa"
+{{ end }}
+
+{{ if eq .system.sound "pulseaudio" }}
+args="$args --sound-pulse"
+{{ end }}
+
+args="$args --extra-deps"
+
 if hash emerge 2>/dev/null ; then
 
-  . {{ .chezmoi.sourceDir }}/scripts/gentoo.sh --deps
-
-  {{ if eq .system.sound "alsa" }}
-
-  . {{ .chezmoi.sourceDir }}/scripts/gentoo.sh --sound-alsa
-
-  {{ end }}
-
-  {{ if eq .system.sound "pulseaudio" }}
-
-  . {{ .chezmoi.sourceDir }}/scripts/gentoo.sh --sound-pulse
-
-  {{ end }}
+  . {{ .chezmoi.sourceDir }}/scripts/gentoo.sh $args
 
 elif hash pacman 2>/dev/null ; then
 
-  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh --deps
-
-  {{ if eq .system.sound "alsa" }}
-
-  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh --sound-alsa
-
-  {{ end }}
-
-  {{ if eq .system.sound "pulseaudio" }}
-
-  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh --sound-pulse
-
-  {{ end }}
-
-  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh --extra-deps
+  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh $args
 
 elif hash apt-get 2>/dev/null ; then
 
-  . {{ .chezmoi.sourceDir }}/scripts/debian.sh --deps
+  . {{ .chezmoi.sourceDir }}/scripts/debian.sh $args
 
-  {{ if eq .system.sound "alsa" }}
-
-  . {{ .chezmoi.sourceDir }}/scripts/debian.sh --sound-alsa
-
-  {{ end }}
-
-  {{ if eq .system.sound "pulseaudio" }}
-
-  . {{ .chezmoi.sourceDir }}/scripts/debian.sh --sound-pulse
-
-  {{ end }}
-
-  . {{ .chezmoi.sourceDir }}/scripts/debian.sh --extra-deps
 fi
 
 trap bye EXIT
