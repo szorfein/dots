@@ -9,7 +9,14 @@ auto_update  "yes"
 #mixer_type "software"
 filesystem_charset "UTF-8"
 
-{{ if eq .system.sound "alsa" }}
+{{ if eq .chezmoi.username "daggoth" }}
+audio_output {
+  type  "alsa"
+  name  "Pro"
+  device "softvol"
+  #buffer_time "2000000"
+}
+{{ else if eq .system.sound "alsa" }}
 audio_output {
   type  "alsa"
   name  "alsa card"

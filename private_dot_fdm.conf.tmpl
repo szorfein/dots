@@ -12,6 +12,13 @@ action "junk" maildir "${path}/Junk"
 account "gmail" imaps server "imap.googlemail.com"
   port 993 user "{{ .name }}@gmail.com" pass $(pass gmail/{{ .name }})
 
+# The stdin account is disabled: it will be ignored unless explicitly requested
+# using the -a switch on the command line.
+account "stdin" disabled stdin
+
+# Catch local mail early.
+match account "stdin" action "inbox"
+
 # Junk (spam)
 match "^From:.*ezine@recruitni.com" in headers action drop
 match "^From:.*@*.chase.com" in headers action drop

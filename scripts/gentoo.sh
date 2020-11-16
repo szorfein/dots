@@ -41,6 +41,7 @@ dev-libs/light
 x11-wm/awesome
 www-client/brave-bin
 net-mail/fdm
+net-misc/youtube-dl
 EOF
 }
 
@@ -53,6 +54,7 @@ install_deps() {
   euse_global zsh-completion
   euse_global vim-syntax
   euse_global jpeg
+  euse_global flac
 
   # for vim
   euse_pkg app-editors/vim X
@@ -79,6 +81,7 @@ install_deps() {
 
   # vifm 
   euse_pkg dev-python/pillow jpeg
+  euse_pkg media-video/ffmpegthumbnailer png
 
   # mpv driver
   euse_pkg media-video/ffmpeg openh264
@@ -93,7 +96,7 @@ install_deps() {
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf \
     neomutt msmtp tmux cava ueberzug weechat i3lock-color rofi youtube-dl \
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow \
-    arc-theme
+    arc-theme ffmpegthumbnailer
 }
 
 install_pulse() {
