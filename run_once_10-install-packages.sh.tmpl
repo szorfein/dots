@@ -44,7 +44,7 @@ elif hash pacman 2>/dev/null ; then
 
 elif hash apt-get 2>/dev/null ; then
 
-  . {{ .chezmoi.sourceDir }}/scripts/debian.sh $args
+  sh {{ .chezmoi.sourceDir }}/scripts/debian.sh $args
 
 fi
 
