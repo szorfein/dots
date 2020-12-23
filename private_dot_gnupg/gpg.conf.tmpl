@@ -2,8 +2,10 @@
 # default key
 #-----------------------------
 
-{{- if (index . "gpgkey") }}
+{{- if .gpgkey.sign }}
 default-key {{ .gpgkey.sign }}
+{{- end }}
+{{- if .gpgkey.encrypt }}
 default-recipient {{ .gpgkey.encrypt }}
 {{- end }}
 

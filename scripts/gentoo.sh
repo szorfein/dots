@@ -92,6 +92,9 @@ install_deps() {
   euse_pkg x11-misc/lightdm gtk
   euse_pkg x11-misc/lightdm non_root
 
+  # extra
+  euse_pkg net-firewall/iptables conntrack
+
   sudo $ins gnupg pass vim zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst \
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf \
     neomutt msmtp tmux cava ueberzug weechat i3lock-color rofi youtube-dl \

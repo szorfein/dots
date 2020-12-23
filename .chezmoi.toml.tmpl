@@ -1,7 +1,7 @@
 {{- $email := promptString "email" -}}
 [gpg]
   # ID for your key [C]
-  recipient = ""
+  recipient = {{ false }}
 [data]
   name = "username"
   [data.github]
@@ -9,9 +9,9 @@
     name = "username"
   [data.gpgkey]
     # ID for the signing key [S]
-    sign = ""
+    sign = {{ false }}
     # ID for encrypt key [E]
-    encrypt = ""
+    encrypt = {{ false }}
   [data.system]
     sound = "alsa" # set alsa or pulseaudio here
     # Default sound card to use (pactl list sinks short)

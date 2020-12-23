@@ -1,10 +1,14 @@
 [user]
   name = {{ .github.name }}
   email = {{ .github.email }}
+  {{- if .gpgkey.sign }}
   signingkey = {{ .gpgkey.sign }}
+  {{- end }}
 
 [commit]
+  {{- if .gpgkey.sign }}
   gpgsign = true
+  {{- end }}
 
 [core]
   editor = vim
