@@ -53,16 +53,18 @@ awful.screen.connect_for_each_screen(function(s)
 
   -- Load extra layouts
   require("layouts")(s)
-  
+
   -- Create the wibox
   require("bars."..M.name)(s)
 end)
 -- }}}
 
+-- Start compositor
+require("module.autostart")
+
 require("module.rules")
 require("titlebars")
 require("module.signals")
-require("module.autostart")
 
 awful.spawn.easy_async_with_shell("sh -c 'echo "..M.name.." >/tmp/awesome-theme'", function()
   local icon = "<span foreground='" .. M.x.primary .. "'> ※ </span>"
