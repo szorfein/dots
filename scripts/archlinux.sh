@@ -53,7 +53,6 @@ usage() {
 }
 
 ## CLI options
-ARG="${1:-false}"
 DEPS=false
 PULSE=false
 ALSA=false
@@ -62,13 +61,14 @@ EXTRA=false
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
 
 while [ "$#" -gt 0 ] ; do
-  case "$ARG" in
-    --deps) DEPS=true ; shift ;;
-    --sound-pulse) PULSE=true ; shift ;;
-    --sound-alsa) ALSA=true ; shift ;;
-    --extra-deps) EXTRA=true ; shift ;;
-    *) usage; exit 1 ;
+  case "$1" in
+    --deps) DEPS=true ;;
+    --sound-pulse) PULSE=true ;;
+    --sound-alsa) ALSA=true ;;
+    --extra-deps) EXTRA=true ;;
+    *) usage; exit 1 ;;
   esac
+  shift
 done
 
 main() {
