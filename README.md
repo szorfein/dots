@@ -39,7 +39,7 @@ Why i switch on chezmoi?
 
 | name | WTF | Notes |
 |---|---|---|
-| alsa | Audio Driver | Can be remove in the config file if you prefer pulseaudio |
+| alsa | Audio Driver | Can be change in the config file if you prefer pulseaudio |
 | awesome | Window Manager | Configs recreate from scratch |
 | brave | Web Browser | brave-bin with alsa, firefox with pulseaudio |
 | feh | Image Viewer | |
@@ -52,7 +52,7 @@ Why i switch on chezmoi?
 | scrot | Screen Capture | |
 | systemd | Init System | Even on gentoo :) |
 | tmux | Terminal multiplexer | |
-| vifm | File Manager | Faster than ranger, customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
+| vifm | File Manager | With [image preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim | Editor | I use vim 8 with the native third-party package loading |
 | weechat | IRC client | |
 | xst | Terminal | |
