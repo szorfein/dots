@@ -84,7 +84,7 @@ With `apt-get` (debian,...)
 If you have create your first user recently (via: `useradd -m -G users,wheel,audio,video username`), logout and back to initialize his environment correctly.
     
 ## Install
-Only 3 little steps here
+Only 4 little steps here
 
 ### Clone this repo
 
@@ -101,6 +101,13 @@ You can change for example in `data.system`:
       sound = "pulseaudio"
 
 It will install firefox rather than brave-bin and modify a lot of things during the install.
+
+### Remove secrets
+I use GPG to encrypt some things here, you can remove them to avoid the issue [#6](https://github.com/szorfein/dots/issues/6).
+
+    $ chezmoi cd
+    $ git rm private_dot_ssh/encrypted_private_gem*.pem
+    $ git commit -m "remove secret"
 
 ### Apply
 `apply` will install all the dependencies and add files to your $HOME.

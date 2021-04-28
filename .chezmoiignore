@@ -3,7 +3,6 @@ LICENSE
 Makefile
 asound
 scripts
-.weechat/private_weechat.conf
 *.tar.gz
 {{- if ne .github.name "szorfein" }}
 .weechat/certs

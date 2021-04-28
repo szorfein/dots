@@ -34,7 +34,6 @@ unstable_pkgs() {
   [ -d "$unstable_dir" ] || sudo mkdir -p "$unstable_dir"
   cat << EOF | sudo tee "$unstable_dir"/dots
 =x11-terms/xst-9999 **
-media-fonts/nerd-fonts-iosevka
 media-sound/cava
 x11-misc/i3lock-color
 dev-libs/light
@@ -92,8 +91,11 @@ install_deps() {
   euse_pkg x11-misc/lightdm gtk
   euse_pkg x11-misc/lightdm non_root
 
-  # extra
-  euse_pkg net-firewall/iptables conntrack
+  # fonts
+  euse_pkg media-fonts/nerd-fonts-iosevka X
+
+  # rofi
+  euse_pkg x11-misc/rofi windowmode
 
   sudo $ins gnupg pass vim zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst \
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf \
