@@ -13,7 +13,11 @@ terminal_cmd = terminal .. " -e "
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 {{- if eq .system.sound "alsa" }}
+  {{- if eq .chezmoi.osRelease.id "arch" }}
+web_browser = "brave"
+  {{- else }}
 web_browser = "brave-bin"
+  {{- end }}
 {{ else }}
 web_browser = "firefox-bin"
 {{ end -}}
