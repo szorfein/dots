@@ -26,9 +26,9 @@ install_deps() {
   # Ueberzug
   pkgs="$pkgs python3-pip"
 
-  sudo $ins gpg gpg-agent xclip pass vim zsh awesome mpd ncmpcpp xinit \
+  sudo $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit \
     xserver-xorg-core xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm \
-    neomutt imagemagick msmtp msmtp-mta tmux weechat rofi youtube-dl \
+    neomutt imagemagick msmtp msmtp-mta weechat rofi youtube-dl \
     papirus-icon-theme mpc lightdm inotify-tools stow arc-theme $pkgs
 }
 
@@ -39,6 +39,16 @@ install_pulse() {
 
 install_alsa() {
   pkgs="alsa-utils"
+  sudo $ins $pkgs
+}
+
+install_emacs() {
+  pkgs="ripgrep emacs"
+  sudo $ins $pkgs
+}
+
+install_vim() {
+  pkgs="vim tmux"
   sudo $ins $pkgs
 }
 
@@ -113,6 +123,8 @@ usage() {
   echo " --sound-pulse  Install deps for PulseAudio"
   echo " --sound-alsa   Install deps for ALSA"
   echo " --extra-deps   Install other dependencies"
+  echo " --vim          Install deps for vim"
+  echo " --emacs        Install deps for emacs"
 }
 
 ## CLI options
@@ -120,6 +132,8 @@ DEPS=false
 PULSE=false
 ALSA=false
 EXTRA=false
+VIM=false
+EMACS=false
 
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
 
@@ -129,6 +143,8 @@ while [ "$#" -gt 0 ] ; do
     --sound-pulse) PULSE=true ;;
     --sound-alsa) ALSA=true ;;
     --extra-deps) EXTRA=true ;;
+    --vim) VIM=true ;;
+    --emacs) EMACS=true ;;
     *) usage ; exit 1 ;;
   esac
   shift
@@ -138,6 +154,8 @@ main() {
   "$DEPS" && install_deps
   "$PULSE" && install_pulse
   "$ALSA" && install_alsa
+  "$VIM" && install_vim
+  "$EMACS" && install_emacs
   "$EXTRA" && install_extra_deps
   exit 0
 }

@@ -10,8 +10,8 @@ DEST="$DIR/env.lua"
 cat <<EOF | tee "$DEST"
 terminal = os.getenv("TERMINAL") or "xst"
 terminal_cmd = terminal .. " -e "
-editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
+editor = "{{ .system.editor }}"
+editor_cmd = terminal_cmd .. editor
 {{- if eq .system.sound "alsa" }}
   {{- if eq .chezmoi.osRelease.id "arch" }}
 web_browser = "brave"
@@ -22,10 +22,10 @@ web_browser = "brave-bin"
 web_browser = "firefox-bin"
 {{ end -}}
 
-file_browser = "vifm"
+file_browser = terminal_cmd .. "vifm"
 terminal_args = { " -c ", " -e " }
 sound_system = "{{ .system.sound }}"
 sound_card = "{{ .system.soundcard }}"
-cpu_core = $(nproc) or 1
+cpu_core = $(nproc)
 password = "awesome"
 EOF

@@ -20,9 +20,9 @@ build() {
 }
 
 install_deps() {
-  sudo $ins gnupg pass xclip vim zsh awesome mpd ncmpcpp xorg-xinit xorg-server \
+  sudo $ins gnupg pass xclip zsh awesome mpd ncmpcpp xorg-xinit xorg-server \
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm \
-    neomutt imagemagick msmtp msmtp-mta tmux weechat rofi \
+    neomutt imagemagick msmtp msmtp-mta weechat rofi \
     youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools \
     light stow unzip arc-gtk-theme ffmpegthumbnailer
 }
@@ -38,6 +38,16 @@ install_alsa() {
   build brave-bin
 }
 
+install_emacs() {
+  pkgs="ripgrep emacs"
+  sudo $ins $pkgs
+}
+
+install_vim() {
+  pkgs="vim tmux"
+  sudo $ins $pkgs
+}
+
 install_extra_deps() {
   for pkg in xst-git nerd-fonts-iosevka cava python-ueberzug i3lock-color ; do
     build "$pkg"
@@ -50,6 +60,8 @@ usage() {
   echo " --sound-pulse  Install deps for PulseAudio"
   echo " --sound-alsa   Install deps for ALSA"
   echo " --extra-deps   Install other dependencies"
+  echo " --vim          Install deps for vim"
+  echo " --emacs        Install deps for emacs"
 }
 
 ## CLI options
@@ -57,6 +69,8 @@ DEPS=false
 PULSE=false
 ALSA=false
 EXTRA=false
+VIM=false
+EMACS=false
 
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
 
@@ -66,6 +80,8 @@ while [ "$#" -gt 0 ] ; do
     --sound-pulse) PULSE=true ;;
     --sound-alsa) ALSA=true ;;
     --extra-deps) EXTRA=true ;;
+    --vim) VIM=true ;;
+    --emacs) EMACS=true ;;
     *) usage; exit 1 ;;
   esac
   shift
@@ -75,6 +91,8 @@ main() {
   "$DEPS" && install_deps
   "$PULSE" && install_pulse
   "$ALSA" && install_alsa
+  "$VIM" && install_vim
+  "$EMACS" && install_emacs
   "$EXTRA" && install_extra_deps
   exit 0
 }

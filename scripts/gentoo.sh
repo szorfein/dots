@@ -37,6 +37,7 @@ unstable_pkgs() {
 media-sound/cava
 x11-misc/i3lock-color
 dev-libs/light
+dev-lang/lua:5.2 ~amd64
 x11-wm/awesome
 www-client/brave-bin
 net-mail/fdm
@@ -51,12 +52,8 @@ install_deps() {
   if ! hash euse 2>/dev/null; then sudo $ins gentoolkit ; fi
   euse_global_disable deprecated
   euse_global zsh-completion
-  euse_global vim-syntax
   euse_global jpeg
   euse_global flac
-
-  # for vim
-  euse_pkg app-editors/vim X
 
   # for pass
   euse_pkg app-admin/pass X
@@ -87,7 +84,7 @@ install_deps() {
   euse_pkg media-video/ffmpeg vpx
 
   # lightdm
-  euse_pkg_disable x11-misc/lightdm gnome
+  euse_pkg x11-misc/lightdm gnome
   euse_pkg x11-misc/lightdm gtk
   euse_pkg x11-misc/lightdm non_root
 
@@ -97,9 +94,9 @@ install_deps() {
   # rofi
   euse_pkg x11-misc/rofi windowmode
 
-  sudo $ins gnupg pass vim zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst \
+  sudo $ins gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst \
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf \
-    neomutt msmtp tmux cava ueberzug weechat i3lock-color rofi youtube-dl \
+    neomutt msmtp cava ueberzug weechat i3lock-color rofi youtube-dl \
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow \
     arc-theme ffmpegthumbnailer
 }
@@ -121,6 +118,24 @@ install_alsa() {
   sudo $ins $pkgs
 }
 
+install_emacs() {
+  euse_global_disable vim-syntax
+
+  pkgs="ripgrep emacs"
+  sudo $ins $pkgs
+}
+
+install_vim() {
+  euse_global_disable emacs
+
+  euse_global vim-syntax
+  euse_pkg app-editors/vim X
+  euse_pkg app-editors/vim vim-pager
+
+  pkgs="vim tmux"
+  sudo $ins $pkgs
+}
+
 install_extra_deps() {
   :
 }
@@ -131,6 +146,8 @@ usage() {
   echo " --sound-pulse  Install deps for PulseAudio"
   echo " --sound-alsa   Install deps for ALSA"
   echo " --extra-deps   Install other dependencies"
+  echo " --vim          Install deps for vim"
+  echo " --emacs        Install deps for emacs"
 }
 
 ## CLI options
@@ -138,6 +155,8 @@ DEPS=false
 PULSE=false
 ALSA=false
 EXTRA=false
+VIM=false
+EMACS=false
 
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
 
@@ -147,6 +166,8 @@ while [ "$#" -gt 0 ] ; do
     --sound-pulse) PULSE=true ;;
     --sound-alsa) ALSA=true ;;
     --extra-deps) EXTRA=true ;;
+    --vim) VIM=true ;;
+    --emacs) EMACS=true ;;
     *) usage ; exit 1 ;;
   esac
   shift
@@ -156,6 +177,8 @@ main() {
   "$DEPS" && install_deps
   "$PULSE" && install_pulse
   "$ALSA" && install_alsa
+  "$VIM" && install_vim
+  "$EMACS" && install_emacs
   "$EXTRA" && install_extra_deps
   exit 0
 }

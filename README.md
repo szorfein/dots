@@ -100,7 +100,11 @@ You can change for example in `data.system`:
     [data.system]
       sound = "pulseaudio"
 
-It will install firefox rather than brave-bin and modify a lot of things during the install.
+It will install firefox rather than brave-bin and modify a lot of things during the install.  
+For all those who use or want try emacs as main editor (via doom-emacs), change in `data.system`:
+
+    [data.system]
+      editor = "emacs"
 
 ### Remove secrets
 I use GPG to encrypt some things here, you can remove them to avoid the issue [#6](https://github.com/szorfein/dots/issues/6).

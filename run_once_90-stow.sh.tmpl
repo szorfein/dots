@@ -2,21 +2,18 @@
 
 set -o errexit
 
+DOTS={{ .chezmoi.homedir }}/.dotfiles
+DEST={{ .chezmoi.homedir }}
+
 if cat /tmp/awesome-theme 2>/dev/null ; then
   LAST_THEME="$(cat /tmp/awesome-theme)"
 else
   LAST_THEME="lines"
 fi
 
-DOTS={{ .chezmoi.homedir }}/.dotfiles
-DEST={{ .chezmoi.homedir }}
-
 apply() {
-  # Remove old link
-  stow -D "$1"
-
   # Install new link
-  stow "$1"
+  stow "$1" -t "$DEST"
 }
 
 apply_theme() {
@@ -28,11 +25,17 @@ apply_theme() {
   )
 }
 
+# Remove any previous stow links
+echo "Removing old Stow links..."
+for dir in zsh ncmpcpp vifm vim .x picom tmux awesomewm; do
+  cd "$DOTS"
+  [ -d "$dir" ] && stow -D "$dir" -t "$DEST"
+done
+
+echo "Applying Stow links..."
 (cd $DOTS \
-  && apply zsh \
   && apply ncmpcpp \
   && apply vifm \
-  && apply vim \
   && apply .x \
   && apply picom \
   && apply tmux \
@@ -40,7 +43,15 @@ apply_theme() {
   && apply_theme "$LAST_THEME"
 )
 
+{{ if eq .system.editor "vim" }}
+(cd "$DOTS" \
+  && apply vim \
+  && apply tmux \
+  && ./install --vim --vimplugins
+)
+{{ end }}
+
 # wallpapers and vimcolor
 (cd $DOTS \
-  && ./install --images --vimplugins --vim --fonts
+  && ./install --images --fonts
 )

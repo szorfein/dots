@@ -11,7 +11,7 @@
   {{- end }}
 
 [core]
-  editor = vim
+  editor = {{ .system.editor }}
   autocrlf = input
 
 {{- if eq .github.name "szorfein" }}

@@ -24,6 +24,14 @@ msg "Execute $0..."
 
 args="--deps"
 
+{{ if eq .system.editor "emacs" }}
+args="$args --emacs"
+{{ end }}
+
+{{ if eq .system.editor "vim" }}
+args="$args --vim"
+{{ end }}
+
 {{ if eq .system.sound "alsa" }}
 args="$args --sound-alsa"
 {{ end }}
