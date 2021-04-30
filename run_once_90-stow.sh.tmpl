@@ -27,7 +27,7 @@ apply_theme() {
 
 # Remove any previous stow links
 echo "Removing old Stow links..."
-for dir in zsh ncmpcpp vifm vim .x picom tmux awesomewm; do
+for dir in ncmpcpp vifm vim .x picom tmux awesomewm; do
   cd "$DOTS"
   [ -d "$dir" ] && stow -D "$dir" -t "$DEST"
 done
@@ -49,6 +49,14 @@ echo "Applying Stow links..."
   && apply tmux \
   && ./install --vim --vimplugins
 )
+{{ end }}
+
+{{ if eq .system.editor "emacs" }}
+echo "Installing Doom packages..."
+DOOM="{{ .chezmoi.homedir }}/.emacs.d/bin/doom"
+"$DOOM" env
+"$DOOM" sync
+"$DOOM" build
 {{ end }}
 
 # wallpapers and vimcolor

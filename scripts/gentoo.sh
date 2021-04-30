@@ -120,6 +120,7 @@ install_alsa() {
 
 install_emacs() {
   euse_global_disable vim-syntax
+  euse_pkg app-editors/emacs json
 
   pkgs="ripgrep emacs"
   sudo $ins $pkgs

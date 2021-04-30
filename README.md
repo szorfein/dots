@@ -106,6 +106,9 @@ For all those who use or want try emacs as main editor (via doom-emacs), change 
     [data.system]
       editor = "emacs"
 
+For emacs, you should also manually install the package `all-the-icons` like this:
+    $ emacs --batch -f all-the-icons-install-fonts
+
 ### Remove secrets
 I use GPG to encrypt some things here, you can remove them to avoid the issue [#6](https://github.com/szorfein/dots/issues/6).
 
