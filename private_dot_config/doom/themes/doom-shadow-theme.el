@@ -67,7 +67,7 @@ determine the exact padding."
   "A dark theme inspired by Atom One Dark"
 
   ;; name        default   256       16
-  ((bg         `(,xrdb nil       nil            ))
+  ((bg         `(,xrbg nil       nil            ))
    (bg-alt     `(,xr0 nil       nil            ))
    (base0      `(,xrbase0 "black"   "black"        ))
    (base1      `(,xrbase1 "brightblack"  ))

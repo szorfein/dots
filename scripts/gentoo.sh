@@ -120,8 +120,18 @@ install_alsa() {
 
 install_emacs() {
   euse_global_disable vim-syntax
+  euse_pkg_disable app-editors/emacs alsa
+
+  # Should enable the Gui
+  euse_pkg app-editors/emacs gui
+  euse_pkg app-emacs/emacs-common gui
+
+  euse_pkg app-editors/emacs gtk
+  euse_pkg app-editors/emacs wide-int
+  # Doom need Emacs compiled with json
   euse_pkg app-editors/emacs json
 
+  # discount = markdown
   pkgs="ripgrep discount emacs"
   sudo $ins $pkgs
 }
