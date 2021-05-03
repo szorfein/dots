@@ -29,7 +29,7 @@ install_deps() {
   sudo $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit \
     xserver-xorg-core xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm \
     neomutt imagemagick msmtp msmtp-mta weechat rofi youtube-dl \
-    papirus-icon-theme mpc lightdm inotify-tools stow arc-theme $pkgs
+    papirus-icon-theme mpc lightdm inotify-tools stow arc-theme tmux $pkgs
 }
 
 install_pulse() {
@@ -48,7 +48,7 @@ install_emacs() {
 }
 
 install_vim() {
-  pkgs="vim tmux"
+  pkgs="vim"
   sudo $ins $pkgs
 }
 

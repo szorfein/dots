@@ -3,7 +3,8 @@
 (setq user-full-name "{{ .github.name }}"
       user-mail-address "{{ .github.email }}")
 
-(setq doom-font (font-spec :family "Iosevka Term" :size 12))
+(setq doom-font (font-spec :family "Iosevka Term" :size 14))
+(setq display-line-numbers-type t)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -12,6 +13,11 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(after! org
+:config
+(setq org-directory "~/documents/org")
+(setq org-noter-property-note-location (concat org-directory "/notes/"))
+(setq org-noter-notes-search-path (concat org-directory "/notes/"))
+(setq org-journal-dir (concat org-directory "/journal/")))
 
-(setq display-line-numbers-type t)
+(setq projectile-project-search-path '("~/labs/"))

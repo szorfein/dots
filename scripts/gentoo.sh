@@ -37,8 +37,6 @@ unstable_pkgs() {
 media-sound/cava
 x11-misc/i3lock-color
 dev-libs/light
-dev-lang/lua:5.2 ~amd64
-x11-wm/awesome
 www-client/brave-bin
 net-mail/fdm
 net-misc/youtube-dl
@@ -94,11 +92,16 @@ install_deps() {
   # rofi
   euse_pkg x11-misc/rofi windowmode
 
+  # awesome
+  euse_pkg_disable x11-wm/awesome lua_single_target_lua5-1
+  euse_pkg x11-wm/awesome lua_single_target_lua5-2
+  euse_pkg dev-lua/lgi lua_targets_lua5-2
+
   sudo $ins gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst \
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf \
     neomutt msmtp cava ueberzug weechat i3lock-color rofi youtube-dl \
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow \
-    arc-theme ffmpegthumbnailer
+    arc-theme ffmpegthumbnailer tmux
 }
 
 install_pulse() {
@@ -126,8 +129,10 @@ install_emacs() {
   euse_pkg app-editors/emacs gui
   euse_pkg app-emacs/emacs-common gui
 
+  euse_global emacs
   euse_pkg app-editors/emacs gtk
   euse_pkg app-editors/emacs wide-int
+
   # Doom need Emacs compiled with json
   euse_pkg app-editors/emacs json
 
@@ -143,7 +148,7 @@ install_vim() {
   euse_pkg app-editors/vim X
   euse_pkg app-editors/vim vim-pager
 
-  pkgs="vim tmux"
+  pkgs="vim"
   sudo $ins $pkgs
 }
 

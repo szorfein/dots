@@ -1,6 +1,6 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
-Work only on distro linux including the installer: ( tested on a clean install of Gentoo, Archlinux and Debian )  
+Work only on distro linux including the installer: ( tested on a fresh install of Gentoo, Archlinux and Debian )  
 + `emerge`: Gentoo, Pentoo, no Funtoo because this require `systemd`.
 + `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
 + `apt-get`: Debian, Kali, etc...
@@ -106,7 +106,7 @@ For all those who use or want try emacs as main editor (via doom-emacs), change 
     [data.system]
       editor = "emacs"
 
-For emacs, you should also manually install the package `all-the-icons` like this:
+For emacs, when the installation is terminated, you have to manually install the package `all-the-icons` like this:
 
     $ emacs --batch -f all-the-icons-install-fonts
 
@@ -123,6 +123,7 @@ I use GPG to encrypt some things here, you can remove them to avoid the issue [#
     $ chezmoi apply
 
 ## Update
+From time to time, start the update simply with:
 
     $ chezmoi update
 

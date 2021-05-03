@@ -24,7 +24,7 @@ install_deps() {
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm \
     neomutt imagemagick msmtp msmtp-mta weechat rofi \
     youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools \
-    light stow unzip arc-gtk-theme ffmpegthumbnailer
+    light stow unzip arc-gtk-theme ffmpegthumbnailer tmux
 }
 
 install_pulse() {
@@ -44,7 +44,7 @@ install_emacs() {
 }
 
 install_vim() {
-  pkgs="vim tmux"
+  pkgs="vim"
   sudo $ins $pkgs
 }
 
