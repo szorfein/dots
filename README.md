@@ -53,7 +53,7 @@ Why i switch on chezmoi?
 | systemd | Init System | Even on gentoo :) |
 | tmux | Terminal multiplexer | |
 | vifm | File Manager | With [image preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
-| vim | Editor | I use vim 8 with the native third-party package loading |
+| vim, emacs | Editors | I use the both |
 | weechat | IRC client | |
 | xst | Terminal | |
 | zathura | PDF/Epub viewer | |

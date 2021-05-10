@@ -68,7 +68,7 @@ transfer() {
 # Used when my hostname change then we get the message:
 # Error: Can't open display.
 xauth-update() {
-  xauth add "$(hostname)/unix:0" MIT-MAGIC-COOKIE-1 "$(xauth list | tail -1 | awk '{print $3}')"
+  xauth add "$(hostname)/unix:0" MIT-MAGIC-COOKIE-1 "$(xauth list | tail -1 | awk '{print $3}')";
 }
 
 # GPG with SSH

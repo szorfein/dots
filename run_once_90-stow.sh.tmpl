@@ -39,25 +39,10 @@ echo "Applying Stow links..."
   && apply .x \
   && apply picom \
   && apply tmux \
+  && apply vim \
   && apply awesomewm \
   && apply_theme "$LAST_THEME"
 )
-
-{{ if eq .system.editor "vim" }}
-(cd "$DOTS" \
-  && apply vim \
-  && apply tmux \
-  && ./install --vim --vimplugins
-)
-{{ end }}
-
-{{ if eq .system.editor "emacs" }}
-echo "Installing Doom packages..."
-DOOM="{{ .chezmoi.homedir }}/.emacs.d/bin/doom"
-"$DOOM" env
-"$DOOM" sync
-"$DOOM" build
-{{ end }}
 
 # wallpapers and vimcolor
 (cd $DOTS \

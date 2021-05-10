@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+# vim
+echo "Installing Vim packages..."
+vim -c PlugUpdate -c qa
+
+# emacs
+echo "Installing Doom packages..."
+DOOM="{{ .chezmoi.homedir }}/.emacs.d/bin/doom"
+"$DOOM" env
+"$DOOM" sync
+"$DOOM" build
