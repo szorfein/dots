@@ -71,7 +71,7 @@ install_extra_deps() {
 
   # picom
   PN="picom"
-  PV="8"
+  PV="8.2"
 
   ( cd ~/builds/ \
     && curl -L -o "$PN"-"$PV".tar.gz https://github.com/yshui/picom/archive/v"$PV".tar.gz \
@@ -87,7 +87,7 @@ install_extra_deps() {
 
   # i3lock-color
   PN="i3lock-color"
-  PV="2.12.c.5"
+  PV="2.13.c.2"
 
   ( cd ~/builds \
     && curl -L -o "$PN"-"$PV".tar.gz https://github.com/Raymo111/"$PN"/archive/"$PV".tar.gz \

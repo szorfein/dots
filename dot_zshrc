@@ -14,7 +14,7 @@
 ZSH_THEME="spaceship"
 
 # Plugin list in ~/.oh-my-zsh/plugins
-plugins=(git git-prompt ruby rails)
+plugins=(git-prompt vi-mode transfer)
 
 # Disable oh-my-zsh update
 DISABLE_UPDATE_PROMPT=true
@@ -44,25 +44,6 @@ man() {
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[0;36m' \
     command man "$@"
-}
-
-# Function for upload file -> https://transfer.sh/
-# Alias of : curl --upload-file ./hello.txt https://transfer.sh/hello.txt 
-# transfer hello.txt 
-transfer() { 
-  if [ $# -eq 0 ]; then
-    echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
-    return 1;
-  fi
-  tmpfile=$( mktemp -t transferXXX );
-  if tty -s; then
-    basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
-    curl --retry 3 --connect-timeout 60 --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
-  else
-    curl --retry 3 --connect-timeout 60 --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
-  fi;
-  cat $tmpfile;
-  rm -f $tmpfile;
 }
 
 # Used when my hostname change then we get the message:

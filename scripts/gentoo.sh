@@ -82,19 +82,17 @@ install_deps() {
   euse_pkg media-video/ffmpeg vpx
 
   # lightdm
-  euse_pkg x11-misc/lightdm gnome
   euse_pkg x11-misc/lightdm gtk
   euse_pkg x11-misc/lightdm non_root
-
-  # fonts
-  euse_pkg media-fonts/nerd-fonts-iosevka X
 
   # rofi
   euse_pkg x11-misc/rofi windowmode
 
   # awesome
-  euse_pkg_disable x11-wm/awesome lua_single_target_lua5-1
-  euse_pkg x11-wm/awesome lua_single_target_lua5-2
+  cat << EOF | sudo tee /etc/portage/package.use/awesome
+x11-wm/awesome -lua_single_target_lua5-1 lua_single_target_lua5-2
+dev-lua/lgi lua_targets_lua5-2
+EOF
   euse_pkg dev-lua/lgi lua_targets_lua5-2
 
   sudo $ins gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst \
@@ -122,7 +120,7 @@ install_alsa() {
 }
 
 install_emacs() {
-  euse_global_disable vim-syntax
+  euse_global emacs
   euse_pkg_disable app-editors/emacs alsa
 
   # Should enable the Gui
@@ -142,8 +140,6 @@ install_emacs() {
 }
 
 install_vim() {
-  euse_global_disable emacs
-
   euse_global vim-syntax
   euse_pkg app-editors/vim X
   euse_pkg app-editors/vim vim-pager
