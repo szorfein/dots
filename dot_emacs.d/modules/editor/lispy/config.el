@@ -9,7 +9,8 @@
          (hy-mode . lispy-mode)
          (lfe-mode . lispy-mode)
          (dune-mode . lispy-mode)
-         (clojure-mode . lispy-mode))
+         (clojure-mode . lispy-mode)
+         (fennel-mode . lispy-mode))
   :init
   (add-hook! 'eval-expression-minibuffer-setup-hook
     (defun doom-init-lispy-in-eval-expression-h ()
@@ -37,4 +38,14 @@
           additional
           additional-insert))
   :config
-  (lispyville-set-key-theme))
+  (lispyville-set-key-theme)
+;; REVIEW Delete this once https://github.com/noctuid/lispyville/pull/297 is merged
+  (defadvice! +lispy--fix-lispyville-end-of-defun-a (_)
+    "lispyville-end-of-defun doesn't go to the next defun when
+point is already at the end of a defun, whereas
+lispyville-beginning-of-defun does."
+    :before #'lispyville-end-of-defun
+    (when (<= (- (line-end-position)
+                 (point))
+              1)
+      (forward-line))))

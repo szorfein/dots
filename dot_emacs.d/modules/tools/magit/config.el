@@ -4,6 +4,14 @@
   "What direction to open new windows from the status buffer.
 For example, diffs and log buffers. Accepts `left', `right', `up', and `down'.")
 
+(defvar +magit-fringe-size 14
+  "Size of the fringe in magit-mode buffers.
+
+Can be an integer or a cons cell whose CAR and CDR are integer widths for the
+left and right fringe.
+
+Only has an effect in GUI Emacs.")
+
 
 ;;
 ;;; Packages
@@ -56,9 +64,9 @@ For example, diffs and log buffers. Accepts `left', `right', `up', and `down'.")
                          "~/.cache/")
                      "git/credential/socket")))
 
-  ;; Prevent scrolling when manipulating magit-status hunks. Otherwise you must
-  ;; reorient yourself every time you stage/unstage/discard/etc a hunk.
-  ;; Especially so on larger projects."
+  ;; Prevent sudden window position resets when staging/unstaging/discarding/etc
+  ;; hunks in `magit-status-mode' buffers. It's disorienting, especially on
+  ;; larger projects.
   (defvar +magit--pos nil)
   (add-hook! 'magit-pre-refresh-hook
     (defun +magit--set-window-state-h ()
@@ -100,10 +108,22 @@ For example, diffs and log buffers. Accepts `left', `right', `up', and `down'.")
 
   ;; Clean up after magit by killing leftover magit buffers and reverting
   ;; affected buffers (or at least marking them as need-to-be-reverted).
-  (define-key magit-status-mode-map [remap magit-mode-bury-buffer] #'+magit/quit)
+  (define-key magit-mode-map "q" #'+magit/quit)
+  (define-key magit-mode-map "Q" #'+magit/quit-all)
 
   ;; Close transient with ESC
   (define-key transient-map [escape] #'transient-quit-one)
+
+  (add-hook! 'magit-mode-hook
+    (add-hook! 'window-configuration-change-hook :local
+      (defun +magit-enlargen-fringe-h ()
+        "Make fringe larger in magit."
+        (and (display-graphic-p)
+             (derived-mode-p 'magit-mode)
+             +magit-fringe-size
+             (let ((left  (or (car-safe +magit-fringe-size) +magit-fringe-size))
+                   (right (or (cdr-safe +magit-fringe-size) +magit-fringe-size)))
+               (set-window-fringes nil left right))))))
 
   ;; An optimization that particularly affects macOS and Windows users: by
   ;; resolving `magit-git-executable' Emacs does less work to find the
@@ -216,6 +236,8 @@ ensure it is built when we actually use Forge."
   ;; REVIEW There must be a better way to exclude particular evil-collection
   ;;        modules from the blacklist.
   (map! (:map magit-mode-map
+         :nv "q" #'+magit/quit
+         :nv "Q" #'+magit/quit-all
          :nv "]" #'magit-section-forward-sibling
          :nv "[" #'magit-section-backward-sibling
          :nv "gr" #'magit-refresh

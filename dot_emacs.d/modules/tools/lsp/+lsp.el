@@ -1,8 +1,9 @@
 ;;; tools/lsp/+lsp.el -*- lexical-binding: t; -*-
 
-(defvar +lsp-company-backends (if (featurep! :editor snippets)
-                                  '(:separate company-capf company-yasnippet)
-                                'company-capf)
+(defvar +lsp-company-backends
+  (if (featurep! :editor snippets)
+      '(:separate company-capf company-yasnippet)
+    'company-capf)
   "The backends to prepend to `company-backends' in `lsp-mode' buffers.
 Can be a list of backends; accepts any value `company-backends' accepts.")
 
@@ -44,7 +45,7 @@ about it (it will be logged to *Messages* however).")
     (setq lsp-keymap-prefix nil))
 
   :config
-  (pushnew! doom-debug-variables 'lsp-log-io 'lsp-print-performance)
+  (add-to-list 'doom-debug-variables 'lsp-log-io)
 
   (setq lsp-intelephense-storage-path (concat doom-etc-dir "lsp-intelephense/")
         lsp-vetur-global-snippets-dir
@@ -130,39 +131,70 @@ server getting expensively restarted when reverting buffers."
                (or doom-debug-p
                    (not (eq +lsp-prompt-to-install-server 'quiet)))))
           (doom-shut-up-a #'lsp--info "No language server available for %S"
-                          major-mode))))))
+                          major-mode)))))
+
+  (when (featurep! :ui modeline +light)
+    (defvar-local lsp-modeline-icon nil)
+
+    (add-hook! '(lsp-before-initialize-hook
+                 lsp-after-initialize-hook
+                 lsp-after-uninitialized-functions
+                 lsp-before-open-hook
+                 lsp-after-open-hook)
+      (defun +lsp-update-modeline (&rest _)
+        "Update modeline with lsp state."
+        (let* ((workspaces (lsp-workspaces))
+               (face (if workspaces 'success 'warning))
+               (label (if workspaces "LSP Connected" "LSP Disconnected")))
+          (setq lsp-modeline-icon (concat
+                                   " "
+                                   (+modeline-format-icon 'faicon "rocket" "" face label -0.0575)
+                                   " "))
+          (add-to-list 'global-mode-string
+                       '(t (:eval lsp-modeline-icon))
+                       'append))))))
 
 
 (use-package! lsp-ui
-  :defer t
+  :hook (lsp-mode . lsp-ui-mode)
+  :init
+  (defadvice! +lsp--use-hook-instead-a (orig-fn &rest args)
+    "Change `lsp--auto-configure' to not force `lsp-ui-mode' on us. Using a hook
+instead is more sensible."
+    :around #'lsp--auto-configure
+    (letf! ((#'lsp-ui-mode #'ignore))
+      (apply orig-fn args)))
+
   :config
-  (setq lsp-ui-doc-max-height 8
+  (when (featurep! +peek)
+    (set-lookup-handlers! 'lsp-ui-mode
+      :definition 'lsp-ui-peek-find-definitions
+      :implementations 'lsp-ui-peek-find-implementation
+      :references 'lsp-ui-peek-find-references
+      :async t))
+
+  (setq lsp-ui-peek-enable (featurep! +peek)
+        lsp-ui-doc-max-height 8
         lsp-ui-doc-max-width 35
-        lsp-ui-sideline-ignore-duplicate t
-        ;; lsp-ui-doc is redundant with and more invasive than
-        ;; `+lookup/documentation'
-        lsp-ui-doc-enable nil
         lsp-ui-doc-show-with-mouse nil  ; don't disappear on mouseover
         lsp-ui-doc-position 'at-point
+        lsp-ui-sideline-ignore-duplicate t
         ;; Don't show symbol definitions in the sideline. They are pretty noisy,
         ;; and there is a bug preventing Flycheck errors from being shown (the
         ;; errors flash briefly and then disappear).
         lsp-ui-sideline-show-hover nil
         ;; Some icons don't scale correctly on Emacs 26, so disable them there.
         lsp-ui-sideline-actions-icon  ; DEPRECATED Remove later
-        (if EMACS27+ lsp-ui-sideline-actions-icon-default))
+        (if EMACS27+ lsp-ui-sideline-actions-icon-default)
+        ;; REVIEW Temporarily disabled, due to immense slowness on every
+        ;;        keypress. See emacs-lsp/lsp-ui#613
+        lsp-ui-doc-enable nil)
 
   (map! :map lsp-ui-peek-mode-map
         "j"   #'lsp-ui-peek--select-next
         "k"   #'lsp-ui-peek--select-prev
         "C-k" #'lsp-ui-peek--select-prev-file
-        "C-j" #'lsp-ui-peek--select-next-file)
-
-  (when (featurep! +peek)
-    (set-lookup-handlers! 'lsp-ui-mode :async t
-      :definition 'lsp-ui-peek-find-definitions
-      :implementations 'lsp-ui-peek-find-implementation
-      :references 'lsp-ui-peek-find-references)))
+        "C-j" #'lsp-ui-peek--select-next-file))
 
 
 (use-package! helm-lsp

@@ -16,19 +16,22 @@
 - [[#features][Features]]
 - [[#configuration][Configuration]]
   - [[#downloading-your-email][Downloading your email]]
+  - [[#sending-mail][Sending mail]]
   - [[#customize-notmuch-hello-buffer][Customize =*notmuch-hello*= buffer]]
   - [[#changing-the-notmuch-landing-page][Changing the =notmuch= landing page]]
+  - [[#writing-html-emails][Writing HTML Emails]]
 - [[#troubleshooting][Troubleshooting]]
 
 * Description
-This module turns Emacs into email client using ~notmuch~.
+This module turns Emacs into an email client using ~notmuch~.
 
 ** Module Flags
++ =+org= Enables org-mime for writing HTML emails using org-mode.
 + =+afew= Enables integration with =afew=.
 
 ** Plugins
 + [[https://notmuchmail.org/][notmuch]]
-+ [[https://github.com/org-mime/org-mime][org-mime]]
++ [[https://github.com/org-mime/org-mime][org-mime]]* (with =+org= flag)
 + [[https://github.com/fuxialexander/counsel-notmuch][counsel-notmuch]]*
 + [[https://github.com/emacs-helm/helm-notmuch][helm-notmuch]]*
 
@@ -68,7 +71,11 @@ environment.systemPackages = with pkgs; [
 ** TODO openSUSE
 ** TODO Debian/Ubuntu
 
-* TODO Features
+* Features
+
+| Keymap    | Command            | Description                                   |
+| ~SPC m u~ | =+notmuch/update=  | Download, sync, and index emails with notmuch |
+| ~SPC m c~ | =+notmuch/compose= | Compose new email                             |
 
 * Configuration
 ** Downloading your email
@@ -84,7 +91,9 @@ index your email for the first time:
 notmuch new
 #+END_SRC
 
-*** TODO Gmailier
+*** lieer
+
+[[https://github.com/gauteh/lieer][Lieer]], formerly called Gmailieer, is the indexing tool used by default. To install lieer, see the [[https://github.com/gauteh/lieer#installation][installation docs]].
 
 *** offlineimap
 To use [[https://www.offlineimap.org/][offlineimap]], change ~+notmuch-sync-backend~:
@@ -134,7 +143,10 @@ own backend:
       ;; Set this to an arbitrary shell command
       +notmuch-sync-command "my-notmuch-sync-cmd")
 #+END_SRC
-
+** Sending mail
+- [[https://notmuchmail.org/notmuch-emacs/#index6h2][notmuch docs: Sending mail]]
+- [[https://notmuchmail.org/emacstips/#index11h2][notmuch docs: msmtp, message mode and multiple accounts]]
+- [[https://notmuchmail.org/emacstips/#index12h2][notmuch docs: sending mail using smtpmail]]
 ** Customize =*notmuch-hello*= buffer
 It is possible to change the =*notmuch-hello*= buffer if you want to.
 
@@ -159,5 +171,24 @@ a custom search as your landing page.
 #+BEGIN_SRC emacs-lisp
 (setq +notmuch-home-function (lambda () (notmuch-search "tag:inbox")))
 #+END_SRC
+** Writing HTML Emails
+The [[https://github.com/org-mime/org-mime][org-mime]] package provides functionality for composing emails in org-mode and transforming them to HTML. This feature is enabled using the =+org= flag.
+
+Example use cases:
+
+- To convert an email to an HTML email use ~M-x org-mime-htmlize~
+- To compose email using an org-mode editor buffer, use ~M-x org-mime-edit-mail-in-org-mode~
+
+If you'd like to make configuration changes to =org-mime=, you may do so normally. By default the output of =org-mime-htmlize= includes section numbers, a byline, and a table of contents. That's probably more formal than the emails you're used to sending, so here's some example configuration that turns those features off.
+
+/config.el/
+
+#+begin_src emacs-lisp
+(after! org-mime
+  (setq org-mime-export-options '(:section-numbers nil
+                                  :with-author nil
+                                  :with-toc nil)))
+#+end_src
+
 
 * TODO Troubleshooting

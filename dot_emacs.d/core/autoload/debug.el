@@ -20,7 +20,6 @@
 Each entry can be a variable symbol or a cons cell whose CAR is the variable
 symbol and CDR is the value to set it to when `doom-debug-mode' is activated.")
 
-(defvar doom--debug-vars-old-values nil)
 (defvar doom--debug-vars-undefined nil)
 
 (defun doom--watch-debug-vars-h (&rest _)
@@ -40,14 +39,14 @@ symbol and CDR is the value to set it to when `doom-debug-mode' is activated.")
     (dolist (var doom-debug-variables)
       (cond ((listp var)
              (cl-destructuring-bind (var . val) var
-               (if (not (boundp var))
-                   (add-to-list 'doom--debug-vars-undefined var)
-                 (set-default
-                  var (if (not enabled)
-                          (alist-get var doom--debug-vars-old-values)
-                        (setf (alist-get var doom--debug-vars-old-values)
-                              (symbol-value var))
-                        val)))))
+               (if (boundp var)
+                   (set-default
+                    var (if (not enabled)
+                            (prog1 (get var 'initial-value)
+                              (put 'x 'initial-value nil))
+                          (put var 'initial-value (symbol-value var))
+                          val))
+                 (add-to-list 'doom--debug-vars-undefined var))))
             ((if (boundp var)
                  (set-default var enabled)
                (add-to-list 'doom--debug-vars-undefined var)))))
@@ -77,13 +76,11 @@ symbol and CDR is the value to set it to when `doom-debug-mode' is activated.")
   emacs -Q -l init.el -f doom-run-all-startup-hooks-h"
   (setq after-init-time (current-time))
   (let ((inhibit-startup-hooks nil))
-    (mapc (lambda (hook)
-            (run-hook-wrapped hook #'doom-try-run-hook))
-          '(after-init-hook
-            delayed-warnings-hook
-            emacs-startup-hook
-            tty-setup-hook
-            window-setup-hook))))
+    (doom-run-hooks 'after-init-hook
+                    'delayed-warnings-hook
+                    'emacs-startup-hook
+                    'tty-setup-hook
+                    'window-setup-hook)))
 
 
 ;;
@@ -94,7 +91,7 @@ symbol and CDR is the value to set it to when `doom-debug-mode' is activated.")
     (let (forms)
       (with-temp-buffer
         (insert-file-contents file)
-        (let (emacs-lisp-mode) (emacs-lisp-mode))
+        (let (emacs-lisp-mode-hook) (emacs-lisp-mode))
         (while (re-search-forward (format "(%s " (regexp-quote form)) nil t)
           (let ((ppss (syntax-ppss)))
             (unless (or (nth 4 ppss)
@@ -125,10 +122,14 @@ ready to be pasted in a bug report on github."
                       (if (file-symlink-p file) ""
                         (concat " -> " (abbrev-path (file-truename file)))))))
       `((generated . ,(format-time-string "%b %d, %Y %H:%M:%S"))
-        (distro . ,(list (doom-system-distro-version) (sh "uname" "-msr")))
+        (system . ,(delq
+                    nil (list (doom-system-distro-version)
+                              (when (executable-find "uname")
+                                (sh "uname" "-msr"))
+                              (window-system))))
         (emacs . ,(delq
                    nil (list emacs-version
-                             emacs-repository-branch
+                             (bound-and-true-p emacs-repository-branch)
                              (and (stringp emacs-repository-version)
                                   (substring emacs-repository-version 0 9))
                              (symlink-path doom-emacs-dir))))
@@ -326,21 +327,6 @@ Some items are not supported by the `nsm.el' module."
 
 ;;
 ;;; Reporting bugs
-
-;;;###autoload
-(defun doom/issue-tracker ()
-  "Open Doom Emacs' issue tracker on Discourse."
-  (interactive)
-  (browse-url "https://discourse.doomemacs.org/c/support"))
-
-;;;###autoload
-(defun doom/report-bug ()
-  "Open the browser on our Discourse.
-
-If called when a backtrace buffer is present, it and the output of `doom-info'
-will be automatically appended to the result."
-  (interactive)
-  (browse-url "https://discourse.doomemacs.org/how2report"))
 
 ;;;###autoload
 (defun doom/copy-buffer-contents (buffer-name)

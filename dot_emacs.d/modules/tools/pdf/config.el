@@ -18,47 +18,15 @@
       (add-hook 'kill-buffer-hook #'+pdf-cleanup-windows-h nil t)))
 
   :config
-  ;; HACK `pdf-tools-install-noverify' tries to "reset" open pdf-view-mode
-  ;;      buffers, but does so incorrectly, causing errors when pdf-tools is
-  ;;      loaded after opening a pdf file. We've done its job ourselves in
-  ;;      `+pdf--install-epdfinfo-a' instead.
-  (defadvice! +pdf--inhibit-pdf-view-mode-resets-a (orig-fn &rest args)
-    :around #'pdf-tools-install-noverify
-    (letf! ((#'pdf-tools-pdf-buffer-p #'ignore))
-      (apply orig-fn args)))
-
   (defadvice! +pdf--install-epdfinfo-a (orig-fn &rest args)
     "Install epdfinfo after the first PDF file, if needed."
     :around #'pdf-view-mode
-    ;; Prevent "epdfinfo not an executable" error short-circuiting this advice
-    (prog1 (with-demoted-errors "%s" (apply orig-fn args))
-      ;; ...so we can go ahead and install it afterwards.
-      (cond ((file-executable-p pdf-info-epdfinfo-program))
-            ((y-or-n-p "To read PDFs in Emacs the epdfinfo program must be built. Build it now?")
-             (message nil) ; flush lingering prompt in echo-area
-             ;; Make sure this doesn't run more than once
-             (advice-remove #'pdf-view-mode #'+pdf--install-epdfinfo-a)
-             (unless (or (pdf-info-running-p)
-                         (ignore-errors (pdf-info-check-epdfinfo) t))
-               ;; HACK On the first pdf you open (before pdf-tools loaded)
-               ;;      `pdf-tools-install' throws errors because it has hardcoded
-               ;;      opinions about what buffer should be focused when it is run.
-               ;;      These errors cause `compile' to position the compilation
-               ;;      window incorrectly or can interfere with the opening of the
-               ;;      original pdf--sometimes aborting/burying it altogether. A
-               ;;      timer works around this.
-               (run-at-time
-                0.1 nil
-                (lambda ()
-                  (with-current-buffer (pdf-tools-install t)
-                    (add-hook! 'compilation-finish-functions :local
-                      (dolist (buf (buffer-list))
-                        (with-current-buffer buf
-                          (and (buffer-file-name)
-                               (or (pdf-tools-pdf-buffer-p)
-                                   (derived-mode-p 'pdf-view-mode))
-                               (revert-buffer t t))))))))))
-            ((message "Aborted")))))
+    (if (file-executable-p pdf-info-epdfinfo-program)
+        (apply orig-fn args)
+      ;; If we remain in pdf-view-mode, it'll spit out cryptic errors. This
+      ;; graceful failure is better UX.
+      (fundamental-mode)
+      (message "Viewing PDFs in Emacs requires epdfinfo. Use `M-x pdf-tools-install' to build it")))
 
   (pdf-tools-install-noverify)
 
@@ -106,8 +74,24 @@
 
   ;; Add retina support for MacOS users
   (eval-when! IS-MAC
-    (defvar +pdf--scaled-p nil)
+    (defun +pdf-view-create-page-a (page &optional window)
+      "Create an image of PAGE for display on WINDOW."
+      :override #'pdf-view-create-page
+      (let* ((size (pdf-view-desired-image-size page window))
+             (width (if (not (pdf-view-use-scaling-p))
+                        (car size)
+                      (* 2 (car size))))
+             (data (pdf-cache-renderpage
+                    page width width))
+             (hotspots (pdf-view-apply-hotspot-functions
+                        window page size)))
+        (pdf-view-create-image data
+                               :width width
+                               :scale (if (pdf-view-use-scaling-p) 0.5 1)
+                               :map hotspots
+                               :pointer 'arrow)))
 
+    (defvar +pdf--scaled-p nil)
     (defadvice! +pdf--scale-up-on-retina-display-a (orig-fn &rest args)
       "Scale up the PDF on retina displays."
       :around #'pdf-util-frame-scale-factor
@@ -126,8 +110,7 @@
     (defadvice! +pdf--use-scaling-on-ns-a ()
       :before-until #'pdf-view-use-scaling-p
       (and (eq (framep-on-display) 'ns)
-           EMACS27+
-           pdf-view-use-scaling))
+           EMACS27+))
 
     (defadvice! +pdf--supply-width-to-create-image-calls-a (orig-fn &rest args)
       :around '(pdf-annot-show-annotation

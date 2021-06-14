@@ -93,7 +93,6 @@ install_deps() {
 x11-wm/awesome -lua_single_target_lua5-1 lua_single_target_lua5-2
 dev-lua/lgi lua_targets_lua5-2
 EOF
-  euse_pkg dev-lua/lgi lua_targets_lua5-2
 
   sudo $ins gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst \
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf \

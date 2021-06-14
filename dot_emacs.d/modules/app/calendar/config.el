@@ -76,8 +76,7 @@
   :commands (cfw:open-org-calendar
              cfw:org-create-source
              cfw:org-create-file-source
-             cfw:open-org-calendar-withkevin
-             my-open-calendar))
+             cfw:open-org-calendar-withkevin))
 
 
 (use-package! calfw-cal
@@ -92,8 +91,4 @@
   :defer t
   :init
   (defvar org-gcal-dir (concat doom-cache-dir "org-gcal/"))
-  (defvar org-gcal-token-file (concat org-gcal-dir "token.gpg"))
-  :config
-  ;; hack to avoid the deferred.el error
-  (defun org-gcal--notify (title mes)
-    (message "org-gcal::%s - %s" title mes)))
+  (defvar org-gcal-token-file (concat org-gcal-dir "token.gpg")))

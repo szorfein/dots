@@ -389,8 +389,7 @@ another level of headings on each invocation."
 Made for `org-tab-first-hook' in evil-mode."
   (interactive)
   (cond ((not (and (bound-and-true-p evil-local-mode)
-                   (or (evil-insert-state-p)
-                       (evil-emacs-state-p))))
+                   (evil-insert-state-p)))
          nil)
         ((org-at-item-p)
          (if (eq this-command 'org-shifttab)
@@ -418,7 +417,8 @@ Made for `org-tab-first-hook' in evil-mode."
 (defun +org-yas-expand-maybe-h ()
   "Expand a yasnippet snippet, if trigger exists at point or region is active.
 Made for `org-tab-first-hook'."
-  (when (bound-and-true-p yas-minor-mode)
+  (when (featurep! :editor snippets)
+    (require 'yasnippet)
     (and (let ((major-mode (if (org-in-src-block-p t)
                                (org-src-get-lang-mode (org-eldoc-get-src-lang))
                              major-mode))

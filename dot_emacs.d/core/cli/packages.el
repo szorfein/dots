@@ -63,15 +63,30 @@ list remains lean."
   (if full commit (substring commit 0 7)))
 
 (defun doom--commit-log-between (start-ref end-ref)
-  (when-let*
-      ((status (straight--call
-                "git" "log" "--oneline" "--no-merges"
-                "-n" "26" end-ref (concat "^" (regexp-quote start-ref))))
-       (output (string-trim-right (straight--process-get-output)))
-       (lines (split-string output "\n")))
-    (if (> (length lines) 25)
-        (concat (string-join (butlast lines 1) "\n") "\n[...]")
-      output)))
+  (straight--process-with-result
+   (straight--process-run
+    "git" "log" "--oneline" "--no-merges"
+    end-ref (concat "^" (regexp-quote start-ref)))
+   (if success
+       (string-trim-right (or stdout ""))
+     (format "ERROR: Couldn't collect commit list because: %s" stderr))))
+
+(defmacro doom--straight-with (form &rest body)
+  (declare (indent 1))
+  `(let-alist
+       (let* ((buffer (straight--process-buffer))
+              (start  (with-current-buffer buffer (point-max)))
+              (retval ,form)
+              (output (with-current-buffer buffer (buffer-substring start (point-max)))))
+         (save-match-data
+           (list (cons 'it      retval)
+                 (cons 'stdout  (substring-no-properties output))
+                 (cons 'success (if (string-match "\n+\\[Return code: \\([0-9-]+\\)\\]\n+" output)
+                                    (string-to-number (match-string 1 output))))
+                 (cons 'output  (string-trim output
+                                             "^\\(\\$ [^\n]+\n\\)*\n+"
+                                             "\n+\\[Return code: [0-9-]+\\]\n+")))))
+     ,@body))
 
 (defun doom--barf-if-incomplete-packages ()
   (let ((straight-safe-mode t))
@@ -101,30 +116,31 @@ list remains lean."
     (print! (start "Updating recipe repos..."))
     (print-group!
      (doom--with-package-recipes
-         (delq
-          nil (mapcar (doom-rpartial #'gethash straight--repo-cache)
-                      (mapcar #'symbol-name straight-recipe-repositories)))
-         (recipe package type local-repo)
-       (let ((esc (unless doom-debug-p "\033[1A"))
-             (ref (straight-vc-get-commit type local-repo))
-             newref output)
-         (print! (start "\033[KUpdating recipes for %s...%s") package esc)
-         (when (straight-vc-fetch-from-remote recipe)
-           (setq output (straight--process-get-output))
-           (straight-merge-package package)
-           (unless (equal ref (setq newref (straight-vc-get-commit type local-repo)))
-             (print! (success "\033[K%s updated (%s -> %s)")
-                     package
-                     (doom--abbrev-commit ref)
-                     (doom--abbrev-commit newref))
-             (unless (string-empty-p output)
-               (print-group! (print! (info "%s" output)))))))))
+      (delq
+       nil (mapcar (doom-rpartial #'gethash straight--repo-cache)
+                   (mapcar #'symbol-name straight-recipe-repositories)))
+      (recipe package type local-repo)
+      (let ((esc (unless doom-debug-p "\033[1A"))
+            (ref (straight-vc-get-commit type local-repo))
+            newref output)
+        (print! (start "\033[KUpdating recipes for %s...%s") package esc)
+        (doom--straight-with (straight-vc-fetch-from-remote recipe)
+          (when .it
+            (setq output .output)
+            (straight-merge-package package)
+            (unless (equal ref (setq newref (straight-vc-get-commit type local-repo)))
+              (print! (success "\033[K%s updated (%s -> %s)")
+                      package
+                      (doom--abbrev-commit ref)
+                      (doom--abbrev-commit newref))
+              (unless (string-empty-p output)
+                (print-group! (print! (info "%s" output))))))))))
     (setq straight--recipe-lookup-cache (make-hash-table :test #'eq)
           doom--cli-updated-recipes t)))
 
 (defvar doom--eln-output-expected nil)
 
-(defvar doom--eln-output-path (car (bound-and-true-p comp-eln-load-path)))
+(defvar doom--eln-output-path (car (bound-and-true-p native-comp-eln-load-path)))
 
 (defun doom--eln-file-name (file)
   "Return the short .eln file name corresponding to `file'."
@@ -141,12 +157,12 @@ list remains lean."
   (concat doom--eln-output-path eln-name ".error"))
 
 (defun doom--find-eln-file (eln-name)
-  "Find `eln-name' on the `comp-eln-load-path'."
+  "Find `eln-name' on the `native-comp-eln-load-path'."
   (cl-some (lambda (eln-path)
              (let ((file (concat eln-path eln-name)))
                (when (file-exists-p file)
                  file)))
-           comp-eln-load-path))
+           native-comp-eln-load-path))
 
 (defun doom--elc-file-outdated-p (file)
   "Check whether the corresponding .elc for `file' is outdated."
@@ -200,7 +216,7 @@ list remains lean."
            with previous = 0
            while (not (zerop pending))
            if (/= previous pending) do
-           (print! (info "\033[KWaiting for %d async jobs...\033[1A" pending))
+           (print! (start "\033[KNatively compiling %d files...\033[1A" pending))
            (setq previous pending)
            else do
            (let ((inhibit-message t))
@@ -230,7 +246,7 @@ list remains lean."
                      (not (doom--find-eln-file (doom--eln-file-name file)))
                      (not (cl-some (lambda (re)
                                      (string-match-p re file))
-                                   comp-deferred-compilation-deny-list))) do
+                                   native-comp-deferred-compilation-deny-list))) do
              (doom-log "Compiling %s" file)
              (native-compile-async file))))
 
@@ -243,7 +259,7 @@ declaration) or dependency thereof that hasn't already been."
   (print! (start "Installing packages..."))
   (let ((pinned (doom-package-pinned-list)))
     (print-group!
-     (add-hook 'comp-async-cu-done-hook #'doom--native-compile-done-h)
+     (add-hook 'native-comp-async-cu-done-functions #'doom--native-compile-done-h)
      (if-let (built
               (doom--with-package-recipes (doom-package-recipe-list)
                   (recipe package type local-repo)
@@ -264,7 +280,7 @@ declaration) or dependency thereof that hasn't already been."
                       (when (and IS-WINDOWS (stringp local-repo))
                         (let ((default-directory (straight--repos-dir local-repo)))
                           (when (file-in-directory-p default-directory straight-base-dir)
-                            (straight--call "git" "config" "core.autocrlf" "true")))))
+                            (straight--process-run "git" "config" "core.autocrlf" "true")))))
                   (error
                    (signal 'doom-package-error (list package e))))))
          (progn
@@ -294,7 +310,7 @@ declaration) or dependency thereof that hasn't already been."
           (or (if force-p :all straight--packages-to-rebuild)
               (make-hash-table :test #'equal)))
          (recipes (doom-package-recipe-list)))
-     (add-hook 'comp-async-cu-done-hook #'doom--native-compile-done-h)
+     (add-hook 'native-comp-async-cu-done-functions #'doom--native-compile-done-h)
      (unless force-p
        (straight--make-build-cache-available))
      (if-let (built
@@ -312,11 +328,12 @@ declaration) or dependency thereof that hasn't already been."
                          (want-native-compile
                           (or (eq build t)
                               (memq 'native-compile build))))
-                    (when (eq (car-safe build) :not)
-                      (setq want-byte-compile (not want-byte-compile)
-                            want-native-compile (not want-native-compile)))
-                    (unless (require 'comp nil t)
-                      (setq want-native-compile nil))
+                    (and (eq (car-safe build) :not)
+                         (setq want-byte-compile (not want-byte-compile)
+                               want-native-compile (not want-native-compile)))
+                    (or (and (require 'comp nil t)
+                             (ignore-errors (native-comp-available-p)))
+                        (setq want-native-compile nil))
                     (and (or want-byte-compile want-native-compile)
                          (or (file-newer-than-file-p repo-dir build-dir)
                              (file-exists-p (straight--modified-dir (or local-repo package)))
@@ -378,16 +395,19 @@ declaration) or dependency thereof that hasn't already been."
                    (target-ref
                     (cdr (or (assoc local-repo pinned)
                              (assoc package pinned))))
+                   commits
                    output)
                (or (cond
                     ((not (stringp target-ref))
                      (print! (start "\033[K(%d/%d) Fetching %s...%s") i total package esc)
-                     (when (straight-vc-fetch-from-remote recipe)
-                       (setq output (straight--process-get-output))
-                       (straight-merge-package package)
-                       (setq target-ref (straight-vc-get-commit type local-repo))
-                       (or (not (doom--same-commit-p target-ref ref))
-                           (cl-return))))
+                     (doom--straight-with (straight-vc-fetch-from-remote recipe)
+                       (when .it
+                         (straight-merge-package package)
+                         (setq target-ref (straight-vc-get-commit type local-repo))
+                         (setq output (doom--commit-log-between ref target-ref)
+                               commits (length (split-string output "\n" t)))
+                         (or (not (doom--same-commit-p target-ref ref))
+                             (cl-return)))))
 
                     ((doom--same-commit-p target-ref ref)
                      (print! (info "\033[K(%d/%d) %s is up-to-date...%s") i total package esc)
@@ -401,7 +421,8 @@ declaration) or dependency thereof that hasn't already been."
                             (straight-vc-commit-present-p recipe target-ref)))
                      (straight-vc-check-out-commit recipe target-ref)
                      (or (not (eq type 'git))
-                         (setq output (doom--commit-log-between ref target-ref)))
+                         (setq output (doom--commit-log-between ref target-ref)
+                               commits (length (split-string output "\n" t))))
                      (doom--same-commit-p target-ref (straight-vc-get-commit type local-repo)))
 
                     ((print! (start "\033[K(%d/%d) Re-cloning %s...") i total local-repo esc)
@@ -412,7 +433,8 @@ declaration) or dependency thereof that hasn't already been."
                         (straight-use-package (intern package) nil 'no-build))
                        (prog1 (file-directory-p repo)
                          (or (not (eq type 'git))
-                             (setq output (doom--commit-log-between ref target-ref)))))))
+                             (setq output (doom--commit-log-between ref target-ref)
+                                   commits (length (split-string output "\n" t))))))))
                    (progn
                      (print! (warn "\033[K(%d/%d) Failed to fetch %s")
                              i total local-repo)
@@ -421,11 +443,20 @@ declaration) or dependency thereof that hasn't already been."
                      (cl-return)))
                (puthash local-repo t repos-to-rebuild)
                (puthash package t packages-to-rebuild)
-               (print! (success "\033[K(%d/%d) %s updated (%s -> %s)")
+               (print! (success "\033[K(%d/%d) %s: %s -> %s%s")
                        i total local-repo
                        (doom--abbrev-commit ref)
-                       (doom--abbrev-commit target-ref))
+                       (doom--abbrev-commit target-ref)
+                       (if (and (integerp commits) (> commits 0))
+                           (format " [%d commit(s)]" commits)
+                         ""))
                (unless (string-empty-p output)
+                 (let ((lines (split-string output "\n")))
+                   (setq output
+                         (if (> (length lines) 20)
+                             (concat (string-join (cl-subseq (butlast lines 1) 0 20) "\n")
+                                     "\n[...]")
+                           output)))
                  (print-group! (print! "%s" (indent 2 output)))))
            (user-error
             (signal 'user-error (error-message-string e)))
@@ -472,16 +503,18 @@ declaration) or dependency thereof that hasn't already been."
       (print! (warn "\033[KSkipping repos/%s because it is local" repo))
       (cl-return))
     (let ((before-size (doom-directory-size default-directory)))
-      (straight--call "git" "reset" "--hard")
-      (straight--call "git" "clean" "-ffd")
-      (if (not (car (straight--call "git" "replace" "--graft" "HEAD")))
+      (doom-call-process "git" "reset" "--hard")
+      (doom-call-process "git" "clean" "-ffd")
+      (if (not (zerop (car (doom-call-process "git" "replace" "--graft" "HEAD"))))
           (print! (info "\033[Krepos/%s is already compact\033[1A" repo))
-        (straight--call "git" "reflog" "expire" "--expire=all" "--all")
-        (straight--call "git" "gc" "--prune=now")
-        (print! (success "\033[KRegrafted repos/%s (from %0.1fKB to %0.1fKB)")
-                repo before-size (doom-directory-size default-directory))
-        (print-group! (print! "%s" (straight--process-get-output))))
-      t)))
+        (doom-call-process "git" "reflog" "expire" "--expire=all" "--all")
+        (doom-call-process "git" "gc" "--prune=now")
+        (let ((after-size (doom-directory-size default-directory)))
+          (if (equal after-size before-size)
+              (print! (success "\033[Krepos/%s cannot be compacted further" repo))
+            (print! (success "\033[KRegrafted repos/%s (from %0.1fKB to %0.1fKB)")
+                    repo before-size after-size)))))
+    t))
 
 (defun doom--cli-packages-regraft-repos (repos)
   (if (not repos)

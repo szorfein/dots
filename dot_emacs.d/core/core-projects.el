@@ -23,7 +23,8 @@ debian, and derivatives). On most it's 'fd'.")
   :commands (projectile-project-root
              projectile-project-name
              projectile-project-p
-             projectile-locate-dominating-file)
+             projectile-locate-dominating-file
+             projectile-relevant-known-projects)
   :init
   (setq projectile-cache-file (concat doom-cache-dir "projectile.cache")
         ;; Auto-discovery is slow to do by default. Better to update the list
@@ -34,7 +35,7 @@ debian, and derivatives). On most it's 'fd'.")
         projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o")
         projectile-kill-buffers-filter 'kill-only-files
         projectile-known-projects-file (concat doom-cache-dir "projectile.projects")
-        projectile-ignored-projects (list "~/" temporary-file-directory)
+        projectile-ignored-projects '("~/")
         projectile-ignored-project-function #'doom-project-ignored-p)
 
   (global-set-key [remap evil-jump-to-tag] #'projectile-find-tag)
@@ -136,19 +137,6 @@ c) are not valid projectile projects."
                  and do (remhash proot projectile-projects-cache-time)
                  and do (remhash proot projectile-project-type-cache))
         (projectile-serialize-cache))))
-
-  ;; It breaks projectile's project root resolution if HOME is a project (e.g.
-  ;; it's a git repo). In that case, we disable bottom-up root searching to
-  ;; prevent issues. This makes project resolution a little slower and less
-  ;; accurate in some cases.
-  (let ((default-directory "~"))
-    (when (cl-find-if #'projectile-file-exists-p
-                      projectile-project-root-files-bottom-up)
-      (doom-log "HOME appears to be a project. Disabling bottom-up root search.")
-      (setq projectile-project-root-files
-            (append projectile-project-root-files-bottom-up
-                    projectile-project-root-files)
-            projectile-project-root-files-bottom-up nil)))
 
   ;; Some MSYS utilities auto expanded the `/' path separator, so we need to prevent it.
   (when IS-WINDOWS

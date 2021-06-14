@@ -1,10 +1,10 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; lang/org/packages.el
 
-;; Install cutting-edge version of org-mode, and from a mirror, because
-;; code.orgmode.org runs on a potato.
 (package! org-mode
   :recipe (:host github
+           ;; Install cutting-edge version of org-mode, and from a mirror,
+           ;; because code.orgmode.org runs on a potato.
            :repo "emacs-straight/org-mode"
            :files ("*.el" "lisp/*.el" "contrib/lisp/*.el" "contrib/scripts")
            ;; HACK A necessary hack because org requires a compilation step
@@ -18,12 +18,12 @@
            (with-temp-file (doom-path (straight--repos-dir "org-mode") "org-version.el")
              (insert "(fset 'org-release (lambda () \"9.5\"))\n"
                      "(fset 'org-git-version #'ignore)\n"
-                     "(provide 'org-version)\n")))
-  :pin "7a62a4d3251a512069aa06b0082529d61d22de26"
-  ;; Prevents built-in Org from sneaking into the byte-compilation of
-  ;; `org-plus-contrib', and inform other packages that `org-mode' satisfies the
-  ;; `org' dependency: https://github.com/raxod502/straight.el/issues/352
-  :shadow 'org)
+                     "(provide 'org-version)\n"))
+           ;; Prevents built-in Org from sneaking into the byte-compilation of
+           ;; `org-plus-contrib', and inform other packages that `org-mode'
+           ;; satisfies the `org' dependency: raxod502/straight.el#352
+           :includes (org org-plus-contrib))
+  :pin "7a62a4d3251a512069aa06b0082529d61d22de26")
 
 (package! avy)
 (package! htmlize :pin "49205105898ba8993b5253beec55d8bddd820a70")
@@ -41,7 +41,9 @@
 (when (featurep! :tools pdf)
   (package! org-pdftools :pin "a5b61bca3f8c91b0859bb0df1a929f9a31a57b99"))
 (when (featurep! :tools magit)
-  (package! orgit :pin "609fd0ccfb5268704b5bc7d7ac1014d4960b9707"))
+  (package! orgit :pin "609fd0ccfb5268704b5bc7d7ac1014d4960b9707")
+  (when (featurep! :tools magit +forge)
+    (package! orgit-forge :pin "ea2a1cf9d337901b413e9df258b8e07af55c00f6")))
 (when (featurep! +brain)
   (package! org-brain :pin "e9b9b3e5bb3c63cecb1367df49205c346d9c050a"))
 (when (featurep! +dragndrop)
@@ -79,6 +81,8 @@
 (package! ob-async :pin "de1cd6c93242a4cb8773bbe115b7be3d4dd6b97e")
 (when (featurep! :lang crystal)
   (package! ob-crystal :pin "d84c1adee4b269cdba06a97caedb8071561a09af"))
+(when (featurep! :lang elixir)
+  (package! ob-elixir :pin "8990a8178b2f7bd93504a9ab136622aab6e82e32"))
 (when (featurep! :lang go)
   (package! ob-go :pin "2067ed55f4c1d33a43cb3f6948609d240a8915f5"))
 (when (featurep! :lang hy)

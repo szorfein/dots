@@ -3,11 +3,11 @@
 #
 # Author: Denys Dovhan, denysdovhan.com
 # License: MIT
-# https://github.com/denysdovhan/spaceship-prompt
+# https://github.com/spaceship-prompt/spaceship-prompt
 
 # Current version of Spaceship
 # Useful for issue reporting
-export SPACESHIP_VERSION='3.11.2'
+export SPACESHIP_VERSION='3.12.4'
 
 # Common-used variable for new line separator
 NEWLINE='
@@ -46,6 +46,8 @@ if [ -z "$SPACESHIP_PROMPT_ORDER" ]; then
     host          # Hostname section
     git           # Git section (git_branch + git_status)
     hg            # Mercurial section (hg_branch  + hg_status)
+    gradle        # Gradle section
+    maven         # Maven section
     package       # Package version
     node          # Node.js section
     ruby          # Ruby section
