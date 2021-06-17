@@ -1,0 +1,6 @@
+media-sound/pulseaudio libsamplerate
+
+media-sound/cava pulseaudio
+media-video/ffmpeg pulseaudio bs2b
+
+media-sound/mpd pulseaudio

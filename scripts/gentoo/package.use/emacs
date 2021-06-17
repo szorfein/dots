@@ -1,0 +1,4 @@
+# doom-emacs need json
+app-editors/emacs -alsa gui gtk wide-int json
+
+app-emacs/emacs-common gui

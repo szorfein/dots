@@ -1,0 +1,53 @@
+# required by x11-libs/gtk+-3.24.29::gentoo
+# required by app-text/zathura-0.4.4::gentoo
+# required by app-text/zathura-pdf-mupdf-0.3.6::gentoo
+# required by zathura-pdf-mupdf (argument)
+x11-libs/cairo X
+# required by media-libs/mesa-21.0.3::gentoo
+# required by virtual/opengl-7.0-r2::gentoo
+# required by media-video/mpv-0.33.1-r1::gentoo
+# required by mpv (argument)
+media-libs/libglvnd X
+# required by sys-auth/polkit-0.119::gentoo[systemd]
+# required by sys-apps/accountsservice-0.6.55::gentoo
+# required by x11-misc/lightdm-1.30.0-r2::gentoo[gnome]
+# required by x11-misc/lightdm-gtk-greeter-2.0.8::gentoo
+sys-apps/systemd policykit
+# required by x11-misc/rofi-1.6.1::gentoo
+# required by rofi (argument)
+x11-libs/libxkbcommon X
+# required by x11-misc/rofi-1.6.1::gentoo
+# required by rofi (argument)
+x11-libs/pango X
+
+dev-libs/boost icu
+x11-libs/cairo X
+media-video/ffmpeg openh264 vpx
+media-video/ffmpegthumbnailer png
+media-gfx/imagemagick jpeg
+x11-misc/lightdm gtk non_root
+
+dev-python/pillow jpeg
+
+# mpd
+media-sound/mpd -network -ipv6 flac libsamplerate
+media-video/mpv cli
+media-sound/ncmpcpp taglib
+
+# mail
+mail-mta/msmtp sasl
+mail-client/neomutt gpgme gdbm
+
+# pass
+app-admin/pass X zsh-completion emacs
+
+# awesome / lua5-2
+x11-wm/awesome -lua_single_target_lua5-1 lua_single_target_lua5-2
+dev-lua/lgi lua_targets_lua5-2
+dev-python/pillow jpeg
+
+# imlib
+media-libs/imlib2 jpeg png
+
+# rofi
+x11-misc/rofi windowmode
