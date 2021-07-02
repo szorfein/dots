@@ -19,22 +19,24 @@ bye() {
 
 msg "Execute $0..."
 
-services="gpg-agent.socket gpg-agent-ssh.socket mpd.service fdm.timer"
-systemctl="systemctl --user"
+if hash systemctl 2>/dev/null ; then
+  services="gpg-agent.socket gpg-agent-ssh.socket mpd.service fdm.timer"
+  systemctl="systemctl --user"
 
-for service in $services ; do
-  echo -n "$service... "
-  if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
-  echo -n "$service... "
-  if ! $systemctl is-active $service ; then $systemctl start $service ; fi
-done
+  for service in $services ; do
+    echo -n "$service... "
+    if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
+    echo -n "$service... "
+    if ! $systemctl is-active $service ; then $systemctl start $service ; fi
+  done
 
-services_system="lightdm"
-systemctl="sudo systemctl"
-for service in $services_system ; do
-  echo -n "$service..."
-  if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
-done
+  services_system="lightdm"
+  systemctl="sudo systemctl"
+  for service in $services_system ; do
+    echo -n "$service..."
+    if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
+  done
+fi
 
 echo ""
 # Configure lightdm here

@@ -1,9 +1,10 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
-Work only on distro linux including the installer: ( tested on a fresh install of Gentoo, Archlinux and Debian )  
+Work only on distro linux including the installer: ( tested on a fresh install of Gentoo, Archlinux, Void and Debian )  
 + `emerge`: Gentoo, Pentoo, no Funtoo because this require `systemd`.
 + `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
 + `apt-get`: Debian, Kali, etc...
++ `xbps-install`: Void
 
 Why i switch on chezmoi?
 + Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !

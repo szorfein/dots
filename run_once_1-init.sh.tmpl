@@ -33,14 +33,17 @@ if hash emerge 2>/dev/null ; then
   sudo emaint sync -r ninjatools
 fi
 
-# save the full path of systemctl
-SYSTEMCTL=$(whereis systemctl | awk '{print $2}')
+if hash systemctl 2>/dev/null ; then
+  # save the full path of systemctl
+  SYSTEMCTL=$(whereis systemctl | awk '{print $2}')
 
-# make all buttons for the logout work - post an issue if you think it's not secure enough
-cat << EOF | sudo tee /etc/sudoers.d/dots
+  # make all buttons for the logout work - post an issue if you think it's not secure enough
+  cat << EOF | sudo tee /etc/sudoers.d/dots
 $USER ALL=(ALL) NOPASSWD: $SYSTEMCTL poweroff
 $USER ALL=(ALL) NOPASSWD: $SYSTEMCTL reboot
 $USER ALL=(ALL) NOPASSWD: $SYSTEMCTL restart tor
 EOF
+
+fi
 
 trap bye EXIT

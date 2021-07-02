@@ -46,6 +46,10 @@ elif hash apt-get 2>/dev/null ; then
 
   sh {{ .chezmoi.sourceDir }}/scripts/debian.sh $args
 
+elif hash xbps-install 2>/dev/null ; then
+
+  sh {{ .chezmoi.sourceDir }}/scripts/void.sh $args
+
 fi
 
 trap bye EXIT
