@@ -3,6 +3,7 @@
 set -o errexit -o nounset
 
 ins="pacman -S --noconfirm --needed"
+pkgs_aur="xst-git nerd-fonts-iosevka cava python-ueberzug i3lock-color"
 
 build() {
   PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
@@ -20,36 +21,32 @@ build() {
 }
 
 install_deps() {
-  sudo $ins gnupg pass xclip zsh awesome mpd ncmpcpp xorg-xinit xorg-server \
-    base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm \
-    neomutt imagemagick msmtp msmtp-mta weechat rofi \
-    youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools \
-    light stow unzip arc-gtk-theme ffmpegthumbnailer tmux
+  pkgs="gnupg pass xclip zsh awesome mpd ncmpcpp xorg-xinit xorg-server
+    base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
+    neomutt imagemagick msmtp msmtp-mta weechat rofi
+    youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools
+    light stow unzip arc-gtk-theme ffmpegthumbnailer tmux"
 }
 
 install_pulse() {
-  pkgs="pulseaudio firefox"
-  sudo $ins $pkgs
+  pkgs="$pkgs pulseaudio firefox"
 }
 
 install_alsa() {
-  pkgs="alsa-utils alsa-plugins ladspa swh-plugins libsamplerate"
-  sudo $ins $pkgs
-  build brave-bin
+  pkgs="$pkgs alsa-utils alsa-plugins ladspa swh-plugins libsamplerate"
+  pkgs_aur="$pkgs_aur brave-bin"
 }
 
 install_emacs() {
-  pkgs="ripgrep emacs"
-  sudo $ins $pkgs
+  pkgs="$pkgs ripgrep emacs jq"
 }
 
 install_vim() {
-  pkgs="vim"
-  sudo $ins $pkgs
+  pkgs="$pkgs vim"
 }
 
 install_extra_deps() {
-  for pkg in xst-git nerd-fonts-iosevka cava python-ueberzug i3lock-color ; do
+  for pkg in $pkgs_aur ; do
     build "$pkg"
   done
 }
@@ -93,7 +90,11 @@ main() {
   "$ALSA" && install_alsa
   "$VIM" && install_vim
   "$EMACS" && install_emacs
+
+  sudo $ins $pkgs
+
   "$EXTRA" && install_extra_deps
+
   exit 0
 }
 

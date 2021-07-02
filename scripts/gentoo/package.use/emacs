@@ -1,4 +1,4 @@
 # doom-emacs need json
-app-editors/emacs -alsa gui gtk wide-int json
+app-editors/emacs -alsa gui gtk json xft gpm
 
-app-emacs/emacs-common gui
+app-emacs/emacs-common -gui

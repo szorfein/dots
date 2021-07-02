@@ -21,7 +21,6 @@ x11-libs/libxkbcommon X
 x11-libs/pango X
 
 dev-libs/boost icu
-x11-libs/cairo X
 media-video/ffmpeg openh264 vpx
 media-video/ffmpegthumbnailer png
 media-gfx/imagemagick jpeg
@@ -51,3 +50,6 @@ media-libs/imlib2 jpeg png
 
 # rofi
 x11-misc/rofi windowmode
+
+# fdm
+net-mail/fdm examples

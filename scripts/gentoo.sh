@@ -32,7 +32,7 @@ install_deps() {
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf
     neomutt msmtp cava ueberzug weechat i3lock-color rofi youtube-dl
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow
-    arc-theme ffmpegthumbnailer tmux"
+    arc-theme ffmpegthumbnailer tmux fdm"
 }
 
 install_pulse() {
@@ -51,7 +51,7 @@ install_emacs() {
   sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/emacs /etc/portage/package.use/
 
   # discount = markdown
-  pkgs="$pkgs ripgrep discount emacs"
+  pkgs="$pkgs ripgrep discount emacs app-misc/jq"
 }
 
 install_vim() {
