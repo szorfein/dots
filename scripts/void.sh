@@ -11,10 +11,10 @@ build() {
 
 install_deps() {
   pkgs="xst nerd-fonts-ttf cava ueberzug i3lock-color gnupg2 pass xclip zsh 
-    curl awesome mpd ncmpcpp xinit xorg
+    curl awesome mpd ncmpcpp xinit xorg-apps xorg-minimal xorg-input-drivers
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
     neomutt ImageMagick msmtp weechat rofi
-    youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk3-greeter inotify-tools
+    youtube-dl papirus-icon-theme mpc lightdm-gtk3-greeter inotify-tools
     light stow unzip arc-theme ffmpegthumbnailer tmux"
 }
 

@@ -40,9 +40,9 @@ mail-client/neomutt gpgme gdbm
 # pass
 app-admin/pass X zsh-completion emacs
 
-# awesome / lua5-2
-x11-wm/awesome -lua_single_target_lua5-1 lua_single_target_lua5-2
-dev-lua/lgi lua_targets_lua5-2
+# awesome / lua5-3
+x11-wm/awesome -lua_single_target_lua5-1 -lua_single_target_lua5-2 lua_single_target_lua5-3
+dev-lua/lgi lua_targets_lua5-3
 dev-python/pillow jpeg
 
 # imlib
