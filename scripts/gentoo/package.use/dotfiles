@@ -53,3 +53,9 @@ x11-misc/rofi windowmode
 
 # fdm
 net-mail/fdm examples
+
+# ghostscript-gpl
+app-text/ghostscript-gpl cups
+
+# xmlto
+app-text/xmlto text
