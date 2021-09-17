@@ -100,6 +100,7 @@
               org-block-end-line
               org-code
               org-date
+              org-footnote
               org-formula
               org-latex-and-related
               org-link
@@ -138,7 +139,7 @@
                    #'+spell/correct))
 
       ;; TODO PR this fix upstream!
-      (defadvice! +spell--fix-face-detection-a (orig-fn &rest args)
+      (defadvice! +spell--fix-face-detection-a (fn &rest args)
         "`spell-fu--faces-at-point' uses face detection that won't penetrary
 overlays (like `hl-line'). This makes `spell-fu-faces-exclude' demonstrably less
 useful when it'll still spellcheck excluded faces on any line that `hl-line' is
@@ -147,7 +148,7 @@ displayed on, even momentarily."
         (letf! (defun get-char-property (pos prop &optional obj)
                  (or (plist-get (text-properties-at pos) prop)
                      (funcall get-char-property pos prop obj)))
-          (apply orig-fn args)))
+          (apply fn args)))
 
       (defadvice! +spell--create-word-dict-a (_word words-file _action)
         "Prevent `spell-fu--word-add-or-remove' from throwing non-existant
@@ -234,7 +235,8 @@ e.g. proselint and langtool."
                 (require 'flyspell-correct-helm nil t)))
           ((and (featurep! :completion ivy)
                 (require 'flyspell-correct-ivy nil t)))
-          ((require 'flyspell-correct-popup nil t)
+          ((featurep! :completion vertico)) ; vertico doesn't need any extra configuration
+          ((require 'flyspell-correct-popup nil t) ; only use popup if no compatible completion UI is enabled
            (setq flyspell-popup-correct-delay 0.8)
            (define-key popup-menu-keymap [escape] #'keyboard-quit))))
 

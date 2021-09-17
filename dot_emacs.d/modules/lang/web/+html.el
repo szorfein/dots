@@ -4,7 +4,8 @@
   :mode "\\.[px]?html?\\'"
   :mode "\\.\\(?:tpl\\|blade\\)\\(?:\\.php\\)?\\'"
   :mode "\\.erb\\'"
-  :mode "\\.l?eex\\'"
+  :mode "\\.[lh]?eex\\'"
+  :mode "\\.sface\\'"
   :mode "\\.jsp\\'"
   :mode "\\.as[cp]x\\'"
   :mode "\\.ejs\\'"
@@ -65,6 +66,7 @@
     (delq! nil web-mode-engines-auto-pairs))
 
   (add-to-list 'web-mode-engines-alist '("elixir" . "\\.eex\\'"))
+  (add-to-list 'web-mode-engines-alist '("phoenix" . "\\.[lh]eex\\'"))
 
   ;; Use // instead of /* as the default comment delimited in JS
   (setf (alist-get "javascript" web-mode-comment-formats nil nil #'equal)

@@ -68,14 +68,17 @@
 
       ((featurep! :completion helm)
        (evil-ex-define-cmd "pg[rep]"   #'+helm:project-search)
-       (evil-ex-define-cmd "pg[grep]d" #'+helm:project-search-from-cwd)))
+       (evil-ex-define-cmd "pg[grep]d" #'+helm:project-search-from-cwd))
+      ((featurep! :completion vertico)
+       (evil-ex-define-cmd "pg[rep]"   #'+vertico:project-search)
+       (evil-ex-define-cmd "pg[grep]d" #'+vertico:project-search-from-cwd)))
 
 ;;; Project tools
 (evil-ex-define-cmd "com[pile]"   #'+evil:compile)
 (evil-ex-define-cmd "make"        #'+evil:make)
 (evil-ex-define-cmd "mk"          #'+evil:make) ; convenience alias
 (evil-ex-define-cmd "debug"       #'+debugger/start)
-(evil-ex-define-cmd "er[rors]"    #'flycheck-list-errors)
+(evil-ex-define-cmd "er[rors]"    #'+default/diagnostics)
 
 ;;; File operations
 (evil-ex-define-cmd "cp"          #'+evil:copy-this-file)

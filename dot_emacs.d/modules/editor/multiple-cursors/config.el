@@ -19,6 +19,14 @@
         "C-p" #'evil-multiedit-prev))
 
 
+(use-package! iedit
+  :when (featurep! :completion vertico)
+  :defer t
+  :init
+  ;; Fix conflict with embark.
+  (setq iedit-toggle-key-default nil))
+
+
 (use-package! evil-mc
   :when (featurep! :editor evil)
   :commands (evil-mc-make-cursor-here
@@ -92,7 +100,7 @@
 
   ;; HACK Allow these commands to be repeated by prefixing them with a numerical
   ;;      argument. See gabesoft/evil-mc#110
-  (defadvice! +multiple-cursors--make-repeatable-a (orig-fn)
+  (defadvice! +multiple-cursors--make-repeatable-a (fn)
     :around '(evil-mc-make-and-goto-first-cursor
               evil-mc-make-and-goto-last-cursor
               evil-mc-make-and-goto-prev-cursor
@@ -104,7 +112,7 @@
               evil-mc-skip-and-goto-prev-match
               evil-mc-skip-and-goto-next-match)
     (dotimes (i (if (integerp current-prefix-arg) current-prefix-arg 1))
-      (funcall orig-fn)))
+      (funcall fn)))
 
   ;; If we're entering insert mode, it's a good bet that we want to start using
   ;; our multiple cursors
@@ -173,7 +181,10 @@
         (when +mc--compat-evil-prev-state
           (unwind-protect
               (cl-case +mc--compat-evil-prev-state
-                ((normal visual) (evil-force-normal-state))
+                ;; For `evil-multiedit', marked occurrences aren't saved after
+                ;; exiting mc, so we should return to normal state anyway
+                ((normal visual multiedit multiedit-insert)
+                 (evil-force-normal-state))
                 (t (message "Don't know how to handle previous state: %S"
                             +mc--compat-evil-prev-state)))
             (setq +mc--compat-evil-prev-state nil)

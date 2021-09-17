@@ -3,7 +3,7 @@
 ;;
 ;;; Initialize internal state
 
-(defconst doom-version "2.0.9"
+(defconst doom-version "3.0.0-alpha"
   "Current version of Doom Emacs.")
 
 (defvar doom-init-p nil
@@ -21,7 +21,6 @@ envvar will enable this at startup.")
 (defconst doom-interactive-p (not noninteractive)
   "If non-nil, Emacs is in interactive mode.")
 
-(defconst EMACS27+   (> emacs-major-version 26))
 (defconst EMACS28+   (> emacs-major-version 27))
 (defconst IS-MAC     (eq system-type 'darwin))
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
@@ -244,20 +243,15 @@ users).")
       request-storage-directory    (concat doom-cache-dir "request")
       shared-game-score-directory  (concat doom-etc-dir "shared-game-score/"))
 
-(defadvice! doom--write-to-etc-dir-a (orig-fn &rest args)
-  "Resolve Emacs storage directory to `doom-etc-dir', to keep local files from
-polluting `doom-emacs-dir'."
-  :around #'locate-user-emacs-file
-  (let ((user-emacs-directory doom-etc-dir))
-    (apply orig-fn args)))
-
-(defadvice! doom--write-enabled-commands-to-doomdir-a (orig-fn &rest args)
+(defadvice! doom--write-to-sane-paths-a (fn &rest args)
   "When enabling a disabled command, the `put' call is written to
 ~/.emacs.d/init.el, which causes issues for Doom, so write it to the user's
 config.el instead."
   :around #'en/disable-command
-  (let ((user-init-file custom-file))
-    (apply orig-fn args)))
+  :around #'locate-user-emacs-file
+  (let ((user-emacs-directory doom-etc-dir)
+        (user-init-file custom-file))
+    (apply fn args)))
 
 
 ;;
@@ -267,7 +261,7 @@ config.el instead."
 ;; indicates misconfiguration (don't rely on case insensitivity for file names).
 (setq auto-mode-case-fold nil)
 
-;; Disable bidirectional text rendering for a modest performance boost. I've set
+;; Disable bidirectional text scanning for a modest performance boost. I've set
 ;; this to `nil' in the past, but the `bidi-display-reordering's docs say that
 ;; is an undefined state and suggest this to be just as good:
 (setq-default bidi-display-reordering 'left-to-right
@@ -299,7 +293,7 @@ config.el instead."
 ;; The GC introduces annoying pauses and stuttering into our Emacs experience,
 ;; so we use `gcmh' to stave off the GC while we're using Emacs, and provoke it
 ;; when it's idle.
-(setq gcmh-idle-delay 5  ; default is 15s
+(setq gcmh-idle-delay 0.5  ; default is 15s
       gcmh-high-cons-threshold (* 16 1024 1024)  ; 16mb
       gcmh-verbose doom-debug-p)
 
@@ -355,7 +349,6 @@ config.el instead."
       (when (boundp 'libgnutls-version)
         (concat "SECURE128:+SECURE192:-VERS-ALL"
                 (if (and (not IS-WINDOWS)
-                         (not (version< emacs-version "26.3"))
                          (>= libgnutls-version 30605))
                     ":+VERS-TLS1.3")
                 ":+VERS-TLS1.2"))
@@ -523,7 +516,6 @@ unreadable. Returns the names of envvars that were changed."
 (defun doom-run-hook (hook)
   "Run HOOK (a hook function) with better error handling.
 Meant to be used with `run-hook-wrapped'."
-  (doom-log "Running doom hook: %s" hook)
   (condition-case-unless-debug e
       (funcall hook)
     (error
@@ -578,7 +570,7 @@ TRIGGER-HOOK is a list of quoted hooks and/or sharp-quoted functions."
              ;; because the latter is triggered too late (after the file has
              ;; opened and modes are all set up).
              (advice-add 'after-find-file :before fn '((depth . -101))))
-            ((add-hook hook fn (if EMACS27+ -101))))
+            ((add-hook hook fn -101)))
       fn)))
 
 

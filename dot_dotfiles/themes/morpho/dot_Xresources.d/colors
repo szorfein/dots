@@ -1,63 +1,50 @@
-! Material theme
+#define base00 #171529
+#define base01 #1A172E
+#define base02 #272244
+#define base03 #BAA6F5
+#define base04 #ABA9BC
+#define base05 #E6F4F1
+#define base06 #F9F7FF
+#define base08 #f9f899
+#define base09 #FF876D
+#define base0A #FF50A0
+#define base0B #E452C3
+#define base0C #CA60E3
+#define base0D #AE6DF4
+#define base0E #877BFE
+#define base0F #418CF5
 
-! theme https://www.colorspire.com/
-! material color: https://material.io/inline-tools/color/
-! material: https://material.io/tools/color 
+*background: base00
+*foreground: base05
 
-! BG !
-! theme0  #171529
-! theme1  #1A172E
-! theme2  #272244
-! theme3  #2E2951
-! FG !
-! theme4  #D6E1FF
-! theme5  #EBF0FF
-! theme6  #FAFFFF
-!! Primary, Secondary !!
-! theme7  #937DB5
-! theme8  #A997C8
-! theme9  #7a91c7
-! theme10 #8ca0cf
-!! Alert !!
-! theme11 #C3C5AA
-! theme12 #CDCFBA
-!! Others !!
-! theme13 #E7D6FF
-! theme14 #7E8AA0
-! theme15 #7a91c7
+! Black
+*color0:  base01
+*color8:  base02
 
-! Theme 1, 4
-*background: #1A172E
-*foreground: #D6E1FF
+! Red
+*color1:  base08
+*color9:  base08
 
-! Black, 0, 3
-*color0: #171529
-*color8: #2E2951
+! Green
+*color2:  base0B
+*color10: base0B
 
-! Red, 11, 12
-*color1: #C3C5AA
-*color9: #CDCFBA
+! Yellow
+*color3:  base0A
+*color11: base09
 
-! Green, 14, 14
-*color2: #7E8AA0
-*color10: #7E8AA0
+! Blue
+*color4:  base03
+*color12: base0C
 
-! Yellow, 13, 13
-*color3: #E7D6FF
-*color11: #E7D6FF
+! Magenta
+*color5:  base0D
+*color13: base0D
 
-! Blue, 15, 15
-*color4: #7A91C7
-*color12: #7A91C7
+! Cyan
+*color6:  base0E
+*color14: base0F
 
-! Magenta, 9, 10
-*color5: #7A91C7
-*color13: #8CA0CF
-
-! Cyan, 7, 8
-*color6: #937DB5
-*color14: #A997C8
-
-! White, 5, 6
-*color7: #EBF0FF
-*color15: #FAFFFF
+! White
+*color7:  base05
+*color15: base06

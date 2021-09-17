@@ -103,30 +103,30 @@ font to that size. It's rarely a good idea to do so!")
       (run-hooks 'doom-switch-frame-hook)
       (setq doom--last-frame (selected-frame)))))
 
-(defun doom-run-switch-buffer-hooks-a (orig-fn buffer-or-name &rest args)
+(defun doom-run-switch-buffer-hooks-a (fn buffer-or-name &rest args)
   (if (or doom-inhibit-switch-buffer-hooks
           (and buffer-or-name
                (eq (current-buffer)
                    (get-buffer buffer-or-name)))
-          (and (eq orig-fn #'switch-to-buffer) (car args)))
-      (apply orig-fn buffer-or-name args)
+          (and (eq fn #'switch-to-buffer) (car args)))
+      (apply fn buffer-or-name args)
     (let ((gc-cons-threshold most-positive-fixnum)
           (doom-inhibit-switch-buffer-hooks t)
           (inhibit-redisplay t))
-      (when-let (buffer (apply orig-fn buffer-or-name args))
+      (when-let (buffer (apply fn buffer-or-name args))
         (with-current-buffer (if (windowp buffer)
                                  (window-buffer buffer)
                                buffer)
           (run-hooks 'doom-switch-buffer-hook))
         buffer))))
 
-(defun doom-run-switch-to-next-prev-buffer-hooks-a (orig-fn &rest args)
+(defun doom-run-switch-to-next-prev-buffer-hooks-a (fn &rest args)
   (if doom-inhibit-switch-buffer-hooks
-      (apply orig-fn args)
+      (apply fn args)
     (let ((gc-cons-threshold most-positive-fixnum)
           (doom-inhibit-switch-buffer-hooks t)
           (inhibit-redisplay t))
-      (when-let (buffer (apply orig-fn args))
+      (when-let (buffer (apply fn args))
         (with-current-buffer buffer
           (run-hooks 'doom-switch-buffer-hook))
         buffer))))
@@ -499,13 +499,13 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
           (set-fontset-font t 'unicode font nil 'append)))))
   :config
   (cond ((daemonp)
-         (defadvice! doom--disable-all-the-icons-in-tty-a (orig-fn &rest args)
+         (defadvice! doom--disable-all-the-icons-in-tty-a (fn &rest args)
            "Return a blank string in tty Emacs, which doesn't support multiple fonts."
            :around '(all-the-icons-octicon all-the-icons-material
                      all-the-icons-faicon all-the-icons-fileicon
                      all-the-icons-wicon all-the-icons-alltheicon)
            (if (or (not after-init-time) (display-multi-font-p))
-               (apply orig-fn args)
+               (apply fn args)
              "")))
         ((not (display-graphic-p))
          (defadvice! doom--disable-all-the-icons-in-tty-a (&rest _)
@@ -571,9 +571,6 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
       (cons 'custom-theme-directory
             (delq 'custom-theme-directory custom-theme-load-path)))
 
-;; Underline looks a bit better when drawn lower
-(setq x-underline-at-descent-line t)
-
 (defun doom-init-fonts-h (&optional reload)
   "Loads `doom-font'."
   (when (fboundp 'set-fontset-font)
@@ -620,7 +617,7 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
     (with-selected-frame (or frame (selected-frame))
       (load-theme doom-theme t))))
 
-(defadvice! doom--load-theme-a (orig-fn theme &optional no-confirm no-enable)
+(defadvice! doom--load-theme-a (fn theme &optional no-confirm no-enable)
   "Record `doom-theme', disable old themes, and trigger `doom-load-theme-hook'."
   :around #'load-theme
   ;; Run `load-theme' from an estranged buffer, where we can ensure that
@@ -631,7 +628,7 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
       ;; Disable previous themes so there are no conflicts. If you truly want
       ;; multiple themes enabled, then use `enable-theme' instead.
       (mapc #'disable-theme custom-enabled-themes)
-      (prog1 (funcall orig-fn theme no-confirm no-enable)
+      (prog1 (funcall fn theme no-confirm no-enable)
         (when (and (not no-enable) (custom-theme-enabled-p theme))
           (setq doom-theme theme)
           (put 'doom-theme 'previous-themes (or last-themes 'none))
@@ -667,16 +664,17 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
   (dolist (fn '(switch-to-buffer display-buffer))
     (advice-add fn :around #'doom-run-switch-buffer-hooks-a)))
 
+;; Apply `doom-font' et co
+(add-hook 'doom-after-init-modules-hook #'doom-init-fonts-h -100)
+
 ;; Apply `doom-theme'
 (add-hook (if (daemonp)
               'after-make-frame-functions
             'doom-after-init-modules-hook)
-          #'doom-init-theme-h)
+          #'doom-init-theme-h
+          -90)
 
-;; Apply `doom-font' et co
-(add-hook 'doom-after-init-modules-hook #'doom-init-fonts-h)
-
-(add-hook 'window-setup-hook #'doom-init-ui-h 'append)
+(add-hook 'window-setup-hook #'doom-init-ui-h 100)
 
 
 ;;
@@ -702,25 +700,11 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
   (fset 'define-fringe-bitmap #'ignore))
 
 (after! whitespace
-  (defun doom-disable-whitespace-mode-in-childframes-a (orig-fn)
+  (defun doom-is-childframes-p ()
     "`whitespace-mode' inundates child frames with whitespace markers, so
 disable it to fix all that visual noise."
-    (unless (frame-parameter nil 'parent-frame)
-      (funcall orig-fn)))
-  (add-function :around whitespace-enable-predicate #'doom-disable-whitespace-mode-in-childframes-a))
-
-;; Don't display messages in the minibuffer when using the minibuffer
-;; DEPRECATED Remove when Emacs 26.x support is dropped.
-(eval-when! (not EMACS27+)
-  (defmacro doom-silence-motion-key (command key)
-    (let ((key-command (intern (format "doom/silent-%s" command))))
-      `(progn
-         (defun ,key-command ()
-           (interactive)
-           (ignore-errors (call-interactively ',command)))
-         (define-key minibuffer-local-map (kbd ,key) #',key-command))))
-  (doom-silence-motion-key backward-delete-char "<backspace>")
-  (doom-silence-motion-key delete-char "<delete>"))
+    (frame-parameter nil 'parent-frame))
+  (add-function :before-while whitespace-enable-predicate #'doom-is-childframes-p))
 
 (provide 'core-ui)
 ;;; core-ui.el ends here

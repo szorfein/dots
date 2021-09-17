@@ -46,6 +46,7 @@ completion.
 + helm =+fuzzy +childframe= - *Another* search engine for love and life
 + ido - The /other/ *other* search engine for love and life
 + [[file:../modules/completion/ivy/README.org][ivy]] =+fuzzy +prescient +childframe +icons= - /The/ search engine for love and life
++ [[file:../modules/completion/vertico/README.org][vertico]] =+icons= - The search engine of the future
 
 * :config
 Modules that configure Emacs one way or another, or focus on making it easier
@@ -83,7 +84,7 @@ Modules that reconfigure or augment packages or features built into Emacs.
 + [[file:../modules/emacs/vc/README.org][vc]] - TODO
 
 * :email
-+ [[file:../modules/email/mu4e/README.org][mu4e]] =+gmail= - TODO
++ [[file:../modules/email/mu4e/README.org][mu4e]] =+org +gmail= - TODO
 + [[file:../modules/email/notmuch/README.org][notmuch]] - TODO
 + wanderlust =+gmail= - TODO
 
@@ -116,14 +117,14 @@ Modules that bring support for a language or group of languages to Emacs.
 + [[file:../modules/lang/fstar/README.org][fstar]] - F* support
 + [[file:../modules/lang/gdscript/README.org][gdscript]] =+lsp= - TODO
 + [[file:../modules/lang/go/README.org][go]] =+lsp= - TODO
-+ [[file:../modules/lang/haskell/README.org][haskell]] =+dante +ghcide +lsp= - TODO
++ [[file:../modules/lang/haskell/README.org][haskell]] =+lsp= - TODO
 + hy - TODO
 + [[file:../modules/lang/idris/README.org][idris]] - TODO
 + java =+meghanada +eclim +lsp= - TODO
 + [[file:../modules/lang/javascript/README.org][javascript]] =+lsp= - JavaScript, TypeScript, and CoffeeScript support
 + [[file:../modules/lang/json/README.org][json]] =+lsp= - TODO
 + [[file:../modules/lang/julia/README.org][julia]] =+lsp= - TODO
-+ [[file:../modules/lang/kotlin/README.org][kotlin]] =+lsp+= - TODO
++ [[file:../modules/lang/kotlin/README.org][kotlin]] =+lsp= - TODO
 + [[file:../modules/lang/latex/README.org][latex]] =+latexmk +cdlatex +fold +lsp= - TODO
 + lean - TODO
 + [[file:../modules/lang/ledger/README.org][ledger]] - TODO
@@ -138,7 +139,7 @@ Modules that bring support for a language or group of languages to Emacs.
 + purescript =+lsp= - TODO
 + [[file:../modules/lang/python/README.org][python]] =+cython +lsp +pyright +pyenv +conda +poetry= - TODO
 + qt - TODO
-+ racket - TODO
++ [[file:../modules/lang/racket/README.org][racket]] =+lsp +xp= - TODO
 + [[file:../modules/lang/raku/README.org][raku]] - TODO
 + [[file:../modules/lang/rest/README.org][rest]] - TODO
 + rst - TODO
@@ -203,7 +204,6 @@ Aesthetic modules that affect the Emacs interface or user experience.
 + [[file:../modules/ui/doom-dashboard/README.org][doom-dashboard]] - TODO
 + [[file:../modules/ui/doom-quit/README.org][doom-quit]] - TODO
 + [[file:../modules/ui/emoji/README.org][emoji]] =+ascii +github +unicode= - Adds emoji support to Emacs
-+ [[file:../modules/ui/fill-column/README.org][fill-column]] - TODO
 + [[file:../modules/ui/hl-todo/README.org][hl-todo]] - TODO
 + [[file:../modules/ui/hydra/README.org][hydra]] - TODO
 + indent-guides - TODO

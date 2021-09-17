@@ -464,10 +464,10 @@ window and return that window."
   (+popup/close nil t))
 
 ;;;###autoload
-(defun +popup-save-a (orig-fn &rest args)
+(defun +popup-save-a (fn &rest args)
   "Sets aside all popups before executing the original function, usually to
 prevent the popup(s) from messing up the UI (or vice versa)."
-  (save-popups! (apply orig-fn args)))
+  (save-popups! (apply fn args)))
 
 ;;;###autoload
 (defun +popup-display-buffer-fullframe-fn (buffer alist)
@@ -612,18 +612,3 @@ Accepts the same arguments as `display-buffer-in-side-window'. You must set
                           (setq window--sides-shown t))
                         (window--display-buffer
                          buffer best-window 'reuse alist)))))))))
-
-
-;;
-;; Emacs backwards compatibility
-
-(unless EMACS27+
-  (defadvice! +popup--set-window-dedicated-a (window)
-    "Ensure `window--display-buffer' respects `display-buffer-mark-dedicated'.
-
-This was not so until recent Emacs 27 builds, where it causes breaking errors.
-This advice ensures backwards compatibility for Emacs <= 26 users."
-    :filter-return #'window--display-buffer
-    (when (and (windowp window) display-buffer-mark-dedicated)
-      (set-window-dedicated-p window display-buffer-mark-dedicated))
-    window))

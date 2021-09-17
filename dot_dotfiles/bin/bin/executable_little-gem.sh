@@ -30,37 +30,39 @@ EOF
 }
 
 gen_gemspec() {
-    content="require File.dirname(__FILE__) + \"/lib/$PROJ_LOW/version\"
+    content="# frozen_string_literal: true
+
+require_relative 'lib/$PROJ_LOW/version\'
 
 # https://guides.rubygems.org/specification-reference/
 Gem::Specification.new do |s|
-  s.files = \`git ls-files\`.split(\" \")
-  s.files.reject! { |fn| fn.include? \"certs\" }
-  s.name = \"$PROJ_LOW\"
-  s.summary = \"Awesome Ruby Project !\"
+  s.name = \'$PROJ_LOW\'
+  s.summary = \'Awesome Ruby Project !\'
   s.version = $PROJ_CAP::VERSION
-  s.description = <<-EOF
+  s.platform = Gem::Platform::RUBY
+  s.description = <<-DESCRIPTION
     $PROJ is just an awesome gem !
-  EOF
-  s.email = \"$EMAIL\"
-  s.homepage = \"https://github.com/$USERNAME/$PROJ\"
-  s.license = \"MIT\"
+  DESCRIPTION
+  s.email = \'$EMAIL\'
+  s.files = Dir.glob('lib/**/*', File::FNM_DOTMATCH)
+  s.homepage = \'https://github.com/$USERNAME/$PROJ\'
+  s.license = \'MIT\'
   s.metadata = {
-    \"bug_tracker_uri\" => \"https://github.com/$USERNAME/$PROJ/issues\",
-    \"changelog_uri\" => \"https://github.com/$USERNAME/$PROJ/blob/master/CHANGELOG.md\",
-    \"source_code_uri\" => \"https://github.com/$USERNAME/$PROJ\",
-    \"wiki_uri\" => \"https://github.com/$USERNAME/$PROJ/wiki\",
-    \"funding_uri\" => \"https://patreon.com/$USERNAME\",
+    \'bug_tracker_uri\' => \'https://github.com/$USERNAME/$PROJ/issues\',
+    \'changelog_uri\' => \'https://github.com/$USERNAME/$PROJ/blob/master/CHANGELOG.md\',
+    \'source_code_uri\' => \'https://github.com/$USERNAME/$PROJ\',
+    \'wiki_uri\' => \'https://github.com/$USERNAME/$PROJ/wiki\',
+    \'funding_uri\' => \'https://patreon.com/$USERNAME\',
   }
-  s.author = \"$USERNAME\"
-  s.bindir = \"bin\"
-  s.cert_chain = [\"certs/$USERNAME.pem\"]
-  s.executables << \"$PROJ_LOW\"
+  s.author = \'$USERNAME\'
+  s.bindir = \'bin\'
+  s.cert_chain = [\'certs/$USERNAME.pem\']
+  s.executables << \'$PROJ_LOW\'
   s.extra_rdoc_files = ['README.md']
-  s.required_ruby_version = \">=$RUBY_VERSION_REQUIRED\"
+  s.required_ruby_version = \'>=$RUBY_VERSION_REQUIRED\'
   s.requirements << 'TODO change: libmagick, v6.0'
   s.requirements << 'TODO change: A good graphics card'
-  s.signing_key = File.expand_path(\"~/.ssh/gem-private_key.pem\") if \$@ =~ /gem\z/
+  s.signing_key = File.expand_path(\'~/.ssh/gem-private_key.pem\') if \$0 =~ /gem\z/
 end
 "
     cat_file "$content" "$PROJ_LOW.gemspec"
@@ -112,8 +114,9 @@ end
 
 gen_bin() {
     content="#!/usr/bin/env ruby
-require \"$PROJ_LOW\"
-puts \"$PROJ_CAP v.\" + $PROJ_CAP::VERSION
+require \'$PROJ_LOW\'
+
+puts \'$PROJ_CAP v.\' + $PROJ_CAP::VERSION
 "
     cat_file "$content" "bin/$PROJ_LOW"
     chmod 744 "$PROJ/bin/$PROJ_LOW"
@@ -130,7 +133,17 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/**/test_*.rb']
 end
 
-task :default => :test
+# Usage: rake gem:build
+namespace :gem do
+  desc \'build the gem\'
+  task :build do
+  Dir[\'$PROJ_LOW*.gem\'].each { |f| File.unlink(f) }
+    system(\'gem build $PROJ_LOW.gemspec\')
+    system(\"gem install $PROJ_LOW-#{$PROJ_CAP::VERSION}.gem -P HighSecurity\")
+  end
+end
+
+task default: :test
 "
     cat_file "$content" Rakefile
 }

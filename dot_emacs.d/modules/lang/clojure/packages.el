@@ -1,9 +1,9 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; lang/clojure/packages.el
 
-(package! clojure-mode :pin "a14671e03c867c9d759ee9e59cdc5cecbf271245")
-(package! cider :pin "4278d7cf0b54af5cc84f4a521ee1ed6e81a96adc")
-(package! clj-refactor :pin "9f3e7357117e96135de051b78deabc0a327c7b06")
+(package! clojure-mode :pin "e1dc7caee76d117a366f8b8b1c2da7e6400636a8")
+(package! cider :pin "d8fd5794c909e671641f534b1eb21db0e92138e9")
+(package! clj-refactor :pin "466822ff6f9da584f7cf72c868017b8840574dbd")
 
 (when (featurep! :checkers syntax)
   (package! flycheck-clj-kondo :pin "a558bda44c4cb65b69fa53df233e8941ebd195c5"))

@@ -40,9 +40,7 @@
        :desc "Find type definition"                  "t"   #'+lookup/type-definition
        :desc "Delete trailing whitespace"            "w"   #'delete-trailing-whitespace
        :desc "Delete trailing newlines"              "W"   #'doom/delete-trailing-newlines
-       :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
-       (:when (featurep! :checkers syntax)
-        :desc "List errors"                         "x"   #'flycheck-list-errors)
+       :desc "List errors"                           "x"   #'+default/diagnostics
        (:when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
         :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
         :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
@@ -54,17 +52,21 @@
         (:when (featurep! :completion helm)
          :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
          :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol)
+        (:when (featurep! :completion vertico)
+         :desc "Jump to symbol in current workspace" "j"   #'consult-lsp-symbols
+         :desc "Jump to symbol in any workspace"     "J"   (cmd!! #'consult-lsp-symbols 'all-workspaces))
         (:when (featurep! :ui treemacs +lsp)
          :desc "Errors list"                         "X"   #'lsp-treemacs-errors-list
          :desc "Incoming call hierarchy"             "y"   #'lsp-treemacs-call-hierarchy
          :desc "Outgoing call hierarchy"             "Y"   (cmd!! #'lsp-treemacs-call-hierarchy t)
          :desc "References tree"                     "R"   (cmd!! #'lsp-treemacs-references t)
          :desc "Symbols"                             "S"   #'lsp-treemacs-symbols))
-
        (:when (featurep! :tools lsp +eglot)
         :desc "LSP Execute code action"              "a" #'eglot-code-actions
         :desc "LSP Rename"                           "r" #'eglot-rename
-        :desc "LSP Find declaration"                 "j" #'eglot-find-declaration))
+        :desc "LSP Find declaration"                 "j" #'eglot-find-declaration
+        (:when (featurep! :completion vertico)
+         :desc "Jump to symbol in current workspace" "j" #'consult-eglot-symbols)))
 
       ;;; <leader> f --- file
       (:prefix-map ("f" . "file")
@@ -111,8 +113,14 @@
       ;;; <leader> s --- search
       (:prefix-map ("s" . "search")
        :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
-       :desc "Search buffer"                "b" #'swiper
-       :desc "Search all open buffers"      "B" #'swiper-all
+       :desc "Search buffer"                "b"
+       (cond ((featurep! :completion vertico)   #'consult-line)
+             ((featurep! :completion ivy)       #'swiper)
+             ((featurep! :completion helm)      #'swiper))
+       :desc "Search all open buffers"      "B"
+       (cond ((featurep! :completion vertico)   (cmd!! #'consult-line-multi 'all-buffers))
+             ((featurep! :completion ivy)       #'swiper-all)
+             ((featurep! :completion helm)      #'swiper-all))
        :desc "Search current directory"     "d" #'+default/search-cwd
        :desc "Search other directory"       "D" #'+default/search-other-cwd
        :desc "Locate file"                  "f" #'+lookup/file
@@ -127,7 +135,10 @@
        :desc "Search project"               "p" #'+default/search-project
        :desc "Search other project"         "P" #'+default/search-other-project
        :desc "Search buffer"                "s" #'+default/search-buffer
-       :desc "Search buffer for thing at point" "S" #'swiper-isearch-thing-at-point
+       :desc "Search buffer for thing at point" "S"
+       (cond ((featurep! :completion vertico)   #'+vertico/search-symbol-at-point)
+             ((featurep! :completion ivy)       #'swiper-isearch-thing-at-point)
+             ((featurep! :completion helm)      #'swiper-isearch-thing-at-point))
        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
        :desc "Thesaurus"                    "T" #'+lookup/synonyms)
 
@@ -146,8 +157,9 @@
        :desc "Org agenda"                     "a" #'org-agenda
        (:when (featurep! :tools biblio)
         :desc "Bibliographic entries"        "b"
-        (cond ((featurep! :completion ivy)   #'ivy-bibtex)
-              ((featurep! :completion helm)  #'helm-bibtex)))
+        (cond ((featurep! :completion vertico)   #'bibtex-actions-open-entry)
+              ((featurep! :completion ivy)       #'ivy-bibtex)
+              ((featurep! :completion helm)      #'helm-bibtex)))
 
        :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
        :desc "Cancel current org-clock"       "C" #'org-clock-cancel
@@ -188,7 +200,31 @@
           :desc "Arbitrary date" "d" #'org-roam-dailies-find-date
           :desc "Today"          "t" #'org-roam-dailies-find-today
           :desc "Tomorrow"       "m" #'org-roam-dailies-find-tomorrow
-          :desc "Yesterday"      "y" #'org-roam-dailies-find-yesterday))))
+          :desc "Yesterday"      "y" #'org-roam-dailies-find-yesterday)))
+       (:when (featurep! :lang org +roam2)
+        (:prefix ("r" . "roam")
+         :desc "Open random node"           "a" #'org-roam-node-random
+         :desc "Find node"                  "f" #'org-roam-node-find
+         :desc "Find ref"                   "F" #'org-roam-ref-find
+         :desc "Show graph"                 "g" #'org-roam-graph
+         :desc "Insert node"                "i" #'org-roam-node-insert
+         :desc "Capture to node"            "n" #'org-roam-capture
+         :desc "Toggle roam buffer"         "r" #'org-roam-buffer-toggle
+         :desc "Launch roam buffer"         "R" #'org-roam-buffer-display-dedicated
+         :desc "Sync database"              "s" #'org-roam-db-sync
+         (:prefix ("d" . "by date")
+          :desc "Goto previous note"        "b" #'org-roam-dailies-goto-previous-note
+          :desc "Goto date"                 "d" #'org-roam-dailies-goto-date
+          :desc "Capture date"              "D" #'org-roam-dailies-capture-date
+          :desc "Goto next note"            "f" #'org-roam-dailies-goto-next-note
+          :desc "Goto tomorrow"             "m" #'org-roam-dailies-goto-tomorrow
+          :desc "Capture tomorrow"          "M" #'org-roam-dailies-capture-tomorrow
+          :desc "Capture today"             "n" #'org-roam-dailies-capture-today
+          :desc "Goto today"                "t" #'org-roam-dailies-goto-today
+          :desc "Capture today"             "T" #'org-roam-dailies-capture-today
+          :desc "Goto yesterday"            "y" #'org-roam-dailies-goto-yesterday
+          :desc "Capture yesterday"         "Y" #'org-roam-dailies-capture-yesterday
+          :desc "Find directory"            "-" #'org-roam-dailies-find-directory))))
 
       ;;; <leader> o --- open
       "o" nil ; we need to unbind it first as Org claims this prefix
@@ -278,13 +314,14 @@
       ;;; <leader> t --- toggle
       (:prefix-map ("t" . "toggle")
        :desc "Big mode"                     "b" #'doom-big-font-mode
-       (:when (featurep! :ui fill-column)
-        :desc "Fill Column Indicator"       "c" #'+fill-column/toggle)
+       :desc "Fill Column Indicator"        "c" #'global-display-fill-column-indicator-mode
        :desc "Flymake"                      "f" #'flymake-mode
        :desc "Frame fullscreen"             "F" #'toggle-frame-fullscreen
        :desc "Indent style"                 "I" #'doom/toggle-indent-style
        :desc "Line numbers"                 "l" #'doom/toggle-line-numbers
-       :desc "Word-wrap mode"               "w" #'+word-wrap-mode
+       :desc "Soft line wrapping"           "w" #'visual-line-mode
+       (:when (featurep! :editor word-wrap)
+        :desc "Soft line wrapping"          "w" #'+word-wrap-mode)
        (:when (featurep! :checkers syntax)
         :desc "Flycheck"                   "f" #'flycheck-mode)
        (:when (featurep! :ui indent-guides)
@@ -325,7 +362,7 @@
         :desc "Magit blame"                "B"   #'magit-blame-addition
         :desc "Magit clone"                "C"   #'magit-clone
         :desc "Magit fetch"                "F"   #'magit-fetch
-        :desc "Magit buffer log"           "L"   #'magit-log
+        :desc "Magit buffer log"           "L"   #'magit-log-buffer-file
         :desc "Git stage file"             "S"   #'magit-stage-file
         :desc "Git unstage file"           "U"   #'magit-unstage-file
         (:prefix ("f" . "find")
@@ -365,6 +402,7 @@
         :desc "Display workspaces"           "d" #'+workspace/display
         :desc "Rename workspace"             "r" #'+workspace/rename
         :desc "Create workspace"             "c" #'+workspace/new
+        :desc "Create named workspace"       "C" #'+workspace/new-named
         :desc "Delete workspace"             "k" #'+workspace/delete
         :desc "Save workspace"               "S" #'+workspace/save
         :desc "Switch to other workspace"    "o" #'+workspace/other
@@ -420,7 +458,9 @@
         :desc "Reconnect all"      "r" #'circe-reconnect-all
         :desc "Send message"       "s" #'+irc/send-message
         (:when (featurep! :completion ivy)
-         :desc "Jump to channel"  "j" #'+irc/ivy-jump-to-channel)))
+         :desc "Jump to channel"  "j" #'+irc/ivy-jump-to-channel)
+        (:when (featurep! :completion vertico)
+         :desc "Jump to channel"  "j" #'+irc/vertico-jump-to-channel)))
 
       ;;; <leader> T --- twitter
       (:when (featurep! :app twitter)
@@ -448,6 +488,8 @@
       (:when (featurep! :completion helm)
         "C-S-s"        #'swiper-helm
         "C-S-r"        #'helm-resume)
+      (:when (featurep! :completion vertico)
+        "C-S-r"        #'vertico-repeat)
 
       ;;; objed
       (:when (featurep! :editor objed +manual)
@@ -479,7 +521,12 @@
         [C-tab]      #'company-complete-common-or-cycle
         [tab]        #'company-complete-common-or-cycle
         [backtab]    #'company-select-previous
-        "C-RET"      #'counsel-company
+        "C-RET"      (cond ((featurep! :completion vertico)  #'completion-at-point)
+                           ((featurep! :completion ivy)      #'counsel-company)
+                           ((featurep! :completion helm)     #'helm-company))
+        "C-<return>" (cond ((featurep! :completion vertico)  #'completion-at-point)
+                           ((featurep! :completion ivy)      #'counsel-company)
+                           ((featurep! :completion helm)     #'helm-company))
         :map company-search-map
         "C-n"        #'company-search-repeat-forward
         "C-p"        #'company-search-repeat-backward

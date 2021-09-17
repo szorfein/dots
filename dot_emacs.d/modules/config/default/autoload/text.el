@@ -27,9 +27,10 @@
   "Interactively select what text to insert from the kill ring."
   (interactive)
   (call-interactively
-   (cond ((fboundp 'counsel-yank-pop)    #'counsel-yank-pop)
+   (cond ((fboundp 'consult-yank-pop)    #'consult-yank-pop) ;HACK see @ymarco's comment on #5013 and TODO.org in the selecturm module.
+         ((fboundp 'counsel-yank-pop)    #'counsel-yank-pop)
          ((fboundp 'helm-show-kill-ring) #'helm-show-kill-ring)
-         ((error "No kill-ring search backend available. Enable ivy or helm!")))))
+         ((error "No kill-ring search backend available. Enable ivy, helm or vertico!")))))
 
 ;;;###autoload
 (defun +default/yank-buffer-path (&optional root)
@@ -45,10 +46,14 @@
     (error "Couldn't find filename in current buffer")))
 
 ;;;###autoload
-(defun +default/yank-buffer-path-relative-to-project ()
-  "Copy the current buffer's path to the kill ring."
-  (interactive)
-  (+default/yank-buffer-path (doom-project-root)))
+(defun +default/yank-buffer-path-relative-to-project (&optional include-root)
+  "Copy the current buffer's path to the kill ring.
+With non-nil prefix INCLUDE-ROOT, also include the project's root."
+  (interactive "P")
+  (+default/yank-buffer-path
+   (if include-root
+       (file-name-directory (directory-file-name (doom-project-root)))
+     (doom-project-root))))
 
 ;;;###autoload
 (defun +default/insert-file-path (arg)

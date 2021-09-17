@@ -7,7 +7,7 @@
 
 # Current version of Spaceship
 # Useful for issue reporting
-export SPACESHIP_VERSION='3.12.4'
+export SPACESHIP_VERSION='3.14.1'
 
 # Common-used variable for new line separator
 NEWLINE='
@@ -152,6 +152,8 @@ spaceship_prompt() {
 
   # Should it add a new line before the prompt?
   [[ $SPACESHIP_PROMPT_ADD_NEWLINE == true ]] && echo -n "$NEWLINE"
+
+  # Compose prompt from the order
   spaceship::compose_prompt $SPACESHIP_PROMPT_ORDER
 }
 

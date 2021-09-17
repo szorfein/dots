@@ -5,60 +5,54 @@
 ! colors: https://mycolor.space/
 ! contrast: https://contrast-ratio.com/
 
-!! BG !!
-! theme0  #16171C
-! theme1  #18191e
-! theme2  #24262D
-! theme3  #2D3039
-!! FG !!
-! theme4  #d3e4e2
-! theme5  #dbecea
-! theme6  #f6f9ff
-!! Primary, Secondary !!
-! theme7  #98CC70
-! theme8  #ADD681
-! theme9  #3ade95
-! theme10 #00b9a2
-!! Alert !!
-! theme11 #A360D6
-! theme12 #BD90E1
-!! Others !! (yellow, green, blue)
-! theme13 #d8d679
-! theme14 #82D681
-! theme15 #00899e
+#define base00 #16171C
+#define base01 #18191e
+#define base02 #24262D
+#define base03 #83976D
+#define base04 #d3e4e2
+#define base05 #dbecea
+#define base06 #f6f9ff
+#define base08 #A360D6
+#define base09 #BD90E1
+#define base0A #0072A7
+#define base0B #00899E
+#define base0C #009F91
+#define base0D #00B385
+#define base0E #ADD681
+#define base0F #d8d679
 
-! Theme 1, 4
-*background: #18191E
-*foreground: #D3E4E2
+*background: base00
+*foreground: base05
+*.cursorColor: base04
 
-! Black, 0, 3
-*color0: #16171C
-*color8: #2D3039
+! Black
+*color0: base01
+*color8: base02
 
-! Red, 11, 12
-*color1: #A360D6
-*color9: #BD90E1
+! Red
+*color1: base08
+*color9: base08
 
-! Green, 14, 14
-*color2: #82D681
-*color10: #82D681
+! Green
+*color2:  base0B
+*color10: base0B
 
-! Yellow, 13, 13
-*color3: #D8D679
-*color11: #D8D679
+! Yellow
+*color3:  base0A
+*color11: base09
 
-! Blue, 15, 15
-*color4: #00899E
-*color12: #00899E
+! Blue
+*color4:  base03
+*color12: base0C
 
-! Magenta, 9, 10
-*color5: #3ADE95
-*color13: #00B9A2
+! Magenta
+*color5:  base0D
+*color13: base0D
 
-! Cyan, 7, 8
-*color6: #98CC70
-*color14: #ADD681
+! Cyan
+*color6:  base0E
+*color14: base0F
 
-! White, 5, 6
-*color7: #DBECEA
-*color15: #F6F9FF
+! White
+*color7:  base05
+*color15: base06

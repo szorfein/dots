@@ -157,12 +157,12 @@ If current directory is write-protected or if current user has not enough rights
 
 Git section consists of `git_branch` and `git_status` subsections. It is shown only in Git repositories.
 
-| Variable               |                                                  Default                                                   | Meaning                                                                                                         |
-| :--------------------- | :--------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------- |
-| `SPACESHIP_GIT_SHOW`   |                                                   `true`                                                   | Show Git section                                                                                                |
-| `SPACESHIP_GIT_PREFIX` |                                                   `on·`                                                    | Prefix before Git section                                                                                       |
-| `SPACESHIP_GIT_SUFFIX` |                                     `$SPACESHIP_PROMPT_DEFAULT_SUFFIX`                                     | Suffix after Git section                                                                                        |
-| `SPACESHIP_GIT_SYMBOL` | ![·](https://user-images.githubusercontent.com/3459374/34947621-4f324a92-fa13-11e7-9b99-cdba2cdda6b9.png) | Character to be shown before Git section (requires [powerline patched font](https://github.com/powerline/fonts) |
+| Variable               |                                                  Default                                                   | Meaning                                                                                                          |
+| :--------------------- | :--------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------------------- |
+| `SPACESHIP_GIT_SHOW`   |                                                   `true`                                                   | Show Git section                                                                                                 |
+| `SPACESHIP_GIT_PREFIX` |                                                   `on·`                                                    | Prefix before Git section                                                                                        |
+| `SPACESHIP_GIT_SUFFIX` |                                     `$SPACESHIP_PROMPT_DEFAULT_SUFFIX`                                     | Suffix after Git section                                                                                         |
+| `SPACESHIP_GIT_SYMBOL` | ![·](https://user-images.githubusercontent.com/3459374/34947621-4f324a92-fa13-11e7-9b99-cdba2cdda6b9.png) | Character to be shown before Git section (requires [powerline patched font](https://github.com/powerline/fonts)) |
 
 #### Git branch (`git_branch`)
 
@@ -238,6 +238,7 @@ Mercurial status indicators is shown only when you have dirty repository.
 Package version is shown when repository is a package.
 
 - **npm** — `npm` package contains a `package.json` file. We use `jq`, `python` to parse package version for improving performance and `node` as a fallback. Install [jq](https://stedolan.github.io/jq/) for **improved performance** of this section ([Why?](./troubleshooting.md#why-is-my-prompt-slow))
+- **lerna** — `lerna` monorepo contains a `lerna.json` file. We use `jq`, `python` to parse package version for improving performance and `node` as a fallback. Install [jq](https://stedolan.github.io/jq/) for **improved performance** of this section (same reason as npm).
 - **cargo** — `cargo` package contains a `Cargo.toml` file. Currently, we use `cargo pkgid`, it depends on `Cargo.lock`. So if package version isn't shown, you may need to run some command like `cargo build` which can generate `Cargo.lock` file.
 
 > **Note:** This is the version of the package you are working on, not the version of package manager itself.

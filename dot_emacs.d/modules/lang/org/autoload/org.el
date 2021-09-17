@@ -86,25 +86,6 @@
                (not (evil-emacs-state-p)))
       (evil-insert 1))))
 
-(defun +org--get-property (name &optional bound)
-  (save-excursion
-    (let ((re (format "^#\\+%s:[ \t]*\\([^\n]+\\)" (upcase name))))
-      (goto-char (point-min))
-      (when (re-search-forward re bound t)
-        (buffer-substring-no-properties (match-beginning 1) (match-end 1))))))
-
-;;;###autoload
-(defun +org-get-global-property (name &optional file bound)
-  "Get a document property named NAME (string) from an org FILE (defaults to
-current file). Only scans first 2048 bytes of the document."
-  (unless bound
-    (setq bound 256))
-  (if file
-      (with-temp-buffer
-        (insert-file-contents-literally file nil 0 bound)
-        (+org--get-property name))
-    (+org--get-property name bound)))
-
 ;;;###autoload
 (defun +org-get-todo-keywords-for (&optional keyword)
   "Returns the list of todo keywords that KEYWORD belongs to."
@@ -417,11 +398,14 @@ Made for `org-tab-first-hook' in evil-mode."
 (defun +org-yas-expand-maybe-h ()
   "Expand a yasnippet snippet, if trigger exists at point or region is active.
 Made for `org-tab-first-hook'."
-  (when (featurep! :editor snippets)
-    (require 'yasnippet)
-    (and (let ((major-mode (if (org-in-src-block-p t)
-                               (org-src-get-lang-mode (org-eldoc-get-src-lang))
-                             major-mode))
+  (when (and (featurep! :editor snippets)
+             (require 'yasnippet nil t)
+             (bound-and-true-p yas-minor-mode))
+    (and (let ((major-mode (cond ((org-in-src-block-p t)
+                                  (org-src-get-lang-mode (org-eldoc-get-src-lang)))
+                                 ((org-inside-LaTeX-fragment-p)
+                                  'latex-mode)
+                                 (major-mode)))
                (org-src-tab-acts-natively nil) ; causes breakages
                ;; Smart indentation doesn't work with yasnippet, and painfully slow
                ;; in the few cases where it does.
@@ -429,6 +413,9 @@ Made for `org-tab-first-hook'."
            (cond ((and (or (not (bound-and-true-p evil-local-mode))
                            (evil-insert-state-p)
                            (evil-emacs-state-p))
+                       (or (and (bound-and-true-p yas--tables)
+                                (gethash major-mode yas--tables))
+                           (progn (yas-reload-all) t))
                        (yas--templates-for-key-at-point))
                   (yas-expand)
                   t)

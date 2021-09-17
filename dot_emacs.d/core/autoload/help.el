@@ -126,11 +126,12 @@ selection of all minor-modes, active or not."
                              (<= level depth))
                          (or (null tags)
                              (not (string-match-p ":TOC" tags))))
-                (let ((path (org-get-outline-path)))
+                (let ((path  (org-get-outline-path))
+                      (title (org-collect-keywords '("TITLE") '("TITLE"))))
                   (list (string-join
                          (list (string-join
                                 (append (when include-files
-                                          (list (or (+org-get-global-property "TITLE")
+                                          (list (or (cdr (assoc "TITLE" title))
                                                     (file-relative-name (buffer-file-name)))))
                                         path
                                         (when text
@@ -226,6 +227,8 @@ will be automatically appended to the result."
                   #'+ivy-file-search)
                  ((fboundp '+helm-file-search)
                   #'+helm-file-search)
+                 ((fboundp '+vertico-file-search)
+                  #'+vertico-file-search)
                  ((rgrep
                    (read-regexp
                     "Search for" (or initial-input 'grep-tag-default)
@@ -616,7 +619,7 @@ If prefix arg is present, refresh the cache."
               (insert "This package is configured in the following locations:")
               (dolist (location configs)
                 (insert "\n" indent)
-                (cl-destructuring-bind (file line _match)
+                (cl-destructuring-bind (file line _match &rest)
                     (split-string location ":")
                   (doom--help-insert-button location
                                             (expand-file-name file doom-emacs-dir)
@@ -721,20 +724,37 @@ config blocks in your private config."
   ;; REVIEW Replace with deadgrep
   (unless (executable-find "rg")
     (user-error "Can't find ripgrep on your system"))
-  (if (fboundp 'counsel-rg)
-      (let ((counsel-rg-base-command
-             (if (stringp counsel-rg-base-command)
-                 (format counsel-rg-base-command
-                         (concat "%s " (mapconcat #'shell-quote-argument dirs " ")))
-               (append counsel-rg-base-command dirs))))
-        (counsel-rg query nil "-Lz" prompt))
-    ;; TODO Add helm support?
-    (grep-find
-     (string-join
-      (append (list "rg" "-L" "--search-zip" "--no-heading" "--color=never"
-                    (shell-quote-argument query))
-              (mapcar #'shell-quote-argument dirs))
-      " "))))
+  (cond ((fboundp 'consult--grep)
+         (consult--grep
+          prompt
+          (lambda (input)
+            (pcase-let* ((cmd (split-string-and-unquote consult-ripgrep-args))
+                         (type (consult--ripgrep-regexp-type (car cmd)))
+                         (`(,arg . ,opts) (consult--command-split input))
+                         (`(,re . ,hl) (funcall consult--regexp-compiler arg type)))
+              (when re
+                (list :command
+                      (append cmd
+                              (and (eq type 'pcre) '("-P"))
+                              (list  "-e" (consult--join-regexps re type))
+                              opts
+                              dirs)
+                      :highlight hl))))
+          data-directory query))
+        ((fboundp 'counsel-rg)
+         (let ((counsel-rg-base-command
+                (if (stringp counsel-rg-base-command)
+                    (format counsel-rg-base-command
+                            (concat "%s " (mapconcat #'shell-quote-argument dirs " ")))
+                  (append counsel-rg-base-command dirs))))
+           (counsel-rg query nil "-Lz" (concat prompt ": "))))
+        ;; () TODO Helm support?
+        ((grep-find
+          (string-join
+           (append (list "rg" "-L" "--search-zip" "--no-heading" "--color=never"
+                         (shell-quote-argument query))
+                   (mapcar #'shell-quote-argument dirs))
+           " ")))))
 
 ;;;###autoload
 (defun doom/help-search-load-path (query)

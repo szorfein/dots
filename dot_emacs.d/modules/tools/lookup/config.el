@@ -151,10 +151,10 @@ Dictionary.app behind the scenes to get definitions.")
   ;; xref to be one too.
   (remove-hook 'xref-backend-functions #'etags--xref-backend)
   ;; ...however, it breaks `projectile-find-tag', unless we put it back.
-  (defadvice! +lookup--projectile-find-tag-a (orig-fn)
+  (defadvice! +lookup--projectile-find-tag-a (fn)
     :around #'projectile-find-tag
     (let ((xref-backend-functions '(etags--xref-backend t)))
-      (funcall orig-fn)))
+      (funcall fn)))
 
   ;; This integration is already built into evil
   (unless (featurep! :editor evil)
@@ -165,25 +165,26 @@ Dictionary.app behind the scenes to get definitions.")
     :when (featurep! :completion ivy)
     :config
     (set-popup-rule! "^\\*xref\\*$" :ignore t)
-    ;; xref initialization is different in Emacs 27 - there are two different
-    ;; variables which can be set rather than just one
-    (when EMACS27+
-      (setq xref-show-definitions-function #'ivy-xref-show-defs))
-    ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-    ;; commands other than xref-find-definitions too (eg project-find-regexp)
-    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+    (setq xref-show-definitions-function #'ivy-xref-show-defs
+          xref-show-xrefs-function       #'ivy-xref-show-xrefs)
 
     ;; HACK Fix #4386: `ivy-xref-show-xrefs' calls `fetcher' twice, which has
     ;; side effects that breaks in some cases (i.e. on `dired-do-find-regexp').
-    (defadvice! +lookup--fix-ivy-xrefs (orig-fn fetcher alist)
+    (defadvice! +lookup--fix-ivy-xrefs (fn fetcher alist)
       :around #'ivy-xref-show-xrefs
       (when (functionp fetcher)
         (setf (alist-get 'fetched-xrefs alist)
               (funcall fetcher)))
-      (funcall orig-fn fetcher alist)))
+      (funcall fn fetcher alist)))
 
   (use-package! helm-xref
-    :when (featurep! :completion helm)))
+    :when (featurep! :completion helm))
+
+  (use-package! consult-xref
+    :when (featurep! :completion vertico)
+    :init
+    (setq xref-show-xrefs-function       #'consult-xref
+          xref-show-definitions-function #'consult-xref)))
 
 
 ;;

@@ -34,10 +34,7 @@
 (after! epa
   ;; With GPG 2.1+, this forces gpg-agent to use the Emacs minibuffer to prompt
   ;; for the key passphrase.
-  (set (if EMACS27+
-           'epg-pinentry-mode
-         'epa-pinentry-mode) ; DEPRECATED `epa-pinentry-mode'
-       'loopback)
+  (set 'epg-pinentry-mode 'loopback)
   ;; Default to the first secret key available in your keyring.
   (setq-default
    epa-file-encrypt-to
@@ -276,7 +273,7 @@ Continues comments if executed from a commented line. Consults
         "s-l" #'goto-line
         ;; Restore OS undo, save, copy, & paste keys (without cua-mode, because
         ;; it imposes some other functionality and overhead we don't need)
-        "s-f" #'swiper
+        "s-f" (if (featurep! :completion vertico) #'consult-line #'swiper)
         "s-z" #'undo
         "s-Z" #'redo
         "s-c" (if (featurep 'evil) #'evil-yank #'copy-region-as-kill)
@@ -405,11 +402,13 @@ Continues comments if executed from a commented line. Consults
     "A-x" #'execute-extended-command)
 
   ;; A Doom convention where C-s on popups and interactive searches will invoke
-  ;; ivy/helm for their superior filtering.
+  ;; ivy/helm/vertico for their superior filtering.
   (when-let (command (cond ((featurep! :completion ivy)
                             #'counsel-minibuffer-history)
                            ((featurep! :completion helm)
-                            #'helm-minibuffer-history)))
+                            #'helm-minibuffer-history)
+                           ((featurep! :completion vertico)
+                            #'consult-history)))
     (define-key!
       :keymaps (append +default-minibuffer-maps
                        (when (featurep! :editor evil +everywhere)
@@ -434,9 +433,9 @@ Continues comments if executed from a commented line. Consults
         ;; auto-indent on newline by default
         :gi [remap newline] #'newline-and-indent
         ;; insert literal newline
-        :gi "S-RET"         #'+default/newline
-        :gi [S-return]      #'+default/newline
-        :gi "C-j"           #'+default/newline
+        :i  "S-RET"         #'+default/newline
+        :i  [S-return]      #'+default/newline
+        :i  "C-j"           #'+default/newline
 
         ;; Add new item below current (without splitting current line).
         :gi "C-RET"         #'+default/newline-below

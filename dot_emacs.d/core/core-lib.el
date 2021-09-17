@@ -215,8 +215,20 @@ See `eval-if!' for details on this macro's purpose."
 (defmacro fn! (arglist &rest body)
   "Returns (cl-function (lambda ARGLIST BODY...))
 The closure is wrapped in `cl-function', meaning ARGLIST will accept anything
-`cl-defun' will. "
+`cl-defun' will. Implicitly adds `&allow-other-keys' if `&key' is present in
+ARGLIST."
   (declare (indent defun) (doc-string 1) (pure t) (side-effect-free t))
+  ;; Don't complain about undeclared keys.
+  (when (memq '&key arglist)
+    (if (memq '&aux arglist)
+        (let (newarglist arg)
+          (while arglist
+            (setq arg (pop arglist))
+            (when (eq arg '&aux)
+              (push '&allow-other-keys newarglist))
+            (push arg newarglist))
+          (setq arglist (nreverse newarglist)))
+      (setq arglist (append arglist (list '&allow-other-keys)))))
   `(cl-function (lambda ,arglist ,@body)))
 
 (defmacro cmd! (&rest body)
@@ -366,16 +378,14 @@ This is a wrapper around `eval-after-load' that:
               ;; macros/packages.
               `(eval-after-load ',package ',(macroexp-progn body))))
     (let ((p (car package)))
-      (cond ((not (keywordp p))
-             `(after! (:and ,@package) ,@body))
-            ((memq p '(:or :any))
+      (cond ((memq p '(:or :any))
              (macroexp-progn
               (cl-loop for next in (cdr package)
                        collect `(after! ,next ,@body))))
             ((memq p '(:and :all))
-             (dolist (next (cdr package))
-               (setq body `((after! ,next ,@body))))
-             (car body))))))
+             (dolist (next (reverse (cdr package)) (car body))
+               (setq body `((after! ,next ,@body)))))
+            (`(after! (:and ,@package) ,@body))))))
 
 (defun doom--handle-load-error (e target path)
   (let* ((source (file-name-sans-extension target))
@@ -625,72 +635,7 @@ testing advice (when combined with `rotate-text').
 ;;
 ;;; Backports
 
-(eval-when! (version< emacs-version "27.0.90")
-  ;; DEPRECATED Backported from Emacs 27
-  (defmacro setq-local (&rest pairs)
-    "Make variables in PAIRS buffer-local and assign them the corresponding values.
-
-PAIRS is a list of variable/value pairs.  For each variable, make
-it buffer-local and assign it the corresponding value.  The
-variables are literal symbols and should not be quoted.
-
-The second VALUE is not computed until after the first VARIABLE
-is set, and so on; each VALUE can use the new value of variables
-set earlier in the ‘setq-local’.  The return value of the
-‘setq-local’ form is the value of the last VALUE.
-
-\(fn [VARIABLE VALUE]...)"
-    (declare (debug setq))
-    (unless (zerop (mod (length pairs) 2))
-      (error "PAIRS must have an even number of variable/value members"))
-    (let ((expr nil))
-      (while pairs
-        (unless (symbolp (car pairs))
-          (error "Attempting to set a non-symbol: %s" (car pairs)))
-        ;; Can't use backquote here, it's too early in the bootstrap.
-        (setq expr
-              (cons
-               (list 'set
-                     (list 'make-local-variable (list 'quote (car pairs)))
-                     (car (cdr pairs)))
-               expr))
-        (setq pairs (cdr (cdr pairs))))
-      (macroexp-progn (nreverse expr)))))
-
-(eval-when! (version< emacs-version "27.1")
-  ;; DEPRECATED Backported from Emacs 27. Remove when 26.x support is dropped.
-  (defun executable-find (command &optional remote)
-    "Search for COMMAND in `exec-path' and return the absolute file name.
-Return nil if COMMAND is not found anywhere in `exec-path'.  If
-REMOTE is non-nil, search on the remote host indicated by
-`default-directory' instead."
-    (if (and remote (file-remote-p default-directory))
-        (let ((res (locate-file
-                    command
-                    (mapcar
-                     (lambda (x) (concat (file-remote-p default-directory) x))
-                     (exec-path))
-                    exec-suffixes 'file-executable-p)))
-          (when (stringp res) (file-local-name res)))
-      ;; Use 1 rather than file-executable-p to better match the
-      ;; behavior of call-process.
-      (let ((default-directory
-              (let (file-name-handler-alist)
-                (file-name-quote default-directory))))
-        (locate-file command exec-path exec-suffixes 1)))))
-
-(eval-when! (not (fboundp 'exec-path))
-  ;; DEPRECATED Backported from Emacs 27.1. Remove when 26.x support is dropped.
-  (defun exec-path ()
-    "Return list of directories to search programs to run in remote subprocesses.
-The remote host is identified by `default-directory'.  For remote
-hosts that do not support subprocesses, this returns `nil'.
-If `default-directory' is a local directory, this function returns
-the value of the variable `exec-path'."
-    (let ((handler (find-file-name-handler default-directory 'exec-path)))
-      (if handler
-          (funcall handler 'exec-path)
-        exec-path))))
+;; None at the moment!
 
 (provide 'core-lib)
 ;;; core-lib.el ends here

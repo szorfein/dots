@@ -20,7 +20,9 @@ If there are conflicting keys across the two camps, the built-in ones are
 ignored. This makes it easy to override built-in snippets with private ones."
   (when (eq this-command 'yas-expand)
     (let* ((gc-cons-threshold most-positive-fixnum)
-           (choices (cl-remove-duplicates choices :test #'+snippets--remove-p)))
+           (choices (condition-case _
+                        (cl-remove-duplicates choices :test #'+snippets--remove-p)
+                      (wrong-type-argument choices))))
       (if (cdr choices)
           (cl-loop for fn in (cdr (memq '+snippets-prompt-private yas-prompt-functions))
                    if (funcall fn prompt choices display-fn)
@@ -297,15 +299,14 @@ shadow the default snippet)."
 ;;; Advice
 
 ;;;###autoload
-(defun +snippets-expand-on-region-a (orig-fn &optional no-condition)
+(defun +snippets-expand-on-region-a (fn &optional no-condition)
   "Fix off-by-one when expanding snippets on an evil visual region.
 
 Also strips whitespace out of selection. Also switches to insert mode. If
-`evil-local-mode' isn't enabled, or we're not in visual mode, run ORIG-FN as
-is."
+`evil-local-mode' isn't enabled, or we're not in visual mode, run FN as is."
   (if (not (and (bound-and-true-p evil-local-mode)
                 (evil-visual-state-p)))
-      (funcall orig-fn no-condition)
+      (funcall fn no-condition)
     ;; Trim whitespace in selected region, so as not to introduce extra
     ;; whitespace into `yas-selected-text'.
     (evil-visual-select (save-excursion
@@ -319,7 +320,7 @@ is."
                         'inclusive)
     (letf! ((defun region-beginning () evil-visual-beginning)
             (defun region-end () evil-visual-end))
-      (funcall orig-fn no-condition)))
+      (funcall fn no-condition)))
   (when (and (bound-and-true-p evil-local-mode)
              (not (or (evil-emacs-state-p)
                       (evil-insert-state-p)))

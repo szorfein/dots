@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; lang/ess/packages.el
 
-(package! ess :pin "126d34414ce5446d3f48320773114de83ae55bdc")
+(package! ess :pin "a7ce81bb768d7cc410885711cf99bad0f8941ac3")
 (package! ess-R-data-view :pin "d6e98d3ae1e2a2ea39a56eebcdb73e99d29562e9")
-(package! polymode :pin "b3871e946d278a256d95a3bd4615b1df234ad75a")
+(package! polymode :pin "54888d6c15249503e1a66da7bd7761a9eda9b075")
 (package! poly-R :pin "c42ff3a4d0da96ccb7f826dca5c6b2eb558a2ab5")

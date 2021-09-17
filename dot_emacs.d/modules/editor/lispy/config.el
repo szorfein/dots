@@ -39,13 +39,6 @@
           additional-insert))
   :config
   (lispyville-set-key-theme)
-;; REVIEW Delete this once https://github.com/noctuid/lispyville/pull/297 is merged
-  (defadvice! +lispy--fix-lispyville-end-of-defun-a (_)
-    "lispyville-end-of-defun doesn't go to the next defun when
-point is already at the end of a defun, whereas
-lispyville-beginning-of-defun does."
-    :before #'lispyville-end-of-defun
-    (when (<= (- (line-end-position)
-                 (point))
-              1)
-      (forward-line))))
+  (add-hook! 'evil-escape-inhibit-functions
+    (defun +lispy-inhibit-evil-escape-fn ()
+      (and lispy-mode (evil-insert-state-p)))))

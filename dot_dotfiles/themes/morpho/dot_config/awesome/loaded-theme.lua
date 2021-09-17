@@ -11,8 +11,8 @@ mytheme.name = "morpho"
 
 -- xrdb variables and fallback
 mytheme.x = {
-  background = xrdb.color0 or "#121212",
-  surface = xrdb.color0 or "#000000",
+  background = xrdb.background or "#121212",
+  surface = xrdb.background or "#000000",
   dark_primary = "#28233D", -- branded dark surface
 
   primary = xrdb.color6 or "#9afff9", -- cyan

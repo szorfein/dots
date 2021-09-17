@@ -1,4 +1,4 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; ui/nav-flash/packages.el
 
-(package! nav-flash :pin "d76314802273153c2c38156250d75f95ca352482")
+(package! nav-flash :pin "2e31f32085757e1dfdd8ec78e9940fd1c88750de")

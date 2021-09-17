@@ -64,7 +64,6 @@ results buffer.")
         ivy-fixed-height-minibuffer t
         ivy-read-action-function #'ivy-hydra-read-action
         ivy-read-action-format-function #'ivy-read-action-format-columns
-        projectile-completion-system 'ivy
         ;; don't show recent files in switch-buffer
         ivy-use-virtual-buffers nil
         ;; ...but if that ever changes, show their full path
@@ -212,10 +211,10 @@ results buffer.")
   ;; HACK Fix an issue where `counsel-projectile-find-file-action' would try to
   ;;      open a candidate in an occur buffer relative to the wrong buffer,
   ;;      causing it to fail to find the file we want.
-  (defadvice! +ivy--run-from-ivy-directory-a (orig-fn &rest args)
+  (defadvice! +ivy--run-from-ivy-directory-a (fn &rest args)
     :around #'counsel-projectile-find-file-action
     (let ((default-directory (ivy-state-directory ivy-last)))
-      (apply orig-fn args)))
+      (apply fn args)))
 
   ;; Don't use ^ as initial input. Set this here because `counsel' defines more
   ;; of its own, on top of the defaults.

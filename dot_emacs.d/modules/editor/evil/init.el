@@ -39,12 +39,12 @@
       ert
       free-keys
       helm
+      help
       indent
       image
       kotlin-mode
       occur
       outline
-      package-menu
       simple
       slime
       lispy)
@@ -58,6 +58,9 @@ variable for an explanation of the defaults (in comments). See
   (defvar evil-collection-want-unimpaired-p nil)
   ;; Doom binds goto-reference on gD and goto-assignments on gA ourselves
   (defvar evil-collection-want-find-usages-bindings-p nil)
+  ;; Reduces keybind conflicts between outline-mode and org-mode (which is
+  ;; derived from outline-mode).
+  (defvar evil-collection-outline-enable-in-minor-mode-p nil)
 
   ;; We handle loading evil-collection ourselves
   (defvar evil-collection--supported-modes nil)
@@ -88,6 +91,7 @@ variable for an explanation of the defaults (in comments). See
       apropos
       arc-mode
       auto-package-update
+      beginend
       bm
       bookmark
       (buff-menu "buff-menu")
@@ -106,6 +110,7 @@ variable for an explanation of the defaults (in comments). See
       deadgrep
       debbugs
       debug
+      devdocs
       dictionary
       diff-mode
       dired
@@ -123,6 +128,7 @@ variable for an explanation of the defaults (in comments). See
       elisp-mode
       elisp-refs
       elisp-slime-nav
+      embark
       emms
       epa
       ert
@@ -130,6 +136,7 @@ variable for an explanation of the defaults (in comments). See
       eval-sexp-fu
       evil-mc
       eww
+      fanyi
       finder
       flycheck
       flymake
@@ -169,6 +176,7 @@ variable for an explanation of the defaults (in comments). See
       man
       magit
       magit-todos
+      markdown-mode
       monky
       mu4e
       mu4e-conversation
@@ -202,20 +210,25 @@ variable for an explanation of the defaults (in comments). See
       robe
       rtags
       ruby-mode
+      scroll-lock
+      selectrum
       sh-script
+      ,@(when EMACS28+ '(shortdoc))
       simple
       slime
       sly
       speedbar
       tablist
       tar-mode
+      telega
       (term term ansi-term multi-term)
       tetris
-      ,@(if EMACS27+ '(thread))
+      thread
       tide
       timer-list
       transmission
       trashed
+      tuareg
       typescript-mode
       vc-annotate
       vc-dir
@@ -247,10 +260,10 @@ and complains if a module is loaded too early (during startup)."
       (with-demoted-errors "evil-collection error: %s"
         (evil-collection-init (list module)))))
 
-  (defadvice! +evil-collection-disable-blacklist-a (orig-fn)
+  (defadvice! +evil-collection-disable-blacklist-a (fn)
     :around #'evil-collection-vterm-toggle-send-escape  ; allow binding to ESC
     (let (evil-collection-key-blacklist)
-      (funcall-interactively orig-fn)))
+      (funcall-interactively fn)))
 
   ;; These modes belong to packages that Emacs always loads at startup, causing
   ;; evil-collection and it's co-packages to all load immediately. We avoid this
@@ -276,9 +289,8 @@ and complains if a module is loaded too early (during startup)."
   (after! evil
     ;; Emacs loads these two packages immediately, at startup, which needlessly
     ;; convolutes load order for evil-collection-help.
-    (defer-feature! help help-mode)
-    (defer-feature! help-mode help-mode)
-
+    (add-transient-hook! 'help-mode
+      (+evil-collection-init 'help))
     (add-transient-hook! 'Buffer-menu-mode
       (+evil-collection-init '(buff-menu "buff-menu")))
     (add-transient-hook! 'calc-mode
@@ -299,9 +311,8 @@ and complains if a module is loaded too early (during startup)."
       (+evil-collection-init '(process-menu simple)))
     (add-transient-hook! 'tabulated-list-mode
       (+evil-collection-init 'tabulated-list))
-    (when EMACS27+
-      (add-transient-hook! 'tab-bar-mode
-        (+evil-collection-init 'tab-bar)))
+    (add-transient-hook! 'tab-bar-mode
+      (+evil-collection-init 'tab-bar))
 
     ;; HACK Do this ourselves because evil-collection break's `eval-after-load'
     ;;      load order by loading their target plugin before applying keys. This
