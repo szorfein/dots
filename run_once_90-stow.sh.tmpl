@@ -2,8 +2,8 @@
 
 set -o errexit
 
-DOTS={{ .chezmoi.homedir }}/.dotfiles
-DEST={{ .chezmoi.homedir }}
+DOTS="$HOME"/.dotfiles
+DEST="$HOME"
 
 if cat /tmp/awesome-theme 2>/dev/null ; then
   LAST_THEME="$(cat /tmp/awesome-theme)"

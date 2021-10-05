@@ -99,7 +99,7 @@ determine the exact padding."
    (vertical-bar   (doom-darken base1 0.1))
    (selection      dark-blue)
    (builtin        magenta)
-   (comments       (if doom-shadow-brighter-comments dark-cyan base5))
+   (comments       (if doom-shadow-brighter-comments dark-cyan base6))
    (doc-comments   (doom-lighten (if doom-shadow-brighter-comments dark-cyan base5) 0.25))
    (constants      violet)
    (functions      magenta)
