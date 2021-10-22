@@ -358,6 +358,15 @@ Ugh, such an ugly hack."
     (funcall fn function)))
 
 
+;;;###package undo-tree
+(defadvice! +popup--use-popup-window-for-undo-tree-visualizer-a (fn &rest args)
+  "TODO"
+  :around #'undo-tree-visualize
+  (if undo-tree-visualizer-diff
+      (apply fn args)
+    (letf! ((#'switch-to-buffer-other-window #'pop-to-buffer))
+      (apply fn args))))
+
 ;;;###package wgrep
 (progn
   ;; close the popup after you're done with a wgrep buffer
@@ -374,9 +383,9 @@ Ugh, such an ugly hack."
           which-key-custom-hide-popup-function #'which-key--hide-buffer-side-window
           which-key-custom-show-popup-function
           (lambda (act-popup-dim)
-            (letf! ((defun display-buffer-in-side-window (buffer alist)
-                      (+popup-display-buffer-stacked-side-window-fn
-                       buffer (append '((vslot . -9999)) alist))))
+            (letf! (defun display-buffer-in-side-window (buffer alist)
+                     (+popup-display-buffer-stacked-side-window-fn
+                      buffer (append '((vslot . -9999) (select . t)) alist)))
               ;; HACK Fix #2219 where the which-key popup would get cut off.
               (setcar act-popup-dim (1+ (car act-popup-dim)))
               (which-key--show-buffer-side-window act-popup-dim))))))

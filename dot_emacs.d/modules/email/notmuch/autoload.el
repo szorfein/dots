@@ -4,16 +4,16 @@
 (defun =notmuch ()
   "Activate (or switch to) `notmuch' in its workspace."
   (interactive)
-  (unless (featurep! :ui workspaces)
-    (user-error ":ui workspaces is required, but disabled"))
   (condition-case-unless-debug e
       (progn
-        (+workspace-switch "*MAIL*" t)
+        (when (featurep! :ui workspaces)
+          (+workspace-switch "*MAIL*" t))
         (if-let* ((buf (cl-find-if (lambda (it) (string-match-p "^\\*notmuch" (buffer-name (window-buffer it))))
                                    (doom-visible-windows))))
             (select-window (get-buffer-window buf))
           (funcall +notmuch-home-function))
-        (+workspace/display))
+        (when (featurep! :ui workspaces)
+          (+workspace/display)))
     ('error
      (+notmuch/quit)
      (signal (car e) (cdr e)))))
@@ -28,7 +28,8 @@
   (interactive)
   ;; (+popup/close (get-buffer-window "*notmuch-hello*"))
   (doom-kill-matching-buffers "^\\*notmuch")
-  (+workspace/delete "*MAIL*"))
+  (when (featurep! :ui workspaces)
+    (+workspace/delete "*MAIL*")))
 
 (defun +notmuch-get-sync-command ()
   "Return a shell command string to synchronize your notmuch mmail with."
@@ -60,20 +61,17 @@
   "Sync notmuch emails with server."
   (interactive)
   (with-current-buffer (compile (+notmuch-get-sync-command))
-    (let ((w (get-buffer-window (current-buffer))))
-      (select-window w)
-      (add-hook
-       'compilation-finish-functions
-       (lambda (buf status)
-         (if (equal status "finished\n")
-             (progn
-               (delete-window w)
-               (kill-buffer buf)
-               (notmuch-refresh-all-buffers)
-               (message "Notmuch sync successful"))
-           (user-error "Failed to sync notmuch data")))
-       nil
-       'local))))
+    (add-hook
+     'compilation-finish-functions
+     (lambda (buf status)
+       (if (equal status "finished\n")
+           (progn
+             (kill-buffer buf)
+             (notmuch-refresh-all-buffers)
+             (message "Notmuch sync successful"))
+         (user-error "Failed to sync notmuch data")))
+     nil
+     'local)))
 
 ;;;###autoload
 (defun +notmuch/search-delete ()

@@ -20,7 +20,7 @@ display_bitrate = "yes"
 enable_window_title = "yes"
 ask_before_clearing_playlists = "no"
 visualizer_type = "ellipse"
-visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_data_source = "/tmp/mpd.fifo"
 ignore_leading_the = "yes"
 
 # Playlist

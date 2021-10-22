@@ -36,7 +36,7 @@ mytheme.x = {
 
 -- fonts
 mytheme.f = {
-  h1 = (height >= 1024 and "SpaceMono Nerd Font Mono 50" or "SpaceMono Nerd Font Regular 38"), -- used rarely on big icon or big title
+  h1 = (height >= 1024 and "SpaceMono Nerd Font Mono 50" or "SpaceMono Nerd Font Regular 35"), -- used rarely on big icon or big title
   h4 = "SpaceMono Nerd Font 32",
   h5 = "Material Design Icons Desktop Regular 20", -- icon for h6
   h6 = "SpaceMono Nerd Font Mono Regular 20",

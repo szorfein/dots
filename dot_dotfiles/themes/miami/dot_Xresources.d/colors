@@ -5,14 +5,14 @@
 ! material: https://material.io/tools/color 
 
 ! BG !
-! theme0  #241c22
-! theme1  #2a2228
-! theme2  #2e252a
-! theme3  #30222C
+#define base00 #241c22
+#define base01 #2a2228
+#define base02 #2e252a
+#define base03 #30222C
 !! FG !!
-! theme4  #ffe0b2
-! theme5  #fff59d
-! theme6  #fffdc4
+#define base04 #ffe0b2
+#define base05 #fff59d
+#define base06 #fffdc4
 !! Primary, Secondary !!
 ! theme7  #ff804c
 ! theme8  #ff966d
@@ -26,13 +26,13 @@
 ! theme14 #b9c489
 ! theme15 #d79fda
 
-! Theme 1, 4
-*background: #2A2228
-*foreground: #FFE0B2
+*background: base00
+*foreground: base05
+*.cursorColor: base04
 
-! Black, 0, 3
-*color0: #241C22
-*color8: #30222C
+! Black
+*color0: base01
+*color8: base02
 
 ! Red, 11, 12
 *color1: #CD4864
@@ -58,6 +58,6 @@
 *color6: #FF804C
 *color14: #FF966D
 
-! White, 5, 6
-*color7: #FFF59D
-*color15: #FFFDC4
+! White
+*color7:  base05
+*color15: base06
