@@ -15,6 +15,8 @@ editor_cmd = terminal_cmd .. editor
 {{- if eq .system.sound "alsa" }}
   {{- if eq .chezmoi.osRelease.id "arch" }}
 web_browser = "brave"
+  {{- else if eq .chezmoi.osRelease.id "void" }}
+web_browser = "firefox"
   {{- else }}
 web_browser = "brave-bin"
   {{- end }}

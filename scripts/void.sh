@@ -15,11 +15,11 @@ install_deps() {
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
     neomutt ImageMagick msmtp weechat rofi
     youtube-dl papirus-icon-theme mpc lightdm-gtk3-greeter inotify-tools
-    light stow unzip arc-theme ffmpegthumbnailer tmux"
+    light stow unzip arc-theme ffmpegthumbnailer tmux firefox"
 }
 
 install_pulse() {
-  pkgs="$pkgs pulseaudio pulseaudio-equalizer-ladspa firefox"
+  pkgs="$pkgs pulseaudio pulseaudio-equalizer-ladspa"
 }
 
 install_alsa() {
@@ -36,6 +36,16 @@ install_vim() {
 
 install_extra_deps() {
   :
+}
+
+make_service() {
+  echo "adding service for $1..."
+  [ -s /var/service/"$1" ] || sudo ln -s /etc/sv/"$1" /var/service/"$1"
+}
+
+services() {
+  if "$ALSA" ; then make_service alsa ; fi
+  make_service lightdm
 }
 
 usage() {
@@ -81,6 +91,8 @@ main() {
   sudo $ins $pkgs
 
   "$EXTRA" && install_extra_deps
+
+  services
 
   exit 0
 }

@@ -1,10 +1,10 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
 Work only on distro linux including the installer: ( tested on a fresh install of Gentoo, Archlinux, Void and Debian )  
-+ `emerge`: Gentoo, Pentoo, no Funtoo because this require `systemd`.
++ `emerge`: Gentoo, Pentoo, Funtoo.
 + `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
 + `apt-get`: Debian, Kali, etc...
-+ `xbps-install`: Void
++ `xbps-install`: Voidlinux. Tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
 
 Why i switch on chezmoi?
 + Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
@@ -42,7 +42,7 @@ Why i switch on chezmoi?
 |---|---|---|
 | alsa | Audio Driver | Can be change in the config file if you prefer pulseaudio |
 | awesome | Window Manager | Configs recreate from scratch |
-| brave | Web Browser | brave-bin with alsa, firefox with pulseaudio |
+| brave, firefox | Web Browser | Brave with alsa, Firefox with pulseaudio (except for Voidlinux) |
 | feh | Image Viewer | |
 | i3lock-color | Lock Screen | for now, maybe [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) later |
 | lightdm | Display Manager | (lightdm-gtk-greeter) |
@@ -51,7 +51,6 @@ Why i switch on chezmoi?
 | neomutt | Email Reader | with fdm and msmtp, customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
-| systemd | Init System | Even on gentoo :) |
 | tmux | Terminal multiplexer | |
 | vifm | File Manager | With [image preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim, emacs | Editors | I use the both |
@@ -69,13 +68,17 @@ With `emerge` (gentoo):
 
 With `pacman` (arch,...):
 
-    $ sudo pacman -S chezmoi sudo git vim
+    # pacman -S chezmoi sudo git vim
 
 With `apt-get` (debian,...)
 
-    $ sudo apt-get install sudo git vim
-    $ wget -cv https://github.com/twpayne/chezmoi/releases/download/v1.8.0/chezmoi_1.8.0_linux_amd64.deb
-    $ sudo dpkg -i chezmoi_1.8.0_linux_amd64.deb
+    # apt-get install sudo git vim
+    # wget -cv https://github.com/twpayne/chezmoi/releases/download/v2.9.4/chezmoi_2.9.4_linux_amd64.deb
+    $ sudo dpkg -i chezmoi_2.9.4_linux_amd64.deb
+
+For `voidlinux`:
+
+    # xbps-install chezmoi git sudo
 
 `sudo`, user should have permission for install packages:
 
