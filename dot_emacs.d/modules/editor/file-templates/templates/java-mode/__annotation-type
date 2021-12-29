@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: Java annotation type file template
-# --
-package `(+java-current-package)`;
-
-public @interface `(+java-current-class)`
-{
-    $0
-}
