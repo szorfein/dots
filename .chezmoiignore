@@ -1,9 +1,12 @@
+.oh-my-zsh/cache/**
+
 README.md
 LICENSE
 Makefile
 asound
 scripts
-*.tar.gz
+
 {{- if ne .github.name "szorfein" }}
 .weechat/certs
+.ssh/gem*.pem
 {{- end }}
