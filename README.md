@@ -114,6 +114,7 @@ For emacs, when the installation is terminated, you have to manually install the
 
     M-x all-the-icons-install-fonts
 
+<!--
 ### Remove secrets
 I use GPG to encrypt some things here, you can remove them to avoid the issue [#6](https://github.com/szorfein/dots/issues/6).
 
@@ -121,6 +122,7 @@ I use GPG to encrypt some things here, you can remove them to avoid the issue [#
     $ git rm private_dot_ssh/encrypted_private_gem*.pem
     $ git commit -m "remove secret"
 
+-->
 ### Apply
 `apply` will install all the dependencies and add files to your $HOME.
 
