@@ -6,7 +6,11 @@ destdir=~/.oh-my-zsh/custom/themes/spaceship-prompt
 
 echo "Execute $0..."
 
-ln -sf ${destdir}/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
+[ -L "${destdir}"/spaceship.zsh-theme ] \
+  || ln -s ${destdir}/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 
 zsh=$(whereis zsh | awk '{print $2}')
-chsh -s "$zsh"
+
+if ! grep "^$USER" /etc/passwd | grep -q zsh ; then
+  chsh -s "$zsh"
+fi

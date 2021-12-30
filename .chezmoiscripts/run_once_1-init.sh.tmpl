@@ -2,9 +2,9 @@
 
 set -o errexit
 
-cyan=$'\e[0;96m'
-white=$'\e[0;97m'
-endc=$'\e[0m'
+cyan="\033[0;96m"
+white="\033[0;97m"
+endc="\033[0m"
 
 msg() {
   echo "$cyan--------------------------------------------------$endc"
