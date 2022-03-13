@@ -31,7 +31,7 @@ install_emacs() {
 }
 
 install_vim() {
-  pkgs="$pkgs vim"
+  pkgs="$pkgs vim vim-x11"
 }
 
 install_extra_deps() {
@@ -46,6 +46,7 @@ make_service() {
 services() {
   if "$ALSA" ; then make_service alsa ; fi
   make_service lightdm
+  make_service acpid
 }
 
 usage() {

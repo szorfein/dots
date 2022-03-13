@@ -6,3 +6,9 @@ alias vifm=vifmrun
 
 # make xclip work with voidlinux
 alias xclip='xclip -sel clip'
+
+{{- if eq .chezmoi.osRelease.id "void" }}
+alias vim='vim-x11'
+{{- end }}
+
+alias streload='xrdb merge ~/.Xresources && kill -USR1 $(pidof st)'

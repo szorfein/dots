@@ -1,3 +1,5 @@
+{{- $personal := false -}}{{/* true if this machine should have personal secrets from pass */}}
+
 {{/* Github account (if any) */}}
 {{- $github_username := promptString "Github username" -}}
 {{- $github_email := false -}}
@@ -11,6 +13,7 @@
 {{- $key_recipient = "B5D8FFD0D7F1FB6A43505E319CC9729A2E369CB3" -}}
 {{- $key_sign = "8E3785DE31AAE73F98098744FD696BDDAA8FDC50" -}}
 {{- $key_encrypt = "59154216260D8EA2580DF9D4E2ADD2080A6B28AE" -}}
+{{- $personal = true -}}
 {{- end -}}
 
 {{- $soundcard := "0" -}}
