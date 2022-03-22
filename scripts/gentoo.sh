@@ -32,7 +32,7 @@ install_deps() {
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf
     neomutt msmtp cava ueberzug weechat i3lock-color rofi youtube-dl
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow
-    arc-theme ffmpegthumbnailer tmux fdm"
+    arc-theme ffmpegthumbnailer tmux fdm xss-lock"
 }
 
 install_pulse() {

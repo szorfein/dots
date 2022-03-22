@@ -27,7 +27,7 @@ apply_theme() {
 
 # Remove any previous stow links
 echo "Removing old Stow links..."
-for dir in ncmpcpp vifm vim .x picom tmux awesomewm; do
+for dir in ncmpcpp vifm vim .x tmux awesomewm; do
   cd "$DOTS"
   [ -d "$dir" ] && stow -D "$dir" -t "$DEST"
 done
@@ -37,7 +37,6 @@ echo "Applying Stow links..."
   && apply ncmpcpp \
   && apply vifm \
   && apply .x \
-  && apply picom \
   && apply tmux \
   && apply vim \
   && apply awesomewm \

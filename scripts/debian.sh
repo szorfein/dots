@@ -28,7 +28,7 @@ install_deps() {
 
   sudo $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit \
     xserver-xorg-core xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm \
-    neomutt imagemagick msmtp msmtp-mta weechat rofi youtube-dl \
+    neomutt imagemagick msmtp msmtp-mta weechat rofi youtube-dl xss-lock \
     papirus-icon-theme mpc lightdm inotify-tools stow arc-theme tmux gcc $pkgs
 }
 
