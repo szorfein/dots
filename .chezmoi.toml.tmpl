@@ -17,7 +17,8 @@
 {{- end -}}
 
 {{- $soundcard := "0" -}}
-{{- $board_name := output "cat" "/sys/devices/virtual/dmi/id/board_name" | trim -}}
+{{- $fullpath := printf "%s/%s" .chezmoi.sourceDir "scripts/board_name.sh" -}}
+{{- $board_name := output $fullpath | trim -}}
 {{- if eq $board_name "W51XTU" -}}
 {{- $soundcard = "hw:Pro" -}}
 {{- end -}}
