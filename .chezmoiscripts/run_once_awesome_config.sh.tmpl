@@ -1,13 +1,13 @@
 #!/usr/bin/env sh
 
-set -e
+set -o errexit
 
 DIR="${HOME}/.config/awesome/config"
 DEST="$DIR/env.lua"
 
 [ -d "$DIR" ] || mkdir -p "$DIR"
 
-cat <<EOF | tee "$DEST"
+cat >"$DEST" <<EOF
 terminal = os.getenv("TERMINAL") or "xst"
 terminal_cmd = terminal .. " -e "
 editor = "{{ .system.editor }}"
