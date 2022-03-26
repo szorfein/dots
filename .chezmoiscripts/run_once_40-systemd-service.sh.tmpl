@@ -38,9 +38,10 @@ if hash systemctl 2>/dev/null ; then
   done
 fi
 
-echo ""
-# Configure lightdm here
-cat << EOF | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf
+echo "Installing Lightdm config..."
+FILE="/tmp/lightdm-$$"
+
+cat >"$FILE" <<EOF
 [greeter]
 
 # Appearance
@@ -63,5 +64,7 @@ indicators = ~session;~spacer;~spacer;~layout;~~ ;~clock
 allow-debugging = false
 laptop = false
 EOF
+
+sudo install -m0644 "$FILE" /etc/lightdm/lightdm-gtk-greeter.conf
 
 trap bye EXIT
