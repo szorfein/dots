@@ -109,12 +109,12 @@ It will install firefox rather than brave-bin and modify a lot of things during 
 ### Apply
 `apply` will install all the dependencies and add files to your $HOME.
 
-    $ chezmoi diff
     $ chezmoi apply
 
 ## Update
 From time to time, start the update simply with:
 
+    $ chezmoi diff
     $ chezmoi update
 
 ## Final settings
@@ -123,7 +123,7 @@ If you have not yet configure X, change the keyboard layout like this:
     $ localectl list-x11-keymap-layouts | grep fr
     $ sudo localectl set-x11-keymap fr
 
-For emacs, when the installation is terminated, you have to manually install the package `all-the-icons` like this, start `emacs` and:
+For emacs, when the installation is terminated, you have to manually install the package [all-the-icons](https://github.com/domtronn/all-the-icons.el#installing-fonts) like this, start `emacs` and:
 
     M-x all-the-icons-install-fonts
 

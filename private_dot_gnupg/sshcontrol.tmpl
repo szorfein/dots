@@ -1,3 +1,4 @@
-{{- if eq .github.name "szorfein" }}
-{{- pass "github/sshcontrol" }}
+{{- if eq .github.name "szorfein" -}}
+{{ pass "ssh_control/github" }}
+{{ pass "ssh_control/ansible" }}
 {{- end }}
