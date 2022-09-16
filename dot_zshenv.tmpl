@@ -1,8 +1,10 @@
 # PATH
 PATH="$HOME/bin:$PATH"
 
+# https://wiki.archlinux.org/title/Ruby#Setup
 if hash ruby 2>/dev/null ; then
-  PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+  export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+  PATH="$PATH:$GEM_HOME/bin"
 fi
 
 if hash yarn 2>/dev/null ; then
