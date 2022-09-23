@@ -3,7 +3,7 @@
 set -o errexit -o nounset
 
 ins="pacman -S --noconfirm --needed"
-pkgs_aur="xst-git nerd-fonts-iosevka cava python-ueberzug i3lock-color"
+pkgs_aur="xst-git cava i3lock-color"
 
 build() {
   PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
@@ -23,9 +23,9 @@ build() {
 install_deps() {
   pkgs="gnupg pass xclip zsh awesome mpd ncmpcpp xorg-xinit xorg-server
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
-    neomutt imagemagick msmtp msmtp-mta weechat rofi openssh
+    neomutt imagemagick msmtp msmtp-mta weechat rofi openssh ttf-iosevka-nerd
     youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools
-    light stow unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock"
+    light stow unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug"
 }
 
 install_pulse() {

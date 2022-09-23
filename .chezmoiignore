@@ -11,3 +11,5 @@ scripts
 .weechat/certs
 .ssh/gem*.asc
 {{- end }}
+
+.dotfiles/vifm/.config/vifm/*.txt
