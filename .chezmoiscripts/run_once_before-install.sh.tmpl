@@ -5,8 +5,10 @@ set -o errexit -o nounset
 echo "Running before chezmoiexternal"
 echo "{{ .chezmoi.osRelease.id }}"
 
+lib="{{ .chezmoi.sourceDir }}/scripts/lib.sh"
 script="{{ .chezmoi.sourceDir }}/scripts/{{ .chezmoi.osRelease.id }}/deps.sh"
 
 [ -f "$script" ] || die "Your distro {{ .chezmoi.osRelease.id }} is not yet supported."
 echo "Running before $script"
+. "$lib"
 . "$script"
