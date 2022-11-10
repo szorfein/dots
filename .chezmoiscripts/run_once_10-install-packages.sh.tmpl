@@ -38,9 +38,9 @@ args="$args --sound-pulse"
 
 args="$args --extra-deps"
 
-script="{{ .chezmoi.sourceDir }}/scripts/{{ .osRelease.id }}.sh"
+script="{{ .chezmoi.sourceDir }}/scripts/{{ .chezmoi.osRelease.id }}.sh"
 
-[ -f "$script" ] || die "Your distro {{ .osRelease.id }} is not yet supported."
+[ -f "$script" ] || die "Your distro {{ .chezmoi.osRelease.id }} is not yet supported."
 
 echo "Running after $script"
 #. "$script" $args
