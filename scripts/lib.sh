@@ -2,13 +2,31 @@
 
 set -o errexit -o nounset
 
+cyan="\033[1;36m"
+white="\033[0;38m"
+endc="\033[0m"
+
 die() { echo "[-] $1"; exit 1; }
+
+msg() {
+  echo "$cyan--------------------------------------------------$endc"
+  echo "$cyan-->$white $1 $endc"
+  echo ""
+}
+
+bye() {
+  echo ""
+  echo "$cyan-->$white End for $0 $endc"
+  echo "$cyan--------------------------------------------------$endc"
+}
+
+trap bye EXIT
 
 search_auth() {
   if hash doas 2>/dev/null ; then
-    return "doas"
+    AUTH="doas"
   elif hash sudo 2>/dev/null ; then
-    return "sudo"
+    AUTH="sudo"
   else
     die "No pkg doas or sudo found, please install and configure one for $USER."
   fi
