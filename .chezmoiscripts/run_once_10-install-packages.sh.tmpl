@@ -4,9 +4,11 @@ set -o errexit
 
 xst_version="master"
 
-cyan="\033[0;96m"
-white="\033[0;97m"
+cyan="\033[1;36m"
+white="\033[0;38m"
 endc="\033[0m"
+
+die() { echo "[-] $1"; exit 1; }
 
 msg() {
   echo "$cyan--------------------------------------------------$endc"
@@ -19,6 +21,8 @@ bye() {
   echo "$cyan-->$white End for $0 $endc"
   echo "$cyan--------------------------------------------------$endc"
 }
+
+trap bye EXIT
 
 msg "Execute $0..."
 
@@ -34,22 +38,9 @@ args="$args --sound-pulse"
 
 args="$args --extra-deps"
 
-if hash emerge 2>/dev/null ; then
+script="{{ .chezmoi.sourceDir }}/scripts/{{ .osRelease.id }}.sh"
 
-  . {{ .chezmoi.sourceDir }}/scripts/gentoo.sh $args
+[ -f "$script" ] || die "Your distro {{ .osRelease.id }} is not yet supported."
 
-elif hash pacman 2>/dev/null ; then
-
-  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh $args
-
-elif hash apt-get 2>/dev/null ; then
-
-  sh {{ .chezmoi.sourceDir }}/scripts/debian.sh $args
-
-elif hash xbps-install 2>/dev/null ; then
-
-  sh {{ .chezmoi.sourceDir }}/scripts/void.sh $args
-
-fi
-
-trap bye EXIT
+echo "Running after $script"
+#. "$script" $args
