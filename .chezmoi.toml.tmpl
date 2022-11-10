@@ -1,5 +1,5 @@
 {{- $manage_secret := false -}}{{/* true if this machine store secrets with gpg and pass */}}
-{{- $personal := false -}}{{/* true if this machine should have personal secrets from pass */}}
+{{- $personal := false -}}{{/* true if you can manage my github repos */}}
 
 {{/* Github account (if any) */}}
 {{- $github_username := promptString "Github username" -}}
@@ -32,6 +32,7 @@ encryption = "gpg"
 {{- end -}}
 [data]
   name = "{{ $github_username }}"
+  personal = {{ $personal }}
   [data.github] # used to generate the ~/.gitconfig
     email = "{{ $github_email }}"
     name = "{{ $github_username }}"

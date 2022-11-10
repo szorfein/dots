@@ -1,0 +1,64 @@
+[".vim/autoload/plug.vim"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    refreshPeriod = "168h"
+[".oh-my-zsh"]
+    type = "archive"
+    url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".oh-my-zsh/custom/themes/spaceship-prompt"]
+    type = "archive"
+    url = "https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v3.16.1.tar.gz"
+    exact = true
+    stripComponents = 1
+[".emacs.d"]
+    type = "archive"
+    url = "https://github.com/hlissner/doom-emacs/archive/develop.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+{{- if $personal -}}
+[".dotfiles"]
+    type = "git-repo"
+    url = "https://github.com/szorfein/dotfiles"
+    refreshPeriod = "0"
+[".ansible/collections/ansible_collections/szorfein/hardening"]
+    type = "git-repo"
+    url = "https://github.com/szorfein/ansible-collection-hardening"
+    refreshPeriod = "0"
+[".ansible/collections/ansible_collections/szorfein/privacy"]
+    type = "git-repo"
+    url = "https://github.com/szorfein/ansible-collection-privacy"
+    refreshPeriod = "0"
+[".ansible/collections/ansible_collections/szorfein/desktop"]
+    type = "git-repo"
+    url = "https://github.com/szorfein/ansible-collection-desktop"
+    refreshPeriod = "0"
+{{- else -}}
+[".dotfiles"]
+    type = "archive"
+    url = "https://github.com/szorfein/dotfiles/archive/main.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".ansible/collections/ansible_collections/szorfein/hardening"]
+    type = "archive"
+    url = "https://github.com/szorfein/ansible-collection-hardening/archive/main.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".ansible/collections/ansible_collections/szorfein/privacy"]
+    type = "archive"
+    url = "https://github.com/szorfein/ansible-collection-privacy/archive/main.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".ansible/collections/ansible_collections/szorfein/desktop"]
+    type = "archive"
+    url = "https://github.com/szorfein/ansible-collection-desktop/archive/main.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+{{- end -}}

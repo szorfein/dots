@@ -60,25 +60,25 @@ Why i switch on chezmoi?
 | zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
+You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo vim`).  
 With `emerge` (gentoo):
 
-    # emerge -av sudo dev-vcs/git vim
+    # emerge -av sudo vim
     $ curl -sfL https://git.io/chezmoi | sh
 
 With `pacman` (arch,...):
 
-    # pacman -S chezmoi sudo git vim
+    # pacman -S chezmoi sudo vim
 
 With `apt-get` (debian,...)
 
-    # apt-get install sudo git vim
+    # apt-get install sudo vim
     # wget -cv https://github.com/twpayne/chezmoi/releases/download/v2.9.4/chezmoi_2.9.4_linux_amd64.deb
     $ sudo dpkg -i chezmoi_2.9.4_linux_amd64.deb
 
 For `voidlinux`:
 
-    # xbps-install chezmoi git sudo
+    # xbps-install chezmoi sudo
 
 `sudo`, your user should have permission to install packages:
 

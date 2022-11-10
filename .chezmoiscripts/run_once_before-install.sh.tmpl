@@ -15,8 +15,6 @@ script_dir="{{ .chezmoi.sourceDir }}/scripts/{{ .chezmoi.osRelease.id }}"
 
 search_auth
 
-echo "Running before $script"
-
-"$AUTH" . "$script_dir/deps.sh"
+. "$script_dir/deps.sh"
 
 . "$script_dir/access.sh"

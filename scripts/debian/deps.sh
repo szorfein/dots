@@ -4,9 +4,10 @@ set -o errexit -o nounset
 
 msg "Installing dependencies..."
 
+UPDT="apt-get update"
 INST="apt-get install -y"
-PKGS="pass openssh-server sshpass ansible"
+PKGS="pass openssh-server sshpass ansible git"
 
-$INST $PKGS
-
-systemd_start "sshd"
+$AUTH $UPDT \
+  && $AUTH $INST $PKGS \
+  && systemd_start "sshd"
