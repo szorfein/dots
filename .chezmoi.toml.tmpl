@@ -1,5 +1,5 @@
-{{- $manage_secret := false -}}{{/* true if this machine store secrets with gpg and pass */}}
-{{- $personal := false -}}{{/* true if you can manage my github repos */}}
+{{- $secrets := false -}}{{/* true if this machine store secrets with gpg and pass */}}
+{{- $personal := false -}}{{/* true if you manage my github repos */}}
 
 {{/* Github account (if any) */}}
 {{- $github_username := promptString "Github username" -}}
@@ -15,7 +15,7 @@
 {{- $key_sign = "8E3785DE31AAE73F98098744FD696BDDAA8FDC50" -}}
 {{- $key_encrypt = "59154216260D8EA2580DF9D4E2ADD2080A6B28AE" -}}
 {{- $personal = true -}}
-{{- $manage_secret = true -}}
+{{- $secrets = true -}}
 {{- end -}}
 
 {{- $soundcard := "0" -}}
@@ -25,7 +25,7 @@
 {{- $soundcard = "hw:Pro" -}}
 {{- end -}}
 
-{{- if $manage_secret -}}
+{{- if $secrets -}}
 encryption = "gpg"
 [gpg]
   recipient = "{{ $key_recipient }}"
@@ -33,6 +33,7 @@ encryption = "gpg"
 [data]
   name = "{{ $github_username }}"
   personal = {{ $personal }}
+  secrets = {{ $secrets }}
   [data.github] # used to generate the ~/.gitconfig
     email = "{{ $github_email }}"
     name = "{{ $github_username }}"

@@ -19,7 +19,7 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-{{- if $personal -}}
+{{ if .personal -}}
 [".dotfiles"]
     type = "git-repo"
     url = "https://github.com/szorfein/dotfiles"
@@ -36,7 +36,7 @@
     type = "git-repo"
     url = "https://github.com/szorfein/ansible-collection-desktop"
     refreshPeriod = "0"
-{{- else -}}
+{{ else -}}
 [".dotfiles"]
     type = "archive"
     url = "https://github.com/szorfein/dotfiles/archive/main.tar.gz"
@@ -61,4 +61,4 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-{{- end -}}
+{{ end -}}
