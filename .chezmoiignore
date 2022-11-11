@@ -10,7 +10,11 @@ scripts
 {{- if ne .github.name "szorfein" }}
 .weechat/certs
 .ssh/gem*.asc
+{{- end }}
+
+{{- if not .secrets }}
 .ssh/ansible.pub
+.ssh/authorized_keys
 {{- end }}
 
 .dotfiles/vifm/.config/vifm/*.txt
