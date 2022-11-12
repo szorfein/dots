@@ -7,7 +7,6 @@ KEY_TYPE="ssh-ed25519"
 KNOWN_HOST=~/.ssh/known_hosts
 AUTHORIZED_KEYS=~/.ssh/authorized_keys
 ANSIBLE_KEY=~/.ssh/ansible
-SSH_CONFIG=~/.ssh/config
 
 msg "Configure Ansible access for $USER"
 
@@ -25,15 +24,6 @@ pubkey="$(cat $ANSIBLE_KEY.pub)"
 
 if ! grep -q "^$pubkey" "$AUTHORIZED_KEYS" ; then
   cat "$ANSIBLE_KEY.pub" >> "$AUTHORIZED_KEYS"
-fi
-
-if ! grep -q "^Host $HOST:22" "$SSH_CONFIG" ; then
-  cat >> "$SSH_CONFIG" <<- _EOF_
-
-Host $HOST:22
-  IdentitiesOnly yes
-  IdentityFile $ANSIBLE_KEY
-_EOF_
 fi
 
 ansible "$HOST" -m ansible.builtin.ping

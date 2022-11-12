@@ -3,3 +3,11 @@ HashKnownHosts no
 Host github.com
   IdentitiesOnly yes
   IdentityFile ~/.ssh/ssh_git
+
+Host 127.0.0.1
+  IdentitiesOnly yes
+{{ if .secrets -}}
+  IdentityFile ~/.ssh/ansible.pub
+{{ else -}}
+  IdentityFile ~/.ssh/ansible
+{{ end -}}
