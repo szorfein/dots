@@ -1,0 +1,15 @@
+---
+- hosts: desktop
+  tasks:
+    - name: for user
+      ansible.builtin.debug:
+        msg:
+          - 'hi {{ ansible_user_id }}'
+
+- hosts: desktop
+  become: true
+  tasks:
+    - name: for root
+      ansible.builtin.debug:
+        msg:
+          - 'hi {{ ansible_user_id }}'

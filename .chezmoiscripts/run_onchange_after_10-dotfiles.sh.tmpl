@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+set -o errexit -o nounset
+
+playbook_dir=~/ansible
+
+lib="{{ .chezmoi.sourceDir }}/scripts/lib.sh"
+
+. "$lib"
+
+msg "Execute ansible playbook dotfiles.yml..."
+
+cd "$playbook_dir"
+
+ansible-playbook -i hosts -K dotfiles.yml
