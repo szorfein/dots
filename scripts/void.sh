@@ -10,7 +10,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="xst nerd-fonts-ttf cava ueberzug i3lock-color gnupg2 pass xclip zsh 
+  pkgs="xst nerd-fonts-ttf cava ueberzug i3lock-color gnupg2 pass xclip
     curl awesome mpd ncmpcpp xinit xorg-apps xorg-minimal xorg-input-drivers
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
     neomutt ImageMagick msmtp weechat rofi

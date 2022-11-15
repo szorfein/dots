@@ -21,7 +21,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="gnupg pass xclip zsh awesome mpd ncmpcpp xorg-xinit xorg-server
+  pkgs="gnupg pass xclip awesome mpd ncmpcpp xorg-xinit xorg-server
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
     neomutt imagemagick msmtp msmtp-mta weechat rofi openssh ttf-iosevka-nerd
     youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools

@@ -8,11 +8,6 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-[".oh-my-zsh/custom/themes/spaceship-prompt"]
-    type = "archive"
-    url = "https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v3.16.1.tar.gz"
-    exact = true
-    stripComponents = 1
 [".emacs.d"]
     type = "archive"
     url = "https://github.com/hlissner/doom-emacs/archive/develop.tar.gz"
