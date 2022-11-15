@@ -4,12 +4,12 @@ set -o errexit -o nounset
 
 playbook_dir=~/ansible
 
-lib="{{ .chezmoi.sourceDir }}/scripts/lib.sh"
+script_dir="{{ .chezmoi.sourceDir }}/scripts"
 
-. "$lib"
+. "$script_dir/lib.sh"
 
 msg "Execute ansible playbook dotfiles.yml..."
 
 cd "$playbook_dir"
 
-ansible-playbook -i hosts -K dotfiles.yml
+ansible-playbook --inventory hosts --ask-become-pass dotfiles.yml

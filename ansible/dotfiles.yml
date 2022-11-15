@@ -1,10 +1,9 @@
 ---
 - hosts: desktop
-  tasks:
-    - name: for user
-      ansible.builtin.debug:
-        msg:
-          - 'hi {{ ansible_user_id }}'
+  collections:
+    - szorfein.desktop
+  roles:
+    - dotfiles
 
 - hosts: desktop
   become: true
