@@ -3,12 +3,15 @@
 
 README.md
 LICENSE
+CHANGELOG.md
 Makefile
 asound
 scripts
 
-{{- if ne .github.name "szorfein" }}
+{{- if not .secrets }}
 .weechat/certs
+.ssh/ansible.pub
+.ssh/authorized_keys
 .ssh/gem*.asc
 {{- end }}
 
