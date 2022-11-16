@@ -1,8 +1,26 @@
 ---
-dotfiles_shell: true
+dotfiles_stow_dir: ~/.dotfiles
+
+dotfiles_shell_zsh: true
 dotfiles_shell_plugin_items:
   - { src: 'https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v4.10.1.tar.gz',
       dest: ~/.oh-my-zsh/custom/themes/spaceship-prompt }
 dotfiles_shell_plugin_link_items:
   - { src: ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme,
       dest: ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme }
+
+dotfiles_vim: true
+dotfiles_vim_stow_dir: vim
+dotfiles_vim_plugin_items:
+  - szorfein/ombre.vim
+  - edkolev/tmuxline.vim
+  - dense-analysis/ale
+  - ryanoasis/vim-devicons
+  - lilydjwg/colorizer
+  - Yggdroot/indentLine
+  - mengelbrecht/lightline-bufferline
+  - airblade/vim-gitgutter
+  - christoomey/vim-tmux-navigator
+  - itchyny/lightline.vim
+  - itchyny/vim-gitbranch
+  - preservim/nerdtree

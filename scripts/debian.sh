@@ -47,11 +47,6 @@ install_emacs() {
   sudo $ins $pkgs
 }
 
-install_vim() {
-  pkgs="vim"
-  sudo $ins $pkgs
-}
-
 install_extra_deps() {
   [ -d ~/builds ] && rm -rf ~/builds
 
@@ -123,7 +118,6 @@ usage() {
   echo " --sound-pulse  Install deps for PulseAudio"
   echo " --sound-alsa   Install deps for ALSA"
   echo " --extra-deps   Install other dependencies"
-  echo " --vim          Install deps for vim"
   echo " --emacs        Install deps for emacs"
 }
 
@@ -143,7 +137,6 @@ while [ "$#" -gt 0 ] ; do
     --sound-pulse) PULSE=true ;;
     --sound-alsa) ALSA=true ;;
     --extra-deps) EXTRA=true ;;
-    --vim) VIM=true ;;
     --emacs) EMACS=true ;;
     *) usage ; exit 1 ;;
   esac
@@ -154,7 +147,6 @@ main() {
   "$DEPS" && install_deps
   "$PULSE" && install_pulse
   "$ALSA" && install_alsa
-  "$VIM" && install_vim
   "$EMACS" && install_emacs
   "$EXTRA" && install_extra_deps
   exit 0
