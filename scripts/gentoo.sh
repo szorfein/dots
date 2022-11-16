@@ -31,7 +31,7 @@ install_deps() {
   pkgs="gnupg pass awesome media-sound/mpd ncmpcpp xinit xorg-server xst
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf
     neomutt msmtp cava ueberzug weechat i3lock-color rofi youtube-dl
-    papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow
+    papirus-icon-theme media-sound/mpc lightdm inotify-tools light
     arc-theme ffmpegthumbnailer tmux fdm xss-lock"
 }
 

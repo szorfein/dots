@@ -25,7 +25,7 @@ install_deps() {
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
     neomutt imagemagick msmtp msmtp-mta weechat rofi openssh ttf-iosevka-nerd
     youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools
-    light stow unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug"
+    light unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug"
 }
 
 install_pulse() {
