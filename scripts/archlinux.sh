@@ -21,7 +21,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="gnupg pass xclip awesome mpd ncmpcpp xorg-xinit xorg-server
+  pkgs="gnupg pass xclip awesome ncmpcpp xorg-xinit xorg-server
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
     neomutt imagemagick msmtp msmtp-mta weechat rofi openssh ttf-iosevka-nerd
     youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools
@@ -33,7 +33,7 @@ install_pulse() {
 }
 
 install_alsa() {
-  pkgs="$pkgs alsa-utils alsa-plugins ladspa swh-plugins libsamplerate"
+  pkgs="$pkgs ladspa swh-plugins"
   pkgs_aur="$pkgs_aur brave-bin"
 }
 
@@ -51,7 +51,6 @@ usage() {
   printf "\nUsage:\n"
   echo " --deps         Install dependencies"
   echo " --sound-pulse  Install deps for PulseAudio"
-  echo " --sound-alsa   Install deps for ALSA"
   echo " --extra-deps   Install other dependencies"
   echo " --emacs        Install deps for emacs"
 }
@@ -70,7 +69,6 @@ while [ "$#" -gt 0 ] ; do
   case "$1" in
     --deps) DEPS=true ;;
     --sound-pulse) PULSE=true ;;
-    --sound-alsa) ALSA=true ;;
     --extra-deps) EXTRA=true ;;
     --emacs) EMACS=true ;;
     *) usage; exit 1 ;;
@@ -81,7 +79,6 @@ done
 main() {
   "$DEPS" && install_deps
   "$PULSE" && install_pulse
-  "$ALSA" && install_alsa
   "$EMACS" && install_emacs
 
   sudo pacman -Syy

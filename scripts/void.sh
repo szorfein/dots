@@ -11,7 +11,7 @@ build() {
 
 install_deps() {
   pkgs="xst nerd-fonts-ttf cava ueberzug i3lock-color gnupg2 pass xclip
-    curl awesome mpd ncmpcpp xinit xorg-apps xorg-minimal xorg-input-drivers
+    curl awesome ncmpcpp xinit xorg-apps xorg-minimal xorg-input-drivers
     base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
     neomutt ImageMagick msmtp weechat rofi
     youtube-dl papirus-icon-theme mpc lightdm-gtk3-greeter inotify-tools
@@ -23,7 +23,7 @@ install_pulse() {
 }
 
 install_alsa() {
-  pkgs="$pkgs alsa-utils alsa-plugins ladspa-bs2b swh-plugins alsa-plugins-samplerate"
+  pkgs="$pkgs ladspa-bs2b swh-plugins"
 }
 
 install_emacs() {
@@ -49,7 +49,6 @@ usage() {
   printf "\nUsage:\n"
   echo " --deps         Install dependencies"
   echo " --sound-pulse  Install deps for PulseAudio"
-  echo " --sound-alsa   Install deps for ALSA"
   echo " --extra-deps   Install other dependencies"
   echo " --emacs        Install deps for emacs"
 }
@@ -79,7 +78,6 @@ done
 main() {
   "$DEPS" && install_deps
   "$PULSE" && install_pulse
-  "$ALSA" && install_alsa
   "$EMACS" && install_emacs
 
   sudo $ins $pkgs

@@ -1,11 +1,18 @@
 ---
 dotfiles_stow_dir: ~/.dotfiles
 
-dotfiles_shell_zsh: true
-dotfiles_shell_plugin_items:
+{{ if eq .system.sound "alsa" -}}
+dotfiles_audio_backend: alsa
+{{ end -}}
+
+dotfiles_mpd: true
+dotfiles_mpd_music_dir: ~/musics
+
+dotfiles_zsh: true
+dotfiles_zsh_plugin_items:
   - { src: 'https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v4.10.1.tar.gz',
       dest: ~/.oh-my-zsh/custom/themes/spaceship-prompt }
-dotfiles_shell_plugin_link_items:
+dotfiles_zsh_plugin_link_items:
   - { src: ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme,
       dest: ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme }
 

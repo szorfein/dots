@@ -44,7 +44,7 @@ install_pulse() {
 install_alsa() {
   sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/alsa /etc/portage/package.use/
 
-  pkgs="$pkgs alsa-utils tap-plugins swh-plugins libsamplerate cmt-plugins caps-plugins ladspa-bs2b alsa-plugins brave-bin"
+  pkgs="$pkgs alsa-utils tap-plugins swh-plugins cmt-plugins caps-plugins ladspa-bs2b alsa-plugins brave-bin"
 }
 
 install_emacs() {

@@ -1,9 +1,6 @@
 {{ if eq .chezmoi.username "daggoth" }}
 {{ .chezmoi.sourceDir }}/asound/dot_asoundrc_daggoth
 
-{{ else if eq .chezmoi.username "ninja" }}
-{{ .chezmoi.sourceDir }}/asound/dot_asoundrc_ninja
-
 {{ else if eq .system.sound "pulseaudio" }}
 {{ .chezmoi.sourceDir }}/asound/dot_asoundrc_pulse
 {{ end -}}

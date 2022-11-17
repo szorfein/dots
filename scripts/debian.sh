@@ -26,7 +26,7 @@ install_deps() {
   # Ueberzug
   pkgs="$pkgs python3-pip"
 
-  sudo $ins gpg gpg-agent xclip pass awesome mpd ncmpcpp xinit \
+  sudo $ins gpg gpg-agent xclip pass awesome ncmpcpp xinit \
     xserver-xorg-core xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm \
     neomutt imagemagick msmtp msmtp-mta weechat rofi youtube-dl xss-lock \
     papirus-icon-theme mpc lightdm inotify-tools arc-theme tmux gcc $pkgs
@@ -34,11 +34,6 @@ install_deps() {
 
 install_pulse() {
   pkgs="pulseaudio firefox-esr"
-  sudo $ins $pkgs
-}
-
-install_alsa() {
-  pkgs="alsa-utils"
   sudo $ins $pkgs
 }
 
@@ -116,7 +111,6 @@ usage() {
   printf "\nUsage:\n"
   echo " --deps         Install dependencies"
   echo " --sound-pulse  Install deps for PulseAudio"
-  echo " --sound-alsa   Install deps for ALSA"
   echo " --extra-deps   Install other dependencies"
   echo " --emacs        Install deps for emacs"
 }
@@ -135,7 +129,6 @@ while [ "$#" -gt 0 ] ; do
   case "$1" in
     --deps) DEPS=true ;;
     --sound-pulse) PULSE=true ;;
-    --sound-alsa) ALSA=true ;;
     --extra-deps) EXTRA=true ;;
     --emacs) EMACS=true ;;
     *) usage ; exit 1 ;;
@@ -146,7 +139,6 @@ done
 main() {
   "$DEPS" && install_deps
   "$PULSE" && install_pulse
-  "$ALSA" && install_alsa
   "$EMACS" && install_emacs
   "$EXTRA" && install_extra_deps
   exit 0
