@@ -5,6 +5,10 @@ dotfiles_stow_dir: ~/.dotfiles
 dotfiles_audio_backend: alsa
 {{ end -}}
 
+{{ if (and (hasKey .system "gpu") (ne .system.gpu "none")) -}}
+dotfiles_gpu_driver: {{ .system.gpu }}
+{{ end -}}
+
 dotfiles_mpd: true
 dotfiles_mpd_music_dir: ~/musics
 
@@ -31,3 +35,6 @@ dotfiles_vim_plugin_items:
   - itchyny/lightline.vim
   - itchyny/vim-gitbranch
   - preservim/nerdtree
+
+dotfiles_xorg: true
+dotfiles_xorg_stow_dir: .x

@@ -1,5 +1,5 @@
-{{- $secrets := false -}}{{/* true if this machine store secrets with gpg and pass */}}
 {{- $personal := false -}}{{/* true if you manage my github repos */}}
+{{- $secrets := false -}}{{/* true if this machine store secrets with gpg and pass */}}
 
 {{/* Github account (if any) */}}
 {{- $github_username := promptString "Github username" -}}
@@ -19,10 +19,12 @@
 {{- end -}}
 
 {{- $soundcard := "0" -}}
+{{- $gpu_driver := "none" -}}
 {{- $fullpath := printf "%s/%s" .chezmoi.sourceDir "scripts/board_name.sh" -}}
 {{- $board_name := output $fullpath | trim -}}
 {{- if eq $board_name "W51XTU" -}}
 {{- $soundcard = "hw:Pro" -}}
+{{- $gpu_driver = "intel_gen7" -}}
 {{- end -}}
 
 {{- if $secrets -}}
@@ -43,8 +45,9 @@ encryption = "gpg"
   [data.system]
     editor = "vim" # favorite editor, vim, emacs, etc...
     sound = "alsa" # set alsa or pulseaudio here
+    gpu = {{ $gpu_driver | quote }}
 
     # Sound card to use, default is 0
     # pulseaudio -> pactl list sinks short
     # alsa -> cat /proc/asound/cards
-    soundcard = "{{ $soundcard }}"
+    soundcard = {{ $soundcard | quote }}
