@@ -26,9 +26,8 @@ install_deps() {
   # Ueberzug
   pkgs="$pkgs python3-pip"
 
-  sudo $ins gpg gpg-agent pass awesome ncmpcpp feh scrot vifm mpv zathura fdm \
-    neomutt imagemagick msmtp msmtp-mta weechat rofi youtube-dl xss-lock \
-    papirus-icon-theme mpc lightdm inotify-tools arc-theme tmux gcc $pkgs
+  sudo $ins gpg gpg-agent ncmpcpp vifm mpv zathura fdm neomutt imagemagick msmtp \
+    msmtp-mta weechat rofi youtube-dl lightdm arc-theme tmux gcc $pkgs
 }
 
 install_pulse() {

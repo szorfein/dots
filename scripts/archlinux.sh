@@ -21,11 +21,9 @@ build() {
 }
 
 install_deps() {
-  pkgs="gnupg pass awesome ncmpcpp
-    base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
-    neomutt imagemagick msmtp msmtp-mta weechat rofi openssh ttf-iosevka-nerd
-    youtube-dl papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools
-    light unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug"
+  pkgs="ncmpcpp base-devel wget vifm mpv zathura zathura-pdf-mupdf
+    fdm neomutt imagemagick msmtp msmtp-mta weechat rofi tmux ueberzug
+    youtube-dl lightdm lightdm-gtk-greeter unzip arc-gtk-theme ffmpegthumbnailer"
 }
 
 install_pulse() {

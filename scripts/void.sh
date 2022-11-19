@@ -10,12 +10,9 @@ build() {
 }
 
 install_deps() {
-  pkgs="xst nerd-fonts-ttf cava ueberzug i3lock-color gnupg2 pass
-    curl awesome ncmpcpp xorg-apps
-    base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf fdm
-    neomutt ImageMagick msmtp weechat rofi
-    youtube-dl papirus-icon-theme mpc lightdm-gtk3-greeter inotify-tools
-    light unzip arc-theme ffmpegthumbnailer tmux firefox xss-lock"
+  pkgs="xst cava ueberzug gnupg2 pass arc-theme ffmpegthumbnailer tmux firefox
+    curl ncmpcpp xorg-apps base-devel wget vifm mpv zathura zathura-pdf-mupdf fdm
+    neomutt ImageMagick msmtp weechat rofi youtube-dl lightdm-gtk3-greeter unzip"
 }
 
 install_pulse() {
