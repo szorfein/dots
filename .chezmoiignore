@@ -15,6 +15,7 @@ scripts
 {{- if not .secrets }}
 .ssh/ansible.pub
 .ssh/authorized_keys
+.gnupg/sshcontrol
 {{- end }}
 
 .dotfiles/vifm/.config/vifm/*.txt

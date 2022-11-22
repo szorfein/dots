@@ -10,7 +10,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="xst cava ueberzug gnupg2 pass arc-theme ffmpegthumbnailer tmux firefox
+  pkgs="cava ueberzug arc-theme ffmpegthumbnailer tmux firefox
     curl ncmpcpp xorg-apps base-devel wget vifm mpv zathura zathura-pdf-mupdf fdm
     neomutt ImageMagick msmtp weechat rofi youtube-dl lightdm-gtk3-greeter unzip"
 }
@@ -55,7 +55,6 @@ DEPS=false
 PULSE=false
 ALSA=false
 EXTRA=false
-VIM=false
 EMACS=false
 
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi

@@ -39,6 +39,16 @@ systemd_start() {
   fi
 }
 
+runit_start() {
+  if ! [ -L /var/service/sshd ] ; then
+    "$AUTH" ln -s /etc/sv/sshd /var/service/sshd
+  else
+    if ! pgrep -x "$1" >/dev/null ; then
+      "$AUTH" sv start "$1"
+    fi
+  fi
+}
+
 make_ssh_keys() {
   [ -f "$HOME"/.ssh/ansible.pub ] \
     || ssh-keygen -t ed25519 -o -a 100 -f "$HOME"/.ssh/ansible

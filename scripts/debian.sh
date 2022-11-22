@@ -5,9 +5,7 @@ set -o errexit -o nounset
 ins="apt-get install -y"
 
 install_deps() {
-  # xst
-  pkgs="build-essential pkg-config x11proto-core-dev libx11-dev libxft-dev \
-    fontconfig x11proto-dev libxext-dev"
+  pkgs="build-essential"
 
   # picom
   pkgs="$pkgs meson ninja-build cmake libev-dev libx11-xcb-dev libxcb-render-util0-dev \
@@ -45,31 +43,6 @@ install_extra_deps() {
 
   mkdir -p ~/builds
 
-  # xst
-  PN="xst"
-  PV="0.8.4.1"
-
-  ( cd ~/builds \
-    && curl -L -o "$PN"-"$PV".tar.gz https://github.com/gnotclub/xst/archive/v"$PV".tar.gz \
-    && tar xvf "$PN"-"$PV".tar.gz \
-    && cd "$PN"-"$PV" \
-    && make \
-    && sudo make PREFIX=/usr DESTDIR=/ install
-  )
-
-  # picom
-  PN="picom"
-  PV="8.2"
-
-  ( cd ~/builds/ \
-    && curl -L -o "$PN"-"$PV".tar.gz https://github.com/yshui/picom/archive/v"$PV".tar.gz \
-    && tar xvf "$PN"-"$PV".tar.gz \
-    && cd "$PN"-"$PV" \
-    && meson --buildtype=release . build \
-    && ninja -C build \
-    && sudo ninja -C build install
-  )
-
   # Ueberzug
   sudo pip3 install ueberzug
 
@@ -84,24 +57,6 @@ install_extra_deps() {
     && autoreconf -fiv \
     && ./configure --prefix=/usr --sysconfdir=/etc \
     && sudo make DESTDIR=/ install
-  )
-
-  # Light
-  PN="light"
-  PV="1.2.2"
-
-  # build
-  ( cd ~/builds \
-    && curl -L -o "$PN"-"$PV".tar.gz https://github.com/haikarainen/"$PN"/archive/v"$PV".tar.gz \
-    && tar xvf "$PN"-"$PV".tar.gz \
-    && cd "$PN"-"$PV" \
-    && ./autogen.sh \
-    && ./configure --with-udev && make deb
-  )
-
-  # install
-  ( cd ~/builds \
-    && sudo dpkg -i "$PN"_1.2.1-1_amd64.deb
   )
 }
 
@@ -118,7 +73,6 @@ DEPS=false
 PULSE=false
 ALSA=false
 EXTRA=false
-VIM=false
 EMACS=false
 
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi

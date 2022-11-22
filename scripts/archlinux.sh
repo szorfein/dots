@@ -58,7 +58,6 @@ DEPS=false
 PULSE=false
 ALSA=false
 EXTRA=false
-VIM=false
 EMACS=false
 
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
