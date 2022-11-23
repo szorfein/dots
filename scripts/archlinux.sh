@@ -3,7 +3,7 @@
 set -o errexit -o nounset
 
 ins="pacman -S --noconfirm --needed"
-pkgs_aur="xst-git cava i3lock-color"
+pkgs_aur="cava i3lock-color"
 
 build() {
   PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
@@ -21,9 +21,9 @@ build() {
 }
 
 install_deps() {
-  pkgs="ncmpcpp base-devel wget vifm mpv zathura zathura-pdf-mupdf
+  pkgs="ncmpcpp base-devel vifm mpv zathura zathura-pdf-mupdf
     fdm neomutt imagemagick msmtp msmtp-mta weechat rofi tmux ueberzug
-    youtube-dl lightdm lightdm-gtk-greeter unzip arc-gtk-theme ffmpegthumbnailer"
+    youtube-dl lightdm lightdm-gtk-greeter arc-gtk-theme ffmpegthumbnailer"
 }
 
 install_pulse() {

@@ -49,6 +49,12 @@ runit_start() {
   fi
 }
 
+openrc_start() {
+  if pgrep -x "$1" >/dev/null ; then
+    $AUTH rc-service "$1" start
+  fi
+}
+
 make_ssh_keys() {
   [ -f "$HOME"/.ssh/ansible.pub ] \
     || ssh-keygen -t ed25519 -o -a 100 -f "$HOME"/.ssh/ansible

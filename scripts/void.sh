@@ -11,8 +11,8 @@ build() {
 
 install_deps() {
   pkgs="cava ueberzug arc-theme ffmpegthumbnailer tmux firefox
-    curl ncmpcpp xorg-apps base-devel wget vifm mpv zathura zathura-pdf-mupdf fdm
-    neomutt ImageMagick msmtp weechat rofi youtube-dl lightdm-gtk3-greeter unzip"
+    ncmpcpp xorg-apps base-devel vifm mpv zathura zathura-pdf-mupdf fdm
+    neomutt ImageMagick msmtp weechat rofi youtube-dl lightdm-gtk3-greeter"
 }
 
 install_pulse() {
@@ -53,7 +53,6 @@ usage() {
 ## CLI options
 DEPS=false
 PULSE=false
-ALSA=false
 EXTRA=false
 EMACS=false
 
@@ -63,7 +62,6 @@ while [ "$#" -gt 0 ] ; do
   case "$1" in
     --deps) DEPS=true ;;
     --sound-pulse) PULSE=true ;;
-    --sound-alsa) ALSA=true ;;
     --extra-deps) EXTRA=true ;;
     --emacs) EMACS=true ;;
     *) usage; exit 1 ;;

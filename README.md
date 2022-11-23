@@ -64,7 +64,7 @@ You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`su
 With `emerge` (gentoo):
 
     # emerge -av sudo vim
-    $ curl -sfL https://git.io/chezmoi | sh
+    $ curl -fsLS get.chezmoi.io | sh
 
 With `pacman` (arch,...):
 
@@ -73,8 +73,7 @@ With `pacman` (arch,...):
 With `apt-get` (debian,...)
 
     # apt-get install sudo vim
-    # wget -cv https://github.com/twpayne/chezmoi/releases/download/v2.9.4/chezmoi_2.9.4_linux_amd64.deb
-    $ sudo dpkg -i chezmoi_2.9.4_linux_amd64.deb
+    $ curl -fsLS get.chezmoi.io | sh
 
 For `voidlinux`:
 

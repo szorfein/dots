@@ -71,7 +71,6 @@ usage() {
 ## CLI options
 DEPS=false
 PULSE=false
-ALSA=false
 EXTRA=false
 EMACS=false
 
