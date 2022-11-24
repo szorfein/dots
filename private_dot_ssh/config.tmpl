@@ -1,13 +1,17 @@
 HashKnownHosts no
 
+# https://puppet.com/blog/speed-up-ssh-by-reusing-connections/
 Host github.com
+  ControlMaster auto
+  ControlPath ~/.ssh/sockets/%r@%h-%p
+  ControlPersist 600
   IdentitiesOnly yes
   IdentityFile ~/.ssh/ssh_git
 
 Host 127.0.0.1
   IdentitiesOnly yes
-{{ if .secrets -}}
+{{ if .secrets }}
   IdentityFile ~/.ssh/ansible.pub
-{{ else -}}
+{{ else }}
   IdentityFile ~/.ssh/ansible
-{{ end -}}
+{{ end }}

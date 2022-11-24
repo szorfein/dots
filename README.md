@@ -1,5 +1,5 @@
 # dots
-Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
+Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/) and [gnupg](https://gnupg.org/)/[pass](https://www.passwordstore.org/) to store secrets.  
 Work only on distro linux including the installer: ( tested on a fresh install of Gentoo, Archlinux, Void and Debian )  
 + `emerge`: Gentoo, Pentoo, Funtoo.
 + `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
@@ -92,6 +92,10 @@ Only 4 little steps here
 ### Clone this repo
 
     $ chezmoi init https://github.com/szorfein/dots.git
+
+If chezmoi ask for a password, disable the option with: [see more](https://www.chezmoi.io/reference/commands/init/)
+
+    $ chezmoi init https://github.com/szorfein/dots.git --guess-repo-url=false
 
 ### Config
 Edit the config file with your favorite text editor.

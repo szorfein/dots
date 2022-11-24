@@ -2,22 +2,23 @@
 
 set -o errexit -o nounset
 
-cyan="\033[1;36m"
-white="\033[0;38m"
-endc="\033[0m"
+tc='\033['
+cyan="${tc}36m"
+white="${tc}37m"
+endc="${tc}0m"
 
 die() { echo "[-] $1"; exit 1; }
 
 msg() {
-  echo "$cyan--------------------------------------------------$endc"
-  echo "$cyan-->$white $1 $endc"
-  echo ""
+  echo -e "${cyan}------------------------------------------------------${endc}"
+  echo -e "${cyan}-->${white} ${1} ${endc}"
+  echo
 }
 
 bye() {
-  echo ""
-  echo "$cyan-->$white End for $0 $endc"
-  echo "$cyan--------------------------------------------------$endc"
+  echo
+  echo -e "${cyan}-->${white} End for ${0} ${endc}"
+  echo -e "${cyan}------------------------------------------------------${endc}"
 }
 
 trap bye EXIT
