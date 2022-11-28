@@ -28,18 +28,15 @@ dotfiles_gpu_driver: {{ .system.gpu }}
 dotfiles_mpd: true
 dotfiles_mpd_music_dir: ~/musics
 
-dotfiles_zsh: true
-dotfiles_zsh_plugin_items:
-  - { src: 'https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v4.10.1.tar.gz',
-      dest: ~/.oh-my-zsh/custom/themes/spaceship-prompt }
-dotfiles_zsh_plugin_link_items:
-  - { src: ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme,
-      dest: ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme }
+dotfiles_tmux: true
+dotfiles_tmux_stow_dir: tmux
+
+dotfiles_vifm: true
+dotfiles_vifm_stow_dir: vifm
 
 dotfiles_vim: true
 dotfiles_vim_stow_dir: vim
-dotfiles_vim_plugin_items:
-  - szorfein/ombre.vim
+dotfiles_vim_plugin_git_items:
   - edkolev/tmuxline.vim
   - dense-analysis/ale
   - ryanoasis/vim-devicons
@@ -52,5 +49,18 @@ dotfiles_vim_plugin_items:
   - itchyny/vim-gitbranch
   - preservim/nerdtree
 
+dotfiles_vim_plugin_tar_items:
+  - { url: https://github.com/szorfein/ombre.vim/archive/refs/heads/main.tar.gz,
+      name: ombre }
+
 dotfiles_xorg_stow_dir: .x
 dotfiles_xst: true
+
+dotfiles_zsh: true
+dotfiles_zsh_theme_dir: ~/.oh-my-zsh/custom/themes
+dotfiles_zsh_theme_items:
+  - { url: 'https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v4.10.1.tar.gz',
+      name: spaceship-prompt }
+dotfiles_zsh_link_items:
+  - { src: ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme,
+      dest: ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme }

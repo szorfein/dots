@@ -21,9 +21,8 @@ build() {
 }
 
 install_deps() {
-  pkgs="ncmpcpp base-devel vifm mpv zathura zathura-pdf-mupdf
-    fdm neomutt imagemagick msmtp msmtp-mta weechat rofi tmux ueberzug
-    youtube-dl lightdm lightdm-gtk-greeter arc-gtk-theme ffmpegthumbnailer"
+  pkgs="ncmpcpp base-devel mpv zathura zathura-pdf-mupdf fdm neomutt msmtp
+  msmtp-mta weechat rofi youtube-dl lightdm lightdm-gtk-greeter arc-gtk-theme"
 }
 
 install_pulse() {

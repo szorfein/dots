@@ -10,9 +10,9 @@ build() {
 }
 
 install_deps() {
-  pkgs="cava ueberzug arc-theme ffmpegthumbnailer tmux firefox
-    ncmpcpp xorg-apps base-devel vifm mpv zathura zathura-pdf-mupdf fdm
-    neomutt ImageMagick msmtp weechat rofi youtube-dl lightdm-gtk3-greeter"
+  pkgs="cava arc-theme firefox ncmpcpp xorg-apps base-devel mpv zathura
+  zathura-pdf-mupdf fdm neomutt msmtp weechat rofi youtube-dl
+  lightdm-gtk3-greeter"
 }
 
 install_pulse() {

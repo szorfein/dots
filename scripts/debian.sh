@@ -18,14 +18,8 @@ install_deps() {
   pkgs="$pkgs libpam0g-dev libcairo2-dev libxcb-xkb-dev libxcb-xrm-dev \
     libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev autoconf libxcb-util0-dev"
 
-  # light
-  pkgs="$pkgs debhelper-compat"
-
-  # Ueberzug
-  pkgs="$pkgs python3-pip"
-
-  sudo $ins gpg gpg-agent ncmpcpp vifm mpv zathura fdm neomutt imagemagick msmtp \
-    msmtp-mta weechat rofi youtube-dl lightdm arc-theme tmux gcc $pkgs
+  sudo $ins gpg-agent ncmpcpp mpv zathura fdm neomutt msmtp msmtp-mta weechat \
+  rofi youtube-dl lightdm arc-theme gcc $pkgs
 }
 
 install_pulse() {
@@ -43,12 +37,9 @@ install_extra_deps() {
 
   mkdir -p ~/builds
 
-  # Ueberzug
-  sudo pip3 install ueberzug
-
   # i3lock-color
   PN="i3lock-color"
-  PV="2.13.c.2"
+  PV="2.13.c.4"
 
   ( cd ~/builds \
     && curl -L -o "$PN"-"$PV".tar.gz https://github.com/Raymo111/"$PN"/archive/"$PV".tar.gz \

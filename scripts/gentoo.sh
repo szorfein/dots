@@ -29,10 +29,10 @@ install_deps() {
   sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/dotfiles /etc/portage/package.use/
 
   pkgs="gnupg pass awesome media-sound/mpd ncmpcpp xinit xorg-server xst
-    nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf
-    neomutt msmtp cava ueberzug weechat i3lock-color rofi youtube-dl
+    feh picom scrot mpv zathura zathura-pdf-mupdf
+    neomutt msmtp cava weechat i3lock-color rofi youtube-dl
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light
-    arc-theme ffmpegthumbnailer tmux fdm xss-lock"
+    arc-theme fdm xss-lock"
 }
 
 install_pulse() {
