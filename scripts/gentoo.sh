@@ -28,11 +28,8 @@ install_deps() {
   sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.accept_keywords/* /etc/portage/package.accept_keywords/
   sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/dotfiles /etc/portage/package.use/
 
-  pkgs="gnupg pass awesome media-sound/mpd ncmpcpp xinit xorg-server xst
-    feh picom scrot mpv zathura zathura-pdf-mupdf
-    neomutt msmtp cava weechat i3lock-color rofi youtube-dl
-    papirus-icon-theme media-sound/mpc lightdm inotify-tools light
-    arc-theme fdm xss-lock"
+  pkgs="media-sound/mpd ncmpcpp  mpv zathura zathura-pdf-mupdf neomutt msmtp
+    cava weechat i3lock-color rofi youtube-dl lightdm arc-theme fdm"
 }
 
 install_pulse() {
@@ -54,23 +51,12 @@ install_emacs() {
   pkgs="$pkgs ripgrep discount emacs app-misc/jq"
 }
 
-install_vim() {
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/vim /etc/portage/package.use/
-
-  pkgs="$pkgs vim"
-}
-
-install_extra_deps() {
-  :
-}
-
 usage() {
   printf "\nUsage:\n"
   echo " --deps         Install dependencies"
   echo " --sound-pulse  Install deps for PulseAudio"
   echo " --sound-alsa   Install deps for ALSA"
   echo " --extra-deps   Install other dependencies"
-  echo " --vim          Install deps for vim"
   echo " --emacs        Install deps for emacs"
 }
 
@@ -79,7 +65,6 @@ DEPS=false
 PULSE=false
 ALSA=false
 EXTRA=false
-VIM=false
 EMACS=false
 
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
@@ -90,7 +75,6 @@ while [ "$#" -gt 0 ] ; do
     --sound-pulse) PULSE=true ;;
     --sound-alsa) ALSA=true ;;
     --extra-deps) EXTRA=true ;;
-    --vim) VIM=true ;;
     --emacs) EMACS=true ;;
     *) usage ; exit 1 ;;
   esac
@@ -101,7 +85,6 @@ main() {
   "$DEPS" && install_deps
   "$PULSE" && install_pulse
   "$ALSA" && install_alsa
-  "$VIM" && install_vim
   "$EMACS" && install_emacs
   "$EXTRA" && install_extra_deps
 

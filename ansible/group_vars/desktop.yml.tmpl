@@ -10,16 +10,23 @@ dotfiles_awm_default_theme: miami
 dotfiles_audio_backend: alsa
 {{ end -}}
 
-dotfiles_external_font_items:
-  - { name: CyberPunk, src: 'https://dl.dafont.com/dl/?f=cyberpunks' }
-  - { name: MaterialDesign, src: 'https://github.com/Templarian/MaterialDesign-Font/archive/master.zip' }
+dotfiles_external_font_zip_items:
+  - { name: CyberPunk, url: 'https://dl.dafont.com/dl/?f=cyberpunks' }
+  - { name: MaterialDesign, url: 'https://github.com/Templarian/MaterialDesign-Font/archive/master.zip' }
 
 dotfiles_external_nerd_font_items:
-  - { name: Iosevka, hash: c9c661d28756abad70bea9339dd3673548737214ebec8e8481c0966cedc56931 }
   - { name: SpaceMono, hash: f7c864da3d4057fce7163181ae1dd85a6175c5e55a12a5410a00e57302cc7aa8 }
 
+dotfiles_external_font_ad_hoc_items:
+  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Medium/complete/Iosevka%20Medium%20Nerd%20Font%20Complete.ttf
+  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Regular/complete/Iosevka%20Nerd%20Font%20Complete.ttf
+  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Regular/complete/Iosevka%20Term%20Nerd%20Font%20Complete.ttf
+  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Light/complete/Iosevka%20Light%20Nerd%20Font%20Complete.ttf
+  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Light/complete/Iosevka%20Term%20Light%20Nerd%20Font%20Complete.ttf
+
 dotfiles_external_wallpaper_items:
-  - https://github.com/szorfein/walls/archive/main.zip
+  - { name: wallpaper, url:
+    'https://github.com/szorfein/walls/archive/main.zip' }
 
 {{ if (and (hasKey .system "gpu") (ne .system.gpu "none")) -}}
 dotfiles_gpu_driver: {{ .system.gpu }}
