@@ -6,9 +6,11 @@ dotfiles_awm: true
 dotfiles_awm_stow_dir: awesomewm
 dotfiles_awm_default_theme: miami
 
-{{ if eq .system.sound "alsa" -}}
-dotfiles_audio_backend: alsa
+{{ if (or (eq .system.sound "alsa") (eq .system.sound "pulseaudio")) -}}
+dotfiles_audio_backend: {{ .system.sound }}
 {{ end -}}
+
+dotfiles_emacs: true
 
 dotfiles_external_font_zip_items:
   - { name: CyberPunk, url: 'https://dl.dafont.com/dl/?f=cyberpunks' }

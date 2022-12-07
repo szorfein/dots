@@ -1,10 +1,10 @@
 # dots
 Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/) and [gnupg](https://gnupg.org/)/[pass](https://www.passwordstore.org/) to store secrets.  
-Work only on distro linux including the installer: ( tested on a fresh install of Gentoo, Archlinux, Void and Debian )  
-+ `emerge`: Gentoo, Pentoo, Funtoo.
-+ `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
-+ `apt-get`: Debian, Kali, etc...
-+ `xbps-install`: Voidlinux. Tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
+Work only on few linux distro including:
++ `Archlinux`
++ `Debian 11`
++ `Gentoo`
++ `Void Linux`, tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
 
 Why i switch on chezmoi?
 + Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
@@ -45,13 +45,13 @@ Why i switch on chezmoi?
 | brave, firefox | Web Browser | Brave with alsa, Firefox with pulseaudio (except for Voidlinux) |
 | feh | Image Viewer | |
 | i3lock-color | Lock Screen | for now, maybe [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) later |
-| lightdm | Display Manager | (lightdm-gtk-greeter) |
+| sddm | Display Manager | With a theme inspired from [delicious](https://github.com/stuomas/delicious-sddm-theme) |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
 | neomutt | Email Reader | with fdm and msmtp, customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
-| tmux | Terminal multiplexer | |
+| tmux | Terminal multiplexer | Config inspired from [gpakosz](https://github.com/gpakosz/.tmux) |
 | vifm | File Manager | With [image preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim, emacs | Editors | I use the both |
 | weechat | IRC client | |
@@ -61,21 +61,21 @@ Why i switch on chezmoi?
 
 ## Requirements
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo vim`).  
-With `emerge` (gentoo):
+With `Gentoo`:
 
     # emerge -av sudo vim
     $ curl -fsLS get.chezmoi.io | sh
 
-With `pacman` (arch,...):
+With `Arch`:
 
     # pacman -S chezmoi sudo vim
 
-With `apt-get` (debian,...)
+With `Debian`:
 
-    # apt-get install sudo vim
+    # apt-get install curl sudo vim
     $ curl -fsLS get.chezmoi.io | sh
 
-For `voidlinux`:
+For `Voidlinux`:
 
     # xbps-install chezmoi sudo
 
@@ -84,7 +84,7 @@ For `voidlinux`:
     # EDITOR="vim" visudo
     <username> ALL=(ALL) ALL
 
-If you have create your first user recently (via: `useradd -m -G users,wheel,audio,video <username>`), logout and back to initialize his environment correctly.
+If you have create your first user recently (via: `useradd -m -G users <username>`), logout and back to initialize his environment correctly.
     
 ## Install
 Only 4 little steps here
@@ -93,7 +93,7 @@ Only 4 little steps here
 
     $ chezmoi init https://github.com/szorfein/dots.git
 
-If chezmoi ask for a password, disable the option with: [see more](https://www.chezmoi.io/reference/commands/init/)
+If chezmoi ask for a password, disable the option [see more](https://www.chezmoi.io/reference/commands/init/)
 
     $ chezmoi init https://github.com/szorfein/dots.git --guess-repo-url=false
 
@@ -108,9 +108,24 @@ You can change for example in `data.system`:
       sound = "pulseaudio"
 
 It will install firefox rather than brave-bin and modify a lot of things during the install.  
+Only 10 lines to configure your system, depend on keyword [see
+more](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/):
+
+| var | szorfein |
+|---|---|
+| key_recipient | szorfein@protonmail.com |
+| key_encrypt | xxx |
+| key_sign | xxx |
+| editor | vim |
+| email | szorfein@protonmail.com |
+| name | szorfein |
+| gpu | intel_gen7 |
+| sound | alsa |
+| sound_card | hw:PCH |
+| web | brave |
 
 ### Apply
-`apply` will install all the dependencies and add files to your $HOME.
+`apply` will install all files in your $HOME and start ansible playbook.
 
     $ chezmoi apply
 
@@ -125,10 +140,6 @@ If you have not yet configure X, change the keyboard layout like this:
 
     $ localectl list-x11-keymap-layouts | grep fr
     $ sudo localectl set-x11-keymap fr
-
-For emacs, when the installation is terminated, you have to manually install the package [all-the-icons](https://github.com/domtronn/all-the-icons.el#installing-fonts) like this, start `emacs` and:
-
-    M-x all-the-icons-install-fonts
 
 ## Left Over
 

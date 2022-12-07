@@ -18,19 +18,14 @@ install_deps() {
   pkgs="$pkgs libpam0g-dev libcairo2-dev libxcb-xkb-dev libxcb-xrm-dev \
     libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev autoconf libxcb-util0-dev"
 
-  sudo $ins gpg-agent ncmpcpp mpv zathura fdm neomutt msmtp msmtp-mta weechat \
-  rofi youtube-dl lightdm arc-theme gcc $pkgs
+  sudo $ins mpv zathura fdm neomutt msmtp msmtp-mta weechat youtube-dl $pkgs
 }
 
 install_pulse() {
-  pkgs="pulseaudio firefox-esr"
+  pkgs="firefox-esr"
   sudo $ins $pkgs
 }
 
-install_emacs() {
-  pkgs="ripgrep emacs"
-  sudo $ins $pkgs
-}
 
 install_extra_deps() {
   [ -d ~/builds ] && rm -rf ~/builds
@@ -54,25 +49,19 @@ install_extra_deps() {
 usage() {
   printf "\nUsage:\n"
   echo " --deps         Install dependencies"
-  echo " --sound-pulse  Install deps for PulseAudio"
   echo " --extra-deps   Install other dependencies"
-  echo " --emacs        Install deps for emacs"
 }
 
 ## CLI options
 DEPS=false
-PULSE=false
 EXTRA=false
-EMACS=false
 
 if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
 
 while [ "$#" -gt 0 ] ; do
   case "$1" in
     --deps) DEPS=true ;;
-    --sound-pulse) PULSE=true ;;
     --extra-deps) EXTRA=true ;;
-    --emacs) EMACS=true ;;
     *) usage ; exit 1 ;;
   esac
   shift
@@ -80,10 +69,7 @@ done
 
 main() {
   "$DEPS" && install_deps
-  "$PULSE" && install_pulse
-  "$EMACS" && install_emacs
   "$EXTRA" && install_extra_deps
-  exit 0
 }
 
 main "$@"
