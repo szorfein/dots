@@ -2,11 +2,11 @@
 # default key
 #-----------------------------
 
-{{- if .gpgkey.sign }}
-default-key {{ .gpgkey.sign }}
+{{- if .key_sign }}
+default-key {{ .key_sign }}
 {{- end }}
-{{- if .gpgkey.encrypt }}
-default-recipient {{ .gpgkey.encrypt }}
+{{- if .key_encrypt }}
+default-recipient {{ .key_encrypt }}
 {{- end }}
 
 #-----------------------------

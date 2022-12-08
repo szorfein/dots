@@ -2,44 +2,44 @@
 
 set -o errexit
 
-{{- if eq .system.sound "alsa" }}
+{{- if eq .sound "alsa" }}
 vol_up() {
-  amixer -D {{ .system.soundcard }} sset Master 1%+
+  amixer -D {{ .sound_card }} sset Master 1%+
   vol_get
 }
 
 vol_down() {
-  amixer -D {{ .system.soundcard }} sset Master 1%-
+  amixer -D {{ .sound_card }} sset Master 1%-
   vol_get
 }
 
 vol_set() {
-  amixer -D {{ .system.soundcard }} sset Master "$1"%
+  amixer -D {{ .sound_card }} sset Master "$1"%
   vol_get
 }
 
 vol_get() {
-  vol=$(amixer -D {{ .system.soundcard }} sget Master | grep -o "[0-9]*%" | head -n 1)
+  vol=$(amixer -D {{ .sound_card }} sget Master | grep -o "[0-9]*%" | head -n 1)
   echo "$vol"
 }
 {{- end }}
 
-{{- if eq .system.sound "pulseaudio" }}
+{{- if eq .sound "pulseaudio" }}
 vol_up() {
-  pactl set-sink-mute {{ .system.soundcard }} 0
-  pactl set-sink-volume {{ .system.soundcard }} +1%
+  pactl set-sink-mute {{ .sound_card }} 0
+  pactl set-sink-volume {{ .sound_card }} +1%
   vol_get
 }
 
 vol_down() {
-  pactl set-sink-mute {{ .system.soundcard }} 0 
-  pactl set-sink-volume {{ .system.soundcard }} -1%
+  pactl set-sink-mute {{ .sound_card }} 0
+  pactl set-sink-volume {{ .sound_card }} -1%
   vol_get
 }
 
 vol_set() {
-  pactl set-sink-mute {{ .system.soundcard }} false 
-  pactl set-sink-volume {{ .system.soundcard }} "$1"%
+  pactl set-sink-mute {{ .sound_card }} false
+  pactl set-sink-volume {{ .sound_card }} "$1"%
   vol_get
 }
 

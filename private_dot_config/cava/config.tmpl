@@ -7,15 +7,13 @@ lower_cutoff_freq = 50
 higher_cutoff_freq = 10000 
 
 [input]
-{{ if eq .system.sound "alsa" }}
+{{ if eq .sound "alsa" }}
 method = alsa
+source = {{ .sound_card }}
 {{ end }}
-{{ if eq .system.sound "pulseaudio" }}
+{{ if eq .sound "pulseaudio" }}
 method = pulse
 source = auto
-{{ end }}
-{{ if eq .chezmoi.username "daggoth" }}
-source = hw:Pro
 {{ end }}
 
 method = fifo

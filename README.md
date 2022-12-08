@@ -99,9 +99,9 @@ Edit the config file with your favorite text editor.
 
     $ EDITOR="vim" chezmoi edit-config
 
-You can change for example in `data.system`:
+You can change for example in `[data]`:
 
-    [data.system]
+    [data]
       sound = "pulseaudio"
 
 It will install firefox rather than brave-bin and modify a lot of things during the install.  
