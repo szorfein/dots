@@ -7,13 +7,6 @@ ins="apt-get install -y"
 install_deps() {
   pkgs="build-essential"
 
-  # picom
-  pkgs="$pkgs meson ninja-build cmake libev-dev libx11-xcb-dev libxcb-render-util0-dev \
-    libxcb-image0-dev libpixman-1-dev libxcb-damage0-dev libxcb-randr0-dev \
-    libxcb-sync-dev libxcb-composite0-dev libxcb-xinerama0-dev libxcb-present-dev \
-    libxcb-glx0-dev uthash-dev libconfig-dev libpcre3-dev libgl1-mesa-dev \
-    libdbus-1-dev"
-
   # i3lock-color
   pkgs="$pkgs libpam0g-dev libcairo2-dev libxcb-xkb-dev libxcb-xrm-dev \
     libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev autoconf libxcb-util0-dev"
@@ -31,6 +24,9 @@ install_extra_deps() {
   [ -d ~/builds ] && rm -rf ~/builds
 
   mkdir -p ~/builds
+
+  # Ueberzug
+  sudo pip3 install ueberzug
 
   # i3lock-color
   PN="i3lock-color"

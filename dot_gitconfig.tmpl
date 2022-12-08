@@ -1,23 +1,23 @@
 [user]
-  name = {{ .github.name }}
-  email = {{ .github.email }}
-  {{- if .gpgkey.sign }}
-  signingkey = {{ .gpgkey.sign }}
+  name = {{ .name }}
+  email = {{ .email }}
+  {{- if .key_sign }}
+  signingkey = {{ .key_sign }}
   {{- end }}
 
 [commit]
-  {{- if .gpgkey.sign }}
+  {{- if .key_sign }}
   gpgsign = true
   {{- end }}
 
 [core]
-  editor = {{ .system.editor }}
+  editor = {{ .editor }}
   autocrlf = input
 
 [init]
   defaultBranch = main
 
-{{- if eq .github.name "szorfein" }}
+{{- if eq .name "szorfein" }}
 [url "git@github.com:szorfein"]
   insteadOf = https://github.com/szorfein
 {{- end }}

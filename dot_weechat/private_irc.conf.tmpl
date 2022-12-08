@@ -174,7 +174,7 @@ usermode = ""
 username = "{{ .chezmoi.username }}"
 
 [server]
-{{- if eq .github.name "szorfein" }}
+{{- if eq .name "szorfein" }}
 freenode.addresses = "ajnvpgl6prmkb7yktvue6im5wiedlz2w32uhcwaamdiecdrfpwwgnlqd.onion"
 freenode.proxy = "tor"
 {{- else }}
@@ -191,7 +191,7 @@ freenode.ssl_fingerprint
 freenode.ssl_verify
 freenode.password
 freenode.capabilities
-{{- if eq .github.name "szorfein" }}
+{{- if eq .name "szorfein" }}
 freenode.sasl_mechanism = ecdsa-nist256p-challenge
 freenode.sasl_username = "szorfein"
 freenode.sasl_password
@@ -207,11 +207,7 @@ freenode.sasl_fail
 freenode.autoconnect = on
 freenode.autoreconnect
 freenode.autoreconnect_delay
-{{- if eq .github.name "szorfein" }}
-freenode.nicks = "szorfein"
-{{- else }}
-freenode.nicks = ""
-{{- end }}
+freenode.nicks = {{ .chezmoi.username | quote }}
 freenode.nicks_alternate
 freenode.username
 freenode.realname
