@@ -68,14 +68,17 @@ bind compose p pgp-menu
 #########
 
 setenv PINENTRY_USER_DATA curses
+
+{{- if .secrets }}
 set crypt_use_gpgme = yes
 
 # Capability key [C]
-set pgp_default_key = 0x9CC9729A2E369CB3
+set pgp_default_key = {{ .key_recipient }}
 # sign key [S]
-set pgp_sign_as = {{ .gpgkey.sign }}
+set pgp_sign_as = {{ .key_sign }}
 # encrypt key [E]
-set pgp_self_encrypt_as = {{ .gpgkey.encrypt }}
+set pgp_self_encrypt_as = {{ .key_encrypt }}
+{{- end }}
 
 set pipe_decode # Decode messages I pipe to commands, typically to patch
 set crypt_autosign

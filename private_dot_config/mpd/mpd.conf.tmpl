@@ -16,7 +16,7 @@ audio_output {
   device "softvol"
   #buffer_time "2000000"
 }
-{{ else if eq .system.sound "alsa" }}
+{{ else if eq .sound "alsa" }}
 audio_output {
   type  "alsa"
   name  "alsa card"

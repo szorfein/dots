@@ -24,11 +24,11 @@ msg "Execute $0..."
 
 args="--deps --emacs --vim"
 
-{{ if eq .system.sound "alsa" }}
+{{ if eq .sound "alsa" }}
 args="$args --sound-alsa"
 {{ end }}
 
-{{ if eq .system.sound "pulseaudio" }}
+{{ if eq .sound "pulseaudio" }}
 args="$args --sound-pulse"
 {{ end }}
 

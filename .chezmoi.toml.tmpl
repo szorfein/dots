@@ -1,16 +1,15 @@
 {{- $personal := false -}}{{/* true if able to update my github repository */}}
 {{- $secrets := false -}}{{/* true if this machine store secrets with gpg and pass */}}
 
-{{/* Github account (if any) */}}
-{{- $github_username := promptString "Github username" -}}
-{{- $github_email := false -}}
+{{- $username := promptString "username" -}}
+{{- $email := false -}}
 
 {{/* GPG, ID for key [C] [S] [E] */}}
 {{- $key_recipient := false -}}
 {{- $key_sign := false -}}
 {{- $key_encrypt := false -}}
 
-{{- if eq $github_username "szorfein" -}}
+{{- if eq $username "szorfein" -}}
 {{- $key_recipient = "B5D8FFD0D7F1FB6A43505E319CC9729A2E369CB3" -}}
 {{- $key_sign = "8E3785DE31AAE73F98098744FD696BDDAA8FDC50" -}}
 {{- $key_encrypt = "59154216260D8EA2580DF9D4E2ADD2080A6B28AE" -}}
@@ -31,20 +30,17 @@ encryption = "gpg"
   recipient = "{{ $key_recipient }}"
 {{ end -}}
 [data]
-  name = "{{ $github_username }}"
+  name = "{{ $username }}"
   personal = {{ $personal }}
   secrets = {{ $secrets }}
-  [data.github] # used to generate the ~/.gitconfig
-    email = "{{ $github_email }}"
-    name = "{{ $github_username }}"
-  [data.gpgkey]
-    sign = "{{ $key_sign }}"
-    encrypt = "{{ $key_encrypt }}"
-  [data.system]
-    editor = "vim" # favorite editor, vim, emacs, etc...
-    sound = "alsa" # set alsa or pulseaudio here
+  email = "{{ $email }}"
+  editor = "vim" # favorite editor, vim, emacs, etc...
+  key_recipient = "{{ $key_recipient }}"
+  key_sign = "{{ $key_sign }}"
+  key_encrypt = "{{ $key_encrypt }}"
+  sound = "alsa" # set alsa or pulseaudio here
 
-    # Sound card to use, default is 0
-    # pulseaudio -> pactl list sinks short
-    # alsa -> cat /proc/asound/cards
-    soundcard = "{{ $soundcard }}"
+  # Sound card to use, default is 0
+  # pulseaudio -> pactl list sinks short
+  # alsa -> cat /proc/asound/cards
+  sound_card = "{{ $soundcard }}"

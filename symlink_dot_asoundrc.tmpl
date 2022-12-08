@@ -4,6 +4,6 @@
 {{ else if eq .chezmoi.username "ninja" }}
 {{ .chezmoi.sourceDir }}/asound/dot_asoundrc_ninja
 
-{{ else if eq .system.sound "pulseaudio" }}
+{{ else if eq .sound "pulseaudio" }}
 {{ .chezmoi.sourceDir }}/asound/dot_asoundrc_pulse
 {{ end -}}
