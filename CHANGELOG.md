@@ -1,3 +1,11 @@
+## 2022-12-09
+
+* Add
+  [.chezmoiroot](https://www.chezmoi.io/user-guide/advanced/customize-your-source-directory/#use-a-subdirectory-of-your-dotfiles-repo-as-the-root-of-the-source-state), move all dots in home/
++ Change on .chezmoi.toml.tmpl, so run a `chezmoi init` to regenerate config file.
+  - remove data.system, data.gpgkey, data.github
+  - just prompt for a name (not github).
+
 ## 2022-11-16
 
 + Change on .chezmoi.toml.tmpl, so run a `chezmoi init` to regenerate config file.

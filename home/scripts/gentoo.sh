@@ -25,8 +25,8 @@ install_deps() {
   [ -d /etc/portage/package.use ] || sudo mkdir -p /etc/portage/package.use
   [ -d /etc/portage/package.accept_keyworks ] || sudo mkdir -p /etc/portage/package.accept_keywords
 
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.accept_keywords/* /etc/portage/package.accept_keywords/
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/dotfiles /etc/portage/package.use/
+  sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.accept_keywords/* /etc/portage/package.accept_keywords/
+  sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/dotfiles /etc/portage/package.use/
 
   pkgs="gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf
@@ -36,26 +36,26 @@ install_deps() {
 }
 
 install_pulse() {
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/pulseaudio /etc/portage/package.use/
+  sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/pulseaudio /etc/portage/package.use/
 
   pkgs="$pkgs pulseaudio firefox-bin"
 }
 
 install_alsa() {
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/alsa /etc/portage/package.use/
+  sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/alsa /etc/portage/package.use/
 
   pkgs="$pkgs alsa-utils tap-plugins swh-plugins libsamplerate cmt-plugins caps-plugins ladspa-bs2b alsa-plugins brave-bin"
 }
 
 install_emacs() {
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/emacs /etc/portage/package.use/
+  sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/emacs /etc/portage/package.use/
 
   # discount = markdown
   pkgs="$pkgs ripgrep discount emacs app-misc/jq"
 }
 
 install_vim() {
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/vim /etc/portage/package.use/
+  sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/vim /etc/portage/package.use/
 
   pkgs="$pkgs vim"
 }
