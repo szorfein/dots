@@ -1,10 +1,6 @@
 .oh-my-zsh/cache/**
 .emacs.d/.local/**
 
-README.md
-LICENSE
-CHANGELOG.md
-Makefile
 asound
 scripts
 

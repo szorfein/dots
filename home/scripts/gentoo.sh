@@ -22,9 +22,6 @@ install_deps() {
   if ! hash euse 2>/dev/null; then sudo $ins gentoolkit ; fi
   euse_global jpeg
 
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.accept_keywords/* /etc/portage/package.accept_keywords/
-  sudo cp ~/.local/share/chezmoi/scripts/gentoo/package.use/dotfiles /etc/portage/package.use/
-
   pkgs="mpv zathura zathura-pdf-mupdf neomutt msmtp weechat i3lock-color
     youtube-dl fdm"
 }
