@@ -165,4 +165,5 @@ set send_charset="utf-8"
 set sendmail="/usr/bin/msmtp"
 
 # Default account
-folder-hook gmail/* source ~/.neomutt/accounts/gmail
+source ~/.neomutt/accounts/Personal
+folder-hook $folder 'source ~/.neomutt/accounts/Personal'
