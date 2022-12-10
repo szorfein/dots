@@ -1,19 +1,20 @@
 # general ------------ foreground ---- background -----------------------------
-color error             color3          color8
-color indicator         color6          color8
+color error             red             brightblack
+color indicator         magenta         brightblack # currently highlighted message
 color markers           color2          default
 color message           default         default
-color normal            color7          default
+color normal            default         default
 color prompt            default         default
 color search            color84         default
-color status            color5          color8
-color tilde             color231        default
-color tree              color13         default
+color status            color5          brightblack
+color tilde             cyan            default # blank line padding
+color tree              cyan            default # thread tree
+color sidebar_divider   brightblack     black
 
 # message index ------ foreground ---- background -----------------------------
-color index             color9          default   ~D # deleted messages
-color index             color84         default   ~F # flagged messages
-color index             color4          default   ~N # new messages
+color index             red             default   ~D # deleted messages
+color index             yellow          default   ~F # flagged messages
+color index             cyan            default   ~N # new messages
 color index             color12         default   ~Q # messages which have been replied to
 color index             color215        default   ~T # tagged messages
 color index             color141        default   ~v # messages part of a collapsed thread

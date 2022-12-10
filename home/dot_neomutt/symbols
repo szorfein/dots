@@ -1,19 +1,26 @@
-set index_format="     %zs %zc %zt | %-28.28L  %?X?& ? %.46s %?M10?(%1M)&? %> %{!%a %d %h %H:%M}      "
-set pager_format="\n  %n %T %s%*  %{!%d %b · %H:%M} %?X? %X?%P    \n \n"
-set status_format = "  %f %?r? %m ?%?n? %n ?%?d? %d ?%?t? %t ?%?F? %F ?%?p? %p?  \n \n"
-#set vfolder_format = "%N %?n?%3n&   ?  %8m  · %f"
+# https://github.com/sheoak/neomutt-powerline-nerdfonts/blob/master/powerline.neomuttrc
+
+set index_format=" %zs %zc %zt %{!%d %b} . %-28.28L  %?M?(%1M)&  ? %?X?&·? %s"
+set pager_format=" %n %zc  %T %s%*  %{!%d %b · %H:%M} %?X?  %X ? %P  "
+set status_format = " %f%?r? %r?   %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %> %?p?   %p ?"
+set vfolder_format = " %N %?n?%3n&   ?  %8m  · %f"
 set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
 
 # powerline status bar hack
-color status color4 color0 '([a-zA-Z0-9])(\s)'
-color status color4 color0 '(\s)([a-zA-Z0-9])'
-color status color4 color0 '( )'
-color status color4 color0 '(\S)'
-color status color0 default '(|)'
-color status green color0 ''
-color status white color0 ''
-color status yellow color0 ''
-color status red color0 ''
+color status white black
+color status green black ''
+color status yellow black ''
+color status red black ''
+color status brightblack blue '(.*)' 1
+color status blue black '.*()' 1
+color status black blue '\s* [0-9]+\s*'
+color status blue black '().*$' 1
+color status blue black '()\s*\s*[0-9]+\s*' 1
+color status black blue '\s*\s*[0-9]+\s*'
+color status blue yellow '() ([0-9]+%|all|end) \s*' 1
+color status black blue ' ([0-9]+%|all|end) \s*'
+color status yellow black '()\s*' 1
+color status default black ''
 
 # no addressed to me, to me, group, cc, sent by me, mailing list
 set to_chars=""
@@ -33,4 +40,3 @@ tag-formats "replied" "GR" \
             "encrypted" "GE" \
             "signed" "GS" \
             "attachment" "GA" \
-
