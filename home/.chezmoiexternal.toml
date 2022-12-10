@@ -10,7 +10,7 @@
     refreshPeriod = "168h"
 [".oh-my-zsh/custom/themes/spaceship-prompt"]
     type = "archive"
-    url = "https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v3.16.1.tar.gz"
+    url = "https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v4.12.0.tar.gz"
     exact = true
     stripComponents = 1
 [".emacs.d"]

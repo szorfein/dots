@@ -1,0 +1,30 @@
+## Personal Email Account
+
+{{ if .secrets }}
+## Incoming
+set imap_user = {{ (passFields "mail/personal").user | trim }}
+set imap_pass = '{{ (passFields "mail/personal").pass | trim }}'
+set folder = imaps://{{ (passFields "mail/personal").imap | trim }}
+set spoolfile = +INBOX
+set postponed = +Drafts
+set mbox = +Archive
+set record = +Sent
+set trash = +Trash
+
+## Outgoing
+set realname = {{ (passFields "mail/personal").name | trim }}
+set from = $imap_user
+set smtp_url = 'smtp://{{ (passFields "mail/personal").smtp | trim }}'
+set smtp_pass = '{{ (passFields "mail/personal").pass | trim }}'
+set ssl_force_tls
+set ssl_starttls
+
+set imap_keepalive = 300
+set mail_check = 120
+unset imap_passive  # open a new IMAP connection automatically
+
+## Folders
+mailboxes =Inbox
+account-hook $folder "set imap_user={{ (passFields "mail/personal").user | trim
+-}}"
+{{ end }}

@@ -1,6 +1,13 @@
-######################
+# mailboxes: https://sandyuraz.com/blogs/better_mutt/
+# config: https://gideonwolfe.com/posts/workflow/neomutt/intro/
+# config: https://www.abdus.net/blog/2020/neomutt-the-command-line-email-client/
+# disroot: https://howto.disroot.org/en/tutorials/email/clients/desktop/mutt
+# nice color: https://github.com/dracula/mutt
+# nice color: https://github.com/arcticicestudio/nord/issues/128
+
+#####################
 #  General Options  #
-######################
+#####################
 
 set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
 
@@ -9,11 +16,8 @@ unignore from: to: cc: date: subject:
 hdr_order from: to: cc: date: subject:
 set index_format="%4C %Z %{%b %d} %-16.16L  %s"
 
-set pager_stop
-set pager_index_lines = 4
-set pager_context = 2
-set markers = no           # Don't mark wrapper lines
 set delete = yes           # Don't ask
+set fcc_attach             # save attachments with the body
 
 unset wait_key
 
@@ -25,7 +29,6 @@ unset copy
 unset metoo                # Remove me from CC headers.
 set move = no              # Don't use mbox
 set nohelp                 # No help line.
-set pager_index_lines = 0
 unset mark_old
 unset sort_re
 unset use_from
@@ -112,15 +115,24 @@ set forward_format = "Fwd: %s"
 set forward_quote
 set include
 set hidden_host
-set menu_scroll
 set mime_forward = ask-no
 set reply_to
 set reverse_name
-set tilde
 
 # Colors
 source ~/.neomutt/colors
 source ~/.neomutt/symbols
+
+################
+#  Mutt Pager  #
+################
+
+set pager_index_lines = 10  # Shows 10 lines of index when pager is active
+set pager_context = 3
+set pager_stop
+set menu_scroll
+set tilde
+unset markers               # Don't mark wrapper lines
 
 ##################
 #  Mutt Sidebar  #
@@ -152,9 +164,6 @@ set trash     = ""
 
 set mailcap_path = ~/.neomutt/mailcap # filetypes, w3m for html, etc
 
-# Mailboxes
-source ~/.neomutt/mailboxes
-
 #################
 #  SMTP: msmtp  #
 #################
@@ -164,5 +173,17 @@ set sendmail_wait = -1
 set send_charset="utf-8"
 set sendmail="/usr/bin/msmtp"
 
-# Default account
-folder-hook gmail/* source ~/.neomutt/accounts/gmail
+##############
+#  Accounts  #
+##############
+
+# last is default
+
+source ~/.neomutt/accounts/Personal
+folder-hook $folder 'source ~/.neomutt/accounts/Personal'
+
+###############
+#  Mailboxes  #
+###############
+
+source ~/.neomutt/mailboxes
