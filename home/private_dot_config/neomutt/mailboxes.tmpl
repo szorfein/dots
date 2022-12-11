@@ -1,7 +1,10 @@
 # https://github.com/neomutt/neomutt/issues/1911
-named-mailboxes " ---------   Personal ---------- " ~/.mail/div1
+{{ if .secrets -}}
+named-mailboxes "+   {{ (passFields "mail/personal").user | trim }} +" ~/.mail/div1
+named-mailboxes "---------------------------" ~/.mail/div2
+{{ end -}}
 mailboxes ~/.mail/Personal/Inbox
-named-mailboxes "   Reçus" =INBOX
+named-mailboxes "   Reçus" =Inbox
 named-mailboxes "   Envoyés" =Sent
 named-mailboxes "   Brouillons" =Drafts
 named-mailboxes "   Junk" =Junk
