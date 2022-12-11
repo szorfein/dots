@@ -139,7 +139,6 @@ unset markers               # Don't mark wrapper lines
 ##################
 
 set sidebar_visible
-set sidebar_folder_indent
 set sidebar_short_path
 
 # Toggle sidebar visible with b
@@ -151,27 +150,18 @@ bind index,pager \CP sidebar-prev # Ctrl-n to select next folder
 bind index,pager \CN sidebar-next # Ctrl-p to select previous folder
 bind index,pager \CO sidebar-open # Ctrl-o to open selected folder
 
-#######################
-#  IMAP: offlineimap  #
-#######################
+#################
+#  IMAP: isync  #
+#################
 
 set mbox_type = Maildir
-set folder    = ~/.mails
-set spoolfile = "+INBOX"
+set folder    = ~/.mail
+set spoolfile = ""
 set record    = ""
 set postponed = ""
 set trash     = ""
 
 set mailcap_path = ~/.neomutt/mailcap # filetypes, w3m for html, etc
-
-#################
-#  SMTP: msmtp  #
-#################
-
-## Additional config set in ~/.msmtprc
-set sendmail_wait = -1
-set send_charset="utf-8"
-set sendmail="/usr/bin/msmtp"
 
 ##############
 #  Accounts  #

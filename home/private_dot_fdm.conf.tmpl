@@ -1,23 +1,36 @@
 # SSL
+set lock-types flock
+set maximum-size 10M
 set verify-certificates
 
 # Dir
-$path = "%h/.mails"
+$path = "%h/.mail"
+$personal = "${path}/Personal"
+
+# General
+action "drop" drop
+action "inbox" maildir "${path}/Inbox"
+action "junk" maildir "${path}/Junk"
+action "sent" maildir "${path}/Sent"
+action "spam" maildir "${path}/Spam"
+
+action "personal" maildir "${personal}/Inbox"
 
 # Mutt use maildir
-action "inbox" maildir "${path}/INBOX"
-action "junk" maildir "${path}/Junk"
+action "inbox-personal" maildir "${path}/Personal/Inbox"
+action "junk-personal" maildir "${path}/Personal/Junk"
 
 # Accounts
-account "gmail" imaps server "imap.googlemail.com"
-  port 993 user "{{ .name }}@gmail.com" pass $(pass gmail/{{ .name }})
+{{ if .secrets }}
+account "personal" imaps
+  server {{ (passFields "mail/personal").imap | trim | quote }}
+  port {{ (passFields "mail/personal").imap_port | trim | quote }}
+  user {{ (passFields "mail/personal").user | trim | quote }}
+  pass '{{ (passFields "mail/personal").pass | trim }}'
+{{ end }}
 
-# The stdin account is disabled: it will be ignored unless explicitly requested
-# using the -a switch on the command line.
-account "stdin" disabled stdin
-
-# Catch local mail early.
-match account "stdin" action "inbox"
+#account "gmail" imaps server "imap.googlemail.com"
+#  port 993 user "{{ .name }}@gmail.com" pass $(pass gmail/{{ .name }})
 
 # Junk (spam)
 match "^From:.*ezine@recruitni.com" in headers action drop
@@ -32,6 +45,12 @@ match "^From:.*@mail.itp.net" in headers action drop
 match "^From:.*@faith-h.net" in headers action drop
 match "^From:.*reponse@altech-france.fr" in headers action drop
 match "^From:.*ecards@americangreetings.com" in headers action drop
+
+{{ if .secrets }}
+match "^(From|To):.*[{{ (passFields "mail/personal").user }}]" in headers {
+  match all action "personal"
+}
+{{ end }}
 
 # Default action
 match all action "inbox"

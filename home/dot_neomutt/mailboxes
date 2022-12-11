@@ -1,6 +1,8 @@
+# https://github.com/neomutt/neomutt/issues/1911
+named-mailboxes " ---------   Personal ---------- " ~/.mail/div1
+mailboxes ~/.mail/Personal/Inbox
 named-mailboxes "   Reçus" =INBOX
 named-mailboxes "   Envoyés" =Sent
 named-mailboxes "   Brouillons" =Drafts
 named-mailboxes "   Junk" =Junk
 named-mailboxes "   Poubelle" =Trash
-named-mailboxes " ---------   MAIL ----------" ="."
