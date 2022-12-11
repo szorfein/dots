@@ -90,7 +90,7 @@ set crypt_replysignencrypted
 set crypt_verify_sig
 
 # copy file from /usr/share/doc/mutt/samples/gpg.rc
-#source ~/.neomutt/gpg.rc
+#source ~/.config/neomutt/gpg.rc
 
 # Status bar
 set status_chars=" *%A"
@@ -120,8 +120,8 @@ set reply_to
 set reverse_name
 
 # Colors
-source ~/.neomutt/colors
-source ~/.neomutt/symbols
+source ~/.config/neomutt/colors
+source ~/.config/neomutt/symbols
 
 ################
 #  Mutt Pager  #
@@ -161,7 +161,7 @@ set record    = ""
 set postponed = ""
 set trash     = ""
 
-set mailcap_path = ~/.neomutt/mailcap # filetypes, w3m for html, etc
+set mailcap_path = ~/.config/neomutt/mailcap # filetypes, w3m for html, etc
 
 ##############
 #  Accounts  #
@@ -169,11 +169,11 @@ set mailcap_path = ~/.neomutt/mailcap # filetypes, w3m for html, etc
 
 # last is default
 
-source ~/.neomutt/accounts/Personal
-folder-hook $folder 'source ~/.neomutt/accounts/Personal'
+source ~/.config/neomutt/accounts/Personal
+folder-hook $folder 'source ~/.config/neomutt/accounts/Personal'
 
 ###############
 #  Mailboxes  #
 ###############
 
-source ~/.neomutt/mailboxes
+source ~/.config/neomutt/mailboxes
