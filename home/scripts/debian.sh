@@ -19,9 +19,9 @@ install_deps() {
   pkgs="$pkgs python3-pip"
 
   sudo $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit picom light \
-    xserver-xorg-core xserver-xorg-input-libinput feh scrot vifm mpv zathura fdm \
-    neomutt imagemagick msmtp msmtp-mta weechat rofi youtube-dl xss-lock \
-    papirus-icon-theme mpc lightdm inotify-tools stow arc-theme tmux gcc $pkgs
+    xserver-xorg-core xserver-xorg-input-libinput feh scrot vifm mpv zathura isync \
+    neomutt imagemagick weechat rofi youtube-dl xss-lock papirus-icon-theme \
+    mpc lightdm inotify-tools stow arc-theme tmux gcc $pkgs
 }
 
 install_pulse() {

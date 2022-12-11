@@ -30,9 +30,9 @@ install_deps() {
 
   pkgs="gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst
     nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf
-    neomutt msmtp cava ueberzug weechat i3lock-color rofi youtube-dl
+    neomutt cava ueberzug weechat i3lock-color rofi youtube-dl
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow
-    arc-theme ffmpegthumbnailer tmux fdm xss-lock"
+    arc-theme ffmpegthumbnailer tmux net-mail/isync xss-lock"
 }
 
 install_pulse() {

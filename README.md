@@ -48,7 +48,7 @@ Why i switch on chezmoi?
 | lightdm | Display Manager | (lightdm-gtk-greeter) |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
-| neomutt | Email Reader | with fdm and msmtp, customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
+| neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
 | tmux | Terminal multiplexer | |
