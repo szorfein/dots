@@ -20,14 +20,14 @@ action "personal" maildir "${personal}/Inbox"
 action "inbox-personal" maildir "${path}/Personal/Inbox"
 action "junk-personal" maildir "${path}/Personal/Junk"
 
-# Accounts
-{{ if .secrets }}
-account "personal" imaps
-  server {{ (passFields "mail/personal").imap | trim | quote }}
-  port {{ (passFields "mail/personal").imap_port | trim | quote }}
-  user {{ (passFields "mail/personal").user | trim | quote }}
-  pass '{{ (passFields "mail/personal").pass | trim }}'
-{{ end }}
+# Accounts (using isync)
+#{{ if .secrets }}
+#account "personal" imaps
+#  server {{ (passFields "mail/personal").imap | trim | quote }}
+#  port {{ (passFields "mail/personal").imap_port | trim | quote }}
+#  user {{ (passFields "mail/personal").user | trim | quote }}
+#  pass '{{ (passFields "mail/personal").pass | trim }}'
+#{{ end }}
 
 #account "gmail" imaps server "imap.googlemail.com"
 #  port 993 user "{{ .name }}@gmail.com" pass $(pass gmail/{{ .name }})
