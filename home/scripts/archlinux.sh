@@ -21,8 +21,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="mpv zathura zathura-pdf-mupdf fdm neomutt msmtp msmtp-mta weechat
-    youtube-dl"
+  pkgs="mpv zathura zathura-pdf-mupdf neomutt isync weechat youtube-dl"
 }
 
 install_pulse() {

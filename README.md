@@ -48,7 +48,7 @@ Why i switch on chezmoi?
 | sddm | Display Manager | With a theme inspired from [delicious](https://github.com/stuomas/delicious-sddm-theme) |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
-| neomutt | Email Reader | with fdm and msmtp, customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
+| neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
 | tmux | Terminal multiplexer | Config inspired from [gpakosz](https://github.com/gpakosz/.tmux) |

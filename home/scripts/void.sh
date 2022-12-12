@@ -10,8 +10,8 @@ build() {
 }
 
 install_deps() {
-  pkgs="firefox mpv zathura zathura-pdf-mupdf fdm neomutt msmtp weechat rofi
-    youtube-dl"
+  pkgs="firefox mpv zathura zathura-pdf-mupdf neomutt weechat rofi youtube-dl
+    isync"
 }
 
 install_pulse() {

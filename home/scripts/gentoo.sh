@@ -22,8 +22,8 @@ install_deps() {
   if ! hash euse 2>/dev/null; then sudo $ins gentoolkit ; fi
   euse_global jpeg
 
-  pkgs="mpv zathura zathura-pdf-mupdf neomutt msmtp weechat i3lock-color
-    youtube-dl fdm"
+  pkgs="mpv zathura zathura-pdf-mupdf neomutt weechat i3lock-color youtube-dl
+    net-mail/isync"
 }
 
 install_pulse() {

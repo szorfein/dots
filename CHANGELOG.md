@@ -1,3 +1,11 @@
+## 2022-12-11
+
+* msmtp and fdm are disabled for now.
+* Neomutt use isync to get last emails and use the native smtp instead of msmtp.
+* Neomutt configs moved to ~/.config/neomutt.
+* Simple email (without OAUTH, mailctl, token) can be configured with pass, see the
+  [wiki](https://github.com/szorfein/dots/wiki/Mail).
+
 ## 2022-12-09
 
 * Add

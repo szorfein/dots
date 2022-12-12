@@ -1,0 +1,29 @@
+Create Both
+Expunge Both
+SyncState *
+
+IMAPAccount personal
+{{ if .secrets -}}
+Host {{ (passFields "mail/personal").imap | trim }}
+User {{ (passFields "mail/personal").user | trim }}
+PassCmd "pass mail/personal"
+{{ end -}}
+SSLType IMAPS
+AuthMechs PLAIN
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+# The trailing "/" is important
+Path ~/.mail/Personal/
+Inbox ~/.mail/Personal/Inbox
+Subfolders Verbatim
+
+Channel personal
+Far :personal-remote:
+Near :personal-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
