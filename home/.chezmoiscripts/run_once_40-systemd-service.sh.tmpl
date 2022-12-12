@@ -1,47 +1,54 @@
 #!/usr/bin/env sh
 
-cyan="\033[0;96m"
-white="\033[0;97m"
-endc="\033[0m"
+cyan='\033[0;96m'
+white='\033[0;97m'
+endc='\033[0m'
 
 msg() {
-  echo ""
-  echo "$cyan--------------------------------------------------$endc"
-  echo "$cyan-->$white $1 $endc"
-  echo ""
+  printf "\\n${cyan}%s${endc}\\n" '--------------------------------------------------'
+  printf "${cyan}%s${white} %s${endc}\\n\\n" '-->' "$1"
 }
 
 bye() {
-  echo ""
-    echo "$cyan-->$white End for $0 $endc"
-    echo "$cyan--------------------------------------------------$endc"
+  printf "\\n${cyan}%s${white} %s${endc}\\n" '-->' "End for $0"
+  printf "${cyan}%s${endc}\\n" "--------------------------------------------------"
+}
+
+user_systemd_service() {
+  systemctl="systemctl --user"
+  for service in $@ ; do
+    if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
+    if ! $systemctl is-active $service ; then $systemctl start $service ; fi
+  done
 }
 
 msg "Execute $0..."
 
 if hash systemctl 2>/dev/null ; then
-  services="gpg-agent.socket gpg-agent-ssh.socket mpd.service fdm.timer"
-  systemctl="systemctl --user"
+  user_systemd_service "gpg-agent.socket gpg-agent-ssh.socket mpd.service"
 
-  for service in $services ; do
-    echo -n "$service... "
-    if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
-    echo -n "$service... "
-    if ! $systemctl is-active $service ; then $systemctl start $service ; fi
-  done
+  {{ if .secrets }}
+  user_systemd_service "mbsync.timer"
+  {{ end }}
 
-  services_system="lightdm"
-  systemctl="sudo systemctl"
-  for service in $services_system ; do
-    echo -n "$service..."
-    if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
-  done
+  if hash lightdm 2>/dev/null ; then
+    services_system="lightdm"
+    systemctl="sudo systemctl"
+    for service in $services_system ; do
+      echo -n "$service..."
+      if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
+    done
+  fi
 fi
+
+trap bye EXIT
+
+if ! hash lightdm 2>/dev/null ; then exit; fi
 
 echo "Installing Lightdm config..."
 FILE="/tmp/lightdm-$$"
 
-cat >"$FILE" <<EOF
+cat >"$FILE" <<- _EOF_
 [greeter]
 
 # Appearance
@@ -63,8 +70,6 @@ indicators = ~session;~spacer;~spacer;~layout;~~ ;~clock
 # Security
 allow-debugging = false
 laptop = false
-EOF
+_EOF_
 
 sudo install -m0644 "$FILE" /etc/lightdm/lightdm-gtk-greeter.conf
-
-trap bye EXIT

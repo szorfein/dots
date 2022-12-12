@@ -3,11 +3,11 @@ Expunge Both
 SyncState *
 
 IMAPAccount personal
-{{ if .secrets }}
+{{ if .secrets -}}
 Host {{ (passFields "mail/personal").imap | trim }}
 User {{ (passFields "mail/personal").user | trim }}
 PassCmd "pass mail/personal"
-{{ end }}
+{{ end -}}
 SSLType IMAPS
 AuthMechs PLAIN
 
