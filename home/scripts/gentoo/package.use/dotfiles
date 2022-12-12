@@ -35,7 +35,7 @@ media-sound/ncmpcpp taglib
 
 # mail
 mail-mta/msmtp sasl
-mail-client/neomutt gpgme gdbm
+mail-client/neomutt gpgme gdbm sasl
 
 # pass
 app-admin/pass X zsh-completion emacs
@@ -62,3 +62,5 @@ app-text/xmlto text
 
 # misc
 media-libs/freetype harfbuzz
+
+net-mail/isync sasl

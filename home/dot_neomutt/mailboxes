@@ -1,6 +1,0 @@
-named-mailboxes "   Reçus" =INBOX
-named-mailboxes "   Envoyés" =Sent
-named-mailboxes "   Brouillons" =Drafts
-named-mailboxes "   Junk" =Junk
-named-mailboxes "   Poubelle" =Trash
-named-mailboxes " ---------   MAIL ----------" ="."
