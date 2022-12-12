@@ -3,7 +3,7 @@
 set -o errexit -o nounset
 
 ins="pacman -S --noconfirm --needed"
-pkgs_aur="cava i3lock-color"
+pkgs_aur="i3lock-color"
 
 build() {
   PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
@@ -21,7 +21,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="mpv zathura zathura-pdf-mupdf neomutt isync weechat youtube-dl"
+  pkgs="mpv zathura zathura-pdf-mupdf weechat youtube-dl"
 }
 
 install_pulse() {
