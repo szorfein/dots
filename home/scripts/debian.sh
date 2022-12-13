@@ -11,7 +11,7 @@ install_deps() {
   pkgs="$pkgs libpam0g-dev libcairo2-dev libxcb-xkb-dev libxcb-xrm-dev \
     libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev autoconf libxcb-util0-dev"
 
-  sudo $ins mpv zathura weechat youtube-dl $pkgs
+  sudo $ins weechat youtube-dl $pkgs
 }
 
 install_pulse() {

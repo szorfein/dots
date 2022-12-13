@@ -10,15 +10,13 @@ endc="${tc}0m"
 die() { echo "[-] $1"; exit 1; }
 
 msg() {
-  echo -e "${cyan}------------------------------------------------------${endc}"
-  echo -e "${cyan}-->${white} ${1} ${endc}"
-  echo
+  printf "\\n${cyan}%s${endc}\\n" '--------------------------------------------------'
+  printf "${cyan}%s${white} %s${endc}\\n\\n" '-->' "$1"
 }
 
 bye() {
-  echo
-  echo -e "${cyan}-->${white} End for ${0} ${endc}"
-  echo -e "${cyan}------------------------------------------------------${endc}"
+  printf "\\n${cyan}%s${white} %s${endc}\\n" '-->' "End for $0"
+  printf "${cyan}%s${endc}\\n" "--------------------------------------------------"
 }
 
 trap bye EXIT

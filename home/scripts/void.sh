@@ -10,7 +10,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="firefox mpv zathura zathura-pdf-mupdf weechat rofi youtube-dl"
+  pkgs="firefox weechat youtube-dl"
 }
 
 install_pulse() {

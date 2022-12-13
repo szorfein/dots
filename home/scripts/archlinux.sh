@@ -21,7 +21,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="mpv zathura zathura-pdf-mupdf weechat youtube-dl"
+  pkgs="weechat youtube-dl"
 }
 
 install_pulse() {

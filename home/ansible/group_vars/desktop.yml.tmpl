@@ -17,21 +17,18 @@ dotfiles_external_font_zip_items:
     url: https://dl.dafont.com/dl/?f=cyberpunks
   - name: MaterialDesign
     url: https://github.com/Templarian/MaterialDesign-Font/archive/master.zip
+  - name: Dot-Fonts
+    url: https://github.com/szorfein/fonts/archive/refs/heads/main.zip
+    hash: 5e4c76f89e65287b7ea9113532df65456da78fc8f107ffe7bc9434b00281bf06
 
 dotfiles_external_nerd_font_items:
   - name: SpaceMono
     hash: f7c864da3d4057fce7163181ae1dd85a6175c5e55a12a5410a00e57302cc7aa8
 
-dotfiles_external_font_ad_hoc_items:
-  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Medium/complete/Iosevka%20Medium%20Nerd%20Font%20Complete.ttf
-  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Regular/complete/Iosevka%20Nerd%20Font%20Complete.ttf
-  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Regular/complete/Iosevka%20Term%20Nerd%20Font%20Complete.ttf
-  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Light/complete/Iosevka%20Light%20Nerd%20Font%20Complete.ttf
-  - https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Iosevka/Light/complete/Iosevka%20Term%20Light%20Nerd%20Font%20Complete.ttf
-
 dotfiles_external_wallpaper_items:
   - name: wallpaper
     url: https://github.com/szorfein/walls/archive/main.zip
+    hash: 17d060a4f0fa4fda45466a3afac79f728bf6434e75d3b22d92925f5087299933
 
 {{ if (or (eq .gpu "intel_gen7") (eq .gpu "intel")) -}}
 dotfiles_gpu_driver: {{ .gpu }}

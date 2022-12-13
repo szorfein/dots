@@ -22,7 +22,7 @@ install_deps() {
   if ! hash euse 2>/dev/null; then sudo $ins gentoolkit ; fi
   euse_global jpeg
 
-  pkgs="mpv zathura zathura-pdf-mupdf weechat i3lock-color youtube-dl"
+  pkgs="weechat i3lock-color youtube-dl"
 }
 
 install_pulse() {
@@ -30,7 +30,7 @@ install_pulse() {
 }
 
 install_alsa() {
-  pkgs="$pkgs tap-plugins swh-plugins cmt-plugins caps-plugins ladspa-bs2b alsa-plugins brave-bin"
+  pkgs="$pkgs tap-plugins swh-plugins cmt-plugins caps-plugins ladspa-bs2b brave-bin"
 }
 
 usage() {
