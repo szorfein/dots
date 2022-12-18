@@ -22,8 +22,11 @@
 {{- $fullpath := printf "%s/%s" .chezmoi.sourceDir "scripts/board_name.sh" -}}
 {{- $board_name := output $fullpath | trim -}}
 {{- if eq $board_name "W51XTU" -}}
-{{- $soundcard = "hw:Pro" -}}
+{{- $soundcard = "hw:PCH" -}}
 {{- $gpu_driver = "intel_gen7" -}}
+{{- else if eq $board_name "Dazzle_CX" -}}
+{{- $gpu_driver = "nouveau" -}}
+{{- $soundcard = "hw:PCH" -}}
 {{- end -}}
 
 {{- if $secrets -}}
@@ -47,3 +50,4 @@ encryption = "gpg"
   # pulseaudio -> pactl list sinks short
   # alsa -> cat /proc/asound/cards
   sound_card = {{ $soundcard | quote }}
+  web = "brave"

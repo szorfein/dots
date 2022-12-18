@@ -4,20 +4,17 @@
     - szorfein.desktop
   roles:
     - dotfiles
+
+# Web browser
+- hosts: desktop
+  collections:
+    - szorfein.desktop
+  roles:
+    - web_browser
+
+# SDDM for the end
+- hosts: desktop
+  collections:
+    - szorfein.desktop
+  roles:
     - display_manager
-  vars:
-    display_manager_sddm: true
-    display_manager_background:
-      url: 'https://github.com/szorfein/dm-background/archive/refs/heads/sddm.tar.gz'
-      name: glitch.mp4
-      sum: 'ccc1bdcb621d5a475d45da333b5dfa0e1f96a4b2b133fd850056ebf9edbc4f20'
-    display_manager_theme:
-      url: 'https://github.com/stuomas/delicious-sddm-theme/archive/refs/heads/master.tar.gz'
-      name: delicious
-      background_dir: background
-      sum: '20dda1a210cf736dc0454fca9c81edd564c87ebf66e022023071842759b7a960'
-    display_manager_theme_customize:
-      - regexp: '^glowcolor='
-        line: 'glowcolor=#BBA33393'
-      - regexp: '^iconoverlay='
-        line: 'iconoverlay=#FF000000'

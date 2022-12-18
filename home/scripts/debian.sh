@@ -14,12 +14,6 @@ install_deps() {
   sudo $ins weechat youtube-dl $pkgs
 }
 
-install_pulse() {
-  pkgs="firefox-esr"
-  sudo $ins $pkgs
-}
-
-
 install_extra_deps() {
   [ -d ~/builds ] && rm -rf ~/builds
 

@@ -10,7 +10,7 @@ build() {
 }
 
 install_deps() {
-  pkgs="firefox weechat youtube-dl"
+  pkgs="weechat youtube-dl"
 }
 
 install_pulse() {

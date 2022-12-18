@@ -3,12 +3,6 @@
     url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
     stripComponents = 1
     refreshPeriod = "168h"
-[".emacs.d"]
-    type = "archive"
-    url = "https://github.com/hlissner/doom-emacs/archive/develop.tar.gz"
-    exact = true
-    stripComponents = 1
-    refreshPeriod = "168h"
 {{ if .personal -}}
 [".dotfiles"]
     type = "git-repo"

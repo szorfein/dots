@@ -24,13 +24,8 @@ install_deps() {
   pkgs="weechat youtube-dl"
 }
 
-install_pulse() {
-  pkgs="$pkgs firefox"
-}
-
 install_alsa() {
   pkgs="$pkgs ladspa swh-plugins"
-  pkgs_aur="$pkgs_aur brave-bin"
 }
 
 install_extra_deps() {

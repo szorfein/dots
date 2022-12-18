@@ -25,12 +25,8 @@ install_deps() {
   pkgs="weechat i3lock-color youtube-dl"
 }
 
-install_pulse() {
-  pkgs="$pkgs firefox-bin"
-}
-
 install_alsa() {
-  pkgs="$pkgs tap-plugins swh-plugins cmt-plugins caps-plugins ladspa-bs2b brave-bin"
+  pkgs="$pkgs tap-plugins swh-plugins cmt-plugins caps-plugins ladspa-bs2b"
 }
 
 usage() {

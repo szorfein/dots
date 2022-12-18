@@ -1,6 +1,7 @@
 # dots
 Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/) and [gnupg](https://gnupg.org/)/[pass](https://www.passwordstore.org/) to store secrets.  
-Work only on few linux distro including:
+Only works on some Linux distro including:
+
 + `Archlinux`
 + `Debian 11`
 + `Gentoo`
@@ -42,7 +43,7 @@ Why i switch on chezmoi?
 |---|---|---|
 | alsa | Audio Driver | Can be change in the config file if you prefer pulseaudio |
 | awesome | Window Manager | Configs recreate from scratch |
-| brave, firefox | Web Browser | Brave with alsa, Firefox with pulseaudio (except for Voidlinux) |
+| [brave](https://brave.com/) | Web Browser | Edit the config file to install [librewolf](https://librewolf.net) instead. |
 | feh | Image Viewer | |
 | i3lock-color | Lock Screen | for now, maybe [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) later |
 | sddm | Display Manager | With a theme inspired from [delicious](https://github.com/stuomas/delicious-sddm-theme) |
@@ -52,32 +53,32 @@ Why i switch on chezmoi?
 | picom | Compositor | Replacement for compton |
 | scrot | Screen Capture | |
 | tmux | Terminal multiplexer | Config inspired from [gpakosz](https://github.com/gpakosz/.tmux) |
-| vifm | File Manager | With [image preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
-| vim, emacs | Editors | I use the both |
-| weechat | IRC client | |
-| xst | Terminal | |
+| vifm | File Manager | With [image/font/pdf/epub/video preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
+| vim, [doomemacs](https://github.com/doomemacs/doomemacs) | Editors | I use the both |
+| weechat | IRC client | Only need to reach [matrix](https://matrix.org/). |
+| [xSt](https://github.com/gnotclub/xst) | Terminal | A fork of [st](https://st.suckless.org/). |
 | zathura | PDF/Epub viewer | |
-| zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
+| zsh | Shell | With [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo vim`).  
+You need to install [chezmoi](https://chezmoi.io), `git`, a text editor (e.g `vim`) and a package to have the permissions to make modifications on the system (`sudo / doas`).  
 With `Gentoo`:
 
-    # emerge -av sudo vim
+    # emerge -av sudo vim dev-vcs/git
     $ curl -fsLS get.chezmoi.io | sh
 
 With `Arch`:
 
-    # pacman -S chezmoi sudo vim
+    # pacman -S chezmoi sudo vim git
 
 With `Debian`:
 
-    # apt-get install curl sudo vim
+    # apt-get install curl sudo vim git
     $ curl -fsLS get.chezmoi.io | sh
 
 For `Voidlinux`:
 
-    # xbps-install chezmoi sudo
+    # xbps-install -S chezmoi sudo git
 
 `sudo`, your user should have permission to install packages:
 
@@ -85,7 +86,7 @@ For `Voidlinux`:
     <username> ALL=(ALL) ALL
 
 If you have create your first user recently (via: `useradd -m -G users <username>`), logout and back to initialize his environment correctly.
-    
+
 ## Install
 Only 4 little steps here
 
@@ -106,26 +107,26 @@ You can change for example in `[data]`:
 
     [data]
       sound = "pulseaudio"
+      web = "librewolf"
 
-It will install firefox rather than brave-bin and modify a lot of things during the install.  
-Only 10 lines to configure your system, depend on keyword [see
-more](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/):
+[machine-to-machine](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/), only few lines to configure your environment:
 
-| var | szorfein |
-|---|---|
-| key_recipient | szorfein@protonmail.com |
-| key_encrypt | xxx |
-| key_sign | xxx |
-| editor | vim |
-| email | szorfein@protonmail.com |
-| name | szorfein |
-| gpu | intel_gen7 |
-| sound | alsa |
-| sound_card | hw:PCH |
-| web | brave |
+| var | szorfein | xXx |
+|---|---|---|
+| key_recipient | szorfein@protonmail.com | |
+| key_encrypt | xxx | |
+| key_sign | xxx | |
+| editor | vim | emacs |
+| email | szorfein@protonmail.com | |
+| name | szorfein | xxx |
+| gpu | intel_gen7 | nouveau |
+| secrets | true | false |
+| sound | alsa | pulseaudio |
+| sound_card | hw:PCH | 0 |
+| web | brave | librewolf |
 
 ### Apply
-`apply` will install all files in your $HOME and start ansible playbook.
+`apply` will install all files in your $HOME and execute ansible playbook.
 
     $ chezmoi apply
 
@@ -144,8 +145,9 @@ If you have not yet configure X, change the keyboard layout like this:
 ## Left Over
 
 ### Issues
-For any questions, comments, feedback or issues, submit a [new issue](https://github.com/szorfein/dots/issues/new).
+For any questions, comments, feedback or issues, submit a [new issue](https://github.com/szorfein/dots/issues/new).  
+If an error occurs while running a ansible playbook, please post an issue [here](https://github.com/szorfein/ansible-collection-desktop/issues).
 
 ### Support
-Any support are greatly appreciated, star the repo, offer me a coffee... thanks you!  
+Any support are greatly appreciated, star the repo, a coffee... thanks you!  
 [![Donate](https://img.shields.io/badge/don-liberapay-1ba9a4)](https://liberapay.com/szorfein) [![Donate](https://img.shields.io/badge/don-patreon-ab69f4)](https://www.patreon.com/szorfein)
