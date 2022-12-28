@@ -34,18 +34,13 @@ dotfiles_audio_backend: {{ .sound }}
 
 dotfiles_emacs_doom: true
 
-dotfiles_external_font_zip_items:
-  - name: CyberPunk
-    url: https://dl.dafont.com/dl/?f=cyberpunks
-  - name: MaterialDesign
-    url: https://github.com/Templarian/MaterialDesign-Font/archive/master.zip
-  - name: Dot-Fonts
-    url: https://github.com/szorfein/fonts/archive/refs/heads/main.zip
-    hash: 5e4c76f89e65287b7ea9113532df65456da78fc8f107ffe7bc9434b00281bf06
-
-dotfiles_external_nerd_font_items:
-  - name: SpaceMono
-    hash: f7c864da3d4057fce7163181ae1dd85a6175c5e55a12a5410a00e57302cc7aa8
+dotfiles_external: true
+dotfiles_external_font_reaver_cache_dir: ~/.cache/reaver/fonts
+dotfiles_external_font_reaver_items:
+  - cyberpunk.zip
+  - material-design.zip
+  - dot-fonts.zip
+  - space-mono.zip
 
 dotfiles_external_wallpaper_items:
   - name: wallpaper
@@ -71,23 +66,24 @@ dotfiles_vifm_stow_dir: vifm
 
 dotfiles_vim: true
 dotfiles_vim_stow_dir: vim
-dotfiles_vim_plugin_git_items:
-  - edkolev/tmuxline.vim
-  - dense-analysis/ale
-  - ryanoasis/vim-devicons
-  - lilydjwg/colorizer
-  - Yggdroot/indentLine
-  - mengelbrecht/lightline-bufferline
-  - airblade/vim-gitgutter
-  - christoomey/vim-tmux-navigator
-  - itchyny/lightline.vim
-  - itchyny/vim-gitbranch
-  - preservim/nerdtree
+dotfiles_vim_reaver_cache_dir: ~/.cache/reaver/vim
+dotfiles_vim_reaver_items:
+  - ale.tar.gz
+  - colorizer.tar.gz
+  - indentLine.tar.gz
+  - lightline.tar.gz
+  - lightline-bufferline.tar.gz
+  - nerdtree.tar.gz
+  - ombre.tar.gz
+  - tmuxline.tar.gz
+  - vim-devicons.tar.gz
+  - vim-gitbranch.tar.gz
+  - vim-gitgutter.tar.gz
+  - vim-tmux-navigator.tar.gz
 
-dotfiles_vim_plugin_tar_items:
-  - name: ombre
-    url: https://github.com/szorfein/ombre.vim/archive/refs/heads/main.tar.gz
-
+{{ if ne .keymap "en" }}
+dotfiles_xorg_keymap: {{ .keymap }}
+{{ end }}
 dotfiles_xorg_stow_dir: .x
 dotfiles_xst: true
 

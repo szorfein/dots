@@ -1,0 +1,7 @@
+# Enable/disable automatic updating of repository metadata
+update_sources: true
+
+# Print backtrace when RubyGems encounters an error
+backtrace: true
+
+gem: --user-install --no-document --suggestions

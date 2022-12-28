@@ -4,10 +4,8 @@ set -o errexit -o nounset
 
 msg "Installing dependencies..."
 
-UPDT="xbps-install -S"
-INST="xbps-install"
-PKGS="pass openssh python3 ansible sshpass git"
+INST="xbps-install -S"
+PKGS="pass openssh python3 ansible sshpass git ruby"
 
-$AUTH $UPDT \
-  && $AUTH $INST $PKGS \
+$AUTH $INST $PKGS \
   && runit_start "sshd"

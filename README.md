@@ -45,7 +45,7 @@ Why i switch on chezmoi?
 | awesome | Window Manager | Configs recreate from scratch |
 | [brave](https://brave.com/) | Web Browser | Edit the config file to install [librewolf](https://librewolf.net) instead. |
 | feh | Image Viewer | |
-| i3lock-color | Lock Screen | for now, maybe [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) later |
+| [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Lock Screen | |
 | sddm | Display Manager | With a theme inspired from [delicious](https://github.com/stuomas/delicious-sddm-theme) |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
@@ -61,7 +61,7 @@ Why i switch on chezmoi?
 | zsh | Shell | With [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io), `git`, a text editor (e.g `vim`) and a package to have the permissions to make modifications on the system (`sudo / doas`).  
+You need to install `chezmoi`, `git`, a text editor (e.g `vim`) and a package to have the permissions to make modifications on the system `sudo` or `doas`.  
 With `Gentoo`:
 
     # emerge -av sudo vim dev-vcs/git
@@ -92,11 +92,13 @@ Only 4 little steps here
 
 ### Clone this repo
 
-    $ chezmoi init https://github.com/szorfein/dots.git
-
 If chezmoi ask for a password, disable the option [see more](https://www.chezmoi.io/reference/commands/init/)
 
     $ chezmoi init https://github.com/szorfein/dots.git --guess-repo-url=false
+
+To test the ansible branch
+
+    $ chezmoi init https://github.com/szorfein/dots.git --guess-repo-url=false --branch=ansible
 
 ### Config
 Edit the config file with your favorite text editor.
@@ -116,10 +118,11 @@ You can change for example in `[data]`:
 | key_recipient | szorfein@protonmail.com | |
 | key_encrypt | xxx | |
 | key_sign | xxx | |
+| keymap | fr | fr |
 | editor | vim | emacs |
 | email | szorfein@protonmail.com | |
-| name | szorfein | xxx |
 | gpu | intel_gen7 | nouveau |
+| name | szorfein | xxx |
 | secrets | true | false |
 | sound | alsa | pulseaudio |
 | sound_card | hw:PCH | 0 |
@@ -135,12 +138,6 @@ From time to time, start the update simply with:
 
     $ chezmoi diff
     $ chezmoi update
-
-## Final settings
-If you have not yet configure X, change the keyboard layout like this:
-
-    $ localectl list-x11-keymap-layouts | grep fr
-    $ sudo localectl set-x11-keymap fr
 
 ## Left Over
 

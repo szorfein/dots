@@ -1,0 +1,11 @@
+---
+things:
+  - name: cyberpunk.zip
+    url: https://dl.dafont.com/dl/?f=cyberpunks
+  - name: material-design.zip
+    url: https://github.com/Templarian/MaterialDesign-Font/archive/refs/heads/master.zip
+  - name: dot-fonts.zip
+    url: https://github.com/szorfein/fonts/archive/refs/heads/main.zip
+  - name: space-mono.zip
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.0-RC/SpaceMono.zip
+time: 86000
