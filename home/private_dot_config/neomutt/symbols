@@ -11,14 +11,14 @@ color status white black
 color status green black ''
 color status yellow black ''
 color status red black ''
-color status brightblack blue '(.*)' 1
+color status white blue '(.*)' 1
 color status blue black '.*()' 1
 color status black blue '\s* [0-9]+\s*'
 color status blue black '().*$' 1
 color status blue black '()\s*\s*[0-9]+\s*' 1
-color status black blue '\s*\s*[0-9]+\s*'
+color status white blue '\s*\s*[0-9]+\s*'
 color status blue yellow '() ([0-9]+%|all|end) \s*' 1
-color status black blue ' ([0-9]+%|all|end) \s*'
+color status white blue ' ([0-9]+%|all|end) \s*'
 color status yellow black '()\s*' 1
 color status default black ''
 

@@ -11,7 +11,8 @@ if hash yarn 2>/dev/null ; then
   PATH="$PATH:${HOME}/.yarn/bin"
 fi
 
-[ -d $HOME/.emacs.d/bin ] && PATH="$HOME/.emacs.d/bin:$PATH"
+# doom
+[ -d $HOME/.config/emacs/bin ] && PATH="$HOME/.config/emacs/bin:$PATH"
 
 export PATH
 

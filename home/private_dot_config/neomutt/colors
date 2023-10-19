@@ -1,6 +1,6 @@
 # general ------------ foreground ---- background -----------------------------
-color error             red             brightblack
-color indicator         magenta         brightblack # currently highlighted message
+color error             black           red
+color indicator         cyan            black # currently highlighted message
 color markers           color2          default
 color message           default         default
 color normal            default         default
