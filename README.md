@@ -63,22 +63,22 @@ Why i switch on chezmoi?
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
 With `emerge` (gentoo):
 
-    # emerge -av sudo dev-vcs/git vim
-    $ curl -sfL https://git.io/chezmoi | sh
+    # emerge -av sudo vim dev-vcs/git
+    $ curl -fsLS get.chezmoi.io | sh
 
 With `pacman` (arch,...):
 
-    # pacman -S chezmoi sudo git vim
+    # pacman -S chezmoi sudo vim git
 
 With `apt-get` (debian,...)
 
-    # apt-get install sudo git vim
-    # wget -cv https://github.com/twpayne/chezmoi/releases/download/v2.9.4/chezmoi_2.9.4_linux_amd64.deb
-    $ sudo dpkg -i chezmoi_2.9.4_linux_amd64.deb
+    # apt-get install curl sudo vim git
+    $ curl -fsLS get.chezmoi.io | sh
 
-For `voidlinux`:
+For `Voidlinux`:
 
-    # xbps-install chezmoi git sudo
+    # xbps-install -S chezmoi sudo git
+
 
 `sudo`, your user should have permission to install packages:
 
@@ -93,6 +93,10 @@ Only 4 little steps here
 ### Clone this repo
 
     $ chezmoi init https://github.com/szorfein/dots.git
+
+To test the ansible branch, (also look the branch for additionnal instructions)
+
+    $ chezmoi init https://github.com/szorfein/dots.git --guess-repo-url=false --branch=ansible
 
 ### Config
 Edit the config file with your favorite text editor.
