@@ -139,6 +139,14 @@ From time to time, start the update simply with:
     $ chezmoi diff
     $ chezmoi update
 
+## Extra Ansible playbooks
+You can run manually extra playbooks present in repo as all is alrealy configured.
+
+    $ cd ~/ansible
+
+Current playbooks with command to run:
++ ssh hardening: `ansible-playbook -i hosts --ask-become-pass ssh.yml`
+
 ## Left Over
 
 ### Issues

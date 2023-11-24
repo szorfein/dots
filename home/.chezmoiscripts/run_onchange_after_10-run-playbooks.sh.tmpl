@@ -2,6 +2,8 @@
 
 set -o errexit -o nounset
 
+# CHANGELOG collection desktop hash: {{ "~/.ansible/collections/ansible_collections/szorfein/desktop/CHANGELOG.md" | sha256sum }}
+
 playbook_dir=~/ansible
 
 script_dir="{{ .chezmoi.sourceDir }}/scripts"

@@ -4,6 +4,9 @@
 ## Incoming
 set imap_user = {{ (passFields "mail/personal").user | trim }}
 set folder = +Personal
+set from = {{ (passFields "mail/personal").user | trim | quote }}
+set envelope_from
+set use_from = "yes"
 set spoolfile = +Inbox
 set postponed = +Drafts
 set mbox = +Archive
