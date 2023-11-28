@@ -146,6 +146,7 @@ You can run manually extra playbooks present in repo as all is alrealy configure
 
 Current playbooks with command to run:
 + ssh hardening: `ansible-playbook -i hosts --ask-become-pass ssh.yml`
++ os hardening: `ansible-playbook -i hosts --ask-become-pass os-hardened.yml`
 
 ## Left Over
 

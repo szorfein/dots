@@ -1,0 +1,15 @@
+---
+os_fix_cmdline: true
+os_fix_core_dumps: true
+os_fix_cpu_microcode: true
+os_fix_hidepid: true
+os_fix_kernel: true
+os_fix_login_defs: true
+os_fix_modprobe: true
+os_fix_pam: true
+os_fix_permissions: true
+os_fix_securetty: true
+os_fix_sysctl: true
+os_fix_umask: true
+
+os_umask: '027'

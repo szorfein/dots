@@ -1,0 +1,6 @@
+---
+- hosts: hardened
+  collections:
+    - szorfein.hardening
+  roles:
+    - os
