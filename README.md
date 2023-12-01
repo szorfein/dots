@@ -111,6 +111,11 @@ You can change for example in `[data]`:
       sound = "pulseaudio"
       web = "librewolf"
 
+You can also configure whitch GPU driver should be installed with keyword. Only `intel_gen7`, `intel` or `nouveau` are supported for now, see option [dotfiles_gpu_driver](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles#role-variables).
+
+    [data]
+      gpu = "intel"
+
 [machine-to-machine](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/), only few lines to configure your environment:
 
 | var | szorfein | xXx |
