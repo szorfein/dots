@@ -31,6 +31,9 @@
 {{- else if eq $board_name "Dazzle_CX" -}}
 {{- $gpu_driver = "nouveau" -}}
 {{- $soundcard = "hw:PCH" -}}
+{{- else if eq $board_name "PRIME_H510M-K" -}}
+{{- $gpu_driver = "intel" -}}
+{{- $soundcard = "hw:PCH" -}}
 {{- end -}}
 
 {{- if $secrets -}}
