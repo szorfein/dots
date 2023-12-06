@@ -49,8 +49,9 @@ runit_start() {
 }
 
 openrc_start() {
-  if pgrep -x "$1" >/dev/null ; then
-    $AUTH rc-service "$1" start
+  if ! pgrep -x "$1" >/dev/null ; then
+    echo "Starting $1..."
+    "$AUTH" rc-service "$1" start
   fi
 }
 
