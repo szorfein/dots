@@ -2,21 +2,35 @@
 #####################
 #  DISPLAY MANAGER  #
 
-display_manager_sddm: true
-display_manager_background:
-  url: 'https://github.com/szorfein/dm-background/archive/refs/heads/sddm.tar.gz'
-  name: glitch.mp4
-  sum: 'ccc1bdcb621d5a475d45da333b5dfa0e1f96a4b2b133fd850056ebf9edbc4f20'
-display_manager_theme:
-  url: 'https://github.com/stuomas/delicious-sddm-theme/archive/refs/heads/master.tar.gz'
+# custom tool https://github.com/szorfein/reaver
+# just avoid to download all the archives aith Ansible, it's too horrible...
+dm_reaver_dir: ~/.cache/reaver/display-manager
+
+# 'sddm' or 'lightdm' or ''
+{{ if eq .dm "sddm" "lightdm" -}}
+dm_use: '.dm'
+{{ end -}}
+
+dm_sddm_theme:
   name: delicious
-  background_dir: background
-  sum: '20dda1a210cf736dc0454fca9c81edd564c87ebf66e022023071842759b7a960'
-display_manager_theme_customize:
+  archive: delicious.tar.gz
+  background_dir: background # each theme has a custom name, sometime is bg,
+bgs, backgrounds, etc...
+
+dm_sddm_backgrounds:
+  - sddm-backgrounds.tar.gz
+
+dm_sddm_theme_customize:
+  - regexp: '^background='
+    line: 'background=glitch.mp4'
   - regexp: '^glowcolor='
     line: 'glowcolor=#BBA33393'
   - regexp: '^iconoverlay='
     line: 'iconoverlay=#FF000000'
+
+dm_lightdm_theme:
+  name: litarvan
+  archive: lightdm-webkit-theme-litarvan.tar.gz
 
 ##############
 #  DOTFILES  #
