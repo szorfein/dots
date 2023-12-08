@@ -46,7 +46,7 @@ Why i switch on chezmoi?
 | [brave](https://brave.com/) | Web Browser | Edit the config file to install [librewolf](https://librewolf.net) instead. |
 | feh | Image Viewer | |
 | [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Lock Screen | |
-| sddm | Display Manager | With a theme inspired from [delicious](https://github.com/stuomas/delicious-sddm-theme) |
+| sddm | Display Manager | With a theme inspired from [delicious](https://github.com/stuomas/delicious-sddm-theme), edit the config file for lightdm or nothing. |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
 | neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
@@ -118,20 +118,21 @@ You can also configure whitch GPU driver should be installed with keyword. Only 
 
 [machine-to-machine](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/), only few lines to configure your environment:
 
-| var | szorfein | xXx |
-|---|---|---|
-| key_recipient | szorfein@protonmail.com | |
-| key_encrypt | xxx | |
-| key_sign | xxx | |
-| keymap | fr | fr |
-| editor | vim | emacs |
-| email | szorfein@protonmail.com | |
-| gpu | intel_gen7 | nouveau |
-| name | szorfein | xxx |
-| secrets | true | false |
-| sound | alsa | pulseaudio |
-| sound_card | hw:PCH | 0 |
-| web | brave | librewolf |
+| var | szorfein (dev) | xXx | server (musl) |
+|---|---|---|---|
+| key_recipient | szorfein@protonmail.com | | |
+| key_encrypt | xxx | | |
+| key_sign | xxx | | |
+| keymap | fr | fr | fr |
+| editor | vim | emacs | vim |
+| email | szorfein@protonmail.com | | |
+| gpu | intel_gen7 | nouveau | intel |
+| name | szorfein | xxx | |
+| secrets | true | false | true |
+| sound | alsa | pulseaudio | alsa |
+| sound_card | hw:PCH | 0 | hw:PCH |
+| web | brave | librewolf | brave |
+| dm | sddm | lightdm | lightdm |
 
 ### Apply
 `apply` will install all files in your $HOME and execute ansible playbook.

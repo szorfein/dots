@@ -8,14 +8,13 @@ dm_reaver_dir: ~/.cache/reaver/display-manager
 
 # 'sddm' or 'lightdm' or ''
 {{ if eq .dm "sddm" "lightdm" -}}
-dm_use: '.dm'
+dm_use: {{ .dm | quote }}
 {{ end -}}
 
 dm_sddm_theme:
   name: delicious
   archive: delicious.tar.gz
-  background_dir: background # each theme has a custom name, sometime is bg,
-bgs, backgrounds, etc...
+  background_dir: background # each theme has a custom name, sometime is bg, bgs, backgrounds, etc...
 
 dm_sddm_backgrounds:
   - sddm-backgrounds.tar.gz
