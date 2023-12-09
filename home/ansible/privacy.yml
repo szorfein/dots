@@ -1,0 +1,7 @@
+---
+- hosts: privacy
+  collections:
+    - szorfein.privacy
+  roles:
+    - os
+    - tor
