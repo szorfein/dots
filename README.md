@@ -58,7 +58,7 @@ Why i switch on chezmoi?
 | weechat | IRC client | Only need to reach [matrix](https://matrix.org/). |
 | [xSt](https://github.com/gnotclub/xst) | Terminal | A fork of [st](https://st.suckless.org/). |
 | zathura | PDF/Epub viewer | |
-| zsh | Shell | With [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
+| zsh | Shell | With [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [starship](https://starship.rs) |
 
 ## Requirements
 You need to install `chezmoi`, `git`, a text editor (e.g `vim`) and a package to have the permissions to make modifications on the system `sudo` or `doas`.  
@@ -144,6 +144,13 @@ From time to time, start the update simply with:
 
     $ chezmoi diff
     $ chezmoi update
+
+## Doom Emacs
+After the first install, if you need-want to use
+[doomemac](https://github.com/doomemacs/doomemacs), you have to finish the installation with a single command:
+
+    $ doom sync
+    $ emacs
 
 ## Extra Ansible playbooks
 You can run manually extra playbooks present in repo as all is alrealy configured.
