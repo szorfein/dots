@@ -2,7 +2,8 @@
 
 set -o errexit -o nounset
 
-# CHANGELOG collection desktop hash: {{ "~/.ansible/collections/ansible_collections/szorfein/desktop/CHANGELOG.md" | sha256sum }}
+# group_vars/desktop hash: {{ include "ansible/group_vars/desktop.yml.tmpl" | sha256sum }}
+# dotfiles.yml hash: {{ include "ansible/dotfiles.yml" | sha256sum }}
 
 playbook_dir=~/ansible
 
