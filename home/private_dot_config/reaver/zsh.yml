@@ -1,0 +1,9 @@
+---
+things:
+  - name: oh-my-zsh.tar.gz
+    url: https://github.com/ohmyzsh/ohmyzsh/archive/refs/heads/master.tar.gz
+  - name: zsh-autosuggestions.tar.gz
+    url: https://github.com/zsh-users/zsh-autosuggestions/archive/refs/heads/master.tar.gz
+  - name: zsh-syntax-highlighting.tar.gz
+    url: https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/heads/master.tar.gz
+time: 86000

@@ -100,8 +100,17 @@ dotfiles_xorg_keymap: {{ .keymap }}
 dotfiles_xorg_stow_dir: .x
 dotfiles_xst: true
 
+# Zsh
 dotfiles_zsh: true
 dotfiles_zsh_stow_dir: zsh
+dotfiles_zsh_reaver_cache_dir: ~/.cache/reaver/zsh
+dotfiles_zsh_reaver_install:
+  - src: oh-my-zsh.tar.gz
+    dest: ~/.oh-my-zsh
+  - src: zsh-autosuggestions.tar.gz
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  - src: zsh-syntax-highlighting.tar.gz
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 #################
 #  WEB BROWSER  #
