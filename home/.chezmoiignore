@@ -1,5 +1,6 @@
 .oh-my-zsh/cache/**
-.emacs.d/.local/**
+.config/emacs/**
+.config/awesome/**
 
 asound
 scripts

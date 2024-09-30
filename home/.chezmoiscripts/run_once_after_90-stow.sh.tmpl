@@ -4,7 +4,7 @@ set -o errexit
 
 OLD_AWM_THEME=""
 NEW_AWM_THEME=""
-DOTS="$HOME"/.dotfiles
+DOTS="$HOME/.dotfiles"
 DEST="$HOME"
 
 [ -f /tmp/awesome-theme ] && OLD_AWM_THEME="$(cat /tmp/awesome-theme)"
@@ -38,6 +38,11 @@ if [ "$OLD_AWM_THEME" ] ; then
   stow -D "$OLD_AWM_THEME" -t "$DEST"
 fi
 
+# Also need to be sure other themes should be remove
+echo "Removing older awm3 theme"
+cd "$DOTS/themes-m3"
+stow -D "$NEW_AWM_THEME" -t "$DEST"
+
 # Remove any existing inputrc
 [ -f "$HOME/.inputrc" ] && rm "$HOME/.inputrc"
 
@@ -52,7 +57,7 @@ echo "Applying Stow links..."
   && apply awm-m3
 )
 
-echo "Applying theme "$NEW_AWM_THEME"
+echo "Applying theme $NEW_AWM_THEME"
 cd "$DOTS/themes-m3" && apply_theme "$NEW_AWM_THEME"
 
 # wallpapers and vimcolor

@@ -129,7 +129,7 @@ From time to time, start the update simply with:
 
 ## Doom Emacs
 After the first install, if you need-want to use
-[doomemac](https://github.com/doomemacs/doomemacs), you have to finish the
+[doomemacs](https://github.com/doomemacs/doomemacs), you have to finish the
 installation with a single command:
 
     $ doom sync

@@ -11,3 +11,9 @@ zsh=$(whereis zsh | awk '{print $2}')
 if ! grep "^$USER" /etc/passwd | grep -q zsh ; then
   chsh -s "$zsh"
 fi
+
+echo "You probably need to logout and back if zsh was not your shell before."
+echo ""
+echo "To start awesome, enter the command: startx"
+echo "Good luck"
+echo ""
