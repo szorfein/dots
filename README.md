@@ -44,20 +44,20 @@ Why i switch on chezmoi?
 | awesome | Window Manager | Configs recreate from scratch |
 | brave, firefox | Web Browser | Brave with alsa, Firefox with pulseaudio (except for Voidlinux) |
 | feh | Image Viewer | |
-| i3lock-color | Lock Screen | for now, maybe [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) later |
+| [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Lock Screen | |
 | lightdm | Display Manager | (lightdm-gtk-greeter) |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
 | neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
-| scrot | Screen Capture | |
+| maim | Screen Capture | |
 | tmux | Terminal multiplexer | |
 | vifm | File Manager | With [image preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim, emacs | Editors | I use the both |
 | weechat | IRC client | |
 | xst | Terminal | |
 | zathura | PDF/Epub viewer | |
-| zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) |
+| zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and more... |
 
 ## Requirements
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
@@ -120,6 +120,14 @@ From time to time, start the update simply with:
 
     $ chezmoi diff
     $ chezmoi update
+
+## Doom Emacs
+After the first install, if you need-want to use
+[doomemac](https://github.com/doomemacs/doomemacs), you have to finish the
+installation with a single command:
+
+    $ doom sync
+    $ emacs
 
 ## Final settings
 If you have not yet configure X, change the keyboard layout like this:

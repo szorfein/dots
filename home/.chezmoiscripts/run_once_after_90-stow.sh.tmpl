@@ -2,13 +2,17 @@
 
 set -o errexit
 
+OLD_AWM_THEME=""
+NEW_AWM_THEME=""
 DOTS="$HOME"/.dotfiles
 DEST="$HOME"
 
-if cat /tmp/awesome-theme 2>/dev/null ; then
-  LAST_THEME="$(cat /tmp/awesome-theme)"
+[ -f /tmp/awesome-theme ] && OLD_AWM_THEME="$(cat /tmp/awesome-theme)"
+
+if [ -f /tmp/awm-m3 ] ; then
+  NEW_AWM_THEME="$(cat /tmp/awm-m3)"
 else
-  LAST_THEME="lines"
+  NEW_AWM_THEME="focus"
 fi
 
 apply() {
@@ -18,8 +22,8 @@ apply() {
 
 apply_theme() {
   echo ""
-  echo "Applying themes/$LAST_THEME"
-  (cd themes \
+  echo "Applying themes-m3/$LAST_THEME"
+  (cd themes-m3 \
     && stow -D "$1" -t "$DEST" \
     && stow "$1" -t "$DEST"
   )
@@ -27,10 +31,16 @@ apply_theme() {
 
 # Remove any previous stow links
 echo "Removing old Stow links..."
-for dir in ncmpcpp vifm vim .x tmux awesomewm; do
+for dir in ncmpcpp vifm .x tmux vim zsh awesomewm awm-m3 zsh; do
   cd "$DOTS"
   [ -d "$dir" ] && stow -D "$dir" -t "$DEST"
 done
+
+if [ "$OLD_AWM_THEME" ] ; then
+  echo "Removing older theme..."
+  cd "$DOTS/themes"
+  stow -D "$OLD_AWM_THEME" -t "$DEST"
+fi
 
 echo "Applying Stow links..."
 (cd $DOTS \
@@ -39,11 +49,12 @@ echo "Applying Stow links..."
   && apply .x \
   && apply tmux \
   && apply vim \
-  && apply awesomewm \
-  && apply_theme "$LAST_THEME"
+  && apply zsh \
+  && apply awm-m3 \
+  && apply_theme "$NEW_AWM_THEME"
 )
 
 # wallpapers and vimcolor
 (cd $DOTS \
-  && ./install --images --fonts
+  && ./install --images --fonts --vim
 )

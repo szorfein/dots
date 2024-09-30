@@ -3,7 +3,7 @@
 set -o errexit -o nounset
 
 ins="pacman -S --noconfirm --needed"
-pkgs_aur="xst-git cava i3lock-color"
+pkgs_aur="xst-git cava i3lock-color betterlockscreen"
 
 build() {
   PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
@@ -22,10 +22,11 @@ build() {
 
 install_deps() {
   pkgs="gnupg pass xclip zsh awesome mpd ncmpcpp xorg-xinit xorg-server
-    base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf isync
+    base-devel wget feh picom maim vifm mpv zathura zathura-pdf-mupdf isync
     neomutt imagemagick weechat rofi openssh ttf-iosevka-nerd yt-dlp
     papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools light stow
-    unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug"
+    unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug
+    xorg-xdpyinfo xorg-xrandr jq bc"
 }
 
 install_pulse() {
@@ -38,7 +39,7 @@ install_alsa() {
 }
 
 install_emacs() {
-  pkgs="$pkgs ripgrep emacs jq"
+  pkgs="$pkgs ripgrep emacs"
 }
 
 install_vim() {

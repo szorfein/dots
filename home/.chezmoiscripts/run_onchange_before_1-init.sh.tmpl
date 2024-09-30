@@ -33,26 +33,26 @@ if hash emerge 2>/dev/null ; then
   [ -d $CONF ] || sudo mkdir -p $CONF
   sudo curl -L -o /etc/portage/repos.conf/ninjatools.conf https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
   sudo emaint sync -r ninjatools
+
+  # need also GURU for gentoo
+  [ -d $REPO/guru ] || sudo mkdir -p $REPO/guru
+
+  cat <<EOF > "/etc/portage/repos.conf/guru.conf"
+[guru]
+location = /var/db/repos/guru
+sync-type = git
+sync-uri = https://github.com/gentoo/guru
+priority = 50
+auto-sync = Yes
+EOF
+
+  sudo emaint sync -r guru
 fi
 
 if hash systemctl 2>/dev/null ; then
+
   # save the full path of systemctl
-  SYSTEMCTL=$(whereis systemctl | awk '{print $2}')
+  #SYSTEMCTL=$(whereis systemctl | awk '{print $2}')
 
-  # make all buttons for the logout work - post an issue if you think it's not secure enough
-  cat << EOF | sudo tee /etc/sudoers.d/dots
-$USER ALL=(ALL) NOPASSWD: $SYSTEMCTL poweroff
-$USER ALL=(ALL) NOPASSWD: $SYSTEMCTL reboot
-EOF
-
-  sudo chmod 0400 /etc/sudoers.d/dots
 fi
-
-{{ if (eq .chezmoi.osRelease.id "void") -}}
-cat << EOF | sudo tee /etc/sudoers.d/dots
-$USER ALL=(ALL) NOPASSWD: /usr/bin/poweroff
-$USER ALL=(ALL) NOPASSWD: /usr/bin/reboot
-EOF
-
-sudo chmod 0400 /etc/sudoers.d/dots
 {{ end -}}

@@ -10,12 +10,12 @@ build() {
 }
 
 install_deps() {
-  pkgs="xst nerd-fonts-ttf cava ueberzug i3lock-color gnupg2 pass xclip zsh 
+  pkgs="xst nerd-fonts-ttf cava ueberzug betterlockscreen gnupg2 pass xclip zsh
     curl awesome mpd ncmpcpp xinit xorg-apps xorg-minimal xorg-input-drivers
-    base-devel wget feh picom scrot vifm mpv zathura zathura-pdf-mupdf isync
-    neomutt ImageMagick weechat rofi youtube-dl papirus-icon-theme mpc
+    base-devel wget feh picom maim vifm mpv zathura zathura-pdf-mupdf isync
+    neomutt ImageMagick weechat youtube-dl papirus-icon-theme mpc
     lightdm-gtk3-greeter inotify-tools light stow unzip arc-theme
-    ffmpegthumbnailer tmux firefox xss-lock"
+    ffmpegthumbnailer tmux firefox xss-lock jq xrdb gcc"
 }
 
 install_pulse() {
@@ -27,7 +27,7 @@ install_alsa() {
 }
 
 install_emacs() {
-  pkgs="$pkgs ripgrep emacs-gtk3 jq"
+  pkgs="$pkgs ripgrep emacs-gtk3"
 }
 
 install_vim() {

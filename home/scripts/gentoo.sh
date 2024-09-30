@@ -29,10 +29,11 @@ install_deps() {
   sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/dotfiles /etc/portage/package.use/
 
   pkgs="gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst
-    nerd-fonts-iosevka feh picom scrot vifm mpv zathura zathura-pdf-mupdf
-    neomutt cava ueberzug weechat i3lock-color rofi youtube-dl
+    nerd-fonts-iosevka feh picom maim vifm mpv zathura zathura-pdf-mupdf
+    neomutt cava ueberzug weechat rofi youtube-dl
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow
-    arc-theme ffmpegthumbnailer tmux net-mail/isync xss-lock"
+    arc-theme ffmpegthumbnailer tmux net-mail/isync xss-lock
+    app-misc/jq x11-misc/betterlockscreen"
 }
 
 install_pulse() {
@@ -51,7 +52,7 @@ install_emacs() {
   sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/emacs /etc/portage/package.use/
 
   # discount = markdown
-  pkgs="$pkgs ripgrep discount emacs app-misc/jq"
+  pkgs="$pkgs ripgrep discount emacs"
 }
 
 install_vim() {
