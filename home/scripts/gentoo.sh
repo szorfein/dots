@@ -33,7 +33,7 @@ install_deps() {
     neomutt cava ueberzug weechat rofi youtube-dl
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow
     arc-theme ffmpegthumbnailer tmux net-mail/isync xss-lock
-    app-misc/jq x11-misc/betterlockscreen"
+    app-misc/jq x11-misc/betterlockscreen app-shells/starship"
 }
 
 install_pulse() {

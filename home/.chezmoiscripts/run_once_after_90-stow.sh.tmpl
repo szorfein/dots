@@ -21,17 +21,13 @@ apply() {
 }
 
 apply_theme() {
-  echo ""
-  echo "Applying themes-m3/$LAST_THEME"
-  (cd themes-m3 \
-    && stow -D "$1" -t "$DEST" \
-    && stow "$1" -t "$DEST"
-  )
+  stow -D "$1" -t "$DEST"
+  stow "$1" -t "$DEST"
 }
 
 # Remove any previous stow links
 echo "Removing old Stow links..."
-for dir in ncmpcpp vifm .x tmux vim zsh awesomewm awm-m3 zsh; do
+for dir in ncmpcpp vifm .x tmux vim zsh awesomewm awm-m3; do
   cd "$DOTS"
   [ -d "$dir" ] && stow -D "$dir" -t "$DEST"
 done
@@ -42,6 +38,9 @@ if [ "$OLD_AWM_THEME" ] ; then
   stow -D "$OLD_AWM_THEME" -t "$DEST"
 fi
 
+# Remove any existing inputrc
+[ -f "$HOME/.inputrc" ] && rm "$HOME/.inputrc"
+
 echo "Applying Stow links..."
 (cd $DOTS \
   && apply ncmpcpp \
@@ -50,9 +49,11 @@ echo "Applying Stow links..."
   && apply tmux \
   && apply vim \
   && apply zsh \
-  && apply awm-m3 \
-  && apply_theme "$NEW_AWM_THEME"
+  && apply awm-m3
 )
+
+echo "Applying theme "$NEW_AWM_THEME"
+cd "$DOTS/themes-m3" && apply_theme "$NEW_AWM_THEME"
 
 # wallpapers and vimcolor
 (cd $DOTS \

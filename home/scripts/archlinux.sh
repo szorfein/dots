@@ -26,7 +26,7 @@ install_deps() {
     neomutt imagemagick weechat rofi openssh ttf-iosevka-nerd yt-dlp
     papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools light stow
     unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug
-    xorg-xdpyinfo xorg-xrandr jq bc"
+    xorg-xdpyinfo xorg-xrandr jq bc starship"
 }
 
 install_pulse() {

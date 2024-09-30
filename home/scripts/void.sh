@@ -9,13 +9,14 @@ build() {
   :
 }
 
+# Remove nerd-fonts-ttf (package size ~= 7G)
 install_deps() {
-  pkgs="xst nerd-fonts-ttf cava ueberzug betterlockscreen gnupg2 pass xclip zsh
+  pkgs="xst cava ueberzug betterlockscreen gnupg2 pass xclip zsh
     curl awesome mpd ncmpcpp xinit xorg-apps xorg-minimal xorg-input-drivers
     base-devel wget feh picom maim vifm mpv zathura zathura-pdf-mupdf isync
     neomutt ImageMagick weechat youtube-dl papirus-icon-theme mpc
     lightdm-gtk3-greeter inotify-tools light stow unzip arc-theme
-    ffmpegthumbnailer tmux firefox xss-lock jq xrdb gcc"
+    ffmpegthumbnailer tmux firefox xss-lock jq xrdb gcc starship"
 }
 
 install_pulse() {

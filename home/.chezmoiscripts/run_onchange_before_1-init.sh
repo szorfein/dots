@@ -30,14 +30,13 @@ if hash emerge 2>/dev/null ; then
 
   [ -d $REPO/ninjatools ] || sudo mkdir -p $REPO/ninjatools
 
-  [ -d $CONF ] || sudo mkdir -p $CONF
-  sudo curl -L -o /etc/portage/repos.conf/ninjatools.conf https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
-  sudo emaint sync -r ninjatools
+  [ -d "$CONF" ] || sudo mkdir -p "$CONF"
+  curl -L -o /tmp/ninjatools.conf https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
 
   # need also GURU for gentoo
-  [ -d $REPO/guru ] || sudo mkdir -p $REPO/guru
+  [ -d "$REPO/guru" ] || sudo mkdir -p "$REPO/guru"
 
-  cat <<EOF > "/etc/portage/repos.conf/guru.conf"
+  cat <<EOF > /tmp/guru.conf
 [guru]
 location = /var/db/repos/guru
 sync-type = git
@@ -46,6 +45,9 @@ priority = 50
 auto-sync = Yes
 EOF
 
+  sudo mv /tmp/ninjatools.conf "$CONF"/ninjatools.conf
+  sudo mv /tmp/guru.conf "$CONF"/guru.conf
+  sudo emaint sync -r ninjatools
   sudo emaint sync -r guru
 fi
 
@@ -53,6 +55,6 @@ if hash systemctl 2>/dev/null ; then
 
   # save the full path of systemctl
   #SYSTEMCTL=$(whereis systemctl | awk '{print $2}')
+  echo "Next..."
 
 fi
-{{ end -}}

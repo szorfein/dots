@@ -115,6 +115,12 @@ It will install firefox rather than brave-bin and modify a lot of things during 
 
     $ chezmoi apply
 
+If /tmp is protected with `noexec`, you need to tell `chezmoi` to use another dir
+[#1929](https://github.com/twpayne/chezmoi/issues/1929)
+
+    $ mkdir $HOME/tmp
+    $ TMPDIR=$HOME/tmp chezmoi apply
+
 ## Update
 From time to time, start the update simply with:
 
