@@ -46,6 +46,9 @@ stow -D "$NEW_AWM_THEME" -t "$DEST"
 # Remove any existing inputrc
 [ -f "$HOME/.inputrc" ] && rm "$HOME/.inputrc"
 
+# Make sure directory for awesome exist...
+mkdir -p "$HOME/.config/awesome/theme"
+
 echo "Applying Stow links..."
 (cd $DOTS \
   && apply ncmpcpp \

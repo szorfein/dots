@@ -85,7 +85,7 @@ For `Voidlinux`:
     # EDITOR="vim" visudo
     <username> ALL=(ALL) ALL
 
-If you have create your first user recently (via: `useradd -m -G users,wheel,audio,video <username>`), logout and back to initialize his environment correctly.
+If you have create your first user recently (via: `useradd -m -s /bin/bash <username>`), logout and back to initialize his environment correctly.
     
 ## Install
 Only 4 little steps here

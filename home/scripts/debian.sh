@@ -10,17 +10,21 @@ install_deps() {
     fontconfig x11proto-dev libxext-dev"
 
   # i3lock-color
+  # https://github.com/Raymo111/i3lock-color#debian
   pkgs="$pkgs autoconf make libpam0g-dev libcairo2-dev libfontconfig1-dev \
     libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev \
     libxcb-randr0-dev libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev \
     libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev"
 
-  # Ueberzug
-  pkgs="$pkgs python3-pip"
+  # Ueberzug (debian 12+)
+  pkgs="$pkgs ueberzug"
+
+  # Betterlockscreen
+  # https://github.com/betterlockscreen/betterlockscreen/tree/main#system-requirements
 
   sudo $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit picom light \
-    xserver-xorg-core xserver-xorg-input-libinput feh scrot vifm mpv zathura isync \
-    neomutt imagemagick weechat rofi youtube-dl xss-lock papirus-icon-theme \
+    xserver-xorg-core xserver-xorg-input-libinput feh maim vifm mpv zathura isync \
+    neomutt imagemagick weechat youtube-dl xss-lock papirus-icon-theme jq \
     mpc lightdm inotify-tools stow arc-theme tmux gcc $pkgs
 }
 
@@ -51,7 +55,7 @@ install_extra_deps() {
 
   # xst
   PN="xst"
-  PV="0.8.4.1"
+  PV="0.9.0"
 
   ( cd ~/builds \
     && curl -L -o "$PN"-"$PV".tar.gz https://github.com/gnotclub/xst/archive/v"$PV".tar.gz \
@@ -61,12 +65,9 @@ install_extra_deps() {
     && sudo make PREFIX=/usr DESTDIR=/ install
   )
 
-  # Ueberzug
-  sudo pip3 install ueberzug
-
   # i3lock-color
   PN="i3lock-color"
-  PV="2.13.c.4"
+  PV="2.13.c.5"
 
   ( cd ~/builds \
     && curl -L -o "$PN"-"$PV".tar.gz https://github.com/Raymo111/"$PN"/archive/"$PV".tar.gz \
@@ -76,6 +77,10 @@ install_extra_deps() {
     && ./configure --prefix=/usr --sysconfdir=/etc \
     && sudo make DESTDIR=/ install
   )
+
+  # Betterlockscreen
+  # https://github.com/betterlockscreen/betterlockscreen#installation-script
+  wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
 }
 
 usage() {
