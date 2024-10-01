@@ -1,3 +1,21 @@
+Updates and tested on Voidlinux (glibc and musl), Debian 12. (not yes tested Gentoo and Arch)
+
+### New
+- New theme - [Focus](https://github.com/szorfein/dotfiles).
+- zsh, add starship, zsh-autosuggestion and zsh-syntax-highlighting.
+- Add GURU repository for Gentoo (for betterlockscreen, quickemu and more).
+
+### Change
+- Update doomemacs config and install on .config/emacs instead of .doom.
+- Maim replace Scrot
+- Betterlockscreen replace i3lockcolor.
+
+### Drop
+- plug.vim
+- rofi
+- zsh configs, use configs from my dotfiles.
+- zsh-spaceship-prompt
+
 ## 2022-12-11
 
 * msmtp and fdm are disabled for now.

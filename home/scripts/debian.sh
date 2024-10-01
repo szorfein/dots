@@ -21,6 +21,7 @@ install_deps() {
 
   # Betterlockscreen
   # https://github.com/betterlockscreen/betterlockscreen/tree/main#system-requirements
+  pkgs="$pkgs bc"
 
   sudo $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit picom light \
     xserver-xorg-core xserver-xorg-input-libinput feh maim vifm mpv zathura isync \
@@ -81,6 +82,13 @@ install_extra_deps() {
   # Betterlockscreen
   # https://github.com/betterlockscreen/betterlockscreen#installation-script
   wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
+
+  # Starship
+  [ -z "$TMPDIR" ] && TMPDIR="$HOME"
+  curl -sS https://starship.rs/install.sh -o "$TMPDIR/starship.sh"
+  chmod u+x "$TMPDIR/starship.sh"
+  echo "Installing Starship..."
+  sudo "$TMPDIR/starship.sh" --yes >/dev/null
 }
 
 usage() {
