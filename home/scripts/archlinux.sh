@@ -3,7 +3,7 @@
 set -o errexit -o nounset
 
 ins="pacman -S --noconfirm --needed"
-pkgs_aur="xst-git cava i3lock-color betterlockscreen"
+pkgs_aur="light xst-git cava i3lock-color betterlockscreen"
 
 build() {
   PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
@@ -24,7 +24,7 @@ install_deps() {
   pkgs="gnupg pass xclip zsh awesome mpd ncmpcpp xorg-xinit xorg-server
     base-devel wget feh picom maim vifm mpv zathura zathura-pdf-mupdf isync
     neomutt imagemagick weechat rofi openssh ttf-iosevka-nerd yt-dlp
-    papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools light stow
+    papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools stow
     unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug
     xorg-xdpyinfo xorg-xrandr jq bc starship"
 }
@@ -43,6 +43,9 @@ install_emacs() {
 }
 
 install_vim() {
+  if pacman -Q | awk '{print $1}' | grep -q '^vim' ; then
+    sudo pacman -R --no-confirm vim
+  fi
   pkgs="$pkgs gvim"
 }
 

@@ -1,10 +1,7 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
-Work only on distro linux including the installer: ( tested on a fresh install of Gentoo, Archlinux, Void and Debian )  
-+ `emerge`: Gentoo, Pentoo, Funtoo.
-+ `pacman`: Archlinux, Manjaro, Antergos, ArchBang,...
-+ `apt-get`: Debian, Kali, etc...
-+ `xbps-install`: Voidlinux. Tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
+Work only on few distro linux including Gentoo, Archlinux, Void and Debian. It
+should not work on distro variant...
 
 Why i switch on chezmoi?
 + Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
@@ -32,9 +29,9 @@ Why i switch on chezmoi?
 
 ## Screenshots
 
-| Lines | Sci | Miami |
+| Lines | Focus | Miami |
 | --- | --- | --- |
-| ![](https://github.com/szorfein/unix-portfolio/raw/master/lines/monitor.png) | ![](https://github.com/szorfein/unix-portfolio/raw/master/sci/logout.png) | ![](https://github.com/szorfein/unix-portfolio/raw/master/miami/start_screen.png) |
+| ![](https://github.com/szorfein/unix-portfolio/raw/master/lines/monitor.png) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/miami/start_screen.png) |
 
 ## Packages
 
@@ -61,21 +58,21 @@ Why i switch on chezmoi?
 
 ## Requirements
 You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
-With `emerge` (gentoo):
+With Gentoo:
 
     # emerge -av sudo vim dev-vcs/git
     $ curl -fsLS get.chezmoi.io | sh
 
-With `pacman` (arch,...):
+With Archlinux:
 
     # pacman -S chezmoi sudo vim git
 
-With `apt-get` (debian,...)
+With Debian:
 
     # apt-get install curl sudo vim git
     $ curl -fsLS get.chezmoi.io | sh
 
-For `Voidlinux`:
+For Voidlinux:
 
     # xbps-install -S chezmoi sudo git
 
