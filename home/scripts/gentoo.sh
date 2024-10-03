@@ -38,7 +38,7 @@ install_deps() {
   fi
 
   pkgs="app-crypt/gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst
-    nerd-fonts-iosevka feh picom maim vifm mpv zathura zathura-pdf-mupdf
+    feh picom maim vifm mpv zathura zathura-pdf-mupdf
     neomutt cava ueberzug weechat net-misc/yt-dlp
     papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow
     arc-theme ffmpegthumbnailer tmux net-mail/isync xss-lock
@@ -54,7 +54,8 @@ install_pulse() {
 install_alsa() {
   sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/alsa "$USE_DIR/"
 
-  pkgs="$pkgs alsa-utils tap-plugins swh-plugins libsamplerate cmt-plugins caps-plugins ladspa-bs2b alsa-plugins brave-bin"
+  pkgs="$pkgs alsa-utils tap-plugins swh-plugins libsamplerate cmt-plugins caps-plugins ladspa-bs2b alsa-plugins"
+  # need to be update from ninjatool >  brave-bin
 }
 
 install_emacs() {
