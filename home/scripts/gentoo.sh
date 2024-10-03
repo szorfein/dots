@@ -32,9 +32,9 @@ install_deps() {
   sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/dotfiles "$USE_DIR/"
 
   if has_systemd ; then
-    rm "$USE_DIR"/*-elogind
+    sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/lightdm-systemd "$USE_DIR/"
   else
-    rm "$USE_DIR"/*-systemd
+    sudo cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/lightdm-elogind "$USE_DIR/"
   fi
 
   pkgs="app-crypt/gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst

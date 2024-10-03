@@ -1,1 +1,2 @@
+sys-auth/pambase elogind
 x11-misc/lightdm -gnome gtk non-root elogind

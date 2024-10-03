@@ -1,5 +1,5 @@
 has_systemd() {
-  if [ -d /usr/lib/systemd/system ] || [ -d /usr/lib64/systemd/system ] ; then
+  if [ -f /bin/systemctl ] || [ -f /usr/bin/systemctl ] ; then
     return 0
   else
     return 1

@@ -1,4 +1,5 @@
-Updates and tested on Arch, Voidlinux (glibc and musl), Debian 12 and Gentoo.
+## 2024-10-03
+Updates and tested on Arch, Voidlinux (glibc and musl), Debian 12 and Gentoo (glibc, musl).
 
 ### New
 - New awesome config.
