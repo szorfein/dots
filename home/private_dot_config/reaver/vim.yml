@@ -25,4 +25,6 @@ things:
     url: https://github.com/airblade/vim-gitgutter/archive/refs/heads/master.tar.gz
   - name: vim-tmux-navigator.tar.gz
     url: https://github.com/christoomey/vim-tmux-navigator/archive/refs/heads/master.tar.gz
+  - name: vamp.vim.tar.gz
+    url: https://github.com/szorfein/vamp.vim/archive/refs/heads/master.tar.gz
 time: 86000

@@ -37,9 +37,12 @@ dm_lightdm_theme:
 dotfiles_stow_dir: ~/.dotfiles
 dotfiles_stow_dir_theme: ~/.dotfiles/themes
 
-dotfiles_awm: true
 dotfiles_awm_stow_dir: awesomewm
-dotfiles_awm_default_theme: miami
+dotfiles_awm_default_theme: focus
+
+dotfiles_awm_m3: true
+dotfiles_awm_m3_stow_dir: awm-m3
+dotfiles_awm_m3_stow_dir_theme: themes-m3
 
 {{ if eq .sound "alsa" "pulseaudio" -}}
 dotfiles_audio_backend: {{ .sound }}
@@ -58,7 +61,7 @@ dotfiles_external_font_reaver_items:
 dotfiles_external_wallpaper_items:
   - name: wallpaper
     url: https://github.com/szorfein/walls/archive/main.zip
-    hash: 17d060a4f0fa4fda45466a3afac79f728bf6434e75d3b22d92925f5087299933
+    hash: 6a9a53ea28bbbd5ff38beb665683c893ce424e7f8eb1df1fcb9758900856bb2a
 
 {{ if eq .gpu "intel_gen7" "intel" "nouveau" -}}
 dotfiles_gpu_driver: {{ .gpu }}
@@ -93,6 +96,7 @@ dotfiles_vim_reaver_items:
   - vim-gitbranch.tar.gz
   - vim-gitgutter.tar.gz
   - vim-tmux-navigator.tar.gz
+  - vamp.vim.tar.gz
 
 {{ if ne .keymap "en" }}
 dotfiles_xorg_keymap: {{ .keymap }}
