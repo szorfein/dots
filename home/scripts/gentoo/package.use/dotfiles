@@ -24,7 +24,6 @@ dev-libs/boost icu
 media-video/ffmpeg openh264 vpx
 media-video/ffmpegthumbnailer png
 media-gfx/imagemagick jpeg
-x11-misc/lightdm gtk non_root
 
 dev-python/pillow jpeg
 
@@ -39,6 +38,7 @@ mail-client/neomutt gpgme gdbm sasl
 
 # pass
 app-admin/pass X zsh-completion emacs
+media-gfx/qrencode png
 
 # awesome / lua5-3
 x11-wm/awesome -lua_single_target_lua5-1 -lua_single_target_lua5-2 lua_single_target_lua5-3
@@ -47,9 +47,6 @@ dev-python/pillow jpeg
 
 # imlib
 media-libs/imlib2 jpeg png
-
-# rofi
-x11-misc/rofi windowmode
 
 # fdm
 net-mail/fdm examples
@@ -64,3 +61,5 @@ app-text/xmlto text
 media-libs/freetype harfbuzz
 
 net-mail/isync sasl
+
+net-libs/libdom xml
