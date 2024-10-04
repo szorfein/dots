@@ -37,7 +37,7 @@ install_deps() {
     pkgs="brave-bin"
   else
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/lightdm-elogind "$USE_DIR/"
-    pkgs"librewolf"
+    pkgs="librewolf"
   fi
 
   pkgs="$pkgs app-crypt/gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst
