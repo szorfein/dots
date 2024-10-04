@@ -1,21 +1,6 @@
 #!/usr/bin/env sh
 
-cyan="\033[0;96m"
-white="\033[0;97m"
-endc="\033[0m"
-
-msg() {
-  echo ""
-  echo "$cyan--------------------------------------------------$endc"
-  echo "$cyan-->$white $1 $endc"
-  echo ""
-}
-
-bye() {
-  echo ""
-    echo "$cyan-->$white End for $0 $endc"
-    echo "$cyan--------------------------------------------------$endc"
-}
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
 
 msg "Execute $0..."
 
@@ -42,5 +27,3 @@ add_file ~/.config/mpd/database
 add_file ~/.config/mpd/state
 add_file ~/.mail/div1
 add_file ~/.mail/div2
-
-trap bye EXIT

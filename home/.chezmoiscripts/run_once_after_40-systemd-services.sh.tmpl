@@ -1,18 +1,8 @@
 #!/usr/bin/env sh
 
-cyan='\033[0;96m'
-white='\033[0;97m'
-endc='\033[0m'
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
 
-msg() {
-  printf "\\n${cyan}%s${endc}\\n" '--------------------------------------------------'
-  printf "${cyan}%s${white} %s${endc}\\n\\n" '-->' "$1"
-}
-
-bye() {
-  printf "\\n${cyan}%s${white} %s${endc}\\n" '-->' "End for $0"
-  printf "${cyan}%s${endc}\\n" "--------------------------------------------------"
-}
+AUTH=$(search_auth)
 
 user_systemd_service() {
   systemctl="systemctl --user"
@@ -33,15 +23,13 @@ if hash systemctl 2>/dev/null ; then
 
   if hash lightdm 2>/dev/null ; then
     services_system="lightdm"
-    systemctl="sudo systemctl"
+    systemctl="$AUTH systemctl"
     for service in $services_system ; do
       echo -n "$service..."
       if ! $systemctl is-enabled $service ; then $systemctl enable $service ; fi
     done
   fi
 fi
-
-trap bye EXIT
 
 if ! hash lightdm 2>/dev/null ; then exit; fi
 
@@ -72,4 +60,4 @@ allow-debugging = false
 laptop = false
 _EOF_
 
-sudo install -m0644 "$FILE" /etc/lightdm/lightdm-gtk-greeter.conf
+"$AUTH" install -m0644 "$FILE" /etc/lightdm/lightdm-gtk-greeter.conf

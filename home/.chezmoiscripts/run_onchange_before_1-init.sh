@@ -2,59 +2,24 @@
 
 set -o errexit
 
-cyan="\033[0;96m"
-white="\033[0;97m"
-endc="\033[0m"
+# Configuring repository or Pre install actions
 
-msg() {
-  echo "$cyan--------------------------------------------------$endc"
-  echo "$cyan-->$white $1 $endc"
-  echo ""
-}
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
 
-bye() {
-  echo ""
-    echo "$cyan-->$white End for $0 $endc"
-    echo "$cyan--------------------------------------------------$endc"
-}
-
-trap bye EXIT
+AUTH=$(search_auth)
 
 msg "Execute $0..."
 
 if hash emerge 2>/dev/null ; then
+  "$AUTH" emerge -av --changed-use app-eselect/eselect-repository
 
-  # need my repo ninjatools for gentoo
-  REPO=/var/db/repos
-  CONF=/etc/portage/repos.conf
+  "$AUTH" eselect repository add ninjatools git https://github.com/szorfein/ninjatools.git
+  "$AUTH" eselect repository add guru git https://github.com/gentoo/guru.git
+  "$AUTH" eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
+  "$AUTH" eselect repository add librewolf git https://codeberg.org/librewolf/gentoo.git
 
-  [ -d $REPO/ninjatools ] || sudo mkdir -p $REPO/ninjatools
-
-  [ -d "$CONF" ] || sudo mkdir -p "$CONF"
-  curl -L -o /tmp/ninjatools.conf https://raw.githubusercontent.com/szorfein/ninjatools/master/ninjatools.conf
-
-  # need also GURU for gentoo
-  [ -d "$REPO/guru" ] || sudo mkdir -p "$REPO/guru"
-
-  cat <<EOF > /tmp/guru.conf
-[guru]
-location = /var/db/repos/guru
-sync-type = git
-sync-uri = https://github.com/gentoo/guru
-priority = 50
-auto-sync = Yes
-EOF
-
-  sudo mv /tmp/ninjatools.conf "$CONF"/ninjatools.conf
-  sudo mv /tmp/guru.conf "$CONF"/guru.conf
-  sudo emaint sync -r ninjatools
-  sudo emaint sync -r guru
-fi
-
-if hash systemctl 2>/dev/null ; then
-
-  # save the full path of systemctl
-  #SYSTEMCTL=$(whereis systemctl | awk '{print $2}')
-  echo "Next..."
-
+  "$AUTH" emaint sync -r ninjatools
+  "$AUTH" emaint sync -r guru
+  "$AUTH" emaint sync -r brave-overlay
+  "$AUTH" emaint sync -r librewolf
 fi

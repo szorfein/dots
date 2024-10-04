@@ -6,3 +6,5 @@ dev-libs/light
 www-client/brave-bin
 net-mail/fdm
 net-misc/youtube-dl
+dev-libs/nss ~amd64
+www-client/librewolf ~amd64

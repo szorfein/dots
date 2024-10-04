@@ -2,7 +2,10 @@
 
 set -o errexit -o nounset
 
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
+
 ins="apt-get install -y"
+AUTH=$(search_auth)
 
 install_deps() {
   # xst
@@ -23,7 +26,7 @@ install_deps() {
   # https://github.com/betterlockscreen/betterlockscreen/tree/main#system-requirements
   pkgs="$pkgs bc"
 
-  sudo $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit picom light \
+  "$AUTH" $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit picom light \
     xserver-xorg-core xserver-xorg-input-libinput feh maim vifm mpv zathura isync \
     neomutt imagemagick weechat youtube-dl xss-lock papirus-icon-theme jq \
     mpc lightdm inotify-tools stow arc-theme tmux gcc $pkgs
@@ -31,22 +34,22 @@ install_deps() {
 
 install_pulse() {
   pkgs="pulseaudio firefox-esr"
-  sudo $ins $pkgs
+  "$AUTH" $ins $pkgs
 }
 
 install_alsa() {
   pkgs="alsa-utils"
-  sudo $ins $pkgs
+  "$AUTH" $ins $pkgs
 }
 
 install_emacs() {
   pkgs="ripgrep emacs"
-  sudo $ins $pkgs
+  "$AUTH" $ins $pkgs
 }
 
 install_vim() {
   pkgs="vim"
-  sudo $ins $pkgs
+  "$AUTH" $ins $pkgs
 }
 
 install_extra_deps() {
@@ -63,7 +66,7 @@ install_extra_deps() {
     && tar xvf "$PN"-"$PV".tar.gz \
     && cd "$PN"-"$PV" \
     && make \
-    && sudo make PREFIX=/usr DESTDIR=/ install
+    && "$AUTH" make PREFIX=/usr DESTDIR=/ install
   )
 
   # i3lock-color
@@ -76,19 +79,19 @@ install_extra_deps() {
     && cd "$PN"-"$PV" \
     && autoreconf -fiv \
     && ./configure --prefix=/usr --sysconfdir=/etc \
-    && sudo make DESTDIR=/ install
+    && "$AUTH" make DESTDIR=/ install
   )
 
   # Betterlockscreen
   # https://github.com/betterlockscreen/betterlockscreen#installation-script
-  wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
+  wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | "$AUTH" bash -s system
 
   # Starship
   [ -z "$TMPDIR" ] && TMPDIR="$HOME"
   curl -sS https://starship.rs/install.sh -o "$TMPDIR/starship.sh"
   chmod u+x "$TMPDIR/starship.sh"
   echo "Installing Starship..."
-  sudo "$TMPDIR/starship.sh" --yes >/dev/null
+  "$AUTH" "$TMPDIR/starship.sh" --yes >/dev/null
 }
 
 usage() {

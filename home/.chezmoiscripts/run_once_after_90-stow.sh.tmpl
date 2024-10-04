@@ -2,10 +2,14 @@
 
 set -o errexit
 
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
+
 OLD_AWM_THEME=""
 NEW_AWM_THEME=""
 DOTS="$HOME/.dotfiles"
 DEST="$HOME"
+
+msg "Execute $0..."
 
 [ -f /tmp/awesome-theme ] && OLD_AWM_THEME="$(cat /tmp/awesome-theme)"
 

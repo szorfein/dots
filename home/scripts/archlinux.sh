@@ -2,21 +2,26 @@
 
 set -o errexit -o nounset
 
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
+
 ins="pacman -S --noconfirm --needed"
 pkgs_aur="light xst-git cava i3lock-color betterlockscreen"
+AUTH=$(search_auth)
 
 build() {
   PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
   PKG_NAME="${PKG_URL##*/}" # e.g yay.tar.gz
   PKG="${PKG_NAME%%.*}" # e.g yay
   BUILD_DIR="$HOME/build/$PKG"
-  [ -d "$BUILD_DIR" ] || mkdir -p "$BUILD_DIR"
-  [ -d "$BUILD_DIR" ] && rm -rf "$BUILD_DIR"/*
+  [ -d "$BUILD_DIR" ] && rm -rf "$BUILD_DIR"
+  mkdir -p "$BUILD_DIR"
   ( cd "$BUILD_DIR" \
     && curl -o "$PKG_NAME" -L "$PKG_URL" \
     && tar xvf "$PKG_NAME" \
     && cd "$PKG" \
-    && makepkg -si --noconfirm
+    && makepkg -s \
+    && mypkg=$(find . -type f -name "$1-[0-9]*.pkg.tar.zst") \
+    && "$AUTH" pacman -U "$mypkg"
   )
 }
 
@@ -44,7 +49,7 @@ install_emacs() {
 
 install_vim() {
   if pacman -Q | awk '{print $1}' | grep -q '^vim' ; then
-    sudo pacman -R --no-confirm vim
+    "$AUTH" pacman -R --no-confirm vim
   fi
   pkgs="$pkgs gvim"
 }
@@ -95,8 +100,8 @@ main() {
   "$VIM" && install_vim
   "$EMACS" && install_emacs
 
-  sudo pacman -Syy
-  sudo $ins $pkgs
+  "$AUTH" pacman -Syy
+  "$AUTH" $ins $pkgs
 
   "$EXTRA" && install_extra_deps
 

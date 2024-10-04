@@ -2,11 +2,9 @@
 
 set -o errexit -o nounset
 
-zsh_custom="$HOME"/.oh-my-zsh/custom
-
 echo "Execute $0..."
 
-zsh=$(whereis zsh | awk '{print $2}')
+zsh=/bin/zsh
 
 if ! grep "^$USER" /etc/passwd | grep -q zsh ; then
   chsh -s "$zsh"

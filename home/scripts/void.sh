@@ -2,8 +2,11 @@
 
 set -o errexit -o nounset
 
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
 ins="xbps-install -y"
 pkgs=""
+
+AUTH=$(search_auth)
 
 build() {
   :
@@ -41,7 +44,7 @@ install_extra_deps() {
 
 make_service() {
   echo "adding service for $1..."
-  [ -s /var/service/"$1" ] || sudo ln -s /etc/sv/"$1" /var/service/"$1"
+  [ -s /var/service/"$1" ] || "$AUTH" ln -s /etc/sv/"$1" /var/service/"$1"
 }
 
 services() {
@@ -90,7 +93,7 @@ main() {
   "$VIM" && install_vim
   "$EMACS" && install_emacs
 
-  sudo $ins $pkgs
+  "$AUTH" $ins $pkgs
 
   "$EXTRA" && install_extra_deps
 

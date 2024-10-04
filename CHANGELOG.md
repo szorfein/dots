@@ -1,3 +1,8 @@
+- Works with doas or sudo.
+- Gentoo need xml flag with imagemagick to make betterlockscreen work.
+- Gentoo now use `app-eselect/eselect-repository` to install repository.
+- Add two more repository on Gentoo for brave and librewolf (firefox variant).
+
 ## 2024-10-03
 Updates and tested on Arch, Voidlinux (glibc and musl), Debian 12 and Gentoo (glibc, musl).
 

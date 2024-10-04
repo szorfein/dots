@@ -57,7 +57,7 @@ Why i switch on chezmoi?
 | zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and more... |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io) with additionnal packages (`sudo git vim`).  
+You need to install [chezmoi](https://chezmoi.io) with `sudo` or `doas` and additionnal packages (`git vim`).  
 With Gentoo:
 
     # emerge -av sudo vim dev-vcs/git
@@ -76,8 +76,7 @@ For Voidlinux:
 
     # xbps-install -S chezmoi sudo git
 
-
-`sudo`, your user should have permission to install packages:
+Configure `sudo` or `doas`, your user should have permission to install packages:
 
     # EDITOR="vim" visudo
     <username> ALL=(ALL) ALL
