@@ -6,7 +6,7 @@ msg "Installing dependencies..."
 
 UPDT="apt-get update"
 INST="apt-get install -y"
-PKGS="pass openssh-server sshpass ansible git ruby"
+PKGS="pass openssh-server sshpass ansible git ruby tar unzip"
 
 $AUTH $UPDT \
   && $AUTH $INST $PKGS \

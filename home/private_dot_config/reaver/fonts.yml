@@ -1,11 +1,12 @@
 ---
+force_download: false
 things:
   - name: cyberpunk.zip
     url: https://dl.dafont.com/dl/?f=cyberpunks
-  - name: material-design.zip
+  - name: materialdesign.zip
     url: https://github.com/Templarian/MaterialDesign-Font/archive/refs/heads/master.zip
-  - name: dot-fonts.zip
-    url: https://github.com/szorfein/fonts/archive/refs/heads/main.zip
-  - name: space-mono.zip
-    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.0-RC/SpaceMono.zip
+  - name: iosevka.zip
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Iosevka.zip
 time: 86000
+all_to_dest_dir: "~/.local/share/fonts"
+keep_name: true

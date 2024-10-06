@@ -3,7 +3,7 @@
 #  DISPLAY MANAGER  #
 
 # custom tool https://github.com/szorfein/reaver
-# just avoid to download all the archives aith Ansible, it's too horrible...
+# just avoid to download all the archives with Ansible, it's too horrible...
 dm_reaver_dir: ~/.cache/reaver/display-manager
 
 # 'sddm' or 'lightdm' or ''
@@ -31,6 +31,9 @@ dm_lightdm_theme:
   name: litarvan
   archive: lightdm-webkit-theme-litarvan.tar.gz
 
+dm_lightdm_backgrounds:
+  - ~/.cache/reaver/awesome/wallpapers.zip
+
 ##############
 #  DOTFILES  #
 
@@ -51,17 +54,6 @@ dotfiles_audio_backend: {{ .sound }}
 dotfiles_emacs_doom: true
 
 dotfiles_external: true
-dotfiles_external_font_reaver_cache_dir: ~/.cache/reaver/fonts
-dotfiles_external_font_reaver_items:
-  - cyberpunk.zip
-  - material-design.zip
-  - dot-fonts.zip
-  - space-mono.zip
-
-dotfiles_external_wallpaper_items:
-  - name: wallpaper
-    url: https://github.com/szorfein/walls/archive/main.zip
-    hash: 6a9a53ea28bbbd5ff38beb665683c893ce424e7f8eb1df1fcb9758900856bb2a
 
 {{ if eq .gpu "intel_gen7" "intel" "nouveau" -}}
 dotfiles_gpu_driver: {{ .gpu }}
@@ -82,21 +74,6 @@ dotfiles_vifm_stow_dir: vifm
 
 dotfiles_vim: true
 dotfiles_vim_stow_dir: vim
-dotfiles_vim_reaver_cache_dir: ~/.cache/reaver/vim
-dotfiles_vim_reaver_items:
-  - ale.tar.gz
-  - colorizer.tar.gz
-  - indentLine.tar.gz
-  - lightline.tar.gz
-  - lightline-bufferline.tar.gz
-  - nerdtree.tar.gz
-  - ombre.tar.gz
-  - tmuxline.tar.gz
-  - vim-devicons.tar.gz
-  - vim-gitbranch.tar.gz
-  - vim-gitgutter.tar.gz
-  - vim-tmux-navigator.tar.gz
-  - vamp.vim.tar.gz
 
 {{ if ne .keymap "en" }}
 dotfiles_xorg_keymap: {{ .keymap }}
@@ -107,14 +84,6 @@ dotfiles_xst: true
 # Zsh
 dotfiles_zsh: true
 dotfiles_zsh_stow_dir: zsh
-dotfiles_zsh_reaver_cache_dir: ~/.cache/reaver/zsh
-dotfiles_zsh_reaver_install:
-  - src: oh-my-zsh.tar.gz
-    dest: ~/.oh-my-zsh
-  - src: zsh-autosuggestions.tar.gz
-    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-  - src: zsh-syntax-highlighting.tar.gz
-    dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 #################
 #  WEB BROWSER  #

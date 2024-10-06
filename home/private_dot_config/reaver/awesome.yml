@@ -1,0 +1,7 @@
+---
+time: 86000
+force_download: false
+things:
+  - name: wallpapers.zip
+    url: https://github.com/szorfein/walls/archive/refs/heads/main.zip
+    dest_dir: "~/images"
