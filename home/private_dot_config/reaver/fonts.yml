@@ -5,8 +5,10 @@ things:
     url: https://dl.dafont.com/dl/?f=cyberpunks
   - name: materialdesign.zip
     url: https://github.com/Templarian/MaterialDesign-Font/archive/refs/heads/master.zip
-  - name: iosevka.zip
-    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Iosevka.zip
+  - name: iosevka.tar.xz
+    url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz
+  - name: iosevka-term.tar.xz
+    url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/IosevkaTerm.tar.xz
 time: 86000
 all_to_dest_dir: .local/share/fonts
 keep_name: true
