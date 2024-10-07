@@ -4,4 +4,4 @@ force_download: false
 things:
   - name: wallpapers.zip
     url: https://github.com/szorfein/walls/archive/refs/heads/main.zip
-    dest_dir: "~/images"
+    dest_dir: images

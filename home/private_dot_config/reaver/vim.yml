@@ -28,5 +28,5 @@ things:
   - name: vamp.vim.tar.gz
     url: https://github.com/szorfein/vamp.vim/archive/refs/heads/master.tar.gz
 time: 86000
-all_to_dest_dir: "~/.vim/pack/dotfiles/start"
+all_to_dest_dir: .vim/pack/dotfiles/start
 keep_name: true

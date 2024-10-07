@@ -8,5 +8,5 @@ things:
   - name: iosevka.zip
     url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Iosevka.zip
 time: 86000
-all_to_dest_dir: "~/.local/share/fonts"
+all_to_dest_dir: .local/share/fonts
 keep_name: true
