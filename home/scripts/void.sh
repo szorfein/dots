@@ -18,7 +18,7 @@ install_deps() {
     curl awesome mpd ncmpcpp xinit xorg-apps xorg-minimal xorg-input-drivers
     base-devel wget feh picom maim vifm mpv zathura zathura-pdf-mupdf isync
     neomutt ImageMagick weechat youtube-dl papirus-icon-theme mpc
-    lightdm-gtk3-greeter inotify-tools light stow unzip arc-theme
+    inotify-tools light stow unzip arc-theme
     ffmpegthumbnailer tmux firefox xss-lock jq xrdb gcc starship"
 }
 
@@ -49,7 +49,6 @@ make_service() {
 
 services() {
   if "$ALSA" ; then make_service alsa ; fi
-  make_service lightdm
   make_service acpid
 }
 

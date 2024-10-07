@@ -43,7 +43,7 @@ install_deps() {
   pkgs="$pkgs app-crypt/gnupg pass zsh awesome media-sound/mpd ncmpcpp xinit xorg-server xst
     feh picom maim vifm mpv zathura zathura-pdf-mupdf
     neomutt cava ueberzug weechat net-misc/yt-dlp
-    papirus-icon-theme media-sound/mpc lightdm inotify-tools light stow
+    papirus-icon-theme media-sound/mpc inotify-tools light stow
     arc-theme ffmpegthumbnailer tmux net-mail/isync xss-lock
     app-misc/jq x11-misc/betterlockscreen app-shells/starship"
 }

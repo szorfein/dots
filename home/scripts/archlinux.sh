@@ -28,8 +28,8 @@ build() {
 install_deps() {
   pkgs="gnupg pass xclip zsh awesome mpd ncmpcpp xorg-xinit xorg-server
     base-devel wget feh picom maim vifm mpv zathura zathura-pdf-mupdf isync
-    neomutt imagemagick weechat rofi openssh ttf-iosevka-nerd yt-dlp
-    papirus-icon-theme mpc lightdm lightdm-gtk-greeter inotify-tools stow
+    neomutt imagemagick weechat openssh yt-dlp curl
+    papirus-icon-theme mpc inotify-tools stow
     unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug
     xorg-xdpyinfo xorg-xrandr jq bc starship"
 }

@@ -29,7 +29,7 @@ install_deps() {
   "$AUTH" $ins gpg gpg-agent xclip pass zsh awesome mpd ncmpcpp xinit picom light \
     xserver-xorg-core xserver-xorg-input-libinput feh maim vifm mpv zathura isync \
     neomutt imagemagick weechat youtube-dl xss-lock papirus-icon-theme jq \
-    mpc lightdm inotify-tools stow arc-theme tmux gcc $pkgs
+    mpc inotify-tools stow arc-theme tmux gcc $pkgs
 }
 
 install_pulse() {
