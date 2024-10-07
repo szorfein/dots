@@ -6,7 +6,7 @@ msg "Installing dependencies..."
 
 UPDT="pacman -Syy"
 INST="pacman -S --noconfirm --needed"
-PKGS="pass openssh sshpass ansible git ruby unzip tar"
+PKGS="pass openssh sshpass ansible git ruby unzip tar xz"
 
 $AUTH $UPDT \
   && $AUTH $INST $PKGS \
