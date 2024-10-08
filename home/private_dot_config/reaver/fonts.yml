@@ -7,8 +7,10 @@ things:
     url: https://github.com/Templarian/MaterialDesign-Font/archive/refs/heads/master.zip
   - name: iosevka.tar.xz
     url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.tar.xz
+    strip_components: 0
   - name: iosevka-term.tar.xz
     url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/IosevkaTerm.tar.xz
+    strip_components: 0
 time: 86000
 all_to_dest_dir: .local/share/fonts
 keep_name: true
