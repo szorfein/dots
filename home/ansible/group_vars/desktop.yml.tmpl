@@ -6,8 +6,9 @@
 # just avoid to download all the archives with Ansible, it's too horrible...
 dm_reaver_dir: ~/.cache/reaver/display-manager
 
-# 'sddm' or 'lightdm' or ''
-{{ if eq .dm "sddm" "lightdm" -}}
+# 'sddm', 'lightdm', 'lxdm' or ''
+# Don't choose 'lightdm' for Gentoo, all dependencies will not compile
+{{ if eq .dm "sddm" "lightdm" "lxdm" -}}
 dm_use: {{ .dm | quote }}
 {{ end -}}
 
@@ -19,9 +20,11 @@ dm_sddm_theme:
 dm_sddm_backgrounds:
   - sddm-backgrounds.tar.gz
 
+# background= glitch.mp4, animation.mp4, abstract.mp4
+# Animated bg from https://github.com/szorfein/dm-background/tree/sddm
 dm_sddm_theme_customize:
   - regexp: '^background='
-    line: 'background=glitch.mp4'
+    line: 'background=abstract.mp4'
   - regexp: '^glowcolor='
     line: 'glowcolor=#BBA33393'
   - regexp: '^iconoverlay='
@@ -32,6 +35,9 @@ dm_lightdm_theme:
   archive: lightdm-webkit-theme-litarvan.tar.gz
 
 dm_lightdm_backgrounds:
+  - ~/.cache/reaver/awesome/wallpapers.zip
+
+dm_lxdm_backgrounds:
   - ~/.cache/reaver/awesome/wallpapers.zip
 
 ##############

@@ -42,23 +42,23 @@ Why i switch on chezmoi?
 | name | WTF | Notes |
 |---|---|---|
 | alsa | Audio Driver | Can be change in the config file if you prefer pulseaudio |
-| awesome | Window Manager | Configs recreate from scratch |
+| awesome | Window Manager | From https://github.com/szorfein/dotfiles |
 | [brave](https://brave.com/) | Web Browser | Edit the config file to install [librewolf](https://librewolf.net) instead. |
 | feh | Image Viewer | |
 | [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Lock Screen | |
-| sddm | Display Manager | With a theme inspired from [delicious](https://github.com/stuomas/delicious-sddm-theme), edit the config file for lightdm or nothing. |
+| sddm | Display Manager | [delicious](https://github.com/stuomas/delicious-sddm-theme), edit the config file for lightdm, lxdm or nothing. |
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
 | neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
-| scrot | Screen Capture | |
+| [maim](https://github.com/naelstrof/maim) | Screen Capture | |
 | tmux | Terminal multiplexer | Config inspired from [gpakosz](https://github.com/gpakosz/.tmux) |
 | vifm | File Manager | With [image/font/pdf/epub/video preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim, [doomemacs](https://github.com/doomemacs/doomemacs) | Editors | I use the both |
 | weechat | IRC client | Only need to reach [matrix](https://matrix.org/). |
 | [xSt](https://github.com/gnotclub/xst) | Terminal | A fork of [st](https://st.suckless.org/). |
 | zathura | PDF/Epub viewer | |
-| zsh | Shell | With [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [autosuggestion](https://github.com/zsh-users/zsh-autosuggestions/tree/master), and more... |
+| zsh | Shell | With [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [autosuggestion](https://github.com/zsh-users/zsh-autosuggestions/tree/master), and more... |
 
 ## Requirements
 You need to install `chezmoi`, `git`, a text editor (e.g `vim`) and a package to have the permissions to make modifications on the system `sudo` or `doas`.  
