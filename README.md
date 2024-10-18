@@ -1,5 +1,5 @@
 # dots
-Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/) and [gnupg](https://gnupg.org/)/[pass](https://www.passwordstore.org/) to store secrets.  
+Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/), [gnupg](https://gnupg.org/)/[pass](https://www.passwordstore.org/) to store secrets and [reaver](https://github.com/szorfein/reaver).  
 Only works on some Linux distro including:
 
 + `Archlinux`
@@ -52,6 +52,7 @@ Why i switch on chezmoi?
 | neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
 | picom | Compositor | Replacement for compton |
 | [maim](https://github.com/naelstrof/maim) | Screen Capture | |
+| [raven](https://ravenreader.app/) | RSS flux | |
 | tmux | Terminal multiplexer | Config inspired from [gpakosz](https://github.com/gpakosz/.tmux) |
 | vifm | File Manager | With [image/font/pdf/epub/video preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim, [doomemacs](https://github.com/doomemacs/doomemacs) | Editors | I use the both |
