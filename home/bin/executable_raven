@@ -2,8 +2,6 @@
 
 set -o errexit
 
-reaver_path="$HOME/.cache/reaver/appimages/raven.AppImage"
+raven_path="$HOME/.app-images/raven.AppImage"
 
-[ -f "$reaver_path" ] && chmod u+x "$reaver_path"
-
-"$reaver_path" --no-sandbox --disable-setuid-sandbox
+"$raven_path" --disable-setuid-sandbox

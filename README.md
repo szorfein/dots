@@ -50,9 +50,10 @@ Why i switch on chezmoi?
 | mpd | Music Player Daemon | With ncmpcpp, mpc |
 | mpv | Video Player | |
 | neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
+| [notesnook](https://notesnook.com/) | Taking note | Write notes (offline), encrypted, sync on all your devices. |
 | picom | Compositor | Replacement for compton |
 | [maim](https://github.com/naelstrof/maim) | Screen Capture | |
-| [raven](https://ravenreader.app/) | RSS flux | |
+| [raven](https://ravenreader.app/) | RSS flux | Collect news, read them offline. |
 | tmux | Terminal multiplexer | Config inspired from [gpakosz](https://github.com/gpakosz/.tmux) |
 | vifm | File Manager | With [image/font/pdf/epub/video preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
 | vim, [doomemacs](https://github.com/doomemacs/doomemacs) | Editors | I use the both |
