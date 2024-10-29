@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+set -o errexit -o nounset
+
+# Gentoo install binary of gems in $HOME/bin (gem env)
+
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin:$HOME/bin"
+
+gem install reaver
+
+echo "Downloading things with reaver.."
+reaver

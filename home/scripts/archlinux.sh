@@ -30,8 +30,8 @@ install_deps() {
     base-devel wget feh picom maim vifm mpv zathura zathura-pdf-mupdf isync
     neomutt imagemagick weechat openssh yt-dlp curl
     papirus-icon-theme mpc inotify-tools stow
-    unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug
-    xorg-xdpyinfo xorg-xrandr jq bc starship"
+    arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug
+    xorg-xdpyinfo xorg-xrandr jq bc starship ruby unzip tar xz"
 }
 
 install_pulse() {

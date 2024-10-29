@@ -1,5 +1,5 @@
 # dots
-Dotfiles managed by [chezmoi](https://www.chezmoi.io/) and [pass](https://www.passwordstore.org/).  
+Dotfiles managed by [chezmoi](https://www.chezmoi.io/), [pass](https://www.passwordstore.org/) and [reaver](https://github.com/szorfein/reaver).  
 Work only on few distro linux including Gentoo, Archlinux, Void and Debian. It
 should not work on distro variant...
 
@@ -92,7 +92,7 @@ Only 4 little steps here
 
 To test the ansible branch, (also look the branch for additionnal instructions)
 
-    $ chezmoi init https://github.com/szorfein/dots.git --guess-repo-url=false --branch=ansible
+    $ chezmoi init https://github.com/szorfein/dots.git --branch=ansible
 
 ### Config
 Edit the config file with your favorite text editor.

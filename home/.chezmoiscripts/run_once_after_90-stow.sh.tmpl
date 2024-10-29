@@ -66,8 +66,3 @@ echo "Applying Stow links..."
 
 echo "Applying theme $NEW_AWM_THEME"
 cd "$DOTS/themes-m3" && apply_theme "$NEW_AWM_THEME"
-
-# wallpapers and vimcolor
-(cd $DOTS \
-  && ./install --images --fonts --vim
-)

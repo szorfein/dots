@@ -45,7 +45,8 @@ install_deps() {
     neomutt cava ueberzug weechat net-misc/yt-dlp
     papirus-icon-theme media-sound/mpc inotify-tools light stow
     arc-theme ffmpegthumbnailer tmux net-mail/isync xss-lock
-    app-misc/jq x11-misc/betterlockscreen app-shells/starship"
+    app-misc/jq x11-misc/betterlockscreen app-shells/starship
+    dev-lang/ruby app-arch/tar app-arch/unzip app-arch/xz-utils"
 }
 
 install_pulse() {
