@@ -5,7 +5,7 @@ set -o errexit -o nounset
 . $HOME/.local/share/chezmoi/home/scripts/lib.sh
 
 ins="pacman -S --noconfirm --needed"
-pkgs_aur="light xst-git cava i3lock-color betterlockscreen"
+pkgs_aur="light xst cava i3lock-color betterlockscreen"
 AUTH=$(search_auth)
 
 build() {
@@ -21,7 +21,7 @@ build() {
     && cd "$PKG" \
     && makepkg -s \
     && mypkg=$(find . -type f -name "$1-[0-9]*.pkg.tar.zst") \
-    && "$AUTH" pacman -U "$mypkg"
+    && "$AUTH" pacman -U --noconfirm "$mypkg"
   )
 }
 
@@ -30,8 +30,8 @@ install_deps() {
     base-devel wget feh picom maim vifm mpv zathura zathura-pdf-mupdf isync
     neomutt imagemagick weechat openssh yt-dlp curl
     papirus-icon-theme mpc inotify-tools stow
-    unzip arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug
-    xorg-xdpyinfo xorg-xrandr jq bc starship"
+    arc-gtk-theme ffmpegthumbnailer tmux xss-lock ueberzug
+    xorg-xdpyinfo xorg-xrandr jq bc starship ruby unzip tar xz"
 }
 
 install_pulse() {
@@ -48,8 +48,8 @@ install_emacs() {
 }
 
 install_vim() {
-  if pacman -Q | awk '{print $1}' | grep -q '^vim' ; then
-    "$AUTH" pacman -R --no-confirm vim
+  if pacman -Q | awk '{print $1}' | grep -q '^vim$' ; then
+    "$AUTH" pacman -R --noconfirm vim
   fi
   pkgs="$pkgs gvim"
 }

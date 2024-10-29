@@ -1,0 +1,13 @@
+---
+# ligthdm-webkit-theme-litarvan:
+# The last git (2023-12) don't work
+# The 3.2.0 don't work
+# 3.1.0 look right
+things:
+  - name: delicious.tar.gz
+    url: https://github.com/stuomas/delicious-sddm-theme/archive/refs/heads/master.tar.gz
+  - name: sddm-backgrounds.tar.gz
+    url: https://github.com/szorfein/dm-background/archive/refs/heads/sddm.tar.gz
+  - name: lightdm-webkit-theme-litarvan.tar.gz
+    url: https://github.com/Litarvan/lightdm-webkit-theme-litarvan/releases/download/v3.1.0/lightdm-webkit-theme-litarvan-3.1.0.tar.gz
+time: 86000
