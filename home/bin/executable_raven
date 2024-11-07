@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+raven_path="$HOME/.app-images/raven.AppImage"
+
+"$raven_path" --disable-setuid-sandbox
