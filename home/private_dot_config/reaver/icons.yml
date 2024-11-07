@@ -1,0 +1,8 @@
+---
+things:
+  - name: notesnook.png
+    url: https://raw.githubusercontent.com/streetwriters/notesnook/refs/heads/master/resources/icon.png
+  - name: raven.png
+    url: https://raw.githubusercontent.com/hello-efficiency-inc/raven-reader/refs/heads/master/src/assets/trayicon-linux.png
+time: 86000
+all_to_dest_dir: .icons
