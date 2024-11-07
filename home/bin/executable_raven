@@ -2,6 +2,7 @@
 
 set -o errexit
 
-raven_path="$HOME/.app-images/raven.AppImage"
+reaver_path="$HOME/.app-images/raven.AppImage"
 
-"$raven_path" --disable-setuid-sandbox
+#"$reaver_path" --no-sandbox --disable-setuid-sandbox
+"$reaver_path" --disable-setuid-sandbox
