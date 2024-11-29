@@ -1,8 +1,9 @@
 ---
 force_download: false
 things:
-- name: doom.tar.gz
-  url: https://github.com/doomemacs/doomemacs/archive/refs/heads/master.tar.gz
+- name: doom
+  url: https://github.com/doomemacs/doomemacs
+  git: true
   dest_dir: .config/emacs
 - name: all-the-icons.ttf
   url: https://github.com/domtronn/all-the-icons.el/raw/master/fonts/all-the-icons.ttf

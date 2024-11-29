@@ -1,15 +1,91 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; Inspiration from:
+;; https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/
+;; https://github.com/zzamboni/dot-doom/tree/master
+
+;; Enable encryption using gpg, encrypt/decrypt files with extension .gpg
+(require 'epa-file)
+(epa-file-enable)
+(setq epa-file-encrypt-to '("{{ .email }}"))
+(setq epa-file-select-keys 'silent)
+
 (setq user-full-name "{{ .name }}"
       user-mail-address "{{ .email }}")
 
+;; Put all auto-generated configurations in a separate file
+;; Used when using 'M-x customize'
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)
+
 (setq doom-font (font-spec :family "IosevkaTerm Nerd Font" :size 14))
 (setq display-line-numbers-type t)
+
+;; Do not show confusing warnings when installing packages
+(add-to-list 'display-buffer-alist
+             '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+               (display-buffer-no-window)
+               (allow-no-window . t)))
+
+;; Graphical bars
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-shadow)
+
+;; Configure the minibuffer and related
+(use-package vertico
+  :ensure t
+  :hook (after-init . vertico-mode))
+
+(use-package marginalia
+  :ensure t
+  :hook (after-init . marginalia-mode))
+
+(use-package orderless
+  :ensure t
+  :config
+  (setq completion-styles '(orderless basic))
+  (setq completion-category-defaults nil)
+  (setq completion-category-overrride nil))
+
+(use-package savehist
+  :ensure nil ; it is built-in
+  :hook (after-init . savehist-mode))
+
+(use-package corfu
+  :ensure t
+  :hook (after-init . global-corfu-mode)
+  :bind (:map corfu-map ("<tab>" . corfu-complete))
+  :config
+  (setq tab-always-indent 'complete)
+  (setq corfu-preview-current nil)
+  (setq corfu-min-width 20)
+
+  (setq corfu-popupinfo-delay '(1.25 . 0.5))
+  (corfu-popupinfo-mode 1) ; shows documentation after `corfu-popupinfo-delay'
+
+;; Sort by input history (no need to modify `corfu-sort-function').
+(with-eval-after-load 'savehist
+ (corfu-history-mode 1)
+ (add-to-list 'savehist-additional-variables 'corfu-history)))
+
+;; Tweak the dired Emacs file manager
+(use-package dired
+  :ensure nil
+  :commands (dired)
+  :hook
+  ((dired-mode . dired-hide-details-mode)
+   (dired-mode . hl-line-mode))
+  :config
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always)
+  (setq delete-by-moving-to-trash t)
+  (setq dired-dwim-target t))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!

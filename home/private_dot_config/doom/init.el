@@ -7,7 +7,7 @@
        ;company            ; the ultimate code completion backend
        (corfu +orderless)  ; complete with cap(f), cape and a flying feather!
        ;;ivy               ; a search engine for love and life
-       vertico
+       (vertico +icons)
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -47,7 +47,7 @@
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       dired               ; making dired pretty [functional]
+       (dired +icons)      ; making dired pretty [functional]
        electric            ; smarter, keyword-based electric-indent
        ;;ibuffer           ; interactive buffer management
        undo                ; persistent, smarter undo for your inevitable mistakes
@@ -109,7 +109,7 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
-       ;;graphql
+       graphql
        ;;(haskell +dante)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
