@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+{{ if eq .web "brave" }}
+BIN="brave"
+
+  {{ if eq .wm "swayfx" }}
+OPTS="--ozone-platform=wayland"
+  {{ end }}
+{{ end }}
+
+"$BIN" $OPTS "$@"

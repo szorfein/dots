@@ -7,6 +7,7 @@
 {{- $keymap := "en" -}}{{/* keymap used for Xorg */}}
 {{- $soundcard := "0" -}}
 {{- $dm := "" -}}
+{{- $wm := "awm-m3" -}}
 
 {{/* GPG, ID for key [C] [S] [E] */}}
 {{- $key_recipient := false -}}
@@ -30,6 +31,7 @@
 {{- $soundcard = "hw:PCH" -}}
 {{- $gpu_driver = "intel_gen7" -}}
 {{- $dm = "sddm" -}}
+{{- $wm = "swayfx" -}}
 {{- else if eq $board_name "Dazzle_CX" -}}
 {{- $gpu_driver = "nouveau" -}}
 {{- $soundcard = "hw:PCH" -}}
@@ -60,3 +62,4 @@ encryption = "gpg"
   sound_card = {{ $soundcard | quote }}
   web = "brave" # 'brave' or 'librewolf'
   dm = {{ $dm | quote }} # '', 'sddm', 'lightdm' or 'lxdm'. Prefer 'lightdm' or lxdm with musl.
+  wm = {{ $wm | quote }} # 'awm-m2' (old awm+X), 'awm-m3' (awm+X), 'swayfx' (wayland)
