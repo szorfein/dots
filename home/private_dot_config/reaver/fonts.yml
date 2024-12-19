@@ -11,6 +11,8 @@ things:
   - name: iosevka-term.tar.xz
     url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/IosevkaTerm.tar.xz
     strip_components: 0
+  - name: material-design-icons.ttf
+    url: https://github.com/google/material-design-icons/raw/refs/heads/master/variablefont/MaterialSymbolsOutlined%5BFILL,GRAD,opsz,wght%5D.ttf
 time: 86000
 all_to_dest_dir: .local/share/fonts
 keep_name: true
