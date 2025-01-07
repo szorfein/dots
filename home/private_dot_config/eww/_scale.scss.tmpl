@@ -1,0 +1,7 @@
+{{- $fullpath := printf "%s/%s" .chezmoi.sourceDir "scripts/board_name.sh" -}}
+{{- $board_name := output $fullpath | trim -}}
+{{- if eq $board_name "W51XTU" -}}
+0.8443388199535182
+{{- else }}
+1.0
+{{- end -}}

@@ -12,8 +12,6 @@ things:
   url: https://github.com/domtronn/all-the-icons.el/raw/master/fonts/fontawesome.ttf
   dest_dir: .local/share/fonts
 - name: material-design-icons.ttf
-  url: https://github.com/domtronn/all-the-icons.el/raw/master/fonts/material-design-icons.ttf
-  dest_dir: .local/share/fonts
 - name: octicons.ttf
   url: https://github.com/domtronn/all-the-icons.el/raw/master/fonts/octicons.ttf
   dest_dir: .local/share/fonts
