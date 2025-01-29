@@ -21,3 +21,10 @@
 [url "git@github.com:szorfein"]
   insteadOf = https://github.com/szorfein
 {{- end }}
+{{- if eq .editor "vim" "neovim" }}
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+{{ - end }}

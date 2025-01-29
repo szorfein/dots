@@ -52,22 +52,24 @@ dotfiles_stow_dir: ~/.dotfiles
 dotfiles_wm: {{ .wm | trim }}
 {{ end }}
 
+# Configure AwesomeWM m2
 dotfiles_awm_m2_stow_dir: awesomewm # relative to dotfiles_stow_dir
 dotfiles_awm_m2_stow_dir_theme: themes # relative to dotfiles_stow_dir
 dotfiles_awm_m2_default_theme: lines
 
+# Configure AwesomeWM m3
 dotfiles_awm_m3_stow_dir: awm-m3 # relative to dotfiles_stow_dir
 dotfiles_awm_m3_stow_dir_theme: themes-m3 # relative to dotfiles_stow_dir
 dotfiles_awm_m3_default_theme: focus
 
 # Configure SwayFX
 dotfiles_swayfx_stow_dir: swayfx
+dotfiles_swayfx_stow_dir_theme: swayfx-themes
+dotfiles_swayfx_default_theme: holy
 
 {{ if eq .sound "alsa" "pulseaudio" -}}
 dotfiles_audio_backend: {{ .sound }}
 {{ end -}}
-
-dotfiles_emacs_doom: true
 
 dotfiles_external: true
 
@@ -88,14 +90,28 @@ dotfiles_tmux_stow_dir: tmux
 dotfiles_vifm: true
 dotfiles_vifm_stow_dir: vifm
 
+{{ if eq .editor "vim" "doom" }}
 dotfiles_vim: true
+{{ end }}
+
+{{ if eq .editor "doom" }}
+dotfiles_emacs_doom: true
+{{ end }}
+
+{{ if eq .editor "neovim" }}
+dotfiles_neovim: true
+{{ end }}
+
 dotfiles_vim_stow_dir: vim
 
 {{ if ne .keymap "en" }}
 dotfiles_xorg_keymap: {{ .keymap }}
 {{ end }}
 dotfiles_xorg_stow_dir: .x
+
+{{ if ne .wm "swayfx" }}
 dotfiles_xst: true
+{{ end }}
 
 # Zsh
 dotfiles_zsh: true
