@@ -63,6 +63,20 @@ Why i switch on chezmoi?
 | zsh | Shell | With [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [autosuggestion](https://github.com/zsh-users/zsh-autosuggestions/tree/master), and more... |
 
 ## Requirements
+
+### Add an user
+If you're not alrealy have an user (new system), create one:
+
+    useradd -m -s /bin/bash custom-super-username
+
+Next, you need to configure `sudo` or `doas`, your user should have permission to install packages:
+
+    # EDITOR="vi" visudo
+    custom-super-username ALL=(ALL) ALL
+
+If you have create your first user recently, logout and back to initialize his environment correctly.
+
+### Dependencies
 You need to install `chezmoi`, `git`, a text editor (e.g `vim`) and a package to have the permissions to make modifications on the system `sudo` or `doas`.  
 With `Gentoo`:
 
@@ -82,25 +96,13 @@ For `Voidlinux`:
 
     # xbps-install -S chezmoi sudo git
 
-`sudo`, your user should have permission to install packages:
-
-    # EDITOR="vim" visudo
-    <username> ALL=(ALL) ALL
-
-If you have create your first user recently (via: `useradd -m -G users <username>`), logout and back to initialize his environment correctly.
-
 ## Install
 Only 4 little steps here
 
 ### Clone this repo
+Target the ansible branch.
 
-If chezmoi ask for a password, disable the option [see more](https://www.chezmoi.io/reference/commands/init/)
-
-    $ chezmoi init https://github.com/szorfein/dots.git --guess-repo-url=false
-
-To test the ansible branch
-
-    $ chezmoi init https://github.com/szorfein/dots.git --guess-repo-url=false --branch=ansible
+    $ chezmoi init https://github.com/szorfein/dots.git --branch=ansible
 
 ### Config
 Edit the config file with your favorite text editor.
@@ -140,6 +142,12 @@ You can also configure whitch GPU driver should be installed with keyword. Only 
 `apply` will install all files in your $HOME and execute ansible playbook.
 
     $ chezmoi apply
+
+If /tmp is protected with `noexec`, you need to tell `chezmoi` to use another dir
+[#1929](https://github.com/twpayne/chezmoi/issues/1929)
+
+    $ mkdir $HOME/tmp
+    $ TMPDIR=$HOME/tmp chezmoi apply
 
 ## Update
 From time to time, start the update simply with:
