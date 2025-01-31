@@ -33,63 +33,63 @@ Why i switch on chezmoi?
 
 ## Screenshots
 
-| Lines | Sci | Miami |
-| --- | --- | --- |
-| ![](https://github.com/szorfein/unix-portfolio/raw/master/lines/monitor.png) | ![](https://github.com/szorfein/unix-portfolio/raw/master/sci/logout.png) | ![](https://github.com/szorfein/unix-portfolio/raw/master/miami/start_screen.png) |
+| Holy (wayland) | Focus (Xorg) |
+| --- | --- |
+| ![](https://github.com/szorfein/unix-portfolio/raw/master/holy/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 
 ## Packages
 
-| name | WTF | Notes |
+| WTF | Name | Notes |
 |---|---|---|
-| alsa | Audio Driver | Can be change in the config file if you prefer pulseaudio |
-| awesome | Window Manager | From https://github.com/szorfein/dotfiles |
-| [brave](https://brave.com/) | Web Browser | Edit the config file to install [librewolf](https://librewolf.net) instead. |
-| feh | Image Viewer | |
-| [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Lock Screen | |
-| sddm | Display Manager | [delicious](https://github.com/stuomas/delicious-sddm-theme), edit the config file for lightdm, lxdm or nothing. |
-| mpd | Music Player Daemon | With ncmpcpp, mpc |
-| mpv | Video Player | |
-| neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
-| [notesnook](https://notesnook.com/) | Taking note | Write notes (offline), encrypted, sync on all your devices. |
-| picom | Compositor | Replacement for compton |
-| [maim](https://github.com/naelstrof/maim) | Screen Capture | |
-| [raven](https://ravenreader.app/) | RSS flux | Collect news, read them offline. |
-| tmux | Terminal multiplexer | Config inspired from [gpakosz](https://github.com/gpakosz/.tmux) |
-| vifm | File Manager | With [image/font/pdf/epub/video preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
-| vim, [doomemacs](https://github.com/doomemacs/doomemacs) | Editors | I use the both |
-| weechat | IRC client | Only need to reach [matrix](https://matrix.org/). |
-| [xSt](https://github.com/gnotclub/xst) | Terminal | A fork of [st](https://st.suckless.org/). |
+| Audio Driver | Alsa or Pulseaudio | Can be change in the config file |
+| Window Manager | Swayfx or Awesome (with picom) | Wayland or Xorg |
+| Web browser | [brave](https://brave.com/) or [librewolf](https://librewolf.net) | |
+| Image Viewer | imv or feh | Depend of Wayland or Xorg |
+| Lock Screen | [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Not yet for Wayland |
+| Display Manager | sddm, lightdm, lxdm or nothing | |
+| Music Daemon | mpd with playerctl | with ncmpcpp, mpc |
+| Video Player | mpv | |
+| Email reader | neomutt | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
+| Taking note | [notesnook](https://notesnook.com/) | Write notes (offline), encrypted, sync on all your devices. |
+| Screen capture | grim or [maim](https://github.com/naelstrof/maim) | Wayland or Xorg |
+| News Reader | [raven](https://ravenreader.app/) | Collect news, read them offline. |
+| Terminal multiplexer | tmux | with catppucin, mode indicator |
+| File Manager | NNN and Nemo | dropped vifm [sdushantha](https://github.com/sdushantha/dotfiles) |
+| Code Editor | Neovim or [doomemacs](https://github.com/doomemacs/doomemacs) | Wayland or Xorg, doom don't work unless you install Xwayland |
+| IRC client | | Weechat will be dropped soon, Prefer Signal or better [Session](https://getsession.org/), not IRC |
+| Terminal | Wezterm or [xSt](https://github.com/gnotclub/xst) | Wayland or Xorg again |
 | zathura | PDF/Epub viewer | |
-| zsh | Shell | With [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [autosuggestion](https://github.com/zsh-users/zsh-autosuggestions/tree/master), and more... |
+| Shell | ZSH | With [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [autosuggestion](https://github.com/zsh-users/zsh-autosuggestions/tree/master), and more... |
 
 ## Requirements
 
 ### Add an user
 If you're not alrealy have an user (new system), create one:
 
-    useradd -m -s /bin/bash custom-super-username
+    useradd -m -s /bin/bash custom-username
+    passwd custom-username
 
 Next, you need to configure `sudo` or `doas`, your user should have permission to install packages:
 
-    # EDITOR="vi" visudo
-    custom-super-username ALL=(ALL) ALL
+    # EDITOR=vi visudo
+    custom-username ALL=(ALL) ALL
 
 If you have create your first user recently, logout and back to initialize his environment correctly.
 
 ### Dependencies
-You need to install `chezmoi`, `git`, a text editor (e.g `vim`) and a package to have the permissions to make modifications on the system `sudo` or `doas`.  
+You need to install `chezmoi`, `git` and a package to have the permissions to make modifications on the system `sudo` or `doas`.  
 With `Gentoo`:
 
-    # emerge -av sudo vim dev-vcs/git
+    # emerge -av sudo dev-vcs/git
     $ curl -fsLS get.chezmoi.io | sh
 
 With `Arch`:
 
-    # pacman -S chezmoi sudo vim git
+    # pacman -S chezmoi sudo git vi
 
 With `Debian`:
 
-    # apt-get install curl sudo vim git
+    # apt-get install curl sudo git
     $ curl -fsLS get.chezmoi.io | sh
 
 For `Voidlinux`:
@@ -107,7 +107,7 @@ Target the ansible branch.
 ### Config
 Edit the config file with your favorite text editor.
 
-    $ EDITOR="vim" chezmoi edit-config
+    $ EDITOR=vi chezmoi edit-config
 
 You can change for example in `[data]`:
 
@@ -122,21 +122,16 @@ You can also configure whitch GPU driver should be installed with keyword. Only 
 
 [machine-to-machine](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/), only few lines to configure your environment:
 
-| var | szorfein (dev) | xXx | server (musl) |
-|---|---|---|---|
-| key_recipient | szorfein@protonmail.com | | |
-| key_encrypt | xxx | | |
-| key_sign | xxx | | |
-| keymap | fr | fr | fr |
-| editor | vim | emacs | vim |
-| email | szorfein@protonmail.com | | |
-| gpu | intel_gen7 | nouveau | intel |
-| name | szorfein | xxx | |
-| secrets | true | false | true |
-| sound | alsa | pulseaudio | alsa |
-| sound_card | hw:PCH | 0 | hw:PCH |
-| web | brave | librewolf | brave |
-| dm | sddm | lightdm | lightdm |
+| var | SwayFX on wayland | Awesome on Xorg |
+|---|---|---|
+| editor | neovim | doom |
+| gpu | intel | nouveau |
+| secrets | true | false |
+| sound | alsa | pulseaudio |
+| sound_card | hw:PCH | 0 |
+| web | brave | librewolf |
+| dm | sddm | lightdm |
+| wm | swayfx | awm-m3 |
 
 ### Apply
 `apply` will install all files in your $HOME and execute ansible playbook.
@@ -147,7 +142,7 @@ If /tmp is protected with `noexec`, you need to tell `chezmoi` to use another di
 [#1929](https://github.com/twpayne/chezmoi/issues/1929)
 
     $ mkdir $HOME/tmp
-    $ TMPDIR=$HOME/tmp chezmoi apply
+    $ TMPDIR="$HOME/tmp" chezmoi apply
 
 ## Update
 From time to time, start the update simply with:
