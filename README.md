@@ -33,7 +33,7 @@ Why i switch on chezmoi?
 
 ## Screenshots
 
-| Holy (wayland) | Focus (Xorg) |
+| Holy (Wayland) | Focus (Xorg) |
 | --- | --- |
 | ![](https://github.com/szorfein/unix-portfolio/raw/master/holy/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 
@@ -64,20 +64,19 @@ Why i switch on chezmoi?
 ## Requirements
 
 ### Add an user
-If you're not alrealy have an user (new system), create one:
+If need a new user (new system), create one:
 
     useradd -m -s /bin/bash custom-username
     passwd custom-username
 
-Next, you need to configure `sudo` or `doas`, your user should have permission to install packages:
+Next, you need to configure `sudo` or `doas`, we need permission to install packages:
 
     # EDITOR=vi visudo
     custom-username ALL=(ALL) ALL
 
-If you have create your first user recently, logout and back to initialize his environment correctly.
-
 ### Dependencies
-You need to install `chezmoi`, `git` and a package to have the permissions to make modifications on the system `sudo` or `doas`.  
+You need to install `chezmoi` and `git`.
+
 With `Gentoo`:
 
     # emerge -av sudo dev-vcs/git

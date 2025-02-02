@@ -35,7 +35,7 @@ else
     theme="focus"
 fi
 [ -z "$theme" ] && theme=focus
-args="$args --awm-m3 $theme"
+args="$args --awesome-m3 $theme"
 {{ end }}
 
 {{ if eq .wm "awm-m2" }}
@@ -46,7 +46,7 @@ else
     theme="machine"
 fi
 [ -z "$theme" ] && theme=machine
-args="$args --awm-m2 $theme"
+args="$args --awesome-m2 $theme"
 {{ end }}
 
 echo "called with args: $args"
