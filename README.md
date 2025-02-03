@@ -4,7 +4,7 @@ Only works on some Linux distro including:
 
 + `Archlinux`
 + `Debian 11`
-+ `Gentoo`
++ `Gentoo`, tested with systemd, musl (openrc) and/or [binaries](https://wiki.gentoo.org/wiki/Binary_package_guide).
 + `Void Linux`, tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
 
 Why i switch on chezmoi?
@@ -54,7 +54,7 @@ Why i switch on chezmoi?
 | Screen capture | grim or [maim](https://github.com/naelstrof/maim) | Wayland or Xorg |
 | News Reader | [raven](https://ravenreader.app/) | Collect news, read them offline. |
 | Terminal multiplexer | tmux | with catppucin, mode indicator |
-| File Manager | NNN and Nemo | dropped vifm [sdushantha](https://github.com/sdushantha/dotfiles) |
+| File Manager | NNN and Thunar or Nemo | Thunar (if choose Alsa) or Nemo (Pulseaudio). Dropped vifm [sdushantha](https://github.com/sdushantha/dotfiles) |
 | Code Editor | Neovim or [doomemacs](https://github.com/doomemacs/doomemacs) | Wayland or Xorg, doom don't work unless you install Xwayland |
 | IRC client | | Weechat will be dropped soon, Prefer Signal or better [Session](https://getsession.org/), not IRC |
 | Terminal | Wezterm or [xSt](https://github.com/gnotclub/xst) | Wayland or Xorg again |
@@ -114,7 +114,7 @@ You can change for example in `[data]`:
       sound = "pulseaudio"
       web = "librewolf"
 
-You can also configure whitch GPU driver should be installed with keyword. Only `intel_gen7`, `intel` or `nouveau` are supported for now, see option [dotfiles_gpu_driver](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles#role-variables).
+You can also configure whitch GPU driver should be installed with keyword. Only `intel_gen7`, `intel` or `nouveau` are supported for now, see option [dotfiles_gpu_driver](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles#role-variables), also [The SwayFX project does not officially support proprietary NVIDIA drivers.](https://github.com/WillPower3309/swayfx/issues/177)
 
     [data]
       gpu = "intel"

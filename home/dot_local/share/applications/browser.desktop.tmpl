@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Web Browser
+{{- if eq .web "brave" }}
+Exec=~/bin/brave %u
+{{- else if eq .web "librewolf" }}
+Exec=/usr/bin/firefox %u
+{{- end }}
