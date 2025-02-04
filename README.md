@@ -7,7 +7,7 @@ Only works on some Linux distro including:
 + `Gentoo`, tested with systemd, musl (openrc) and/or [binaries](https://wiki.gentoo.org/wiki/Binary_package_guide).
 + `Void Linux`, tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
 
-Why i switch on chezmoi?
+Why i use chezmoi?
 + Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
 + Template are great.
 + Possibility of encrypt files.
@@ -55,7 +55,7 @@ Why i switch on chezmoi?
 | News Reader | [raven](https://ravenreader.app/) | Collect news, read them offline. |
 | Terminal multiplexer | tmux | with catppucin, mode indicator |
 | File Manager | NNN and Thunar or Nemo | Thunar (if choose Alsa) or Nemo (Pulseaudio). Dropped vifm [sdushantha](https://github.com/sdushantha/dotfiles) |
-| Code Editor | Neovim or [doomemacs](https://github.com/doomemacs/doomemacs) | Wayland or Xorg, doom don't work unless you install Xwayland |
+| Code Editor | Neovim or [doomemacs](https://github.com/doomemacs/doomemacs) | Wayland or Xorg, doom don't work on wayland unless you install Xwayland |
 | IRC client | | Weechat will be dropped soon, Prefer Signal or better [Session](https://getsession.org/), not IRC |
 | Terminal | Wezterm or [xSt](https://github.com/gnotclub/xst) | Wayland or Xorg again |
 | zathura | PDF/Epub viewer | |
@@ -69,7 +69,7 @@ If need a new user (new system), create one:
     useradd -m -s /bin/bash custom-username
     passwd custom-username
 
-Next, you need to configure `sudo` or `doas`, we need permission to install packages:
+Next, you need to install and configure `sudo` or `doas`, we need permission to install packages:
 
     # EDITOR=vi visudo
     custom-username ALL=(ALL) ALL
@@ -79,21 +79,21 @@ You need to install `chezmoi` and `git`.
 
 With `Gentoo`:
 
-    # emerge -av sudo dev-vcs/git
+    # emerge -av dev-vcs/git
     $ curl -fsLS get.chezmoi.io | sh
 
 With `Arch`:
 
-    # pacman -S chezmoi sudo git vi
+    # pacman -S chezmoi git vi
 
 With `Debian`:
 
-    # apt-get install curl sudo git
+    # apt-get install curl git
     $ curl -fsLS get.chezmoi.io | sh
 
 For `Voidlinux`:
 
-    # xbps-install -S chezmoi sudo git
+    # xbps-install -S chezmoi git
 
 ## Install
 Only 4 little steps here

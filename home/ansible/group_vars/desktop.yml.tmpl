@@ -56,6 +56,9 @@ dotfiles_audio_backend: {{ .sound }}
 # update font-cache
 dotfiles_external: true
 
+# nnn + Thunar (alsa) or Nemo (pulse)
+dotfiles_files_browser: true
+
 {{ if eq .gpu "intel_gen7" "intel" "nouveau" -}}
 dotfiles_gpu_driver: {{ .gpu }}
 {{ end -}}
@@ -68,9 +71,6 @@ dotfiles_neomutt_mail_dir: ~/.mail
 dotfiles_neomutt_accounts_dir: [ 'Personal' ]
 
 dotfiles_tmux: true
-
-# Will be dropped next release
-# dotfiles_vifm: true
 
 {{ if eq .editor "vim" "doom" }}
 dotfiles_vim: true
@@ -86,14 +86,12 @@ dotfiles_neovim: true
 
 {{ if eq .wm "swayfx" }}
 dotfiles_wezterm: true
+{{ else }}
+dotfiles_xst: true
 {{ end }}
 
 {{ if ne .keymap "en" }}
 dotfiles_xorg_keymap: {{ .keymap }}
-{{ end }}
-
-{{ if ne .wm "swayfx" }}
-dotfiles_xst: true
 {{ end }}
 
 # Zsh
