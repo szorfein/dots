@@ -3,7 +3,7 @@ Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.c
 Only works on some Linux distro including:
 
 + `Archlinux`
-+ `Debian 11`
++ `Debian 11`, ... *frozen* from now, i don't recommend install my dotfiles on it for now, need motivation and time here...
 + `Gentoo`, tested with systemd, musl (openrc) and/or [binaries](https://wiki.gentoo.org/wiki/Binary_package_guide).
 + `Void Linux`, tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
 
