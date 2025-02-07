@@ -11,7 +11,11 @@
   {{- end }}
 
 [core]
-  editor = {{ .editor }}
+{{- if eq .editor "vim" }}
+  editor = vim
+{{- else if eq .editor "neovim" }}
+  editor = nvim
+{{- end }}
   autocrlf = input
 
 [init]
