@@ -1,3 +1,9 @@
+## 2025-01-28
++ Stow install all files before launching Reaver and Ansible using [stow.sh](https://github.com/szorfein/dotfiles/blob/main/stow.sh).
++ Remove a lots of reaver configs (yaml). They are now stored on [dotfiles](https://github.com/szorfein/dotfiles) repository and installed with `stow`.
+
+This should make reaver install only dependencies needed.
+
 ## 2022-12-11
 
 * msmtp and fdm are disabled for now.
