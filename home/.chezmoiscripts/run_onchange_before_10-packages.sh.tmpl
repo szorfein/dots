@@ -1,14 +1,22 @@
 #!/usr/bin/env sh
 
+# archlinux.sh hash: {{ include "scripts/archlinux.sh" | sha256sum }}
+
 set -o errexit
 
 . $HOME/.local/share/chezmoi/home/scripts/lib.sh
 
-xst_version="master"
-
 msg "Execute $0..."
 
-args="--deps --emacs --vim"
+args="--zsh --extra-deps"
+
+{{ if eq .wm "awm-m2" "awm-m3" }}
+args="$args --awesome"
+{{ end }}
+
+{{ if eq .wm "swayfx" }}
+args="$args --swayfx"
+{{ end }}
 
 {{ if eq .sound "alsa" }}
 args="$args --sound-alsa"
@@ -18,7 +26,25 @@ args="$args --sound-alsa"
 args="$args --sound-pulse"
 {{ end }}
 
-args="$args --extra-deps"
+{{ if eq .editor "doom" }}
+args="$args --emacs --vim"
+{{ end }}
+
+{{ if eq .editor "neovim" }}
+args="$args --neovim"
+{{ end }}
+
+{{ if eq .editor "vim" }}
+args="$args --vim"
+{{ end }}
+
+{{ if eq .web "brave" }}
+args="$args --brave"
+{{ end }}
+
+{{ if eq .web "librewolf" }}
+args="$args --librewolf"
+{{ end }}
 
 if hash emerge 2>/dev/null ; then
 

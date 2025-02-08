@@ -1,0 +1,9 @@
+{{- $fullpath := printf "%s/%s" .chezmoi.sourceDir "scripts/board_name.sh" -}}
+{{- $board_name := output $fullpath | trim -}}
+{{- if eq $board_name "W51XTU" -}}
+$scale: 0.8443388199535182;
+{{- else if eq $board_name "PRIME H510M-K" -}}
+$scale: 0.6026469870525034;
+{{- else }}
+$scale: 1.0;
+{{- end -}}

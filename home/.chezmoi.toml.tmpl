@@ -1,5 +1,9 @@
 {{- $personal := false -}}{{/* true if able to update my github repository */}}
 {{- $secrets := false -}}{{/* true if this machine store secrets with gpg and pass */}}
+{{- $keymap := "en" -}}{{/* keymap used for Xorg or Wayland */}}
+{{- $soundcard := "0" -}}
+{{- $wm := "awm-m3" -}}
+{{- $editor := "vim" -}}
 
 {{- $username := promptString "username" -}}
 {{- $email := false -}}
@@ -10,18 +14,22 @@
 {{- $key_encrypt := false -}}
 
 {{- if eq $username "szorfein" -}}
+{{- $email = "szorfein@protonmail.com" -}}
 {{- $key_recipient = "B5D8FFD0D7F1FB6A43505E319CC9729A2E369CB3" -}}
 {{- $key_sign = "8E3785DE31AAE73F98098744FD696BDDAA8FDC50" -}}
 {{- $key_encrypt = "59154216260D8EA2580DF9D4E2ADD2080A6B28AE" -}}
 {{- $personal = true -}}
 {{- $secrets = true -}}
+{{- $keymap = "fr" -}}
 {{- end -}}
 
-{{- $soundcard := "0" -}}
+{{/* Configs based on board_name */}}
 {{- $fullpath := printf "%s/%s" .chezmoi.sourceDir "scripts/board_name.sh" -}}
 {{- $board_name := output $fullpath | trim -}}
 {{- if eq $board_name "W51XTU" -}}
-{{- $soundcard = "hw:Pro" -}}
+{{- $soundcard = "hw:PCH" -}}
+{{- $wm = "swayfx" -}}
+{{- $editor = "neovim" -}}
 {{- end -}}
 
 {{- if $secrets -}}
@@ -31,16 +39,19 @@ encryption = "gpg"
 {{ end -}}
 [data]
   name = "{{ $username }}"
+  keymap = {{ $keymap | quote }} # 'us', 'fr', used on SwayFX.
   personal = {{ $personal }}
   secrets = {{ $secrets }}
-  email = "{{ $email }}"
-  editor = "vim" # favorite editor, vim, emacs, etc...
-  key_recipient = "{{ $key_recipient }}"
-  key_sign = "{{ $key_sign }}"
-  key_encrypt = "{{ $key_encrypt }}"
-  sound = "alsa" # set alsa or pulseaudio here
+  email = {{ $email | quote }}
+  editor = {{ $editor | quote }} # favorite editor, 'vim', 'doom' or 'neovim'.
+  key_recipient = {{ $key_recipient | quote }}
+  key_sign = {{ $key_sign | quote }}
+  key_encrypt = {{ $key_encrypt | quote }}
+  sound = "alsa" # set 'alsa' or 'pulseaudio' here
 
   # Sound card to use, default is 0
   # pulseaudio -> pactl list sinks short
   # alsa -> cat /proc/asound/cards
-  sound_card = "{{ $soundcard }}"
+  sound_card = {{ $soundcard | quote }}
+  web = "brave" # 'brave' (chrome-based) or 'librewolf' (firefox)
+  wm = {{ $wm | quote }} # 'awm-m3' (awesome+Xorg) or 'swayfx' (wayland)

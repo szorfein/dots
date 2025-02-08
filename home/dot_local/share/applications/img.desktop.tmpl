@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Image viewer
+{{- if eq .wm "awm-m2" "awm-m3" }}
+Exec=feh --start-at %u
+{{- else if eq .wm "swayfx" }}
+Exec=imv %F
+{{- end }}
+Terminal=false
