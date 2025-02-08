@@ -6,6 +6,8 @@ set -o errexit -o nounset
 
 ins="pacman -S --noconfirm --needed"
 pkgs="gnupg pass wget curl stow unzip tar xz ruby base-devel rubygems"
+pkgs_aur=""
+user_groups=""
 AUTH=$(search_auth)
 
 build() {
@@ -84,6 +86,7 @@ add_swayfx() {
   # keys for eww
   curl -sS https://github.com/elkowar.gpg | gpg --import
   curl -sS https://github.com/web-flow.gpg | gpg --import
+  user_groups="$user_groups seat"
 }
 
 add_neovim() {
@@ -143,6 +146,12 @@ main() {
   "$AUTH" $ins $pkgs
 
   "$EXTRA" && install_extra_deps
+
+  for group in $user_groups ; do
+      if [ "$group" != "" ] ; then
+          "$AUTH" usermod -aG "$group" "$USER"
+      fi
+  done
 
   exit 0
 }
