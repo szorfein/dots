@@ -12,6 +12,10 @@ fi
 
 echo "You probably need to logout and back if zsh was not your shell before."
 echo ""
+{{ if eq .wm "swayfx" }}
+echo "To start swayfx, enter the command: sway"
+{{- else }}
 echo "To start awesome, enter the command: startx"
+{{- end }}
 echo "Good luck"
 echo ""

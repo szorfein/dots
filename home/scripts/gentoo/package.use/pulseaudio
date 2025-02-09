@@ -1,6 +1,3 @@
-media-sound/pulseaudio libsamplerate
-
-media-sound/cava pulseaudio
-media-video/ffmpeg pulseaudio bs2b
-
-media-sound/mpd pulseaudio
+# Enable udev add dependencies to alsa, alsa-plugin or oss
+# Not sure if able to detect audio cards without this
+media-sound/pulseaudio-daemon -udev

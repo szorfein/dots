@@ -48,7 +48,7 @@ add_awesome() {
     pkgs="$pkgs awesome media-sound/mpd ncmpcpp xinit
     xorg-server xst feh picom maim mpv zathura
     zathura-pdf-mupdf neomutt cava weechat
-    net-misc/yt-dlp papirus-icon-theme media-sound/mpc
+    papirus-icon-theme media-sound/mpc
     inotify-tools light tmux net-mail/isync
     xss-lock app-misc/jq x11-misc/betterlockscreen"
 }
@@ -56,6 +56,7 @@ add_awesome() {
 add_pulse() {
     euse_enable pulseaudio
     euse_disable alsa
+    euse_disable alsa-plugin
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/pulseaudio "$USE_DIR/sound"
 
@@ -84,6 +85,7 @@ add_swayfx() {
     pkgs="$pkgs light papirus-icon-theme inotify-tools
     swaybg imagemagick imv app-misc/jq playerctl
     wl-clipboard gui-apps/grim gui-apps/wmenu
+    media-sound/mpc zathura wezterm
     net-wireless/iwd gui-apps/eww gui-wm/swayfx
     mpv-mpris mpd-mpris acct-group/seat seatd"
 
@@ -96,7 +98,7 @@ add_brave() {
 }
 
 add_librewolf() {
-    pkgs="$pkgs librewolf"
+    pkgs="$pkgs librewolf-bin"
 }
 
 add_emacs() {

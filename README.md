@@ -3,7 +3,7 @@ Dotfiles managed by [chezmoi](https://www.chezmoi.io/), [pass](https://www.passw
 Only works on some Linux distro including:
 
 + `Archlinux`
-+ `Debian`, ... *frozen* from now, i don't recommend install my dotfiles on it for now, need motivation and time here...
++ `Debian`, ... *frozen* from now, i don't recommend install my dotfiles on it, need motivation and time here...
 + `Gentoo`, tested with systemd, musl (openrc) and/or [binaries](https://wiki.gentoo.org/wiki/Binary_package_guide).
 + `Void Linux`, tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
 
@@ -42,11 +42,10 @@ Why i use chezmoi?
 | Cat | Name | Notes |
 |---|---|---|
 | Audio Driver | Alsa or Pulseaudio | Can be change in the config file |
-| Window Manager | Swayfx or Awesome (with picom) | Wayland or Xorg |
+| Window Manager | Swayfx or Awesome | Wayland or Xorg |
 | Web browser | [brave](https://brave.com/) or [librewolf](https://librewolf.net) | |
 | Image Viewer | imv or feh | Depend of Wayland or Xorg |
 | Lock Screen | [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Not yet for Wayland |
-| Display Manager | sddm, lightdm, lxdm or nothing | |
 | Music Daemon | mpd with playerctl | with ncmpcpp, mpc |
 | Video Player | mpv | |
 | Email reader | neomutt | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
@@ -155,5 +154,5 @@ If you have not yet configure X, change the keyboard layout like this:
 For any questions, comments, feedback or issues, submit a [new issue](https://github.com/szorfein/dots/issues/new).
 
 ### Support
-Any support are greatly appreciated, star the repo, offer me a coffee... thanks you!  
+Any support are greatly appreciated, star the repo, donations... thanks you!  
 [![Donate](https://img.shields.io/badge/don-liberapay-1ba9a4)](https://liberapay.com/szorfein) [![Donate](https://img.shields.io/badge/don-patreon-ab69f4)](https://www.patreon.com/szorfein)
