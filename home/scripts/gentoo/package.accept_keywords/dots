@@ -1,10 +1,23 @@
 =x11-terms/xst-9999 **
-x11-misc/betterlockscreen
 media-sound/cava
-x11-misc/i3lock-color
-dev-libs/light
-www-client/brave-bin
-net-mail/fdm
-net-misc/youtube-dl
-dev-libs/nss ~amd64
+
+# awesome
+x11-misc/i3lock-color ~amd64
+x11-misc/betterlockscreen ~amd64
+
+# swayfx
+gui-apps/eww ~amd64
+gui-wm/swayfx ~amd64
+gui-libs/scenefx ~amd64
+media-sound/mpd-mpris ~amd64
+mpv-plugin/mpv-mpris ~amd64
+
+# WezTerm (don't compile yet on musl...)
+x11-terms/wezterm ~amd64
+
+# Web browser
+www-client/brave-bin ~amd64
+dev-libs/libpthread-stubs **
 www-client/librewolf ~amd64
+dev-libs/nss ~amd64
+

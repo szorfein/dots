@@ -90,7 +90,7 @@ add_swayfx() {
 }
 
 add_neovim() {
-  pkgs="$pkgs neovim fd fzf tmux"
+  pkgs="$pkgs neovim fd fzf tmux gcc"
 }
 
 add_zsh() {

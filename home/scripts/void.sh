@@ -33,7 +33,7 @@ add_pulse() {
 }
 
 add_alsa() {
-  pkgs="$pkgs alsa-utils alsa-plugins ladspa-bs2b swh-plugins alsa-plugins-samplerate nnn thunar"
+  pkgs="$pkgs alsa-utils alsa-plugins ladspa-bs2b swh-plugins alsa-plugins-samplerate nnn Thunar"
 
   user_groups="$user_groups audio"
 
@@ -43,8 +43,8 @@ add_alsa() {
 add_swayfx() {
     pkgs="$pkgs swayfx imv light jq wl-clipboard
     papirus-icon-theme inotify-tools mpd mpc wezterm
-    curl stow playerctl mpv-mpris mpDris2 eww ruby
-    swaybg grim wmenu iwd nemo seatd turnstile"
+    playerctl mpv-mpris mpDris2 eww swaybg grim wmenu
+    iwd seatd turnstile"
 
     user_groups="$user_groups _seatd"
 

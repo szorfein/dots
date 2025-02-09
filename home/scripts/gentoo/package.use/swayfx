@@ -1,0 +1,6 @@
+# can't set a wallpaper in jpg without this
+x11-libs/gdk-pixbuf jpeg
+gui-apps/swaybg gdk-pixbuf
+
+# If sys-auth/seatd is used, the server USE flag is required.
+sys-auth/seatd server

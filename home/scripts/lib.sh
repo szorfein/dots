@@ -27,7 +27,7 @@ search_auth() {
 }
 
 has_systemd() {
-  if [ -f /bin/systemctl ] || [ -f /usr/bin/systemctl ] ; then
+  if readlink /sbin/init | grep -q systemd ; then
     return 0
   else
     return 1

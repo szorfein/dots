@@ -129,17 +129,12 @@ After the first install, if you need-want to use
 installation with a single command:
 
     $ doom sync
-    $ emacs
 
 ## Final settings
 If you have not yet configure X, change the keyboard layout like this:
 
     $ localectl list-x11-keymap-layouts | grep fr
     $ sudo localectl set-x11-keymap fr
-
-For emacs, when the installation is terminated, you have to manually install the package [all-the-icons](https://github.com/domtronn/all-the-icons.el#installing-fonts) like this, start `emacs` and:
-
-    M-x all-the-icons-install-fonts
 
 ## Left Over
 
