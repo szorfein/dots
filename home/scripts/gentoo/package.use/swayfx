@@ -4,3 +4,16 @@ gui-apps/swaybg gdk-pixbuf
 
 # If sys-auth/seatd is used, the server USE flag is required.
 sys-auth/seatd server
+
+# Thunar
+x11-libs/gtk+ X
+dev-libs/libdbusmenu gtk3
+app-crypt/gcr gtk
+
+# Brave (even if X is not wanted...)
+media-libs/libepoxy X
+media-libs/libglvnd X
+x11-libs/cairo X
+
+# Pass
+media-gfx/qrencode png

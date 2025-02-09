@@ -1,4 +1,0 @@
-media-sound/cava alsa
-media-sound/alsa-utils libsamplerate
-media-video/ffmpeg alsa ladspa bs2b
-media-sound/mpd alsa

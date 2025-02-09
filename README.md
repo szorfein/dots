@@ -1,9 +1,13 @@
 # dots
 Dotfiles managed by [chezmoi](https://www.chezmoi.io/), [pass](https://www.passwordstore.org/) and [reaver](https://github.com/szorfein/reaver).  
-Work only on few distro linux including Gentoo, Archlinux, Void and Debian. It
-should not work on distro variant...
+Only works on some Linux distro including:
 
-Why i switch on chezmoi?
++ `Archlinux`
++ `Debian`, ... *frozen* from now, i don't recommend install my dotfiles on it for now, need motivation and time here...
++ `Gentoo`, tested with systemd, musl (openrc) and/or [binaries](https://wiki.gentoo.org/wiki/Binary_package_guide).
++ `Void Linux`, tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
+
+Why i use chezmoi?
 + Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
 + Template are great.
 + Possibility of encrypt files.
@@ -29,60 +33,68 @@ Why i switch on chezmoi?
 
 ## Screenshots
 
-| Lines | Focus | Miami |
-| --- | --- | --- |
-| ![](https://github.com/szorfein/unix-portfolio/raw/master/lines/monitor.png) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/miami/start_screen.png) |
+| Holy (Wayland) | Focus (Xorg) |
+| --- | --- |
+| ![](https://github.com/szorfein/unix-portfolio/raw/master/holy/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 
 ## Packages
 
-| name | WTF | Notes |
+| Cat | Name | Notes |
 |---|---|---|
-| alsa | Audio Driver | Can be change in the config file if you prefer pulseaudio |
-| awesome | Window Manager | Configs recreate from scratch |
-| brave, firefox | Web Browser | Brave with alsa, Firefox with pulseaudio (except for Voidlinux) |
-| feh | Image Viewer | |
-| [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Lock Screen | |
-| lightdm | Display Manager | (lightdm-gtk-greeter) |
-| mpd | Music Player Daemon | With ncmpcpp, mpc |
-| mpv | Video Player | |
-| neomutt | Email Reader | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
-| picom | Compositor | Replacement for compton |
-| maim | Screen Capture | |
-| tmux | Terminal multiplexer | |
-| vifm | File Manager | With [image preview](https://github.com/cirala/vifmimg), customized from [sdushantha](https://github.com/sdushantha/dotfiles) |
-| vim, emacs | Editors | I use the both |
-| weechat | IRC client | |
-| xst | Terminal | |
+| Audio Driver | Alsa or Pulseaudio | Can be change in the config file |
+| Window Manager | Swayfx or Awesome (with picom) | Wayland or Xorg |
+| Web browser | [brave](https://brave.com/) or [librewolf](https://librewolf.net) | |
+| Image Viewer | imv or feh | Depend of Wayland or Xorg |
+| Lock Screen | [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Not yet for Wayland |
+| Display Manager | sddm, lightdm, lxdm or nothing | |
+| Music Daemon | mpd with playerctl | with ncmpcpp, mpc |
+| Video Player | mpv | |
+| Email reader | neomutt | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/) |
+| Taking note | [notesnook](https://notesnook.com/) | Write notes (offline), encrypted, sync on all your devices. |
+| Screen capture | grim or [maim](https://github.com/naelstrof/maim) | Wayland or Xorg |
+| News Reader | [raven](https://ravenreader.app/) | Collect news, read them offline. |
+| Terminal multiplexer | tmux | with catppucin, mode indicator |
+| File Manager | NNN and Thunar or Nemo | Thunar (if choose Alsa) or Nemo (Pulseaudio). Dropped vifm [sdushantha](https://github.com/sdushantha/dotfiles) |
+| Code Editor | Neovim or [doomemacs](https://github.com/doomemacs/doomemacs) | Wayland or Xorg, doom don't work on wayland unless you install Xwayland |
+| IRC client | | Weechat will be dropped soon, Prefer Signal or better [Session](https://getsession.org/), not IRC |
+| Terminal | Wezterm or [xSt](https://github.com/gnotclub/xst) | Wayland or Xorg again |
 | zathura | PDF/Epub viewer | |
-| zsh | Shell | Plugins: [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and more... |
+| Shell | ZSH | With [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [autosuggestion](https://github.com/zsh-users/zsh-autosuggestions/tree/master), and more... |
 
 ## Requirements
-You need to install [chezmoi](https://chezmoi.io) with `sudo` or `doas` and additionnal packages (`git vim`).  
-With Gentoo:
 
-    # emerge -av sudo vim dev-vcs/git
+### Add an user
+If need a new user (new system), create one:
+
+    useradd -m -s /bin/bash custom-username
+    passwd custom-username
+
+Next, you need to install and configure `sudo` or `doas`, we need permission to install packages:
+
+    # EDITOR=vi visudo
+    custom-username ALL=(ALL) ALL
+
+### Dependencies
+You need to install `chezmoi` and `git`.
+
+With `Gentoo`:
+
+    # emerge -av dev-vcs/git
     $ curl -fsLS get.chezmoi.io | sh
 
-With Archlinux:
+With `Arch`:
 
-    # pacman -S chezmoi sudo vim git
+    # pacman -S chezmoi git vi
 
-With Debian:
+With `Debian`:
 
-    # apt-get install curl sudo vim git
+    # apt-get install curl git
     $ curl -fsLS get.chezmoi.io | sh
 
-For Voidlinux:
+For `Voidlinux`:
 
-    # xbps-install -S chezmoi sudo git
+    # xbps-install -S chezmoi git
 
-Configure `sudo` or `doas`, your user should have permission to install packages:
-
-    # EDITOR="vim" visudo
-    <username> ALL=(ALL) ALL
-
-If you have create your first user recently (via: `useradd -m -s /bin/bash <username>`), logout and back to initialize his environment correctly.
-    
 ## Install
 Only 4 little steps here
 
@@ -97,12 +109,13 @@ To test the ansible branch, (also look the branch for additionnal instructions)
 ### Config
 Edit the config file with your favorite text editor.
 
-    $ EDITOR="vim" chezmoi edit-config
+    $ EDITOR=vim chezmoi edit-config
 
 You can change for example in `[data]`:
 
     [data]
       sound = "pulseaudio"
+      web = "librewolf"
 
 It will install firefox rather than brave-bin and modify a lot of things during the install.  
 

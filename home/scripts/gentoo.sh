@@ -12,20 +12,17 @@ services=""
 USE_DIR="/etc/portage/package.use"
 AUTH=$(search_auth)
 
+# Make sure to install gentoolkit
 if ! hash euse 2>/dev/null; then
     "$AUTH" $ins gentoolkit
 fi
 
-euse_pkg() {
-  if ! grep -q "$2" "$USE_DIR"/"${1#*/}" 2>/dev/null ; then
-    "$AUTH" euse -p "$1" -E "$2"
-  fi
+euse_enable() {
+  if "$AUTH" euse -E "$1" ; then echo "$1 enabled"; fi
 }
 
-euse_global() {
-  if ! grep -q "$1" /etc/portage/make.conf ; then
-    "$AUTH" euse -E "$1"
-  fi
+euse_disable() {
+  if "$AUTH" euse -D "$1" ; then echo "$1 disabled"; fi
 }
 
 make_service() {
@@ -37,8 +34,8 @@ make_service() {
 }
 
 add_awesome() {
-    "$AUTH" euse -E X
-    "$AUTH" euse -D wayland
+    euse_enable X
+    euse_disable wayland
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/dotfiles "$USE_DIR/wm"
 
@@ -57,8 +54,8 @@ add_awesome() {
 }
 
 add_pulse() {
-    "$AUTH" euse -E pulseaudio
-    "$AUTH" euse -D alsa
+    euse_enable pulseaudio
+    euse_disable alsa
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/pulseaudio "$USE_DIR/sound"
 
@@ -66,10 +63,8 @@ add_pulse() {
 }
 
 add_alsa() {
-    "$AUTH" euse -E alsa
-    "$AUTH" euse -D pulseaudio
-
-    "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/alsa "$USE_DIR/sound"
+    euse_enable alsa
+    euse_disable pulseaudio
 
     pkgs="$pkgs alsa-utils tap-plugins swh-plugins
     libsamplerate cmt-plugins ladspa-bs2b alsa-plugins
@@ -81,8 +76,8 @@ add_alsa() {
 }
 
 add_swayfx() {
-    "$AUTH" euse -E wayland
-    "$AUTH" euse -D X
+    euse_enable wayland
+    euse_disable X
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/swayfx "$USE_DIR/wm"
 
@@ -92,7 +87,7 @@ add_swayfx() {
     net-wireless/iwd gui-apps/eww gui-wm/swayfx
     mpv-mpris mpd-mpris acct-group/seat seatd"
 
-    user_groups="$user_groups video seatd"
+    user_groups="$user_groups video seat"
     services="$services seatd"
 }
 
