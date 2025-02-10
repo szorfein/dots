@@ -1,4 +1,4 @@
-# 2025-02
+## 2025-02
 * Update installation scripts for add swayfx.
 * Add nnn with Thunar (if Alsa) or Nemo (pulseaudio).
 * New variables for `chezmoi edit-config`

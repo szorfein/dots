@@ -5,6 +5,13 @@ media-gfx/imagemagick jpeg xml
 # Brave
 app-text/xmlto text
 
+# Librewolf
+
+# Nemo
+dev-libs/glib dbus
+x11-libs/xapp introspection
+sys-apps/systemd policykit
+
 # Ncmpcpp
 dev-libs/boost icu
 

@@ -50,10 +50,11 @@ add_awesome() {
         "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/lightdm-elogind "$USE_DIR/login"
     fi
 
+    # AppImage need fuse:0
     pkgs="$pkgs awesome media-sound/mpd ncmpcpp xinit
     xorg-server xst feh picom maim mpv zathura
     zathura-pdf-mupdf neomutt cava weechat
-    papirus-icon-theme media-sound/mpc
+    papirus-icon-theme media-sound/mpc sys-fs/fuse:0
     inotify-tools light net-mail/isync
     xss-lock app-misc/jq x11-misc/betterlockscreen"
 }
@@ -118,8 +119,6 @@ add_neovim() {
 }
 
 add_vim() {
-  "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/vim "$USE_DIR/"
-
   pkgs="$pkgs vim tmux"
 }
 
