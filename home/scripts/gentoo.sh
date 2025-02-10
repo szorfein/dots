@@ -9,8 +9,13 @@ pkgs="app-crypt/gnupg pass stow dev-lang/ruby app-arch/tar app-arch/unzip app-ar
 user_groups=""
 services=""
 
-USE_DIR="/etc/portage/package.use"
 AUTH=$(search_auth)
+
+USE_DIR="/etc/portage/package.use"
+
+# Required portage dirs
+[ -d "$USE_DIR" ] || "$AUTH" mkdir -p "$USE_DIR"
+[ -d /etc/portage/package.accept_keyworks ] || "$AUTH" mkdir -p /etc/portage/package.accept_keywords
 
 # Make sure to install gentoolkit
 if ! hash euse 2>/dev/null; then
@@ -49,7 +54,7 @@ add_awesome() {
     xorg-server xst feh picom maim mpv zathura
     zathura-pdf-mupdf neomutt cava weechat
     papirus-icon-theme media-sound/mpc
-    inotify-tools light tmux net-mail/isync
+    inotify-tools light net-mail/isync
     xss-lock app-misc/jq x11-misc/betterlockscreen"
 }
 
@@ -115,7 +120,7 @@ add_neovim() {
 add_vim() {
   "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/vim "$USE_DIR/"
 
-  pkgs="$pkgs vim"
+  pkgs="$pkgs vim tmux"
 }
 
 add_zsh() {
@@ -165,8 +170,6 @@ while [ "$#" -gt 0 ] ; do
 done
 
 main() {
-    [ -d "$USE_DIR" ] || "$AUTH" mkdir -p "$USE_DIR"
-    [ -d /etc/portage/package.accept_keyworks ] || "$AUTH" mkdir -p /etc/portage/package.accept_keywords
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.accept_keywords/* /etc/portage/package.accept_keywords/
 
     "$AUTH" $ins $pkgs
