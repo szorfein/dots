@@ -1,0 +1,31 @@
+# can't set a wallpaper in jpg without this
+x11-libs/gdk-pixbuf jpeg
+gui-apps/swaybg gdk-pixbuf
+
+# If sys-auth/seatd is used, the server USE flag is required.
+sys-auth/seatd server
+
+# Nemo
+dev-libs/glib dbus
+x11-libs/xapp introspection
+sys-apps/systemd policykit
+
+# Thunar
+x11-libs/gtk+ X
+dev-libs/libdbusmenu gtk3
+app-crypt/gcr gtk
+
+# Brave (even if X is not wanted...)
+media-libs/libepoxy X
+media-libs/libglvnd X
+x11-libs/cairo X
+
+# Librewolf
+www-client/librewolf dbus
+media-libs/libvpx postproc
+
+# Pass
+media-gfx/qrencode png
+
+# Wezterm
+x11-libs/libxkbcommon X

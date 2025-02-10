@@ -1,0 +1,11 @@
+# Enable/disable automatic updating of repository metadata
+update_sources: true
+
+# Print backtrace when RubyGems encounters an error
+backtrace: true
+
+{{ if eq .chezmoi.osRelease.id "gentoo" }}
+gem: --no-document --suggestions
+{{ else }}
+gem: --user-install --no-document --suggestions
+{{ end }}

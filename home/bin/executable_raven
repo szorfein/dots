@@ -4,4 +4,5 @@ set -o errexit
 
 raven_path="$HOME/.app-images/raven.AppImage"
 
+#"$reaver_path" --no-sandbox --disable-setuid-sandbox
 "$raven_path" --disable-setuid-sandbox

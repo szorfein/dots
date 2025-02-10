@@ -1,0 +1,54 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+trim_string() {
+    trim=${1#${1%%[![:space:]]*}}
+    trim=${trim%${trim##*[![:space:]]}}
+    printf '%s' "$trim"
+}
+
+# base arguments
+args="--purge --zsh --tmux --ncmpcpp"
+
+{{ if eq .editor "neovim" }}
+args="$args --neovim"
+{{ end }}
+
+{{ if eq .editor "doom" }}
+args="$args --doomemacs --vim"
+{{ end }}
+
+{{ if eq .editor "vim" }}
+args="$args --vim"
+{{ end }}
+
+{{ if eq .wm "swayfx" }}
+args="$args --wezterm --swayfx holy"
+{{ end }}
+
+{{ if eq .wm "awm-m3" }}
+if [ -f /tmp/awm-m3 ] ; then
+    theme="$(cat /tmp/awm-m3)"
+    theme="$(trim_string $theme)"
+else
+    theme="focus"
+fi
+[ -z "$theme" ] && theme=focus
+args="$args --awesome-m3 $theme"
+{{ end }}
+
+{{ if eq .wm "awm-m2" }}
+if [ -f /tmp/awesome-theme ] ; then
+    theme="$(cat /tmp/awesome-theme)"
+    theme="$(trim_string $theme)"
+else
+    theme="machine"
+fi
+[ -z "$theme" ] && theme=machine
+args="$args --awesome-m2 $theme"
+{{ end }}
+
+echo "called with args: $args"
+
+~/.dotfiles/stow.sh $args

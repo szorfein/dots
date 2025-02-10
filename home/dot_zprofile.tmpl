@@ -1,0 +1,16 @@
+unset SSH_AGENT_PID
+SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+
+{{- if eq .chezmoi.osRelease.id "gentoo" }}
+# if not systemd, add this for musl or openrc
+if ! readlink /sbin/init | grep -q systemd ; then
+	# Set the XDG_RUNTIME_DIR variable
+	if [ -z "$XDG_RUNTIME_DIR" ] ; then
+		export XDG_RUNTIME_DIR=/tmp/"$UID"-runtime-dir
+		if ! [ -d "$XDG_RUNTIME_DIR" ] ; then
+			mkdir "$XDG_RUNTIME_DIR"
+			chmod 0700 "$XDG_RUNTIME_DIR"
+		fi
+	fi
+fi
+{{- end }}

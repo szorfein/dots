@@ -11,7 +11,11 @@
   {{- end }}
 
 [core]
-  editor = {{ .editor }}
+{{- if eq .editor "vim" }}
+  editor = vim
+{{- else if eq .editor "neovim" }}
+  editor = nvim
+{{- end }}
   autocrlf = input
 
 [init]
@@ -20,4 +24,11 @@
 {{- if eq .name "szorfein" }}
 [url "git@github.com:szorfein"]
   insteadOf = https://github.com/szorfein
+{{- end }}
+{{- if eq .editor "vim" "neovim" }}
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
 {{- end }}

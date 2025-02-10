@@ -9,5 +9,9 @@ export PATH="$PATH:$GEM_HOME/bin:$HOME/bin"
 
 gem install reaver
 
+{{ if eq .wm "swayfx" }}
+gem install i3ipc
+{{ end }}
+
 echo "Downloading things with reaver.."
 reaver

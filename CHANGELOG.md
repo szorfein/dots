@@ -1,3 +1,13 @@
+## 2025-02
+* Update installation scripts for add swayfx.
+* Add nnn with Thunar (if Alsa) or Nemo (pulseaudio).
+* New variables for `chezmoi edit-config`
+  - web : 'librewolf' or 'brave' (librewolf use pulseaudi as dependencies, so prefer with pulseaudio and brave with alsa)
+  - editor : 'vim', 'neovim' or 'doom' (if you want doom with wayland, you need to install xwayland)
+  - wm : 'swayfx' (new) or keep 'awm-m3' (awesomewm)
+  - keyboard : default is 'us', affect only [swayfx](https://github.com/szorfein/dots/blob/swayfx-master/home/private_dot_config/sway/keyboard.tmpl) for now. Can be changed with `'fr'`, if you need more options here, post an issue or make a PR.
+
+## 2024-12
 - Works with doas or sudo.
 - Gentoo need xml flag with imagemagick to make betterlockscreen work.
 - Gentoo now use `app-eselect/eselect-repository` to install repository.

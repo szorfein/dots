@@ -1,62 +1,28 @@
-# required by x11-libs/gtk+-3.24.29::gentoo
-# required by app-text/zathura-0.4.4::gentoo
-# required by app-text/zathura-pdf-mupdf-0.3.6::gentoo
-# required by zathura-pdf-mupdf (argument)
-x11-libs/cairo X
-# required by media-libs/mesa-21.0.3::gentoo
-# required by virtual/opengl-7.0-r2::gentoo
-# required by media-video/mpv-0.33.1-r1::gentoo
-# required by mpv (argument)
-media-libs/libglvnd X
-# required by x11-misc/rofi-1.6.1::gentoo
-# required by rofi (argument)
-x11-libs/libxkbcommon X
-# required by x11-misc/rofi-1.6.1::gentoo
-# required by rofi (argument)
-x11-libs/pango X
-
-dev-libs/boost icu
-media-video/ffmpeg openh264 vpx
-media-video/ffmpegthumbnailer png
-
 # betterlockscreen need xml
+dev-python/pillow jpeg
 media-gfx/imagemagick jpeg xml
 
-dev-python/pillow jpeg
-
-# mpd
-media-sound/mpd -network -ipv6 flac libsamplerate
-media-video/mpv -lua cli
-media-sound/ncmpcpp taglib
-
-# mail
-mail-mta/msmtp sasl
-mail-client/neomutt gpgme gdbm sasl
-
-# pass
-app-admin/pass X zsh-completion emacs
-media-gfx/qrencode png
-
-# awesome / lua5-3
-x11-wm/awesome -lua_single_target_lua5-1 -lua_single_target_lua5-2 lua_single_target_lua5-3
-dev-lua/lgi lua_targets_lua5-3
-dev-python/pillow jpeg
-
-# imlib
-media-libs/imlib2 jpeg png
-
-# fdm
-net-mail/fdm examples
-
-# ghostscript-gpl
-app-text/ghostscript-gpl cups
-
-# xmlto
+# Brave
 app-text/xmlto text
 
-# misc
-media-libs/freetype harfbuzz
+# Librewolf
 
-net-mail/isync sasl
+# Nemo
+dev-libs/glib dbus
+x11-libs/xapp introspection
+sys-apps/systemd policykit
 
-net-libs/libdom xml
+# Ncmpcpp
+dev-libs/boost icu
+
+# Pass
+media-gfx/qrencode png
+
+# Thunar
+app-crypt/gcr gtk
+dev-libs/libdbusmenu gtk3
+# Bug https://bugs.gentoo.org/811372
+# Bug https://bugs.gentoo.org/624960
+# Should add wayland
+x11-libs/gtk+ wayland
+media-libs/mesa wayland

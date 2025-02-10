@@ -1,0 +1,19 @@
+[Default Applications]
+text/html=brave-browser.desktop
+x-scheme-handler/http=browser.desktop
+x-scheme-handler/https=browser.desktop
+x-scheme-handler/about=browser.desktop
+x-scheme-handler/unknown=browser.desktop
+inode/directory=thunar.desktop
+image/png=img.desktop
+image/jpeg=img.desktop
+image/gif=img.desktop
+application/pdf=zathura.desktop
+video/x-matroska=mpv.desktop
+video/mp4=mpv.desktop
+text/x-shellscript=text.desktop
+text/plain=text.desktop
+text/x-makefile=text.desktop
+
+[Added Associations]
+application/json=text.desktop
