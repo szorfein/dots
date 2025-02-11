@@ -20,8 +20,8 @@ add_awesome() {
     mpd ncmpcpp xinit xorg-apps xorg-minimal
     xorg-input-drivers feh picom maim mpv
     zathura zathura-pdf-mupdf isync neomutt
-    ImageMagick weechat youtube-dl papirus-icon-theme
-    mpc inotify-tools light tmux xss-lock jq xrdb gcc"
+    ImageMagick weechat papirus-icon-theme
+    mpc inotify-tools light xss-lock jq xrdb gcc"
 
     services="$services acpid"
 }
@@ -44,20 +44,23 @@ add_swayfx() {
     pkgs="$pkgs swayfx imv light jq wl-clipboard
     papirus-icon-theme inotify-tools mpd mpc wezterm
     playerctl mpv-mpris mpDris2 eww swaybg grim wmenu
-    iwd seatd turnstile"
+    iwd seatd turnstile mesa-dri"
 
     user_groups="$user_groups _seatd"
 
     services="$services seatd turnstiled"
 }
 
+# No brave package...
 add_brave() {
-    :
+    echo "There are no Brave pkg for Voidlinux, please edit your config file to use Librewolf instead or install Firefox, Chromium yourself..."
+    exit 1
 }
 
-# added with appimage if web = "librewolf" is set
 add_librewolf() {
-    :
+    echo 'repository=https://github.com/index-0/librewolf-void/releases/latest/download/' > /tmp/20-librewolf.conf
+    "$AUTH" mv /tmp/20-librewolf.conf /etc/xbps.d/20-librewolf.conf
+    pkgs="$pkgs librewolf"
 }
 
 add_emacs() {
@@ -69,11 +72,11 @@ add_neovim() {
 }
 
 add_vim() {
-    pkgs="$pkgs vim vim-x11"
+    pkgs="$pkgs vim vim-x11 tmux"
 }
 
 add_zsh() {
-    pkgs="$pkgs starship zsh"
+    pkgs="$pkgs starship zsh yt-dlp"
 }
 
 install_extra_deps() {
