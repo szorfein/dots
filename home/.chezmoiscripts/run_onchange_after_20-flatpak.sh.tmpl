@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+install_app() {
+    if ! flatpak list --user | grep -q "$1" ; then
+        flatpak install --user "$1"
+    fi
+}
+
+{{ if eq .wm "swayfx" }}
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+install_app "com.notesnook.Notesnook"
+
+flatpak update --user
+{{- end }}
+

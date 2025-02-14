@@ -2,6 +2,10 @@
 
 set -o errexit
 
+{{ if eq .wm "swayfx" }}
+flatpak run --user com.notesnook.Notesnook
+{{- else }}
 notesnook_path="$HOME/.app-images/notesnook.AppImage"
 
 "$notesnook_path" --disable-setuid-sandbox
+{{- end }}
