@@ -15,3 +15,9 @@ Host 127.0.0.1
 {{ else }}
   IdentityFile ~/.ssh/ansible
 {{ end }}
+
+{{- if eq .name "szorfein" }}
+Host {{ pass "duplicity/server" }}
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/duplicity
+{{- end }}
