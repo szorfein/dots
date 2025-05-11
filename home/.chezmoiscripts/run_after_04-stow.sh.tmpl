@@ -11,23 +11,23 @@ trim_string() {
 # base arguments
 args="--purge --zsh --tmux --ncmpcpp"
 
-{{ if eq .editor "neovim" }}
+{{- if eq .editor "neovim" }}
 args="$args --neovim"
-{{ end }}
+{{- end }}
 
-{{ if eq .editor "doom" }}
+{{- if eq .editor "doom" }}
 args="$args --doomemacs --vim"
-{{ end }}
+{{- end }}
 
-{{ if eq .editor "vim" }}
+{{- if eq .editor "vim" }}
 args="$args --vim"
-{{ end }}
+{{- end }}
 
-{{ if eq .wm "swayfx" }}
+{{- if eq .wm "swayfx" }}
 args="$args --wezterm --swayfx holy"
-{{ end }}
+{{- end }}
 
-{{ if eq .wm "awm-m3" }}
+{{- if eq .wm "awm-m3" }}
 if [ -f /tmp/awm-m3 ] ; then
     theme="$(cat /tmp/awm-m3)"
     theme="$(trim_string $theme)"
@@ -36,9 +36,9 @@ else
 fi
 [ -z "$theme" ] && theme=focus
 args="$args --awesome-m3 $theme"
-{{ end }}
+{{- end }}
 
-{{ if eq .wm "awm-m2" }}
+{{- if eq .wm "awm-m2" }}
 if [ -f /tmp/awesome-theme ] ; then
     theme="$(cat /tmp/awesome-theme)"
     theme="$(trim_string $theme)"
@@ -47,7 +47,7 @@ else
 fi
 [ -z "$theme" ] && theme=machine
 args="$args --awesome-m2 $theme"
-{{ end }}
+{{- end }}
 
 echo "called with args: $args"
 

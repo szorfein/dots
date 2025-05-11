@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+set -o errexit -o nounset
+
+# for a full walkthrough, see here
+# https://szorfein.vercel.app/post/backup-with-duplicity
+
+{{ if .key_encrypt -}}
+# e.g: 0xABCDEFGHIJKLMNOP
+GPG_ENC_KEY={{- .key_encrypt | quote }}
+
+# e.g: 0xABCDEFGHIJKLMNOP
+GPG_SIG_KEY={{- .key_sign | quote }}
+{{- end }}
+
+if [ -f ~/.password-store/duplicity/server.gpg ] ; then
+# e.g SERVER="ip_addr"
+SERVER={{- pass "duplicity/server" | quote }}
+fi
+
+duplicity --encrypt-key "${GPG_ENC_KEY}" \
+              --include ~/downloads/torrents \
+              --include ~/musics \
+              --include ~/downloads/videos \
+              --exclude '**' ~ "rsync://backup@${SERVER}/backups/"

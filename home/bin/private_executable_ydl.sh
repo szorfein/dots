@@ -34,7 +34,10 @@ if command -v yt-dlp &>/dev/null ; then
   BIN="yt-dlp"
 fi
 
-  #--proxy "socks5://127.0.0.1:${TOR_PORT:-9050}" \
+#username=ydl-$(head -c 12 /dev/urandom | xxd -p)
+#proxy="${username}:0@127.0.0.1:9053/"
+#--proxy "socks5://${proxy}" \
+#--proxy "socks5://127.0.0.1:${TOR_PORT:-9050}" \
 "$BIN" \
   --user-agent "$agent" \
   --add-metadata \

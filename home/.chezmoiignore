@@ -4,6 +4,12 @@
 asound
 scripts
 
+{{- if ne .name "szorfein" }}
+.ssh/duplicity
+.ssh/duplicity.pub
+bin/duplicity-backup.sh
+{{- end }}
+
 {{- if not .secrets }}
 .weechat/certs
 .ssh/ansible.pub
