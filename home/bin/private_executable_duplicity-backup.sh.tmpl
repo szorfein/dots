@@ -18,8 +18,13 @@ if [ -f ~/.password-store/duplicity/server.gpg ] ; then
 SERVER={{- pass "duplicity/server" | quote }}
 fi
 
-duplicity --encrypt-key "${GPG_ENC_KEY}" \
-              --include ~/downloads/torrents \
+duplicity --use-agent \
+              --sign-key "${GPG_SIG_KEY}" \
+              --encrypt-key "${GPG_ENC_KEY}" \
               --include ~/musics \
-              --include ~/downloads/videos \
+              --include ~/downloads \
+              --include ~/Downloads \
+              --include ~/documents \
+              --include ~/images \
+              --rsync-options="--bwlimit=200m" \
               --exclude '**' ~ "rsync://backup@${SERVER}/backups/"
