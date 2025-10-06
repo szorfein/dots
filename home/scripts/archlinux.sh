@@ -11,9 +11,10 @@ user_groups=""
 AUTH=$(search_auth)
 
 build() {
+    echo "Start building $1 from AUR..."
   PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
   PKG_NAME="${PKG_URL##*/}" # e.g yay.tar.gz
-  PKG="${PKG_NAME%%.*}" # e.g yay
+  PKG=$(echo "$PKG_NAME" | sed s/.tar.gz//) # e.g yay
   BUILD_DIR="$HOME/build/$PKG"
   [ -d "$BUILD_DIR" ] && rm -rf "$BUILD_DIR"
   mkdir -p "$BUILD_DIR"
@@ -58,30 +59,26 @@ add_librewolf() {
     mime-types dbus nss ttf-font libpulse ffmpeg"
 
     pkgs_aur="$pkgs_aur librewolf-bin"
+
+    # needed to compile librewolf from aur
+    gpg --recv-keys 8A74EAAF89C17944
 }
 
 add_emacs() {
   pkgs="$pkgs ripgrep emacs"
 }
 
-add_vim() {
-    if pacman -Q | awk '{print $1}' | grep -q '^vim$' ; then
-        "$AUTH" pacman -R --noconfirm vim
-    fi
-    pkgs="$pkgs gvim"
-}
-
 add_swayfx() {
   pkgs="$pkgs papirus-icon-theme inotify-tools
-  imv jq mpd mpc wl-clipboard bc imagemagick
+  imv jq mpd mpc wl-clipboard bc imagemagick dunst
   grim swaybg wmenu playerctl mpd-mpris mpv-mpris
-  wezterm rust git meson scdoc wayland-protocols
+  wezterm rust git meson scdoc wayland-protocols foot
   cairo gdk-pixbuf2 libevdev libinput json-c libgudev
-  wayland libxcb libxkbcommon pango pcre2 wlroots0.17
+  wayland libxcb libxkbcommon pango pcre2 wlroots0.19
   seatd libdrm libglvnd pixman glslang meson ninja
   cargo libdbusmenu-gtk3 gtk3 gtk-layer-shell iwd"
 
-  pkgs_aur="$pkgs_aur scenefx swayfx eww light"
+  pkgs_aur="$pkgs_aur scenefx0.4 swayfx eww light"
 
   # keys for eww
   curl -sS https://github.com/elkowar.gpg | gpg --import
@@ -90,11 +87,11 @@ add_swayfx() {
 }
 
 add_neovim() {
-  pkgs="$pkgs neovim fd fzf tmux gcc"
+  pkgs="$pkgs neovim fd fzf tmux gcc prettier rubocop stylua"
 }
 
 add_zsh() {
-    pkgs="$pkgs starship zsh"
+    pkgs="$pkgs starship zsh yt-dlp"
 }
 
 install_extra_deps() {
@@ -110,7 +107,6 @@ usage() {
   echo " --extra-deps   Install other dependencies"
   echo " --emacs        Install deps for DoomEmacs"
   echo " --neovim       Install deps for NeoVim"
-  echo " --vim          Install deps for Vim"
   echo " --awesome      Install deps for Awesome"
   echo " --swayfx       Install deps for Swayfx"
   echo " --brave        Install deps for Brave"
@@ -132,7 +128,6 @@ while [ "$#" -gt 0 ] ; do
     --swayfx) add_swayfx ;;
     --emacs) add_emacs ;;
     --neovim) add_neovim ;;
-    --vim) add_vim ;;
     --brave) add_brave ;;
     --librewolf) add_librewolf ;;
     --zsh) add_zsh ;;

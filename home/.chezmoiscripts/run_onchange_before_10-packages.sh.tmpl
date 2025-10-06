@@ -29,15 +29,11 @@ args="$args --sound-pulse"
 {{ end }}
 
 {{ if eq .editor "doom" }}
-args="$args --emacs --vim"
+args="$args --emacs
 {{ end }}
 
 {{ if eq .editor "neovim" }}
 args="$args --neovim"
-{{ end }}
-
-{{ if eq .editor "vim" }}
-args="$args --vim"
 {{ end }}
 
 {{ if eq .web "brave" }}

@@ -16,15 +16,11 @@ args="$args --neovim"
 {{ end }}
 
 {{ if eq .editor "doom" }}
-args="$args --doomemacs --vim"
-{{ end }}
-
-{{ if eq .editor "vim" }}
-args="$args --vim"
+args="$args --doomemacs"
 {{ end }}
 
 {{ if eq .wm "swayfx" }}
-args="$args --wezterm --swayfx holy"
+args="$args --foot --wezterm --swayfx holy"
 {{ end }}
 
 {{ if eq .wm "awm-m3" }}

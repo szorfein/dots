@@ -91,7 +91,7 @@ add_swayfx() {
     pkgs="$pkgs light papirus-icon-theme inotify-tools
     swaybg imagemagick imv app-misc/jq playerctl
     wl-clipboard gui-apps/grim gui-apps/wmenu
-    media-sound/mpc zathura wezterm
+    media-sound/mpc zathura wezterm x11-misc/dunst
     net-wireless/iwd gui-apps/eww gui-wm/swayfx
     mpv-mpris mpd-mpris acct-group/seat seatd"
 
@@ -118,10 +118,6 @@ add_neovim() {
     pkgs="$pkgs neovim sys-apps/fd ripgrep fzf tmux"
 }
 
-add_vim() {
-  pkgs="$pkgs vim tmux"
-}
-
 add_zsh() {
     pkgs="$pkgs zsh app-shells/starship net-misc/yt-dlp"
 }
@@ -137,7 +133,6 @@ usage() {
   echo " --extra-deps   Install other dependencies"
   echo " --emacs        Install deps for DoomEmacs"
   echo " --neovim       Install deps for NeoVim"
-  echo " --vim          Install deps for Vim"
   echo " --awesome      Install deps for Awesome"
   echo " --swayfx       Install deps for Swayfx"
   echo " --brave        Install deps for Brave"
@@ -159,7 +154,6 @@ while [ "$#" -gt 0 ] ; do
         --swayfx) add_swayfx ;;
         --emacs) add_emacs ;;
         --neovim) add_neovim ;;
-        --vim) add_vim ;;
         --brave) add_brave ;;
         --librewolf) add_librewolf ;;
         --zsh) add_zsh ;;

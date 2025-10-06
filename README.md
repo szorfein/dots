@@ -33,7 +33,7 @@ Why i use chezmoi?
 
 ## Screenshots
 
-| Holy (Wayland) | Focus (Xorg) |
+| Holy (SwayFX) | Focus (Awesome) |
 | --- | --- |
 | ![](https://github.com/szorfein/unix-portfolio/raw/master/holy/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 

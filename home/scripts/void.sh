@@ -4,7 +4,7 @@ set -o errexit -o nounset
 
 . $HOME/.local/share/chezmoi/home/scripts/lib.sh
 
-ins="xbps-install -Sy"
+ins="xbps-install -S"
 pkgs="gnupg2 pass curl base-devel wget ruby unzip tar xz stow"
 services=""
 user_groups=""
@@ -33,7 +33,7 @@ add_pulse() {
 }
 
 add_alsa() {
-  pkgs="$pkgs alsa-utils alsa-plugins ladspa-bs2b swh-plugins alsa-plugins-samplerate nnn Thunar"
+  pkgs="$pkgs alsa-utils alsa-plugins ladspa-bs2b swh-plugins alsa-plugins-samplerate nnn Thunar tumbler"
 
   user_groups="$user_groups audio"
 
@@ -44,7 +44,7 @@ add_swayfx() {
     pkgs="$pkgs swayfx imv light jq wl-clipboard
     papirus-icon-theme inotify-tools mpd mpc wezterm
     playerctl mpv-mpris mpDris2 eww swaybg grim wmenu
-    iwd seatd turnstile mesa-dri"
+    iwd seatd turnstile mesa-dri dunst foot"
 
     user_groups="$user_groups _seatd"
 
@@ -68,11 +68,7 @@ add_emacs() {
 }
 
 add_neovim() {
-    pkgs="$pkgs neovim fd fzf tmux gcc"
-}
-
-add_vim() {
-    pkgs="$pkgs vim vim-x11 tmux"
+    pkgs="$pkgs neovim fd fzf ripgrep tmux gcc StyLua"
 }
 
 add_zsh() {
@@ -95,7 +91,6 @@ usage() {
   echo " --extra-deps   Install other dependencies"
   echo " --emacs        Install deps for DoomEmacs"
   echo " --neovim       Install deps for NeoVim"
-  echo " --vim          Install deps for Vim"
   echo " --awesome      Install deps for Awesome"
   echo " --swayfx       Install deps for Swayfx"
   echo " --brave        Install deps for Brave"
@@ -117,7 +112,6 @@ while [ "$#" -gt 0 ] ; do
         --swayfx) add_swayfx ;;
         --emacs) add_emacs ;;
         --neovim) add_neovim ;;
-        --vim) add_vim ;;
         --brave) add_brave ;;
         --librewolf) add_librewolf ;;
         --zsh) add_zsh ;;
