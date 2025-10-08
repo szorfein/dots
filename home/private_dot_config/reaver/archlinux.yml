@@ -1,0 +1,24 @@
+---
+# one time per week (604800)
+things:
+  - name: light.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/light.tar.gz
+  - name: eww.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/eww.tar.gz
+  - name: scenefx0.4.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/scenefx0.4.tar.gz
+  - name: swayfx.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/swayfx.tar.gz
+  - name: cava.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
+  - name: i3lock-color.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/i3lock-color.tar.gz
+  - name: betterlockscreen.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/betterlockscreen.tar.gz
+  - name: xst-git.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/xst-git.tar.gz
+  - name: brave-bin.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/brave-bin.tar.gz
+  - name: librewolf-bin.tar.gz
+    url: https://aur.archlinux.org/cgit/aur.git/snapshot/librewolf-bin.tar.gz
+time: 604800

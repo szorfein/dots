@@ -1,5 +1,6 @@
-Drop support for Vim configs, replaced by Neovim.
-Drop support for Vifm.
+- Drop support for Vim configs, replaced by Neovim.
+- Drop support for Vifm.
+- Arch download all AUR snapshots used with Reaver before execute playbook.
 
 File removed:
 
