@@ -24,3 +24,7 @@ bin/duplicity-backup.sh
 {{- end }}
 
 .dotfiles/vifm/.config/vifm/*.txt
+
+{{- if ne .chezmoi.osRelease.id "arch" }}
+.config/reaver/archlinux.yml
+{{- end }}
