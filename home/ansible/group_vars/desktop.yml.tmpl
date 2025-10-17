@@ -45,9 +45,9 @@ dm_lxdm_backgrounds:
 ##############
 #  DOTFILES  #
 
-{{ if eq .wm "awm-m2" "awm-m3" "swayfx" }}
+{{ if eq .wm "awm-m2" "awm-m3" "swayfx" -}}
 dotfiles_wm: {{ .wm | trim }}
-{{ end }}
+{{ end -}}
 
 {{ if eq .sound "alsa" "pulseaudio" -}}
 dotfiles_audio_backend: {{ .sound }}
@@ -61,7 +61,7 @@ dotfiles_files_browser: true
 
 {{ if eq .gpu "intel_gen7" "intel" "nouveau" -}}
 dotfiles_gpu_driver: {{ .gpu }}
-{{ end -}}
+{{ end }}
 
 dotfiles_mpd: true
 dotfiles_mpd_music_dir: ~/musics
@@ -70,29 +70,25 @@ dotfiles_neomutt: true
 dotfiles_neomutt_mail_dir: ~/.mail
 dotfiles_neomutt_accounts_dir: [ 'Personal' ]
 
-dotfiles_tmux: true
-
-{{ if eq .editor "vim" "doom" }}
-dotfiles_vim: true
-{{ end }}
-
-{{ if eq .editor "doom" }}
+{{ if eq .editor "doom" -}}
 dotfiles_emacs_doom: true
-{{ end }}
+{{ end -}}
 
-{{ if eq .editor "neovim" }}
+{{ if eq .editor "neovim" -}}
+dotfiles_tmux: true
 dotfiles_neovim: true
-{{ end }}
+{{ end -}}
 
-{{ if eq .wm "swayfx" }}
+{{ if eq .wm "swayfx" -}}
 dotfiles_wezterm: true
-{{ else }}
+dotfiles_foot: true
+{{ else -}}
 dotfiles_xst: true
-{{ end }}
+{{ end -}}
 
-{{ if ne .keymap "en" }}
+{{ if ne .keymap "en" -}}
 dotfiles_xorg_keymap: {{ .keymap }}
-{{ end }}
+{{ end -}}
 
 # Zsh
 dotfiles_zsh: true
@@ -100,8 +96,8 @@ dotfiles_zsh: true
 #################
 #  WEB BROWSER  #
 
-{{ if eq .web "brave" }}
+{{ if eq .web "brave" -}}
 web_browser_brave: true
-{{ else if eq .web "librewolf" }}
+{{ else if eq .web "librewolf" -}}
 web_browser_librewolf: true
-{{ end }}
+{{ end -}}

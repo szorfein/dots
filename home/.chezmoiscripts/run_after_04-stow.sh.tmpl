@@ -2,17 +2,39 @@
 
 set -o errexit
 
+SWAY_DIR="$HOME/.config/sway"
+SWAY_CONF="$SWAY_DIR/theme"
+DEFAULT_THEME="jinx"
+
 trim_string() {
     trim=${1#${1%%[![:space:]]*}}
     trim=${trim%${trim##*[![:space:]]}}
     printf '%s' "$trim"
 }
 
+detect_sway_theme() {
+    if THEME=$(grep "^set \$theme " "$SWAY_CONF" | awk '{print $3}'); then
+        return 0
+    else
+        return 1
+    fi
+}
+
+change_default_sway() {
+    if [ -d "$SWAY_DIR" ]; then
+        if [ -f "$SWAY_CONF" ]; then
+            if detect_sway_theme; then
+                DEFAULT_THEME="$THEME"
+            fi
+        fi
+    fi
+}
+
 # base arguments
-args="--purge --zsh --tmux --ncmpcpp"
+args="--purge --zsh --ncmpcpp"
 
 {{- if eq .editor "neovim" }}
-args="$args --neovim"
+args="$args --tmux --neovim"
 {{- end }}
 
 {{- if eq .editor "doom" }}
@@ -20,7 +42,8 @@ args="$args --doomemacs"
 {{- end }}
 
 {{- if eq .wm "swayfx" }}
-args="$args --wezterm --swayfx holy"
+change_default_sway
+args="$args --wezterm --foot --swayfx $DEFAULT_THEME"
 {{- end }}
 
 {{- if eq .wm "awm-m3" }}

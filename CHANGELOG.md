@@ -1,6 +1,10 @@
-- Drop support for Vim configs, replaced by Neovim.
+## Oct 17 2025
+
+- Can install last Swayfx theme [Jinx](https://github.com/szorfein/dotfiles)
+- Drop support for Vim configs, replaced by Neovim. Awesome theme need to use Doomemacs.
 - Drop support for Vifm.
-- Arch download all AUR snapshots used with Reaver before execute playbook.
+- Arch download all AUR snapshots needed with Reaver before execute Ansible playbook.
+- Remove the install of AppImage or Flatpak tools.
 
 File removed:
 
