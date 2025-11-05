@@ -12,7 +12,7 @@ user_groups=""
 AUTH=$(search_auth)
 
 build() {
-  :
+    :
 }
 
 add_awesome() {
@@ -27,24 +27,24 @@ add_awesome() {
 }
 
 add_pulse() {
-  pkgs="$pkgs pulseaudio pulseaudio-equalizer-ladspa nnn nemo"
+    pkgs="$pkgs pulseaudio pulseaudio-equalizer-ladspa yazi nemo"
 
-  user_groups="$user_groups dbus"
+    user_groups="$user_groups dbus"
 }
 
 add_alsa() {
-  pkgs="$pkgs alsa-utils alsa-plugins ladspa-bs2b swh-plugins alsa-plugins-samplerate nnn Thunar tumbler"
+    pkgs="$pkgs alsa-utils alsa-plugins ladspa-bs2b swh-plugins alsa-plugins-samplerate yazi Thunar tumbler"
 
-  user_groups="$user_groups audio"
+    user_groups="$user_groups audio"
 
-  services="$services alsa"
+    services="$services alsa"
 }
 
 add_swayfx() {
     pkgs="$pkgs swayfx imv light jq wl-clipboard
-    papirus-icon-theme inotify-tools mpd mpc wezterm
+    inotify-tools mpd mpc foot ImageMagick 
     playerctl mpv-mpris mpDris2 eww swaybg grim wmenu
-    iwd seatd turnstile mesa-dri dunst foot"
+    iwd seatd turnstile mesa-dri dunst chafa"
 
     user_groups="$user_groups _seatd"
 
@@ -68,7 +68,7 @@ add_emacs() {
 }
 
 add_neovim() {
-    pkgs="$pkgs neovim fd fzf ripgrep tmux gcc StyLua"
+    pkgs="$pkgs neovim ripgrep gcc fd fzf tmux nodejs-lts StyLua shfmt bash-language-server lua-language-server python3-ansible-lint the_silver_searcher"
 }
 
 add_zsh() {
@@ -76,46 +76,52 @@ add_zsh() {
 }
 
 install_extra_deps() {
-  :
+    :
 }
 
 make_service() {
-  echo "adding service for $1..."
-  [ -s /var/service/"$1" ] || "$AUTH" ln -s /etc/sv/"$1" /var/service/"$1"
+    echo "adding service for $1..."
+    [ -s /var/service/"$1" ] || "$AUTH" ln -s /etc/sv/"$1" /var/service/"$1"
 }
 
 usage() {
-  printf "\nUsage:\n"
-  echo " --sound-pulse  Install deps for PulseAudio"
-  echo " --sound-alsa   Install deps for ALSA"
-  echo " --extra-deps   Install other dependencies"
-  echo " --emacs        Install deps for DoomEmacs"
-  echo " --neovim       Install deps for NeoVim"
-  echo " --awesome      Install deps for Awesome"
-  echo " --swayfx       Install deps for Swayfx"
-  echo " --brave        Install deps for Brave"
-  echo " --librewolf    Install deps for LibreWolf"
-  echo " --zsh          Install deps for Zsh"
+    printf "\nUsage:\n"
+    echo " --sound-pulse  Install deps for PulseAudio"
+    echo " --sound-alsa   Install deps for ALSA"
+    echo " --extra-deps   Install other dependencies"
+    echo " --emacs        Install deps for DoomEmacs"
+    echo " --neovim       Install deps for NeoVim"
+    echo " --awesome      Install deps for Awesome"
+    echo " --swayfx       Install deps for Swayfx"
+    echo " --brave        Install deps for Brave"
+    echo " --librewolf    Install deps for LibreWolf"
+    echo " --zsh          Install deps for Zsh"
 }
 
 ## CLI options
 EXTRA=false
 
-if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
+if [ "$#" -eq 0 ]; then
+    usage
+    exit 1
+fi
 
-while [ "$#" -gt 0 ] ; do
+while [ "$#" -gt 0 ]; do
     case "$1" in
-        --sound-alsa) add_alsa ;;
-        --sound-pulse) add_pulse ;;
-        --extra-deps) EXTRA=true ;;
-        --awesome) add_awesome ;;
-        --swayfx) add_swayfx ;;
-        --emacs) add_emacs ;;
-        --neovim) add_neovim ;;
-        --brave) add_brave ;;
-        --librewolf) add_librewolf ;;
-        --zsh) add_zsh ;;
-        *) usage; exit 1 ;;
+    --sound-alsa) add_alsa ;;
+    --sound-pulse) add_pulse ;;
+    --extra-deps) EXTRA=true ;;
+    --awesome) add_awesome ;;
+    --swayfx) add_swayfx ;;
+    --emacs) add_emacs ;;
+    --neovim) add_neovim ;;
+    --brave) add_brave ;;
+    --librewolf) add_librewolf ;;
+    --zsh) add_zsh ;;
+    *)
+        usage
+        exit 1
+        ;;
     esac
     shift
 done
@@ -124,14 +130,14 @@ main() {
     "$AUTH" $ins $pkgs
     "$EXTRA" && install_extra_deps
 
-    for group in $user_groups ; do
-        if [ "$group" != "" ] ; then
+    for group in $user_groups; do
+        if [ "$group" != "" ]; then
             "$AUTH" usermod -aG "$group" "$USER"
         fi
     done
 
-    for service in $services ; do
-        if [ "$service" != "" ] ; then
+    for service in $services; do
+        if [ "$service" != "" ]; then
             make_service $service
         fi
     done

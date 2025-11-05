@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
+
+msg "Execute $0..."
+
+{{ if eq .wm "swayfx" }}
+~/bin/compile-menu-launcher.sh
+{{ endif }}
