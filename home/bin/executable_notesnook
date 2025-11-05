@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-set -o errexit
-
-notesnook_path="$HOME/.app-images/notesnook.AppImage"
-
-"$notesnook_path" --disable-setuid-sandbox

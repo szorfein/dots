@@ -1,6 +1,0 @@
----
-things:
-  #- name: notesnook.AppImage
-  # url: https://github.com/streetwriters/notesnook/releases/download/v3.0.18/notesnook_linux_x86_64.AppImage
-all_to_dest_dir: .app-images
-time: 86000

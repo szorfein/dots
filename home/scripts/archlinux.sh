@@ -18,14 +18,13 @@ download_aur_src() {
     BUILD_DIR="$HOME/build/$PKG"
     [ -d "$BUILD_DIR" ] && rm -rf "$BUILD_DIR"
     mkdir -p "$BUILD_DIR"
-    (
-        cd "$BUILD_DIR" \
-            && curl -o "$PKG_NAME" -L "$PKG_URL"
-    )
+    cd "$BUILD_DIR"
+    curl --fail -o "$PKG_NAME" -sSL "$PKG_URL" || exit 1
 }
 
 build() {
     echo "Start building $1 from AUR..."
+    PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
     PKG_NAME="${PKG_URL##*/}"                 # e.g yay.tar.gz
     PKG=$(echo "$PKG_NAME" | sed s/.tar.gz//) # e.g yay
     BUILD_DIR="$HOME/build/$PKG"

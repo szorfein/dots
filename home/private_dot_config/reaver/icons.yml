@@ -1,6 +1,0 @@
----
-things:
-  #- name: notesnook.png
-  # url: https://raw.githubusercontent.com/streetwriters/notesnook/refs/heads/master/resources/icon.png
-time: 86000
-all_to_dest_dir: .icons
