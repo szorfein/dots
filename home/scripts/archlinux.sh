@@ -10,8 +10,8 @@ pkgs_aur=""
 user_groups=""
 AUTH=$(search_auth)
 
-build() {
-    echo "Start building $1 from AUR..."
+download_aur_src() {
+    echo "Downloading $1 from AUR..."
     PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
     PKG_NAME="${PKG_URL##*/}"                 # e.g yay.tar.gz
     PKG=$(echo "$PKG_NAME" | sed s/.tar.gz//) # e.g yay
@@ -20,7 +20,17 @@ build() {
     mkdir -p "$BUILD_DIR"
     (
         cd "$BUILD_DIR" \
-            && curl -o "$PKG_NAME" -L "$PKG_URL" \
+            && curl -o "$PKG_NAME" -L "$PKG_URL"
+    )
+}
+
+build() {
+    echo "Start building $1 from AUR..."
+    PKG_NAME="${PKG_URL##*/}"                 # e.g yay.tar.gz
+    PKG=$(echo "$PKG_NAME" | sed s/.tar.gz//) # e.g yay
+    BUILD_DIR="$HOME/build/$PKG"
+    (
+        cd "$BUILD_DIR" \
             && tar xvf "$PKG_NAME" \
             && cd "$PKG" \
             && makepkg -s \
@@ -62,7 +72,7 @@ add_librewolf() {
     pkgs_aur="$pkgs_aur librewolf-bin"
 
     # needed to compile librewolf from aur
-    gpg --recv-keys 8A74EAAF89C17944
+    gpg --keyserver hkps://keyserver.ubuntu.com:443 --recv-keys 8A74EAAF89C17944
 }
 
 add_emacs() {
@@ -72,7 +82,7 @@ add_emacs() {
 add_swayfx() {
     pkgs="$pkgs inotify-tools
   imv jq mpd mpc wl-clipboard bc imagemagick dunst
-  grim swaybg wmenu playerctl mpd-mpris mpv-mpris
+  grim swaybg playerctl mpd-mpris mpv-mpris
   rust git meson scdoc wayland-protocols foot
   cairo gdk-pixbuf2 libevdev libinput json-c libgudev
   wayland libxcb libxkbcommon pango pcre2 wlroots0.19
@@ -97,6 +107,11 @@ add_zsh() {
 }
 
 install_extra_deps() {
+    # first downloads all src
+    for pkg in $pkgs_aur; do
+        download_aur_src "$pkg"
+    done
+    # build packages
     for pkg in $pkgs_aur; do
         build "$pkg"
     done
