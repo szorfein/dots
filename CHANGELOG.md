@@ -1,3 +1,6 @@
+- Update Arch dependencies for the last theme Jinx.
+- Remove all appimages (raven, notesnook), don't work on Wayland.
+
 ## Oct. 6 2025
 
 - Add dunst dependencie for SwayFX.
