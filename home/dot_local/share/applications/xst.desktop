@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Xst
-GenericName=Xst Terminal Emulator
-Comment=Terminal Emulator
-Icon=st
-Exec=xst

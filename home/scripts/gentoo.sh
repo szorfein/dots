@@ -18,16 +18,16 @@ USE_DIR="/etc/portage/package.use"
 [ -d /etc/portage/package.accept_keyworks ] || "$AUTH" mkdir -p /etc/portage/package.accept_keywords
 
 # Make sure to install gentoolkit
-if ! hash euse 2>/dev/null; then
+if ! hash euse 2> /dev/null; then
     "$AUTH" $ins gentoolkit
 fi
 
 euse_enable() {
-  if "$AUTH" euse -E "$1" ; then echo "$1 enabled"; fi
+    if "$AUTH" euse -E "$1"; then echo "$1 enabled"; fi
 }
 
 euse_disable() {
-  if "$AUTH" euse -D "$1" ; then echo "$1 disabled"; fi
+    if "$AUTH" euse -D "$1"; then echo "$1 disabled"; fi
 }
 
 make_service() {
@@ -44,17 +44,17 @@ add_awesome() {
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/dotfiles "$USE_DIR/wm"
 
-    if has_systemd ; then
+    if has_systemd; then
         "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/lightdm-systemd "$USE_DIR/login"
     else
         "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/lightdm-elogind "$USE_DIR/login"
     fi
 
-    # AppImage need fuse:0
+    # AppImage need sys-fs/fuse:0 if you use
     pkgs="$pkgs awesome media-sound/mpd ncmpcpp xinit
     xorg-server xst feh picom maim mpv zathura
     zathura-pdf-mupdf neomutt cava weechat
-    papirus-icon-theme media-sound/mpc sys-fs/fuse:0
+    papirus-icon-theme media-sound/mpc
     inotify-tools light net-mail/isync
     xss-lock app-misc/jq x11-misc/betterlockscreen"
 }
@@ -66,7 +66,7 @@ add_pulse() {
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/pulseaudio "$USE_DIR/sound"
 
-    pkgs="$pkgs pulseaudio nnn gnome-extra/nemo"
+    pkgs="$pkgs pulseaudio app-misc/yazi gnome-extra/nemo"
 }
 
 add_alsa() {
@@ -75,7 +75,7 @@ add_alsa() {
 
     pkgs="$pkgs alsa-utils tap-plugins swh-plugins
     libsamplerate cmt-plugins ladspa-bs2b alsa-plugins
-    nnn xfce-base/thunar xfce-base/tumbler"
+    app-misc/yazi xfce-base/thunar xfce-base/tumbler"
 
     if ! has_systemd; then
         services="$services alsasound"
@@ -88,10 +88,10 @@ add_swayfx() {
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/swayfx "$USE_DIR/wm"
 
-    pkgs="$pkgs light papirus-icon-theme inotify-tools
+    pkgs="$pkgs light inotify-tools
     swaybg imagemagick imv app-misc/jq playerctl
-    wl-clipboard gui-apps/grim gui-apps/wmenu
-    media-sound/mpc zathura wezterm x11-misc/dunst
+    wl-clipboard gui-apps/grim media-gfx/chafa
+    media-sound/mpc zathura gui-apps/foot x11-misc/dunst
     net-wireless/iwd gui-apps/eww gui-wm/swayfx
     mpv-mpris mpd-mpris acct-group/seat seatd"
 
@@ -108,14 +108,14 @@ add_librewolf() {
 }
 
 add_emacs() {
-  "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/emacs "$USE_DIR/"
+    "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/emacs "$USE_DIR/"
 
-  # discount = markdown
-  pkgs="$pkgs ripgrep discount emacs"
+    # discount = markdown
+    pkgs="$pkgs ripgrep discount emacs"
 }
 
 add_neovim() {
-    pkgs="$pkgs neovim sys-apps/fd ripgrep fzf tmux"
+    pkgs="$pkgs neovim sys-apps/fd ripgrep fzf tmux app-admin/ansible-lint sys-apps/the_silver_searcher net-libs/nodejs"
 }
 
 add_zsh() {
@@ -123,41 +123,47 @@ add_zsh() {
 }
 
 install_extra_deps() {
-  :
+    :
 }
 
 usage() {
-  printf "\nUsage:\n"
-  echo " --sound-pulse  Install deps for PulseAudio"
-  echo " --sound-alsa   Install deps for ALSA"
-  echo " --extra-deps   Install other dependencies"
-  echo " --emacs        Install deps for DoomEmacs"
-  echo " --neovim       Install deps for NeoVim"
-  echo " --awesome      Install deps for Awesome"
-  echo " --swayfx       Install deps for Swayfx"
-  echo " --brave        Install deps for Brave"
-  echo " --librewolf    Install deps for LibreWolf"
-  echo " --zsh          Install deps for Zsh"
+    printf "\nUsage:\n"
+    echo " --sound-pulse  Install deps for PulseAudio"
+    echo " --sound-alsa   Install deps for ALSA"
+    echo " --extra-deps   Install other dependencies"
+    echo " --emacs        Install deps for DoomEmacs"
+    echo " --neovim       Install deps for NeoVim"
+    echo " --awesome      Install deps for Awesome"
+    echo " --swayfx       Install deps for Swayfx"
+    echo " --brave        Install deps for Brave"
+    echo " --librewolf    Install deps for LibreWolf"
+    echo " --zsh          Install deps for Zsh"
 }
 
 ## CLI options
 EXTRA=false
 
-if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
+if [ "$#" -eq 0 ]; then
+    usage
+    exit 1
+fi
 
-while [ "$#" -gt 0 ] ; do
+while [ "$#" -gt 0 ]; do
     case "$1" in
-        --sound-alsa) add_alsa ;;
-        --sound-pulse) add_pulse ;;
-        --extra-deps) EXTRA=true ;;
-        --awesome) add_awesome ;;
-        --swayfx) add_swayfx ;;
-        --emacs) add_emacs ;;
-        --neovim) add_neovim ;;
-        --brave) add_brave ;;
-        --librewolf) add_librewolf ;;
-        --zsh) add_zsh ;;
-        *) usage ; exit 1 ;;
+    --sound-alsa) add_alsa ;;
+    --sound-pulse) add_pulse ;;
+    --extra-deps) EXTRA=true ;;
+    --awesome) add_awesome ;;
+    --swayfx) add_swayfx ;;
+    --emacs) add_emacs ;;
+    --neovim) add_neovim ;;
+    --brave) add_brave ;;
+    --librewolf) add_librewolf ;;
+    --zsh) add_zsh ;;
+    *)
+        usage
+        exit 1
+        ;;
     esac
     shift
 done
@@ -169,14 +175,14 @@ main() {
 
     "$EXTRA" && install_extra_deps
 
-    for group in $user_groups ; do
-        if [ "$group" != "" ] ; then
+    for group in $user_groups; do
+        if [ "$group" != "" ]; then
             "$AUTH" usermod -aG "$group" "$USER"
         fi
     done
 
-    for service in $services ; do
-        if [ "$service" != "" ] ; then
+    for service in $services; do
+        if [ "$service" != "" ]; then
             make_service $service
         fi
     done

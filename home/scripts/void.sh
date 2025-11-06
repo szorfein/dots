@@ -11,9 +11,7 @@ user_groups=""
 
 AUTH=$(search_auth)
 
-build() {
-    :
-}
+#build() {}
 
 add_awesome() {
     pkgs="xst cava betterlockscreen xclip awesome
@@ -42,7 +40,7 @@ add_alsa() {
 
 add_swayfx() {
     pkgs="$pkgs swayfx imv light jq wl-clipboard
-    inotify-tools mpd mpc foot ImageMagick 
+    inotify-tools mpd mpc foot ImageMagick cargo
     playerctl mpv-mpris mpDris2 eww swaybg grim wmenu
     iwd seatd turnstile mesa-dri dunst chafa"
 

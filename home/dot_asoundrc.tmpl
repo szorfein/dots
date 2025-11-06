@@ -1,0 +1,60 @@
+# Samplerate is for general audio playback, best on Music, sound effects
+# The following converter types are available:
+
+# - samplerate_best	Use SRC_SINC_BEST_QUALITY
+# - samplerate_medium	Use SRC_SINC_MEDIUM_QUALITY
+# - samplerate		Use SRC_SINC_FASTEST
+# - samplerate_order	Use SRC_ZERO_ORDER_HOLD
+# - samplerate_linear	Use SRC_LINEAR
+
+defaults.pcm.rate_converter "samplerate_order"
+
+# Speexrate is specific to voice audio compression (VoIP, audio stream, ...)
+# The following converter types are available:
+
+# - speexrate_best	Use quality 10 (equivalent to SRC_SINC_BEST_QUALITY)
+# - speexrate_medium	Use quality 5 (equivalent to SRC_SINC_MEDIUM_QUALITY)
+# - speexrate		Use quality 3 (equivalent to SRC_SINC_FASTEST)
+
+# defaults.pcm.rate_converter "speexrate"
+
+# DMIX Configuration 
+
+#ctl.!default {
+#  type hw
+#  card PCH
+#}
+
+# https://github.com/opensrc/alsa/blob/master/lib/md/Dmix.md#6-the-complex-approach-defining-dmix-parameters
+pcm.ossmix {
+    type dmix
+    ipc_key 1024 # must be unique!
+    slave {
+        pcm "hw:{{- .soundcard -}}" # you cannot use a "plug" device here, darn.
+        period_time 0
+        period_size 1024 # must be power of 2
+        buffer_size 8192
+    }
+    bindings {
+        0 0 # from 0 => to 0
+        1 1 # from 1 => to 1
+    }
+}
+
+pcm.dsp0 {
+    type plug
+    slave.pcm "ossmix"
+    # A hint is required for listing the device in some GUIs, e.g. Phonon
+    # configuration.
+    hint {
+        show on
+        description "My dmix dsp0"
+    }
+}
+
+ctl.mixer0 {
+    type hw
+    card {{- .soundcard -}}
+}
+
+pcm.default pcm.dsp0

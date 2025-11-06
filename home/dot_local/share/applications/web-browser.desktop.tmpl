@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Web Browser
+{{- if eq .web "brave" }}
+Exec={{ .chezmoi.homeDir }}/bin/brave %u
+Icon=brave-desktop
+{{- else if eq .web "librewolf" }}
+Exec=/usr/bin/librewolf %u
+Icon=librewolf
+{{- end }}
