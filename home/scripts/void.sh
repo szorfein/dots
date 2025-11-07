@@ -41,7 +41,7 @@ add_alsa() {
 add_swayfx() {
     pkgs="$pkgs swayfx imv light jq wl-clipboard
     inotify-tools mpd mpc foot ImageMagick cargo
-    playerctl mpv-mpris mpDris2 eww swaybg grim wmenu
+    playerctl mpv-mpris mpDris2 eww swaybg grim
     iwd seatd turnstile mesa-dri dunst chafa"
 
     user_groups="$user_groups _seatd"

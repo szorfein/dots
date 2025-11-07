@@ -7,6 +7,7 @@ sys-auth/seatd server
 
 # Dunst
 app-text/xmlto text
+x11-misc/dunst dunstify
 
 # Nemo
 dev-libs/glib dbus
