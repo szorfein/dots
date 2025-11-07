@@ -1,4 +1,10 @@
-- Update Arch dependencies for the last theme Jinx.
+## 7 Nov. 2025
+
+For people using Pulseaudio, not sure it work's on my last theme so prefer to use ALSA. Need help to develop the integration.
+
+- Update all dependencies for the last theme Jinx.
+- Use terminal Foot instead of WezTerm on Swayfx.
+- Add Yazi instead of NNN.
 - Remove all appimages (raven, notesnook), don't work on Wayland.
 
 ## Oct. 6 2025

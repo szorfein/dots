@@ -4,5 +4,5 @@ Name=Text editor
 {{- if eq .wm "awm-m3" "awm-m2" }}
 Exec=xst -e vim %u
 {{- else if eq .wm "swayfx" }}
-Exec=wezterm-gui start -- nvim %u
+Exec=footclient -e nvim %u
 {{ end}}

@@ -117,10 +117,10 @@ Edit the config file with your favorite text editor.
 You can change for example in `[data]`:
 
     [data]
-      sound = "pulseaudio"
-      web = "librewolf"
+      web = "brave"
+      wm = "swayfx"
 
-It will install firefox rather than brave-bin and modify a lot of things during the install.
+It will install Brave instead of Librewolf and SwayFX with the last theme instead of Awesome.
 
 ### Apply
 

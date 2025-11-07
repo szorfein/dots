@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Comment=Terminal Emulator
+{{- if eq .wm "awm-m3" "awm-m2" }}
+Name=Xst
+GenericName=Xst Terminal Emulator
+Icon=st
+Exec=xst
+{{- else if eq .wm "swayfx" }}
+Name=Foot
+Exec=footclient
+Icon=foot
+{{- end }}

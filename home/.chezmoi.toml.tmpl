@@ -1,7 +1,7 @@
 {{- $personal := false -}}{{/* true if able to update my github repository */}}
 {{- $secrets := false -}}{{/* true if this machine store secrets with gpg and pass */}}
 {{- $keymap := "en" -}}{{/* keymap used for Xorg or Wayland */}}
-{{- $soundcard := "0" -}}
+{{- $soundcard := "PCH" -}}
 {{- $wm := "awm-m3" -}}
 {{- $editor := "neovim" -}}
 
@@ -27,7 +27,7 @@
 {{- $fullpath := printf "%s/%s" .chezmoi.sourceDir "scripts/board_name.sh" -}}
 {{- $board_name := output $fullpath | trim -}}
 {{- if eq $board_name "W51XTU" -}}
-{{- $soundcard = "hw:PCH" -}}
+{{- $soundcard = "PCH" -}}
 {{- $wm = "swayfx" -}}
 {{- $editor = "neovim" -}}
 {{- end -}}
@@ -51,7 +51,8 @@ encryption = "gpg"
 
   # Sound card to use, default is 0
   # pulseaudio -> pactl list sinks short
-  # alsa -> cat /proc/asound/cards
+  # alsa -> cat /proc/asound/cards, type PCH if output is:
+  # 0 [PCH            ]: HDA-Intel - HDA Intel PCH
   sound_card = {{ $soundcard | quote }}
   web = "librewolf" # 'brave' (chrome-based) or 'librewolf' (firefox)
   wm = {{ $wm | quote }} # 'awm-m3' (awesome+Xorg) or 'swayfx' (wayland)
