@@ -5,6 +5,9 @@ gui-apps/swaybg gdk-pixbuf
 # If sys-auth/seatd is used, the server USE flag is required.
 sys-auth/seatd server
 
+# Dunst
+app-text/xmlto text
+
 # Nemo
 dev-libs/glib dbus
 x11-libs/xapp introspection
@@ -20,9 +23,12 @@ media-libs/libepoxy X
 media-libs/libglvnd X
 x11-libs/cairo X
 
-# Librewolf
+# Librewolf-bin
 www-client/librewolf dbus
 media-libs/libvpx postproc
+media-libs/freetype harfbuzz
+dev-python/pycairo X
+media-plugins/alsa-plugins pulseaudio
 
 # Pass
 media-gfx/qrencode png

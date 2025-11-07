@@ -42,7 +42,7 @@ add_awesome() {
     euse_enable X
     euse_disable wayland
 
-    "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/dotfiles "$USE_DIR/wm"
+    "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/awesome "$USE_DIR/wm"
 
     if has_systemd; then
         "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/lightdm-systemd "$USE_DIR/login"

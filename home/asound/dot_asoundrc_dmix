@@ -30,7 +30,7 @@ pcm.ossmix {
     type dmix
     ipc_key 1024 # must be unique!
     slave {
-        pcm "hw:{{- .soundcard -}}" # you cannot use a "plug" device here, darn.
+        pcm "hw:PCH" # you cannot use a "plug" device here, darn.
         period_time 0
         period_size 1024 # must be power of 2
         buffer_size 8192
@@ -54,7 +54,7 @@ pcm.dsp0 {
 
 ctl.mixer0 {
     type hw
-    card {{- .soundcard -}}
+    card PCH
 }
 
 pcm.default pcm.dsp0
