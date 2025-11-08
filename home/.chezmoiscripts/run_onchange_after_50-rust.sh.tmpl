@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+# compile-menu-launcher.sh hash: {{ include (joinPath .chezmoi.homeDir ".dotfiles/swayfx/bin/compile-menu-launcher.sh") | sha256sum }}
+
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
+
+msg "Execute $0..."
+
+{{ if eq .wm "swayfx" }}
+~/bin/compile-menu-launcher.sh
+{{ end }}

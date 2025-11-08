@@ -4,6 +4,9 @@ set -o errexit -o nounset
 
 # group_vars/desktop hash: {{ include "ansible/group_vars/desktop.yml.tmpl" | sha256sum }}
 # dotfiles.yml hash: {{ include "ansible/dotfiles.yml" | sha256sum }}
+# var Archmenu.yml hash: {{ include (joinPath .chezmoi.homeDir ".ansible/collections/ansible_collections/szorfein/desktop/roles/dotfiles/vars/Archlinux.yml") | sha256sum }}
+# var Void.yml hash: {{ include (joinPath .chezmoi.homeDir ".ansible/collections/ansible_collections/szorfein/desktop/roles/dotfiles/vars/Void.yml") | sha256sum }}
+# var Gentoo.yml hash: {{ include (joinPath .chezmoi.homeDir ".ansible/collections/ansible_collections/szorfein/desktop/roles/dotfiles/vars/Gentoo.yml") | sha256sum }}
 
 playbook_dir=~/ansible
 

@@ -5,7 +5,9 @@ set -o errexit -o nounset
 # Gentoo install binary of gems in $HOME/bin (gem env)
 
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin:$HOME/bin"
+if ! $(echo "$PATH" | grep "$GEM_HOME"); then
+    export PATH="$PATH:$GEM_HOME/bin:$HOME/bin"
+fi
 
 gem install reaver
 
