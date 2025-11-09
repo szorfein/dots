@@ -1,0 +1,5 @@
+{{- if eq .sound_card "Pro" }}
+{{ .chezmoi.sourceDir }}/asound/dot_asoundrc_pro
+{{- else if eq .sound_card "PCH" }}
+{{ .chezmoi.sourceDir }}/asound/dot_asoundrc_dmix
+{{- end }}

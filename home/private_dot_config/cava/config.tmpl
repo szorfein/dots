@@ -9,7 +9,7 @@ higher_cutoff_freq = 10000
 [input]
 {{ if eq .sound "alsa" }}
 method = alsa
-source = {{ .sound_card }}
+source = hw:{{ .sound_card }}
 {{ end }}
 {{ if eq .sound "pulseaudio" }}
 method = pulse

@@ -1,3 +1,7 @@
+- Update xdg mimelist with chezmoi template.
+- Asoundrc with symlink, only PCH and Pro soundcard for now.
+- Disable WezTerm
+
 ## Oct 17 2025
 
 - Can install last Swayfx theme [Jinx](https://github.com/szorfein/dotfiles)

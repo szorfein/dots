@@ -1,0 +1,44 @@
+[Default Applications]
+{{- if eq .web "librewolf" }}
+text/html=librewolf.desktop
+x-scheme-handler/http=librewolf.desktop
+x-scheme-handler/https=librewolf.desktop
+x-scheme-handler/about=librewolf.desktop
+x-scheme-handler/unknown=librewolf.desktop
+{{- else if eq .web "brave" }}
+text/html=brave-browser.desktop
+x-scheme-handler/http=browser.desktop
+x-scheme-handler/https=browser.desktop
+x-scheme-handler/about=browser.desktop
+x-scheme-handler/unknown=browser.desktop
+{{- end }}
+inode/directory=thunar.desktop
+{{- if eq .wm "swayfx" }}
+image/png=imv.desktop
+image/jpeg=imv.desktop
+image/gif=imv.desktop
+image/webp=imv.desktop
+{{- else if eq .wm "awm-m2" "awm-m3" }}
+image/png=feh.desktop
+image/jpeg=feh.desktop
+image/gif=feh.desktop
+image/webp=feh.desktop
+{{- end }}
+application/pdf=zathura.desktop
+video/x-matroska=mpv.desktop
+video/mp4=mpv.desktop
+{{- if eq .editor "neovim" }}
+text/x-shellscript=nvim.desktop
+text/plain=nvim.desktop
+text/x-makefile=nvim.desktop
+
+[Added Associations]
+application/json=nvim.desktop
+{{- else if eq .editor "doom" }}
+text/x-shellscript=emacs.desktop
+text/plain=emacs.desktop
+text/x-makefile=emacs.desktop
+
+[Added Associations]
+application/json=text.desktop
+{{- end }}

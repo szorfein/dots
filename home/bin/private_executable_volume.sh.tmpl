@@ -4,22 +4,22 @@ set -o errexit
 
 {{- if eq .sound "alsa" }}
 vol_up() {
-  amixer -D {{ .sound_card }} sset Master 1%+
+  amixer -D hw:{{ .sound_card }} sset Master 1%+
   vol_get
 }
 
 vol_down() {
-  amixer -D {{ .sound_card }} sset Master 1%-
+  amixer -D hw:{{ .sound_card }} sset Master 1%-
   vol_get
 }
 
 vol_set() {
-  amixer -D {{ .sound_card }} sset Master "$1"%
+  amixer -D hw:{{ .sound_card }} sset Master "$1"%
   vol_get
 }
 
 vol_get() {
-  vol=$(amixer -D {{ .sound_card }} sget Master | grep -o "[0-9]*%" | head -n 1)
+  vol=$(amixer -D hw:{{ .sound_card }} sget Master | grep -o "[0-9]*%" | head -n 1)
   echo "$vol"
 }
 {{- end }}
