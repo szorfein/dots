@@ -15,6 +15,10 @@ args="--purge --zsh --tmux --ncmpcpp"
 args="$args --neovim"
 {{ end }}
 
+{{ if eq .editor "vim" }}
+args="$args --vim"
+{{ end }}
+
 {{ if eq .editor "doom" }}
 args="$args --doomemacs"
 {{ end }}

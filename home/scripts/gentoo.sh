@@ -118,6 +118,10 @@ add_neovim() {
     pkgs="$pkgs neovim sys-apps/fd ripgrep fzf tmux app-admin/ansible-lint sys-apps/the_silver_searcher net-libs/nodejs"
 }
 
+add_vim() {
+    pkgs="$pkgs vim"
+}
+
 add_zsh() {
     pkgs="$pkgs zsh app-shells/starship net-misc/yt-dlp"
 }
@@ -138,6 +142,7 @@ usage() {
     echo " --brave        Install deps for Brave"
     echo " --librewolf    Install deps for LibreWolf"
     echo " --zsh          Install deps for Zsh"
+    echo " --vim          Install deps for Vim"
 }
 
 ## CLI options
@@ -160,6 +165,7 @@ while [ "$#" -gt 0 ]; do
     --brave) add_brave ;;
     --librewolf) add_librewolf ;;
     --zsh) add_zsh ;;
+    --vim) add_vim ;;
     *)
         usage
         exit 1

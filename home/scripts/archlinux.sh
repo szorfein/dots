@@ -101,6 +101,13 @@ add_neovim() {
     pkgs="$pkgs neovim gcc fd ripgrep fzf tmux git prettier rubocop stylua shfmt bash-language-server lua-language-server ansible-lint the_silver_searcher codebook-lsp"
 }
 
+add_vim() {
+    if pacman -Q | awk '{print $1}' | grep -q '^vim$'; then
+        "$AUTH" pacman -R --noconfirm vim
+    fi
+    pkgs="$pkgs gvim"
+}
+
 add_zsh() {
     pkgs="$pkgs starship zsh yt-dlp"
 }
@@ -128,6 +135,7 @@ usage() {
     echo " --brave        Install deps for Brave"
     echo " --librewolf    Install deps for LibreWolf"
     echo " --zsh          Install deps for Zsh"
+    echo " --vim          Install deps for Vim"
 }
 
 ## CLI options
@@ -150,6 +158,7 @@ while [ "$#" -gt 0 ]; do
     --brave) add_brave ;;
     --librewolf) add_librewolf ;;
     --zsh) add_zsh ;;
+    --vim) add_vim ;;
     *)
         usage
         exit 1

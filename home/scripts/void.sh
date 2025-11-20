@@ -14,7 +14,7 @@ AUTH=$(search_auth)
 #build() {}
 
 add_awesome() {
-    pkgs="xst cava betterlockscreen xclip awesome
+    pkgs="$pkgs xst cava betterlockscreen xclip awesome
     mpd ncmpcpp xinit xorg-apps xorg-minimal
     xorg-input-drivers feh picom maim mpv
     zathura zathura-pdf-mupdf isync neomutt
@@ -56,7 +56,7 @@ add_brave() {
 }
 
 add_librewolf() {
-    echo 'repository=https://github.com/index-0/librewolf-void/releases/latest/download/' > /tmp/20-librewolf.conf
+    echo 'repository=https://github.com/index-0/librewolf-void/releases/latest/download' > /tmp/20-librewolf.conf
     "$AUTH" mv /tmp/20-librewolf.conf /etc/xbps.d/20-librewolf.conf
     pkgs="$pkgs librewolf"
 }
@@ -67,6 +67,10 @@ add_emacs() {
 
 add_neovim() {
     pkgs="$pkgs neovim ripgrep gcc fd fzf tmux nodejs-lts StyLua shfmt bash-language-server lua-language-server python3-ansible-lint the_silver_searcher"
+}
+
+add_vim() {
+    pkgs="$pkgs vim vim-x11"
 }
 
 add_zsh() {
@@ -94,6 +98,7 @@ usage() {
     echo " --brave        Install deps for Brave"
     echo " --librewolf    Install deps for LibreWolf"
     echo " --zsh          Install deps for Zsh"
+    echo " --vim          Install deps for Vim"
 }
 
 ## CLI options
@@ -116,6 +121,7 @@ while [ "$#" -gt 0 ]; do
     --brave) add_brave ;;
     --librewolf) add_librewolf ;;
     --zsh) add_zsh ;;
+    --vim) add_vim ;;
     *)
         usage
         exit 1

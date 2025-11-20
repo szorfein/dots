@@ -3,7 +3,7 @@
 {{- $keymap := "en" -}}{{/* keymap used for Xorg or Wayland */}}
 {{- $soundcard := "PCH" -}}
 {{- $wm := "awm-m3" -}}
-{{- $editor := "neovim" -}}
+{{- $editor := "vim" -}}
 
 {{- $username := promptString "username" -}}
 {{- $email := false -}}
@@ -43,7 +43,7 @@ encryption = "gpg"
   personal = {{ $personal }}
   secrets = {{ $secrets }}
   email = {{ $email | quote }}
-  editor = {{ $editor | quote }} # favorite editor, 'doom' or 'neovim'.
+  editor = {{ $editor | quote }} # favorite editor, 'vim', 'doom' or 'neovim'.
   key_recipient = {{ $key_recipient | quote }}
   key_sign = {{ $key_sign | quote }}
   key_encrypt = {{ $key_encrypt | quote }}

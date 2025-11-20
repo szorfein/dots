@@ -36,6 +36,10 @@ args="$args --emacs
 args="$args --neovim"
 {{ end }}
 
+{{ if eq .editor "vim" }}
+args="$args --vim"
+{{ end }}
+
 {{ if eq .web "brave" }}
 args="$args --brave"
 {{ end }}
