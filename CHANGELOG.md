@@ -1,3 +1,5 @@
+- Return Vim for Awesome until Neovim is ready.
+
 ## 7 Nov. 2025
 
 For people using Pulseaudio, not sure it work's on my last theme so prefer to use ALSA. Need help to develop the integration.
@@ -9,7 +11,7 @@ For people using Pulseaudio, not sure it work's on my last theme so prefer to us
 
 ## Oct. 6 2025
 
-- Add dunst dependencie for SwayFX.
+- Add dunst dependency for SwayFX.
 - Remove vim config.
 
 ## 2025-02
