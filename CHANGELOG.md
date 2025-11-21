@@ -1,3 +1,4 @@
+- Return Vim for Awesome until Neovim is ready.
 - Update xdg mimelist with chezmoi template.
 - Asoundrc with symlink, only PCH and Pro soundcard for now.
 - Disable WezTerm

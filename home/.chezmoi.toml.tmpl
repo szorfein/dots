@@ -52,7 +52,7 @@ encryption = "gpg"
 {{ end -}}
 [data]
   name = "{{ $username }}"
-  editor = {{ $editor | quote }} # favorite editor, 'doom' or 'neovim'.
+  editor = {{ $editor | quote }} # favorite editor, 'vim', 'doom' or 'neovim'.
   email = "{{ $email }}"
   gpu = {{ $gpu_driver | quote }} # 'intel' (gen8+), 'intel_gen7' or 'nouveau'.
   key_encrypt = "{{ $key_encrypt }}"
