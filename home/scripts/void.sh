@@ -5,7 +5,7 @@ set -o errexit -o nounset
 . $HOME/.local/share/chezmoi/home/scripts/lib.sh
 
 ins="xbps-install -S"
-pkgs="gnupg2 pass curl base-devel wget ruby unzip tar xz stow"
+pkgs="gnupg2 pass curl base-devel wget ruby unzip tar xz stow git"
 services=""
 user_groups=""
 
