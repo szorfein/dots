@@ -119,7 +119,7 @@ add_neovim() {
 }
 
 add_vim() {
-    pkgs="$pkgs vim"
+    pkgs="$pkgs vim tmux"
 }
 
 add_zsh() {

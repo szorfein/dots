@@ -2,11 +2,6 @@
 [".dotfiles"]
     type = "git-repo"
     url = "https://github.com/szorfein/dotfiles"
-    {{ if eq .wm "awm-m3" "awm-m2" -}}
-    ref = "focus-2.0.0"
-    {{ else -}}
-    ref = "main"
-    {{ end -}}
     refreshPeriod = "0"
 [".ansible/collections/ansible_collections/szorfein/hardening"]
     type = "git-repo"

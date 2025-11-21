@@ -70,7 +70,7 @@ add_neovim() {
 }
 
 add_vim() {
-    pkgs="$pkgs vim vim-x11"
+    pkgs="$pkgs vim vim-x11 tmux gcc"
 }
 
 add_zsh() {

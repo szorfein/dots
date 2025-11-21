@@ -105,7 +105,7 @@ add_vim() {
     if pacman -Q | awk '{print $1}' | grep -q '^vim$'; then
         "$AUTH" pacman -R --noconfirm vim
     fi
-    pkgs="$pkgs gvim"
+    pkgs="$pkgs vim tmux"
 }
 
 add_zsh() {
