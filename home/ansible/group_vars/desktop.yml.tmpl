@@ -79,6 +79,11 @@ dotfiles_tmux: true
 dotfiles_neovim: true
 {{ end -}}
 
+{{ if eq .editor "vim" -}}
+dotfiles_tmux: true
+dotfiles_vim: true
+{{ end -}}
+
 {{ if eq .wm "swayfx" -}}
 # dotfiles_wezterm: true
 dotfiles_foot: true
