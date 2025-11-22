@@ -38,7 +38,7 @@ args="$args --tmux --neovim"
 {{- end }}
 
 {{- if eq .editor "vim" }}
-args="$args --vim"
+args="$args --tmux --vim"
 {{- end }}
 
 {{- if eq .editor "doom" }}

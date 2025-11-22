@@ -1,14 +1,15 @@
+{{/* Default */}}
 {{- $personal := false -}}{{/* true if able to update my github repository */}}
 {{- $secrets := false -}}{{/* true if this machine store secrets with gpg and pass */}}
-
 {{- $username := promptString "username" -}}
 {{- $email := false -}}
 {{- $gpu_driver := "none" -}}
 {{- $keymap := "en" -}}{{/* keymap used for Xorg or Wayland */}}
-{{- $soundcard := "0" -}}
+{{- $soundcard := "PCH" -}}
 {{- $dm := "" -}}
 {{- $wm := "awm-m3" -}}
-{{- $editor := "neovim" -}}
+{{- $editor := "vim" -}}
+{{- $sound := "alsa" -}}
 {{- $web := "librewolf" -}}{{/* librewolf is more light than brave */}}
 
 {{/* GPG, ID for key [C] [S] [E] */}}
@@ -16,6 +17,7 @@
 {{- $key_sign := false -}}
 {{- $key_encrypt := false -}}
 
+{{/* Configs based on username */}}
 {{- if eq $username "szorfein" -}}
 {{- $email = "szorfein@protonmail.com" -}}
 {{- $key_recipient = "B5D8FFD0D7F1FB6A43505E319CC9729A2E369CB3" -}}
@@ -61,7 +63,7 @@ encryption = "gpg"
   keymap = {{ $keymap | quote }}
   personal = {{ $personal }}
   secrets = {{ $secrets }}
-  sound = "alsa" # set alsa or pulseaudio here
+  sound = {{ $sound | quote }} # 'alsa' or 'pulseaudio' here
   sound_card = {{ $soundcard | quote }}
   web = {{ $web | quote }} # 'brave' or 'librewolf'
   dm = {{ $dm | quote }} # '', 'sddm', 'lightdm' or 'lxdm'. Prefer 'lightdm' or lxdm with musl.
