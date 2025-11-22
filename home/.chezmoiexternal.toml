@@ -18,7 +18,11 @@
 {{ else -}}
 [".dotfiles"]
     type = "archive"
-    url = "https://github.com/szorfein/dotfiles/archive/main.tar.gz"
+    {{ if eq .wm "awm-m3" "awm-m2" -}}
+    url = "https://github.com/szorfein/dotfiles/archive/refs/heads/focus-2.0.0.tar.gz"
+    {{ else -}}
+    url = "https://github.com/szorfein/dotfiles/archive/refs/heads/main.tar.gz"
+    {{ end -}}
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"

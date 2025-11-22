@@ -41,4 +41,11 @@ text/x-makefile=emacs.desktop
 
 [Added Associations]
 application/json=text.desktop
+{{- else if eq .editor "vim" }}
+text/x-shellscript=vim.desktop
+text/plain=vim.desktop
+text/x-makefile=vim.desktop
+
+[Added Associations]
+application/json=vim.desktop
 {{- end }}
