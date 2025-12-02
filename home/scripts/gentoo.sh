@@ -93,7 +93,8 @@ add_swayfx() {
     wl-clipboard gui-apps/grim media-gfx/chafa
     media-sound/mpc zathura gui-apps/foot x11-misc/dunst
     net-wireless/iwd gui-apps/eww gui-wm/swayfx
-    mpv-mpris mpd-mpris acct-group/seat seatd"
+    mpv-mpris mpd-mpris acct-group/seat seatd
+    gui-apps/swaylock gui-apps/swayidle gui-apps/wlr-randr"
 
     user_groups="$user_groups video seat"
     services="$services seatd"

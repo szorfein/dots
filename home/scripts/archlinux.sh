@@ -87,7 +87,7 @@ add_swayfx() {
   wayland libxcb libxkbcommon pango pcre2 wlroots0.19
   seatd libdrm libglvnd pixman glslang meson ninja
   cargo libdbusmenu-gtk3 gtk3 gtk-layer-shell iwd
-  chafa"
+  chafa swayidle swaylock wlr-randr"
 
     pkgs_aur="$pkgs_aur scenefx0.4 swayfx eww light"
 
