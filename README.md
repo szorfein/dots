@@ -35,9 +35,9 @@ Why i use chezmoi?
 
 ## Screenshots
 
-| Jinx (Wayland)                                                           | Focus (Xorg)                                                               |
-| ------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| ![](https://github.com/szorfein/unix-portfolio/raw/master/Jinx/full.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
+| Abyss (Wayland)                                                            | Focus (Xorg)                                                               |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| ![](https://github.com/szorfein/unix-portfolio/raw/master/Abyss/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 
 ## Packages
 

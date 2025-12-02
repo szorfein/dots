@@ -4,7 +4,7 @@ set -o errexit
 
 SWAY_DIR="$HOME/.config/sway"
 SWAY_CONF="$SWAY_DIR/theme"
-DEFAULT_THEME="jinx"
+DEFAULT_THEME="abyss"
 
 trim_string() {
     trim=${1#${1%%[![:space:]]*}}
@@ -47,7 +47,7 @@ args="$args --doomemacs"
 
 {{- if eq .wm "swayfx" }}
 change_default_sway
-args="$args --wezterm --foot --swayfx $DEFAULT_THEME"
+args="$args --foot --swayfx $DEFAULT_THEME"
 {{- end }}
 
 {{- if eq .wm "awm-m3" }}
