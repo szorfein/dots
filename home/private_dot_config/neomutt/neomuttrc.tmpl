@@ -9,7 +9,11 @@
 #  General Options  #
 #####################
 
+{{ if eq .editor "neovim" -}}
+set editor="nvim -c 'set syntax=mail ft=mail enc=utf-8'"
+{{ else if eq .editor "vim" -}}
 set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
+{{ end -}}
 
 ignore *
 unignore from: to: cc: date: subject:
@@ -40,7 +44,7 @@ set nobeep      # Shup up. ;-)
 #  Key Bindings  #
 ##################
 
-# Vi Key Bindings 
+# Vi Key Bindings
 bind attach,browser,index g noop
 bind attach,browser,index gg first-entry
 bind attach,browser,index G last-entry

@@ -1,15 +1,30 @@
 ---
-os_fix_cmdline: true
+# Install if your distro have the package
+os_use_kernel_hardened: true
+
+# Apply secure value on sysctl
+os_fix_sysctl: true
+
+# If you use Grub
+os_fix_grub: true
+os_disable_ipv6: true
+
+# Disable a lot of useless modules
+os_fix_modprobe: true
+os_modprobe_blacklist_bluetooth: true
+os_modprobe_blacklist_cdrom: true
+os_modprobe_blacklist_webcam: true
+
+# Remove ntp and update time with https every 30 minutes
+os_fix_ntp: true
+
 os_fix_core_dumps: true
 os_fix_cpu_microcode: true
 os_fix_hidepid: true
 os_fix_kernel: true
-os_fix_login_defs: true
-os_fix_modprobe: true
 os_fix_pam: true
 os_fix_permissions: true
 os_fix_securetty: true
-os_fix_sysctl: true
-os_fix_umask: true
 
-os_umask: '027'
+os_fix_umask: true
+os_umask: "027"

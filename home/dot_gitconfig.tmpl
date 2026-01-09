@@ -17,6 +17,16 @@
   editor = nvim
 {{- end }}
   autocrlf = input
+  # https://github.com/git/git/security/advisories/GHSA-8prw-h3cq-mghm
+  symlinks = false
+
+## https://forums.whonix.org/t/git-users-enable-fsck-by-default-for-better-security/2066
+[transfer]
+  fsckobjects = true
+[fetch]
+  fsckobjects = true
+[receive]
+  fsckobjects = true
 
 [init]
   defaultBranch = main

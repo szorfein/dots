@@ -3,18 +3,15 @@
 set -o errexit
 
 DOTFILES_DIR="$HOME/.dotfiles"
-CURR=$(pwd)
 
 # should only impact if .personal = true
 [ -d "$DOTFILES_DIR/.git" ] || exit 0
 
-cd "$DOTFILES_DIR"
-
 {{- if eq .wm "awm-m2" "awm-m3" }}
+CURR=$(pwd)
+cd "$DOTFILES_DIR"
 git checkout -b focus-2.0.0 origin/focus-2.0.0 || true
-{{- else }}
-git checkout main || true
+cd "$CURR"
 {{- end }}
 
-cd "$CURR"
 exit 0

@@ -18,7 +18,9 @@ if [ -f ~/.password-store/duplicity/server.gpg ] ; then
 SERVER={{- pass "duplicity/server" | quote }}
 fi
 
-duplicity --use-agent \
+# duplicity remove-older-than 6M "rsync://backup@${SERVER}/backups/"
+
+duplicity incremental --use-agent \
               --sign-key "${GPG_SIG_KEY}" \
               --encrypt-key "${GPG_ENC_KEY}" \
               --include ~/musics \
@@ -26,5 +28,5 @@ duplicity --use-agent \
               --include ~/Downloads \
               --include ~/documents \
               --include ~/images \
-              --rsync-options="--bwlimit=200m" \
+              --rsync-options="--bwlimit=1m" \
               --exclude '**' ~ "rsync://backup@${SERVER}/backups/"
