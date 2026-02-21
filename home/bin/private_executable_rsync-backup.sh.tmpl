@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+set -o errexit -o nounset
+
+# for a full walkthrough, see here
+# https://szorfein.vercel.app/post/backup-with-duplicity
+
+if [ -f ~/.password-store/duplicity/server.gpg ]; then
+    # e.g SERVER="ip_addr"
+    SERVER={{- pass "duplicity/server" | quote }}
+fi
+
+BACKUP_FILE="/tmp/backup.filter"
+
+# More efficient than playing with --include,--exclude
+cat << EOF > "$BACKUP_FILE"
+# Include patterns
++ /documents/***
++ /Downloads/***
++ /downloads/***
++ /images/***
++ /musics/***
+
+# Exclude everything else
+- /**
+EOF
+
+rsync -avP --delete -e "ssh -i $HOME/.ssh/duplicity" \
+    --bwlimit=400 \
+    --filter="merge $BACKUP_FILE" \
+    "$HOME/" "backup@${SERVER}:backups/"

@@ -22,8 +22,8 @@ keyid-format 0xlong
 with-subkey-fingerprint
 #with-fingerprint
 
-list-options show-uid-validity
 verify-options show-uid-validity
+list-options show-uid-validity
 
 #-----------------------------
 # algorithm and ciphers
@@ -34,3 +34,9 @@ cert-digest-algo SHA512
 default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
 personal-cipher-preferences TWOFISH CAMELLIA256 AES 3DES
 s2k-digest-algo SHA512
+
+#-----------------------------
+# BEGIN Some suggestions added from riseup https://we.riseup.net/riseuplabs+paow/openpgp-best-practices
+#-----------------------------
+keyserver-options no-honor-keyserver-url
+fixed-list-mode

@@ -8,6 +8,7 @@ scripts
 .ssh/duplicity
 .ssh/duplicity.pub
 bin/duplicity-backup.sh
+bin/rsync-backup.sh
 {{- end }}
 
 {{- if not .secrets }}
@@ -27,4 +28,8 @@ bin/duplicity-backup.sh
 
 {{- if ne .chezmoi.osRelease.id "arch" }}
 .config/reaver/archlinux.yml
+{{- end }}
+
+{{- if not .personal }}
+.config/reaver/dots-help.yml
 {{- end }}

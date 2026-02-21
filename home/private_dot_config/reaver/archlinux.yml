@@ -9,8 +9,6 @@ things:
     url: https://aur.archlinux.org/cgit/aur.git/snapshot/scenefx0.4.tar.gz
   - name: swayfx.tar.gz
     url: https://aur.archlinux.org/cgit/aur.git/snapshot/swayfx.tar.gz
-  - name: cava.tar.gz
-    url: https://aur.archlinux.org/cgit/aur.git/snapshot/cava.tar.gz
   - name: i3lock-color.tar.gz
     url: https://aur.archlinux.org/cgit/aur.git/snapshot/i3lock-color.tar.gz
   - name: betterlockscreen.tar.gz

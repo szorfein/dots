@@ -1,0 +1,11 @@
+---
+# one time per week (604800)
+things:
+  - name: oomox-gtk-theme
+    url: https://github.com/themix-project/oomox-gtk-theme
+    git: true
+  - name: aether
+    url: https://github.com/bjarneo/aether
+    git: true
+time: 604800
+all_to_dest_dir: labs
