@@ -91,7 +91,7 @@ add_swayfx() {
     pkgs="$pkgs light inotify-tools
     swaybg imagemagick imv app-misc/jq playerctl
     wl-clipboard gui-apps/grim media-gfx/chafa
-    media-sound/mpc zathura gui-apps/foot x11-misc/dunst
+    media-sound/mpc zathura x11-terms/kitty x11-misc/dunst
     net-wireless/iwd gui-apps/eww gui-wm/swayfx
     mpv-mpris mpd-mpris acct-group/seat seatd
     gui-apps/swaylock gui-apps/swayidle gui-apps/wlr-randr"

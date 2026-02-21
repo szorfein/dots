@@ -13,9 +13,7 @@ cd "$DOTFILES_DIR"
 {{- if eq .wm "awm-m2" "awm-m3" }}
 git checkout -b focus-2.0.0 origin/focus-2.0.0 || true
 {{- else }}
-#git checkout main || true
-# Temporary
-git checkout -b vibe origin/vibe || true
+git checkout main || true
 {{- end }}
 
 cd "$CURR"

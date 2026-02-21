@@ -40,7 +40,7 @@ add_alsa() {
 
 add_swayfx() {
     pkgs="$pkgs swayfx imv light jq wl-clipboard
-    inotify-tools mpd mpc foot ImageMagick cargo
+    inotify-tools mpd mpc kitty ImageMagick cargo
     playerctl mpv-mpris mpDris2 eww swaybg grim
     iwd seatd turnstile mesa-dri dunst chafa wlr-randr
     swayidle swaylock"
