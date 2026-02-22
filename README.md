@@ -8,6 +8,8 @@ Only works on some Linux distro including:
 - `Gentoo`, tested with systemd, musl (openrc) and/or [binaries](https://wiki.gentoo.org/wiki/Binary_package_guide).
 - `Void Linux`, tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
 
+If you need more GNU/Linux distro, you can contribute by making [PR](https://github.com/szorfein/dots/pulls) on the master branch.
+
 Why i use chezmoi?
 
 - Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
@@ -35,9 +37,9 @@ Why i use chezmoi?
 
 ## Screenshots
 
-| Abyss (SwayFX)                                                                                     | Focus (Awesome)                                                            |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| ![Image of the Abyss theme](https://github.com/szorfein/unix-portfolio/raw/master/Abyss/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
+| Vibe (SwayFX)                                                                                    | Focus (Awesome)                                                            |
+| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| ![Image of the Vibe theme](https://github.com/szorfein/unix-portfolio/raw/master/Vibe/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 
 ## Packages
 
@@ -56,7 +58,7 @@ Why i use chezmoi?
 | File Manager         | [Yazi](https://github.com/sxyazi/yazi) and Thunar                                                                                          |                                                                                                                                                                                  |
 | Code Editor          | Neovim or [Doom Emacs](https://github.com/doomemacs/doomemacs)                                                                             | Wayland or Xorg, doom don't work on wayland unless you install Xwayland                                                                                                          |
 | IRC client           |                                                                                                                                            | Weechat will be dropped soon, Prefer Signal or better [Session](https://getsession.org/), not IRC                                                                                |
-| Terminal             | [Foot](https://codeberg.org/dnkl/foot) or [xSt](https://github.com/gnotclub/xst)                                                           | Wayland or Xorg again                                                                                                                                                            |
+| Terminal             | [Kitty](https://github.com/kovidgoyal/kitty) or [xSt](https://github.com/gnotclub/xst)                                                     | Wayland or Xorg again                                                                                                                                                            |
 | PDF/Epub viewer      | Zathura                                                                                                                                    |
 | Shell                | ZSH                                                                                                                                        | With [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [autosuggestion](https://github.com/zsh-users/zsh-autosuggestions/tree/master), and more... |
 

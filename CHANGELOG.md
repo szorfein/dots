@@ -1,4 +1,9 @@
-- Return Vim for Awesome until Neovim is ready.
+## 21 Feb. 2026
+
+- Add new theme for Swayfx "Vibe"
+- Use terminal Kitty instead of Foot (better look with Nerd font symbol and better on change-theme colors reload)
+- Remove Cava from AUR for ArchLinux, it was added in the official repo.
+- With Neovim, better support of the "Javascript world" for people using it (tailwindcss, typescript, vue, eslint, biome...).
 
 ## 7 Nov. 2025
 

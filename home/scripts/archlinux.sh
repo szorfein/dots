@@ -43,10 +43,10 @@ add_awesome() {
   xorg-xinit xorg-server feh picom maim
   mpv zathura zathura-pdf-mupdf isync neomutt
   imagemagick weechat openssh yt-dlp
-  papirus-icon-theme mpc inotify-tools
+  papirus-icon-theme mpc inotify-tools cava
   tmux xss-lock xorg-xdpyinfo xorg-xrandr jq bc"
 
-    pkgs_aur="light xst cava i3lock-color betterlockscreen"
+    pkgs_aur="light xst i3lock-color betterlockscreen"
 }
 
 add_pulse() {
@@ -81,8 +81,8 @@ add_emacs() {
 add_swayfx() {
     pkgs="$pkgs inotify-tools
   imv jq mpd mpc wl-clipboard bc imagemagick dunst
-  grim swaybg playerctl mpd-mpris mpv-mpris
-  rust git meson scdoc wayland-protocols foot
+  grim swaybg playerctl mpd-mpris mpv-mpris cava
+  rust git meson scdoc wayland-protocols kitty
   cairo gdk-pixbuf2 libevdev libinput json-c libgudev
   wayland libxcb libxkbcommon pango pcre2 wlroots0.19
   seatd libdrm libglvnd pixman glslang meson ninja
@@ -98,7 +98,7 @@ add_swayfx() {
 }
 
 add_neovim() {
-    pkgs="$pkgs neovim gcc fd ripgrep fzf tmux git prettier rubocop stylua shfmt bash-language-server lua-language-server ansible-lint the_silver_searcher codebook-lsp"
+    pkgs="$pkgs neovim gcc fd ripgrep fzf tmux git prettier rubocop stylua shfmt bash-language-server lua-language-server ansible-lint the_silver_searcher codebook-lsp tailwindcss-language-server eslint_d biome"
 }
 
 add_vim() {

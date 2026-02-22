@@ -14,6 +14,7 @@ echo "You probably need to logout and back if zsh was not your shell before."
 echo ""
 {{ if eq .wm "swayfx" }}
 echo "To start swayfx, enter the command: sway"
+echo "Or also: exec dbus-run-session -- sway"
 {{- else }}
 echo "To start awesome, enter the command: startx"
 {{- end }}
