@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-set -o errexit
-
-reaver_path="$HOME/.app-images/raven.AppImage"
-
-#"$reaver_path" --no-sandbox --disable-setuid-sandbox
-"$reaver_path" --disable-setuid-sandbox

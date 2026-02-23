@@ -4,8 +4,9 @@ things:
   - name: oomox-gtk-theme
     url: https://github.com/themix-project/oomox-gtk-theme
     git: true
+    dest_dir: labs/oomox-gtk-theme
   - name: aether
     url: https://github.com/bjarneo/aether
     git: true
+    dest_dir: labs/aether
 time: 604800
-all_to_dest_dir: labs

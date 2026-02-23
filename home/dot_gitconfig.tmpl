@@ -24,7 +24,10 @@
 [transfer]
   fsckobjects = true
 [fetch]
-  fsckobjects = true
+# should be true but it fail to clone some repository e.g: vimwiki/vimwiki
+# [#1472](https://github.com/vimwiki/vimwiki/issues/1472)
+# [#3088](https://github.com/psf/requests/issues/3088)
+  fsckobjects = false
 [receive]
   fsckobjects = true
 
