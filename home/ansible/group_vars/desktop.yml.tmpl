@@ -63,7 +63,10 @@ dotfiles_files_browser: true
 dotfiles_gpu_driver: {{ .gpu }}
 {{ end }}
 
+{{ if eq .wm "awm-m2" "awm-m3" -}}
 dotfiles_mpd: true
+{{ end -}}
+
 dotfiles_mpd_music_dir: ~/musics
 
 dotfiles_neomutt: true
@@ -86,7 +89,7 @@ dotfiles_vim: true
 
 {{ if eq .wm "swayfx" -}}
 # dotfiles_wezterm: true
-dotfiles_foot: true
+# dotfiles_foot: true
 dotfiles_kitty: true
 {{ else -}}
 dotfiles_xst: true

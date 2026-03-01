@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+if [ -f ~/.password-store/duplicity/server.gpg ]; then
+    # e.g SERVER="ip_addr"
+    SERVER={{- pass "duplicity/server" | quote }}
+fi
+
+rsync -aAXvP -e "ssh -i $HOME/.ssh/rsync" \
+    --bwlimit=400 \
+    "backup@${SERVER}:backups/" "$HOME/"

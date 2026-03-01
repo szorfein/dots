@@ -31,7 +31,7 @@ change_default_sway() {
 }
 
 # base arguments
-args="--purge --zsh --ncmpcpp"
+args="--purge --zsh"
 
 {{- if eq .editor "neovim" }}
 args="$args --tmux --neovim"
@@ -58,7 +58,7 @@ else
     theme="focus"
 fi
 [ -z "$theme" ] && theme=focus
-args="$args --awesome-m3 $theme"
+args="$args --ncmpcpp --awesome-m3 $theme"
 {{- end }}
 
 {{- if eq .wm "awm-m2" }}
@@ -69,7 +69,7 @@ else
     theme="machine"
 fi
 [ -z "$theme" ] && theme=machine
-args="$args --awesome-m2 $theme"
+args="$args --ncmpcpp --awesome-m2 $theme"
 {{- end }}
 
 echo "called with args: $args"

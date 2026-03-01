@@ -9,6 +9,7 @@ scripts
 .ssh/duplicity.pub
 bin/duplicity-backup.sh
 bin/rsync-backup.sh
+bin/rsync-restore.sh
 {{- end }}
 
 {{- if not .secrets }}
