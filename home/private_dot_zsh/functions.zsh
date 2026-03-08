@@ -6,12 +6,16 @@
 ssh_create_ed25519_keys() {
   [ -z "$1" ] && exit 1
   ssh-keygen -t ed25519 -o -a 100 -f ~/.ssh/"$1"
+  chmod 0600 "$HOME/.ssh/$1"
+  chmod 0600 "$HOME/.ssh/$1.pub"
 }
 
 # e.g: ssh_create_rsa4k_keys "laptop-git"
 ssh_create_rsa4k_keys() {
   [ -z "$1" ] && exit 1
   ssh-keygen -t rsa -b 4096 -o -a 100 -f ~/.ssh/"$1"
+  chmod 0600 "$HOME/.ssh/$1"
+  chmod 0600 "$HOME/.ssh/$1.pub"
 }
 
 # Happend sometime with HDD problem... (xfs > ext4)

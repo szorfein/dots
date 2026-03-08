@@ -1,3 +1,12 @@
+## Mar. 2026
+
+- On SwayFX, replace light by brightnessctl
+- Add Pipewire + Alsa only on Swayfx
+- Remove .asoundrc for Swayfx and Pipewire
+- Update dotfiles link repository for awesome-m3
+
+## Jan. 2026
+
 - Return Vim for Awesome until Neovim is ready.
 - Update xdg mimelist with chezmoi template.
 - Asoundrc with symlink, only PCH and Pro soundcard for now.

@@ -1,5 +1,5 @@
-{{- if eq .sound_card "Pro" }}
+{{- if (and (eq .sound_card "Pro") (ne .wm "swayfx")) }}
 {{ .chezmoi.sourceDir }}/asound/dot_asoundrc_pro
-{{- else if eq .sound_card "PCH" }}
+{{- else if (and (eq .sound_card "PCH") (ne .wm "swayfx")) }}
 {{ .chezmoi.sourceDir }}/asound/dot_asoundrc_dmix
 {{- end }}
