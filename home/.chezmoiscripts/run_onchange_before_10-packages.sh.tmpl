@@ -14,18 +14,18 @@ args="--zsh --extra-deps"
 
 {{ if eq .wm "awm-m2" "awm-m3" }}
 args="$args --awesome"
+{{ if eq .sound "alsa" }}
+args="$args --sound-alsa"
+{{ else if eq .sound "pulseaudio" }}
+args="$args --sound-pulse"
+{{ end }}
 {{ end }}
 
 {{ if eq .wm "swayfx" }}
 args="$args --swayfx"
-{{ end }}
-
 {{ if eq .sound "alsa" }}
-args="$args --sound-alsa"
+args="$args --sound-pipewire-alsa"
 {{ end }}
-
-{{ if eq .sound "pulseaudio" }}
-args="$args --sound-pulse"
 {{ end }}
 
 {{ if eq .editor "doom" }}
