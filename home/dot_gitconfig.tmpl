@@ -17,6 +17,19 @@
   editor = nvim
 {{- end }}
   autocrlf = input
+  # https://github.com/git/git/security/advisories/GHSA-8prw-h3cq-mghm
+  symlinks = false
+
+## https://forums.whonix.org/t/git-users-enable-fsck-by-default-for-better-security/2066
+[transfer]
+  fsckobjects = true
+[fetch]
+  # should be true but it fail to clone some repository e.g: vimwiki/vimwiki
+  # [#1472](https://github.com/vimwiki/vimwiki/issues/1472)
+  # [#3088](https://github.com/psf/requests/issues/3088)
+  fsckobjects = false
+[receive]
+  fsckobjects = true
 
 [init]
   defaultBranch = main
@@ -27,8 +40,8 @@
 {{- end }}
 {{- if eq .editor "vim" "neovim" }}
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+  tool = vimdiff
+  conflictstyle = diff3
 [mergetool]
-	prompt = false
+  prompt = false
 {{- end }}

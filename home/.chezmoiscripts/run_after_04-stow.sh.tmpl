@@ -9,7 +9,7 @@ trim_string() {
 }
 
 # base arguments
-args="--purge --zsh --tmux --ncmpcpp"
+args="--purge --zsh --tmux"
 
 {{ if eq .editor "neovim" }}
 args="$args --neovim"
@@ -36,7 +36,7 @@ else
     theme="focus"
 fi
 [ -z "$theme" ] && theme=focus
-args="$args --awesome-m3 $theme"
+args="$args --ncmpcpp --awesome $theme"
 {{ end }}
 
 {{ if eq .wm "awm-m2" }}
@@ -44,10 +44,10 @@ if [ -f /tmp/awesome-theme ] ; then
     theme="$(cat /tmp/awesome-theme)"
     theme="$(trim_string $theme)"
 else
-    theme="machine"
+    theme="lines"
 fi
-[ -z "$theme" ] && theme=machine
-args="$args --awesome-m2 $theme"
+[ -z "$theme" ] && theme=lines
+args="$args --ncmpcpp --awesome $theme"
 {{ end }}
 
 echo "called with args: $args"

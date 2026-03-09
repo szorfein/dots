@@ -82,22 +82,34 @@ add_alsa() {
     fi
 }
 
+add_pipewire_alsa() {
+    pkgs="$pkgs pipewire media-video/wireplumber sys-auth/rtkit media-sound/wiremix"
+
+    # wireplumber service is only for systemd?
+    if has_systemd; then
+        services="$services wireplumber"
+    fi
+
+    user_groups="$user_groups pipewire"
+}
+
 add_swayfx() {
     euse_enable wayland
     euse_disable X
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/swayfx "$USE_DIR/wm"
 
-    pkgs="$pkgs light inotify-tools
+    pkgs="$pkgs inotify-tools sys-apps/dbus sys-auth/elogind
     swaybg imagemagick imv app-misc/jq playerctl
     wl-clipboard gui-apps/grim media-gfx/chafa
-    media-sound/mpc zathura x11-terms/kitty x11-misc/dunst
+    zathura x11-terms/kitty x11-misc/dunst
     net-wireless/iwd gui-apps/eww gui-wm/swayfx
-    mpv-mpris mpd-mpris acct-group/seat seatd
+    mpv-mpris app-misc/brightnessctl
     gui-apps/swaylock gui-apps/swayidle gui-apps/wlr-randr"
 
-    user_groups="$user_groups video seat"
-    services="$services seatd"
+    #user_groups="$user_groups video seat"
+
+    services="$services dbus elogind"
 }
 
 add_brave() {
@@ -158,6 +170,7 @@ while [ "$#" -gt 0 ]; do
     case "$1" in
     --sound-alsa) add_alsa ;;
     --sound-pulse) add_pulse ;;
+    --sound-pipewire-alsa) add_pipewire_alsa ;;
     --extra-deps) EXTRA=true ;;
     --awesome) add_awesome ;;
     --swayfx) add_swayfx ;;

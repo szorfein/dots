@@ -26,8 +26,6 @@ add_awesome() {
 
 add_pulse() {
     pkgs="$pkgs pulseaudio pulseaudio-equalizer-ladspa yazi nemo"
-
-    user_groups="$user_groups dbus"
 }
 
 add_alsa() {
@@ -38,16 +36,20 @@ add_alsa() {
     services="$services alsa"
 }
 
+add_pipewire_alsa() {
+    pkgs="$pkgs pipewire alsa-pipewire wireplumber wireplumber-elogind wiremix"
+}
+
 add_swayfx() {
-    pkgs="$pkgs swayfx imv light jq wl-clipboard
-    inotify-tools mpd mpc kitty ImageMagick cargo
-    playerctl mpv-mpris mpDris2 eww swaybg grim
-    iwd seatd turnstile mesa-dri dunst chafa wlr-randr
-    swayidle swaylock"
+    pkgs="$pkgs swayfx imv jq wl-clipboard
+    inotify-tools kitty ImageMagick cargo
+    playerctl mpv-mpris eww swaybg grim
+    iwd elogind mesa-dri dunst chafa wlr-randr
+    swayidle swaylock dbus brightnessctl"
 
-    user_groups="$user_groups _seatd"
+    #user_groups="$user_groups _seatd"
 
-    services="$services seatd turnstiled"
+    services="$services dbus"
 }
 
 # No brave package...
@@ -114,6 +116,7 @@ while [ "$#" -gt 0 ]; do
     case "$1" in
     --sound-alsa) add_alsa ;;
     --sound-pulse) add_pulse ;;
+    --sound-pipewire-alsa) add_pipewire_alsa ;;
     --extra-deps) EXTRA=true ;;
     --awesome) add_awesome ;;
     --swayfx) add_swayfx ;;

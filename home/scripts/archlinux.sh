@@ -58,6 +58,13 @@ add_alsa() {
     swh-plugins libsamplerate yazi thunar"
 }
 
+add_pipewire_alsa() {
+    pkgs="$pkgs pipewire pipewire-alsa wireplumber
+    realtime-privileges wiremix"
+
+    user_groups="$user_groups realtime"
+}
+
 add_brave() {
     pkgs="$pkgs alsa-lib gtk3 libxss nss ttf-font"
     pkgs_aur="$pkgs_aur brave-bin"
@@ -81,20 +88,20 @@ add_emacs() {
 add_swayfx() {
     pkgs="$pkgs inotify-tools
   imv jq mpd mpc wl-clipboard bc imagemagick dunst
-  grim swaybg playerctl mpd-mpris mpv-mpris cava
+  grim swaybg playerctl mpv-mpris brightnessctl
   rust git meson scdoc wayland-protocols kitty
   cairo gdk-pixbuf2 libevdev libinput json-c libgudev
   wayland libxcb libxkbcommon pango pcre2 wlroots0.19
-  seatd libdrm libglvnd pixman glslang meson ninja
+  libdrm libglvnd pixman glslang meson ninja
   cargo libdbusmenu-gtk3 gtk3 gtk-layer-shell iwd
   chafa swayidle swaylock wlr-randr"
 
-    pkgs_aur="$pkgs_aur scenefx0.4 swayfx eww light"
+    pkgs_aur="$pkgs_aur scenefx0.4 swayfx eww"
 
     # keys for eww
     curl -sS https://github.com/elkowar.gpg | gpg --import
     curl -sS https://github.com/web-flow.gpg | gpg --import
-    user_groups="$user_groups seat"
+    user_groups="$user_groups network"
 }
 
 add_neovim() {
@@ -150,6 +157,7 @@ while [ "$#" -gt 0 ]; do
     case "$1" in
     --sound-alsa) add_alsa ;;
     --sound-pulse) add_pulse ;;
+    --sound-pipewire-alsa) add_pipewire_alsa ;;
     --extra-deps) EXTRA=true ;;
     --awesome) add_awesome ;;
     --swayfx) add_swayfx ;;

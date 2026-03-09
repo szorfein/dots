@@ -1,3 +1,10 @@
+## Mar. 2026
+
+- On SwayFX, replace light by brightnessctl
+- Add Pipewire + Alsa only on Swayfx
+- Remove .asoundrc for Swayfx and Pipewire
+- Update dotfiles links for awesome-m3 and awesome-m2
+
 ## 21 Feb. 2026
 
 - Add new theme for Swayfx "Vibe"
