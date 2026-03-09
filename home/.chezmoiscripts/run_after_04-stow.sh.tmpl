@@ -66,10 +66,10 @@ if [ -f /tmp/awesome-theme ] ; then
     theme="$(cat /tmp/awesome-theme)"
     theme="$(trim_string $theme)"
 else
-    theme="machine"
+    theme="lines"
 fi
-[ -z "$theme" ] && theme=machine
-args="$args --ncmpcpp --awesome-m2 $theme"
+[ -z "$theme" ] && theme=lines
+args="$args --ncmpcpp --awesome $theme"
 {{- end }}
 
 echo "called with args: $args"

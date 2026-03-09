@@ -3,6 +3,8 @@
     type = "git-repo"
     {{ if eq .wm "awm-m3" -}}
     url = "https://github.com/szorfein/dotfiles-awesome-m3"
+    {{ else if eq .wm "awm-m2" -}}
+    url = "https://github.com/szorfein/dotfiles-awesome"
     {{ else -}}
     url = "https://github.com/szorfein/dotfiles"
     {{ end -}}
@@ -23,7 +25,7 @@
 [".dotfiles"]
     type = "archive"
     {{ if eq .wm "awm-m2" -}}
-    url = "https://github.com/szorfein/dotfiles/archive/refs/heads/focus-2.0.0.tar.gz"
+    url = "https://github.com/szorfein/dotfiles-awesome/archive/refs/heads/main.tar.gz"
     {{ else if eq .wm "awm-m3" -}}
     url = "https://github.com/szorfein/dotfiles-awesome-m3/archive/refs/heads/main.tar.gz"
     {{ else -}}
