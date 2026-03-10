@@ -5,7 +5,7 @@ set -o errexit -o nounset
 . $HOME/.local/share/chezmoi/home/scripts/lib.sh
 
 ins="emerge -av --changed-use"
-pkgs="app-crypt/gnupg pass stow dev-lang/ruby app-arch/tar app-arch/unzip app-arch/xz-utils net-misc/curl"
+pkgs="app-crypt/gnupg app-admin/pass stow dev-lang/ruby app-arch/tar app-arch/unzip app-arch/xz-utils net-misc/curl"
 user_groups=""
 services=""
 
@@ -40,7 +40,6 @@ make_service() {
 
 add_awesome() {
     euse_enable X
-    euse_disable wayland
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/awesome "$USE_DIR/wm"
 
@@ -61,8 +60,6 @@ add_awesome() {
 
 add_pulse() {
     euse_enable pulseaudio
-    euse_disable alsa
-    euse_disable alsa-plugin
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/pulseaudio "$USE_DIR/sound"
 
@@ -71,7 +68,6 @@ add_pulse() {
 
 add_alsa() {
     euse_enable alsa
-    euse_disable pulseaudio
 
     pkgs="$pkgs alsa-utils tap-plugins swh-plugins
     libsamplerate cmt-plugins ladspa-bs2b alsa-plugins
@@ -95,7 +91,6 @@ add_pipewire_alsa() {
 
 add_swayfx() {
     euse_enable wayland
-    euse_disable X
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/swayfx "$USE_DIR/wm"
 

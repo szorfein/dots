@@ -2,9 +2,6 @@
 x11-libs/gdk-pixbuf jpeg
 gui-apps/swaybg gdk-pixbuf
 
-# If sys-auth/seatd is used, the server USE flag is required.
-sys-auth/seatd server
-
 # Dunst
 app-text/xmlto text
 x11-misc/dunst dunstify
@@ -20,9 +17,9 @@ dev-libs/libdbusmenu gtk3
 app-crypt/gcr gtk
 
 # Brave (even if X is not wanted...)
-media-libs/libepoxy X
 media-libs/libglvnd X
 x11-libs/cairo X
+x11-libs/pango X
 
 # Librewolf-bin
 www-client/librewolf dbus
@@ -35,4 +32,4 @@ media-plugins/alsa-plugins pulseaudio
 media-gfx/qrencode png
 
 # Wezterm
-x11-libs/libxkbcommon X
+#x11-libs/libxkbcommon X

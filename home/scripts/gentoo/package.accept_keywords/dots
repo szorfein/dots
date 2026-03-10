@@ -9,8 +9,10 @@ x11-misc/betterlockscreen ~amd64
 gui-apps/eww ~amd64
 gui-wm/swayfx ~amd64
 gui-libs/scenefx ~amd64
-media-sound/mpd-mpris ~amd64
 mpv-plugin/mpv-mpris ~amd64
+app-misc/brightnessctl ~amd64
+gui-apps/wlr-randr ~amd64
+media-sound/wiremix ~amd64
 
 # Web browser
 www-client/brave-bin ~amd64
