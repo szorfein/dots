@@ -94,7 +94,7 @@ add_swayfx() {
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/swayfx "$USE_DIR/wm"
 
-    pkgs="$pkgs inotify-tools sys-apps/dbus sys-auth/elogind
+    pkgs="$pkgs inotify-tools sys-apps/dbus
     swaybg imagemagick imv app-misc/jq playerctl
     wl-clipboard gui-apps/grim media-gfx/chafa
     zathura x11-terms/kitty x11-misc/dunst
@@ -102,9 +102,13 @@ add_swayfx() {
     mpv-mpris app-misc/brightnessctl
     gui-apps/swaylock gui-apps/swayidle gui-apps/wlr-randr"
 
-    #user_groups="$user_groups video seat"
+    if ! has_systemd; then
+        pkgs="$pkgs sys-auth/elogind"
+        services="$services elogind"
+    fi
 
-    services="$services dbus elogind"
+    #user_groups="$user_groups video seat"
+    services="$services dbus"
 }
 
 add_brave() {
