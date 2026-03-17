@@ -37,9 +37,9 @@ Why i use chezmoi?
 
 ## Screenshots
 
-| Vibe (SwayFX)                                                                                    | Focus (Awesome)                                                            |
-| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| ![Image of the Vibe theme](https://github.com/szorfein/unix-portfolio/raw/master/Vibe/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
+| Valyria (SwayFX)                                                                                              | Focus (Awesome)                                                            |
+| ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| ![Image of the Valyria theme](https://github.com/szorfein/unix-portfolio/raw/master/SwayFX/Valyria/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 
 ## Packages
 

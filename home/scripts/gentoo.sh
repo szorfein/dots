@@ -79,18 +79,21 @@ add_alsa() {
 }
 
 add_pipewire_alsa() {
-    pkgs="$pkgs pipewire media-video/wireplumber sys-auth/rtkit media-sound/wiremix"
+    pkgs="$pkgs pipewire media-video/wireplumber sys-auth/rtkit media-sound/wiremix app-misc/yazi xfce-base/thunar xfce-base/tumbler"
+
+    user_groups="$user_groups pipewire"
 
     # wireplumber service is only for systemd?
     if has_systemd; then
         services="$services wireplumber"
     fi
-
-    user_groups="$user_groups pipewire"
 }
 
 add_swayfx() {
     euse_enable wayland
+    if ! has_systemd; then
+        euse_enable elogind
+    fi
 
     "$AUTH" cp ~/.local/share/chezmoi/home/scripts/gentoo/package.use/swayfx "$USE_DIR/wm"
 
@@ -100,15 +103,16 @@ add_swayfx() {
     zathura x11-terms/kitty x11-misc/dunst
     net-wireless/iwd gui-apps/eww gui-wm/swayfx
     mpv-mpris app-misc/brightnessctl
-    gui-apps/swaylock gui-apps/swayidle gui-apps/wlr-randr"
-
-    if ! has_systemd; then
-        pkgs="$pkgs sys-auth/elogind"
-        services="$services elogind"
-    fi
+    gui-apps/swaylock gui-apps/swayidle gui-apps/wlr-randr
+    media-sound/kew sys-process/glances net-im/element-desktop-bin
+    sys-apps/fd"
 
     #user_groups="$user_groups video seat"
     services="$services dbus"
+
+    if ! has_systemd; then
+        services="$services elogind"
+    fi
 }
 
 add_brave() {

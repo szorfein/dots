@@ -1,5 +1,6 @@
 ## Mar. 2026
 
+- Enable service Pipewire, Wireplumber on Void, Arch (not yet for Openrc).
 - On SwayFX, replace light by brightnessctl
 - Add Pipewire + Alsa only on Swayfx
 - Remove .asoundrc for Swayfx and Pipewire

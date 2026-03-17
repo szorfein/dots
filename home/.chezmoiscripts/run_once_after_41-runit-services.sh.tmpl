@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+. $HOME/.local/share/chezmoi/home/scripts/lib.sh
+
+AUTH=$(search_auth)
+
+msg "Execute $0..."
+
+if command -v runit 2>/dev/null ; then
+  # Enable pipewire
+  {{- if eq .wm "swayfx" }}
+  # This enable ALSA
+  "$AUTH" mkdir -p /etc/alsa/conf.d
+  "$AUTH" ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
+  "$AUTH" ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
+
+  # This enable wireplumber
+  mkdir -p "$HOME/.config/pipewire/pipewire.conf.d"
+  ln -sf /usr/share/examples/wireplumber/10-wireplumber.conf "$HOME/.config/pipewire/pipewire.conf.d/"
+  {{- end }}
+fi

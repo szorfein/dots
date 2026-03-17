@@ -55,12 +55,12 @@ add_pulse() {
 
 add_alsa() {
     pkgs="$pkgs alsa-utils alsa-plugins ladspa
-    swh-plugins libsamplerate yazi thunar"
+    swh-plugins libsamplerate yazi thunar tumbler"
 }
 
 add_pipewire_alsa() {
     pkgs="$pkgs pipewire pipewire-alsa wireplumber
-    realtime-privileges wiremix"
+    realtime-privileges wiremix yazi thunar tumbler"
 
     user_groups="$user_groups realtime"
 }
@@ -86,15 +86,16 @@ add_emacs() {
 }
 
 add_swayfx() {
-    pkgs="$pkgs inotify-tools
+    pkgs="$pkgs inotify-tools fd
   imv jq mpd mpc wl-clipboard bc imagemagick dunst
   grim swaybg playerctl mpv-mpris brightnessctl
   rust git meson scdoc wayland-protocols kitty
   cairo gdk-pixbuf2 libevdev libinput json-c libgudev
   wayland libxcb libxkbcommon pango pcre2 wlroots0.19
-  libdrm libglvnd pixman glslang meson ninja
+  libdrm libglvnd pixman glslang meson ninja glances
   cargo libdbusmenu-gtk3 gtk3 gtk-layer-shell iwd
-  chafa swayidle swaylock wlr-randr"
+  chafa swayidle swaylock wlr-randr bulletty kew
+  element-desktop"
 
     pkgs_aur="$pkgs_aur scenefx0.4 swayfx eww"
 
