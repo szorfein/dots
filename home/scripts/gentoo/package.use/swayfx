@@ -12,7 +12,6 @@ x11-libs/xapp introspection
 sys-apps/systemd policykit
 
 # Thunar
-x11-libs/gtk+ X
 dev-libs/libdbusmenu gtk3
 app-crypt/gcr gtk
 
@@ -21,15 +20,28 @@ media-libs/libglvnd X
 x11-libs/cairo X
 x11-libs/pango X
 
+# Kitty
+x11-terms/kitty -X
+
+# Imv
+media-gfx/imv -X
+
 # Librewolf-bin
 www-client/librewolf dbus
 media-libs/libvpx postproc
 media-libs/freetype harfbuzz
-dev-python/pycairo X
 media-plugins/alsa-plugins pulseaudio
+
+# Mpv
+media-video/mpv -X
 
 # Pass
 media-gfx/qrencode png
 
+# Pulse
+media-sound/pulseaudio-daemon -X
+
 # Wezterm
 #x11-libs/libxkbcommon X
+
+media-video/pipewire sound-server pipewire-alsa

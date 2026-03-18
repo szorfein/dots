@@ -1,5 +1,6 @@
 ## Mar. 2026
 
+- Run on Gentoo (binary/systemd) ok, need testing Openrc if anyone interested....
 - Enable service Pipewire, Wireplumber on Void, Arch (not yet for Openrc).
 - On SwayFX, replace light by brightnessctl
 - Add Pipewire + Alsa only on Swayfx

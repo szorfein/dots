@@ -18,7 +18,7 @@ if hash systemctl 2>/dev/null ; then
   {{- if eq .wm "awm-m2" "awm-m3" }}
   user_systemd_service "gpg-agent.socket gpg-agent-ssh.socket mpd.service"
   {{- else if eq .wm "swayfx" }}
-  user_systemd_service "gpg-agent.socket gpg-agent-ssh.socket pipewire.service wireplumber"
+  user_systemd_service "gpg-agent.socket gpg-agent-ssh.socket pipewire wireplumber"
   {{- end }}
 
   {{ if .secrets }}

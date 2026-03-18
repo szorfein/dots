@@ -13,6 +13,9 @@ mpv-plugin/mpv-mpris ~amd64
 app-misc/brightnessctl ~amd64
 gui-apps/wlr-randr ~amd64
 media-sound/wiremix ~amd64
+media-sound/kew ~amd64
+net-im/element-desktop-bin ~amd64
+dev-libs/nspr ~amd64
 
 # Web browser
 www-client/brave-bin ~amd64

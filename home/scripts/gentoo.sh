@@ -79,14 +79,10 @@ add_alsa() {
 }
 
 add_pipewire_alsa() {
-    pkgs="$pkgs pipewire media-video/wireplumber sys-auth/rtkit media-sound/wiremix app-misc/yazi xfce-base/thunar xfce-base/tumbler"
+    # fail with media-sound/wiremix
+    pkgs="$pkgs pipewire media-video/wireplumber sys-auth/rtkit app-misc/yazi xfce-base/thunar xfce-base/tumbler"
 
     user_groups="$user_groups pipewire"
-
-    # wireplumber service is only for systemd?
-    if has_systemd; then
-        services="$services wireplumber"
-    fi
 }
 
 add_swayfx() {
