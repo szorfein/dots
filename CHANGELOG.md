@@ -1,5 +1,6 @@
 ## Mar. 2026
 
+- Reaver fail to download all the aur packages (often) due to "Anubis server protection". Curl has no problem here so add a script in .chezmoiscripts instead.
 - On SwayFX, replace light by brightnessctl
 - Add Pipewire + Alsa only on Swayfx
 - Remove .asoundrc for Swayfx and Pipewire

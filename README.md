@@ -35,9 +35,9 @@ Why i use chezmoi?
 
 ## Screenshots
 
-| Vibe (Wayland)                                                            | Focus (Xorg)                                                               |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| ![](https://github.com/szorfein/unix-portfolio/raw/master/Vibe/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
+| Valyria (Wayland)                                                                   | Focus (Xorg)                                                               |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| ![](https://github.com/szorfein/unix-portfolio/raw/master/SwayFX/Valyria/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 
 ## Packages
 

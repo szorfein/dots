@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+
+{{ if eq .chezmoi.osRelease.id "arch" }}
+TO_REAVER="$HOME/.cache/reaver/archlinux"
+
+[ -d "$TO_REAVER" ] || mkdir -p "$TO_REAVER"
+
+aur_dll() {
+    PKG_URL="https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz"
+    PKG_NAME="${PKG_URL##*/}" # e.g yay.tar.gz
+    (
+        cd "$TO_REAVER" \
+            && curl -o "$PKG_NAME" -L "$PKG_URL"
+    )
+}
+
+aur_dll "light"
+aur_dll "eww"
+aur_dll "scenefx0.4"
+aur_dll "swayfx"
+aur_dll "i3lock-color"
+aur_dll "betterlockscreen"
+aur_dll "xst-git"
+aur_dll "brave-bin"
+aur_dll "librewolf-bin"
+{{ end }}

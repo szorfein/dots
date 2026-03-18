@@ -56,7 +56,7 @@ dotfiles_audio_backend: {{ .sound }}
 # update font-cache
 dotfiles_external: true
 
-# nnn + Thunar (alsa) or Nemo (pulse)
+# Thunar (alsa) or Nemo (pulse)
 dotfiles_files_browser: true
 
 {{ if eq .gpu "intel_gen7" "intel" "nouveau" -}}
@@ -65,6 +65,7 @@ dotfiles_gpu_driver: {{ .gpu }}
 
 {{ if eq .wm "awm-m2" "awm-m3" -}}
 dotfiles_mpd: true
+dotfiles_xst: true
 {{ end -}}
 
 dotfiles_mpd_music_dir: ~/musics
@@ -91,8 +92,7 @@ dotfiles_vim: true
 # dotfiles_wezterm: true
 # dotfiles_foot: true
 dotfiles_kitty: true
-{{ else -}}
-dotfiles_xst: true
+dotfiles_kew: true
 {{ end -}}
 
 {{ if ne .keymap "en" -}}
