@@ -14,12 +14,16 @@ BACKUP_FILE="/tmp/backup.filter"
 
 # More efficient than playing with --include,--exclude
 cat << EOF > "$BACKUP_FILE"
+# Exclude patterns
+- node_modules/***
+
 # Include patterns
 + /documents/***
 + /Downloads/***
 + /downloads/***
 + /images/***
 + /musics/***
++ /home/***
 
 # Exclude everything else
 - /**

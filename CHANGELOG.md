@@ -1,9 +1,12 @@
+# Changelogs
+
 ## Mar. 2026
 
+- New themes for sddm from [Qylock](https://github.com/Darkkal44/qylock). Replace [delicious](https://github.com/stuomas/delicious-sddm-theme)
 - Reaver fail to download all the aur packages (often) due to "Anubis server protection". Curl has no problem here so add a script in .chezmoiscripts instead.
 - On SwayFX, replace light by brightnessctl
-- Add Pipewire + Alsa only on Swayfx
-- Remove .asoundrc for Swayfx and Pipewire
+- Add Pipewire + Alsa for Swayfx
+- Remove .asoundrc for Swayfx
 - Update dotfiles link repository for awesome-m3
 
 ## Jan. 2026

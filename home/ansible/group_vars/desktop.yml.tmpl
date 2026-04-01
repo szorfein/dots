@@ -12,25 +12,10 @@ dm_reaver_dir: ~/.cache/reaver/display-manager
 dm_use: {{ .dm | quote }}
 {{ end -}}
 
-dm_sddm_theme:
-  name: delicious
-  archive: delicious.tar.gz
-  background_dir: background # each theme has a custom name, sometime is bg, bgs, backgrounds, etc...
-
-dm_sddm_backgrounds:
-  - sddm-backgrounds.tar.gz
-
-# background= glitch.mp4, animation.mp4, abstract.mp4
-# Animated bg from https://github.com/szorfein/dm-background/tree/sddm
-dm_sddm_theme_customize:
-  - regexp: '^background='
-    line: 'background=abstract.mp4'
-  - regexp: '^glowcolor='
-    line: 'glowcolor=#BBA33393'
-  - regexp: '^iconoverlay='
-    line: 'iconoverlay=#FF000000'
-  - regexp: '^sessions='
-    line: 'sessions="sway,awesome"'
+# Theme to install
+display_manager_sddm_theme:
+  name: pixel-hollowknight
+  path: {{ .chezmoi.homeDir }}/labs/qylock/themes/pixel-hollowknight
 
 dm_lightdm_theme:
   name: litarvan
