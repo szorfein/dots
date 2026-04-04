@@ -12,6 +12,16 @@ dm_reaver_dir: ~/.cache/reaver/display-manager
 dm_use: {{ .dm | quote }}
 {{ end -}}
 
+{{ if eq .wm "swayfx" -}}
+# Default session to use
+display_manager_session: swayfx
+{{ end -}}
+
+{{ if ne .keymap "en" -}}
+# Value are passed to setxkbmap
+display_manager_keymap: {{ .keymap }}
+{{ end -}}
+
 # Theme to install
 display_manager_sddm_theme:
   name: pixel-hollowknight
