@@ -6,15 +6,11 @@ Host github.com
   ControlPath ~/.ssh/sockets/%r@%h-%p
   ControlPersist 600
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/laptop-git
+  IdentityFile ~/.ssh/github
 
 Host 127.0.0.1
   IdentitiesOnly yes
-{{ if .secrets }}
-  IdentityFile ~/.ssh/ansible.pub
-{{ else }}
   IdentityFile ~/.ssh/ansible
-{{ end }}
 
 {{- if eq .name "szorfein" }}
 Host {{ pass "duplicity/server" }}

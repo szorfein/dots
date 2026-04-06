@@ -1,0 +1,5 @@
+-----BEGIN OPENSSH PRIVATE KEY-----
+{{ if .secrets -}}
+{{ passRaw "github/sshkey-private" -}}
+{{ end -}}
+-----END OPENSSH PRIVATE KEY-----

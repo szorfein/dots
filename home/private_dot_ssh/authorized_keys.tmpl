@@ -1,6 +1,0 @@
-{{- if eq .name "szorfein" }}
-{{- pass "ssh/github_authorized" }}
-{{ end }}
-{{- if .secrets }}
-{{- pass "ssh/ansible.pub" }}
-{{- end }}

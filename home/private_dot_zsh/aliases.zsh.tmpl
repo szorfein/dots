@@ -1,3 +1,7 @@
 {{- if eq .chezmoi.osRelease.id "void" }}
+{{ if eq .wm "swayfx" -}}
+alias vim='nvim'
+{{ else -}}
 alias vim='vim-x11'
+{{ end -}}
 {{- end }}
