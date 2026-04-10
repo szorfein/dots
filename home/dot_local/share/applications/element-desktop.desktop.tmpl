@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Element
+{{ if eq .wm "swayfx" -}}
+Exec=/usr/bin/element-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+{{ else -}}
+Exec=/usr/bin/element-desktop %U
+{{ end -}}
+Terminal=false
+Type=Application
+Icon=element-desktop
+Comment=Element: the future of secure communication
+MimeType=x-scheme-handler/io.element.desktop;x-scheme-handler/element
+Categories=Network;InstantMessaging;Chat

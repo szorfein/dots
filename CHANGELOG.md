@@ -1,5 +1,10 @@
 # Changelogs
 
+## Apr. 2026
+
+- add element-desktop.desktop [element](https://element.io/)
+- add mpv config for wayland
+
 ## Mar. 2026
 
 - New themes for sddm from [Qylock](https://github.com/Darkkal44/qylock). Replace [delicious](https://github.com/stuomas/delicious-sddm-theme)

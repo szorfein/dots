@@ -1,6 +1,26 @@
-{{- if eq .sound "alsa" }}
-ao=alsa
-{{- end }}
-profile=fast
+{{ if eq .gpu "intel_gen7" -}}
+hwdec=vaapi-copy
+{{ else -}}
 hwdec=auto
+{{ end -}}
+
+{{ if eq .wm "swayfx" -}}
+# Sway (Wayland)
+
+gpu-context=wayland
+
+{{ if eq .sound "alsa" -}}
+ao=pipewire
+{{ end -}}
+
+{{ else -}}
+# awesome (Xorg)
+
+{{ if eq .sound "alsa" -}}
+ao=alsa
+{{ end -}}
+
+{{ end -}}
+
+profile=fast
 auto-window-resize=no
