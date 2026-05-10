@@ -1,5 +1,6 @@
 {{ if eq .gpu "intel_gen7" -}}
 hwdec=vaapi-copy
+vo=gpu
 {{ else -}}
 hwdec=auto
 {{ end -}}
@@ -8,6 +9,7 @@ hwdec=auto
 # Sway (Wayland)
 
 gpu-context=wayland
+script=/usr/lib/mpv-mpris/mpris.so
 
 {{ if eq .sound "alsa" -}}
 ao=pipewire
@@ -24,3 +26,7 @@ ao=alsa
 
 profile=fast
 auto-window-resize=no
+
+#geometry=40%:40%
+autofit-smaller=40%
+autofit-larger=40%
