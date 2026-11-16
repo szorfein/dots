@@ -1,0 +1,5 @@
+every_time: 24h
+execute: cd ~/tmp/ryvst && make install
+tasks:
+  - url: https://github.com/szorfein/ryvst.git
+    to_dest: tmp/ryvst

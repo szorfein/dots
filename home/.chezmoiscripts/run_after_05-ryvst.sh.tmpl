@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+set -o errexit -o nounset
+
+if [ ! -f "$HOME/bin/ryvst" ] ; then
+workdir="$HOME/tmp/build"
+mkdir -p $workdir
+cd $workdir
+curl -o ryvst.zip -sSL https://github.com/szorfein/ryvst/archive/refs/heads/main.zip
+unzip ryvst.zip
+cd ryvst-main
+make install
+cd ../..
+rm -rf "$workdir"
+fi
+
+echo "Downloading things with Ryvst.."
+~/bin/ryvst

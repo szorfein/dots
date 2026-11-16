@@ -1,0 +1,7 @@
+every_time: 168h
+tasks:
+{{- if eq .dm "sddm" }}
+  - name: qylock.zip
+    url: https://github.com/Darkkal44/qylock/archive/refs/heads/main.zip
+    to_dest: labs/qylock
+{{- end }}

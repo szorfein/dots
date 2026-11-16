@@ -1,5 +1,10 @@
 # Changelogs
 
+## Nov. 2026
+
+- Replace Reaver by [Ryvst](https://github.com/szorfein/ryvst)
+- Add `throw-keyids` on gnupg
+
 ## Apr. 2026
 
 - add element-desktop.desktop [element](https://element.io/)

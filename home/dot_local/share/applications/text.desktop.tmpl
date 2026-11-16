@@ -4,5 +4,8 @@ Name=Text editor
 {{- if eq .wm "awm-m3" "awm-m2" }}
 Exec=emacs %u
 {{- else if eq .wm "swayfx" }}
-Exec=wezterm-gui start -- nvim %u
+#Exec=wezterm-gui start -- nvim %u
+Exec=kitty +open %U
+Icon=kitty
 {{ end}}
+MimeType=application/x-sh;application/x-shellscript;text/*;
