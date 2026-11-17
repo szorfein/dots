@@ -6,8 +6,8 @@ msg "Installing dependencies..."
 
 UPDT="pacman -Syy"
 INST="pacman -S --noconfirm --needed"
-PKGS="pass openssh sshpass ansible git ruby unzip tar xz stow"
+PKGS="pass openssh sshpass ansible git ruby go unzip tar xz stow"
 
-$AUTH $UPDT \
-  && $AUTH $INST $PKGS \
-  && systemd_start "sshd"
+$AUTH $UPDT &&
+     $AUTH $INST $PKGS &&
+     systemd_start "sshd"

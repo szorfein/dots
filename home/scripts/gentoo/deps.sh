@@ -5,7 +5,7 @@ set -o errexit -o nounset
 msg "Installing dependencies..."
 
 INST="emerge -av --noreplace"
-PKGS="app-admin/pass openssh ansible sshpass dev-vcs/git dev-lang/ruby app-arch/tar app-arch/unzip app-arch/xz-utils app-admin/stow"
+PKGS="app-admin/pass openssh ansible sshpass dev-vcs/git dev-lang/go dev-lang/ruby app-arch/tar app-arch/unzip app-arch/xz-utils app-admin/stow"
 
 # if rust isn't alrealy installed, we use rust-bin to gain time.
 if ! hash rust 2> /dev/null; then
