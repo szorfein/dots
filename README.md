@@ -1,6 +1,6 @@
 # dots
 
-Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/), [gnupg](https://gnupg.org/)/[pass](https://www.passwordstore.org/) to store secrets and [reaver](https://github.com/szorfein/reaver).
+Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/), [gnupg](https://gnupg.org/)/[pass](https://www.passwordstore.org/) to store secrets and [ryvst](https://github.com/szorfein/ryvst).
 Only works on some Linux distro including:
 
 - `Archlinux`
@@ -41,25 +41,24 @@ Why i use chezmoi?
 
 ## Packages
 
-| WTF                  | Name                                                                                                                                       | Notes                                                                                                                                                                            |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Audio Driver         | Alsa or Pulseaudio                                                                                                                         | Can be change in the config file                                                                                                                                                 |
-| Window Manager       | Swayfx or Awesome (with picom)                                                                                                             | Wayland or Xorg                                                                                                                                                                  |
-| Web browser          | [brave](https://brave.com/) or [librewolf](https://librewolf.net)                                                                          |                                                                                                                                                                                  |
-| Image Viewer         | imv or feh                                                                                                                                 | Depend of Wayland or Xorg                                                                                                                                                        |
-| Lock Screen          | [Swaylock-fancy](https://github.com/Big-B/swaylock-fancy/tree/main) or [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Sway or Awm                                                                                                                                                                      |
-| Display Manager      | sddm with [Qylock](https://github.com/Darkkal44/qylock), lightdm, lxdm or nothing                                                          | For SwayFX, only sddm will work's                                                                                                                                                |
-| Music Daemon         | mpd with playerctl                                                                                                                         | with ncmpcpp, mpc                                                                                                                                                                |
-| Video Player         | mpv                                                                                                                                        |                                                                                                                                                                                  |
-| Email reader         | neomutt                                                                                                                                    | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/)                                                    |
-| Screen capture       | grim or [maim](https://github.com/naelstrof/maim)                                                                                          | Wayland or Xorg                                                                                                                                                                  |
-| Terminal multiplexer | tmux                                                                                                                                       | with catppucin, mode indicator                                                                                                                                                   |
-| File Manager         | Yazi and Thunar or Nemo                                                                                                                    | Thunar (if choose Alsa) or Nemo (Pulseaudio). Dropped vifm [sdushantha](https://github.com/sdushantha/dotfiles)                                                                  |
-| Code Editor          | Neovim or [Doom Emacs](https://github.com/doomemacs/doomemacs)                                                                             | Wayland or Xorg, doom don't work on wayland unless you install Xwayland                                                                                                          |
-| IRC client           |                                                                                                                                            | Weechat will be dropped soon, Prefer Signal or better [Session](https://getsession.org/), not IRC                                                                                |
-| Terminal             | Foot or [xSt](https://github.com/gnotclub/xst)                                                                                             | Wayland or Xorg again                                                                                                                                                            |
-| zathura              | PDF/Epub viewer                                                                                                                            |                                                                                                                                                                                  |
-| Shell                | ZSH                                                                                                                                        | With [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [autosuggestion](https://github.com/zsh-users/zsh-autosuggestions/tree/master), and more... |
+| WTF                  | Name                                                                                                                                       | Notes                                                                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Audio Driver         | Pipewire + Alsa                                                                                                                            | With [Wireplumber](https://pipewire.pages.freedesktop.org/wireplumber/)                                                                          |
+| Window Manager       | Swayfx or Awesome (with picom)                                                                                                             | Wayland or Xorg                                                                                                                                  |
+| Web browser          | [brave](https://brave.com/) or [librewolf](https://librewolf.net)                                                                          |                                                                                                                                                  |
+| Image Viewer         | imv or feh                                                                                                                                 | Depend of Wayland or Xorg                                                                                                                        |
+| Lock Screen          | [Swaylock-fancy](https://github.com/Big-B/swaylock-fancy/tree/main) or [betterlockscreen](https://github.com/pavanjadhaw/betterlockscreen) | Sway or Awm                                                                                                                                      |
+| Display Manager      | sddm with [Qylock](https://github.com/Darkkal44/qylock), lightdm, lxdm or nothing                                                          | For SwayFX, only sddm will work's                                                                                                                |
+| Music/Videos         | [kew](https://github.com/ravachol/kew) and mpv                                                                                             |                                                                                                                                                  |
+| Email reader         | neomutt                                                                                                                                    | with [isync](https://isync.sourceforge.io/), customized from [sheoak](https://github.com/sheoak/neomutt-powerline-nerdfonts/)                    |
+| Screen capture       | grim or [maim](https://github.com/naelstrof/maim)                                                                                          | Wayland or Xorg                                                                                                                                  |
+| Terminal multiplexer | tmux                                                                                                                                       | Keep minimal with [rose-pine](https://github.com/rose-pine/tmux), [mode-indicator](https://github.com/MunifTanjim/tmux-mode-indicator)           |
+| File Manager         | Yazi and Thunar or Nemo                                                                                                                    | Thunar (if choose Alsa) or Nemo (Pulseaudio). Dropped vifm [sdushantha](https://github.com/sdushantha/dotfiles)                                  |
+| Code Editor          | Neovim or [Doom Emacs](https://github.com/doomemacs/doomemacs)                                                                             | Wayland or Xorg, doom don't work on wayland unless you install Xwayland                                                                          |
+| IRC/Chat             | I use Matrix today, checking for a nice client...                                                                                          | Discord is too ugly                                                                                                                              |
+| Terminal             | [Kitty](https://github.com/kovidgoyal/kitty) or [xSt](https://github.com/gnotclub/xst)                                                     | Wayland or Xorg again                                                                                                                            |
+| zathura              | PDF/Epub viewer                                                                                                                            |                                                                                                                                                  |
+| Shell                | ZSH                                                                                                                                        | With [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh), [starship](https://starship.rs), [zoxide](https://github.com/ajeetdsouza/zoxide) and more... |
 
 ## Requirements
 
@@ -115,9 +114,13 @@ Edit the config file with your favorite text editor.
 
 You can change for example in `[data]`:
 
-    [data]
-      sound = "pulseaudio"
-      web = "librewolf"
+```toml
+[data]
+  dm = "sddm"
+  keymap = "en"
+  web = "librewolf"
+  wm = "swayfx"
+```
 
 You can also configure whitch GPU driver should be installed with keyword. Only `intel_gen7`, `intel` or `nouveau` are supported for now, see option [dotfiles_gpu_driver](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles#role-variables), also [The SwayFX project does not officially support proprietary NVIDIA drivers.](https://github.com/WillPower3309/swayfx/issues/177)
 
