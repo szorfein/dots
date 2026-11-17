@@ -1,0 +1,8 @@
+every_time: 72h
+tasks:
+  - url: https://github.com/szorfein/ansible-collection-desktop.git
+    to_dest: .ansible/collections/ansible_collections/szorfein/desktop
+  - url: https://github.com/szorfein/ansible-collection-privacy.git
+    to_dest: .ansible/collections/ansible_collections/szorfein/privacy
+  - url: https://github.com/szorfein/ansible-collection-hardening.git
+    to_dest: .ansible/collections/ansible_collections/szorfein/hardening
