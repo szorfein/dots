@@ -1,19 +1,19 @@
 # dots
 
-Dotfiles managed by [ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/), [gnupg](https://gnupg.org/)/[pass](https://www.passwordstore.org/) to store secrets and [ryvst](https://github.com/szorfein/ryvst).
-Only works on some Linux distro including:
+Dotfiles managed with [Ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/), [GnuPG](https://gnupg.org/)/[pass](https://www.passwordstore.org/) for storing secrets and [ryvst](https://github.com/szorfein/ryvst).
+They only works on some Linux distributions, including:
 
 - `Archlinux`
-- `Debian 11`, ... _frozen_ from now, i don't recommend install my dotfiles on it for now, need motivation and time here...
-- `Gentoo`, tested with systemd, musl (openrc) and/or [binaries](https://wiki.gentoo.org/wiki/Binary_package_guide).
-- `Void Linux`, tested on a clean install of the [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
+- `Debian 11`, ... _frozen_ from now on, I don't recommend installing my dotfiles on it for now. I need motivation and time to develop all the missing packages...
+- `Gentoo`, tested with systemd, musl (OpenRC) and/or [binaries](https://wiki.gentoo.org/wiki/Binary_package_guide).
+- `Void Linux`, tested on clean installs of [rootfs-glibc](https://voidlinux.org/download/) and [rootfs-musl](https://voidlinux.org/download/).
 
-Why i use chezmoi?
+Why do I use chezmoi?
 
-- Even with GNU/Stow, i have to modify a lot of files each time i install/reinstall a new system, i start hating this !
-- Template are great.
-- Possibility of encrypt files.
-- Install and updates are easy.
+- Even with GNU/Stow, I have to modify a lot of files each time I install or reinstall a system, I'm starting to hate this !
+- Templates are great.
+- The ability to encrypt files.
+- Installation and updates are easy.
 
 ## Table of contents
 
@@ -62,23 +62,23 @@ Why i use chezmoi?
 
 ## Requirements
 
-### Add an user
+### Add a new user
 
-If need a new user (new system), create one:
+To add a new user, run the following commands:
 
 ```bash
 useradd -m -s /bin/bash custom-username
 passwd custom-username
 ```
 
-Next, you need to install and configure `sudo` or `doas`, we need permission to install packages:
+Next, install and configure `sudo` or `doas`, we need permission to install packages:
 
     # EDITOR=vi visudo
     custom-username ALL=(ALL) ALL
 
 ### Dependencies
 
-You need to install `chezmoi` and `git`.
+You need to install `chezmoi` and `Git`.
 
 With `Gentoo`:
 
@@ -94,7 +94,7 @@ With `Debian`:
     # apt-get install curl git
     $ curl -fsLS get.chezmoi.io | sh
 
-For `Voidlinux`:
+With `Voidlinux`:
 
     # xbps-install -S chezmoi git
 
@@ -104,7 +104,7 @@ Only 4 little steps here
 
 ### Clone this repo
 
-Target the ansible branch.
+Target the Ansible branch.
 
     $ chezmoi init https://github.com/szorfein/dots.git --branch=ansible
 
@@ -114,7 +114,7 @@ Edit the config file with your favorite text editor.
 
     $ EDITOR=vi chezmoi edit-config
 
-You can change for example in `[data]`:
+For example, you can change the following values in `[data]`:
 
 ```toml
 [data]
@@ -124,14 +124,14 @@ You can change for example in `[data]`:
   wm = "swayfx"
 ```
 
-You can also configure whitch GPU driver should be installed with keyword. Only `intel_gen7`, `intel` or `nouveau` are supported for now, see option [dotfiles_gpu_driver](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles#role-variables), also [The SwayFX project does not officially support proprietary NVIDIA drivers.](https://github.com/WillPower3309/swayfx/issues/177)
+You can also configure which GPU driver should be installed with the `gpu` keyword. Only `intel_gen7`, `intel` or `nouveau` are supported for now. See the [dotfiles_gpu_driver](https://github.com/szorfein/ansible-collection-desktop/tree/main/roles/dotfiles#role-variables) option. Also, [the SwayFX project does not officially support proprietary NVIDIA drivers.](https://github.com/WillPower3309/swayfx/issues/177)
 
     [data]
       gpu = "intel"
 
-[machine-to-machine](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/), only few lines to configure your environment:
+[Machine-to-machine](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/) configuration: only a few lines are needed to configure your environment:
 
-| var     | SwayFX on wayland | Awesome on Xorg |
+| var     | SwayFX on Wayland | Awesome on Xorg |
 | ------- | ----------------- | --------------- |
 | editor  | neovim            | doom            |
 | gpu     | intel             | nouveau         |
@@ -142,27 +142,26 @@ You can also configure whitch GPU driver should be installed with keyword. Only 
 
 ### Apply
 
-`apply` will install all files in your $HOME and execute ansible playbook.
+`chezmoi apply` will installs all files in your `$HOME` directory and runs the Ansible playbooks.
 
     $ chezmoi apply
 
-If /tmp is protected with `noexec`, you need to tell `chezmoi` to use another dir
-[#1929](https://github.com/twpayne/chezmoi/issues/1929)
+If `/tmp` is mounted with the `noexec` option, tell `chezmoi` to use another directory [#1929](https://github.com/twpayne/chezmoi/issues/1929)
 
     $ mkdir $HOME/tmp
     $ TMPDIR="$HOME/tmp" chezmoi apply
 
 ## Update
 
-From time to time, start the update simply with:
+From time to time, start the update with:
 
     $ chezmoi diff
     $ chezmoi update
 
 ## Doom Emacs
 
-After the first install, if you need-want to use
-[doomemac](https://github.com/doomemacs/doomemacs), you have to finish the installation with a single command:
+After the first install, if you want to use
+[DoomEmacs](https://github.com/doomemacs/doomemacs), finish the installation by running:
 
     $ doom sync
     $ emacs
@@ -173,18 +172,18 @@ You can run manually extra playbooks present in repo as all is already configure
 
     $ cd ~/ansible
 
-Current playbooks with command to run:
+Current playbooks and commands you can run:
 
 - ssh hardening: `ansible-playbook -i hosts --ask-become-pass ssh.yml`
 - os hardening: `ansible-playbook -i hosts --ask-become-pass os-hardened.yml`
-- privacy enhancement: `ansible-playbook -i hosts --ask-become-pass privacy.yml`
+- Privacy enhancement: `ansible-playbook -i hosts --ask-become-pass privacy.yml`
 
 ## Left Over
 
 ### Issues
 
 For any questions, comments, feedback or issues, submit a [new issue](https://github.com/szorfein/dots/issues/new).
-If an error occurs while running a ansible playbook, please post an issue [here](https://github.com/szorfein/ansible-collection-desktop/issues).
+If an error occurs while running an Ansible playbook, please post an issue [here](https://github.com/szorfein/ansible-collection-desktop/issues).
 
 ### Support
 
