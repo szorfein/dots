@@ -35,9 +35,9 @@ Why i use chezmoi?
 
 ## Screenshots
 
-| Valyria (Wayland)                                                                   | Focus (Xorg)                                                               |
-| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| ![](https://github.com/szorfein/unix-portfolio/raw/master/SwayFX/Valyria/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
+| Familiar (Wayland)                                                                   | Focus (Xorg)                                                               |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| ![](https://github.com/szorfein/unix-portfolio/raw/master/SwayFX/Familiar/clean.jpg) | ![](https://github.com/szorfein/unix-portfolio/raw/master/focus/clean.jpg) |
 
 ## Packages
 
@@ -66,8 +66,10 @@ Why i use chezmoi?
 
 If need a new user (new system), create one:
 
-    useradd -m -s /bin/bash custom-username
-    passwd custom-username
+```bash
+useradd -m -s /bin/bash custom-username
+passwd custom-username
+```
 
 Next, you need to install and configure `sudo` or `doas`, we need permission to install packages:
 
@@ -129,16 +131,14 @@ You can also configure whitch GPU driver should be installed with keyword. Only 
 
 [machine-to-machine](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/), only few lines to configure your environment:
 
-| var        | SwayFX on wayland | Awesome on Xorg |
-| ---------- | ----------------- | --------------- |
-| editor     | neovim            | doom            |
-| gpu        | intel             | nouveau         |
-| secrets    | true              | false           |
-| sound      | alsa              | pulseaudio      |
-| sound_card | hw:PCH            | 0               |
-| web        | brave             | librewolf       |
-| dm         | sddm              | lightdm         |
-| wm         | swayfx            | awm-m3          |
+| var     | SwayFX on wayland | Awesome on Xorg |
+| ------- | ----------------- | --------------- |
+| editor  | neovim            | doom            |
+| gpu     | intel             | nouveau         |
+| secrets | true              | false           |
+| web     | brave             | librewolf       |
+| dm      | sddm              | lightdm         |
+| wm      | swayfx            | awm-m3          |
 
 ### Apply
 

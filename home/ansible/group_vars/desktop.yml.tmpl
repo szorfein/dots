@@ -45,9 +45,8 @@ dm_lxdm_backgrounds:
 dotfiles_wm: {{ .wm | trim }}
 {{ end -}}
 
-{{ if eq .sound "alsa" "pulseaudio" -}}
-dotfiles_audio_backend: {{ .sound }}
-{{ end -}}
+# use Pipewire with ALSA
+dotfiles_audio_backend: "alsa"
 
 # update font-cache
 dotfiles_external: true

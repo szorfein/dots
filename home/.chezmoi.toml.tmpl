@@ -9,7 +9,6 @@
 {{- $dm := "" -}}
 {{- $wm := "awm-m3" -}}
 {{- $editor := "vim" -}}
-{{- $sound := "alsa" -}}
 {{- $web := "librewolf" -}}{{/* librewolf is more light than brave */}}
 
 {{/* GPG, ID for key [C] [S] [E] */}}
@@ -63,7 +62,6 @@ encryption = "gpg"
   keymap = {{ $keymap | quote }}
   personal = {{ $personal }}
   secrets = {{ $secrets }}
-  sound = {{ $sound | quote }} # 'alsa' or 'pulseaudio' here
   sound_card = {{ $soundcard | quote }}
   web = {{ $web | quote }} # 'brave' or 'librewolf'
   dm = {{ $dm | quote }} # '', 'sddm', 'lightdm' or 'lxdm'. Prefer 'lightdm' or lxdm with musl.

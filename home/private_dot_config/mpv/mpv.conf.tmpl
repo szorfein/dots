@@ -11,17 +11,10 @@ hwdec=auto
 gpu-context=wayland
 script=/usr/lib/mpv-mpris/mpris.so
 
-{{ if eq .sound "alsa" -}}
 ao=pipewire
-{{ end -}}
-
 {{ else -}}
 # awesome (Xorg)
-
-{{ if eq .sound "alsa" -}}
-ao=alsa
-{{ end -}}
-
+ao=pipewire
 {{ end -}}
 
 profile=fast

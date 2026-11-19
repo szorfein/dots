@@ -2,7 +2,6 @@
 
 set -o errexit
 
-{{- if eq .sound "alsa" }}
 vol_up() {
   amixer -D hw:{{ .sound_card }} sset Master 1%+
   vol_get
@@ -22,32 +21,6 @@ vol_get() {
   vol=$(amixer -D hw:{{ .sound_card }} sget Master | grep -o "[0-9]*%" | head -n 1)
   echo "$vol"
 }
-{{- end }}
-
-{{- if eq .sound "pulseaudio" }}
-vol_up() {
-  pactl set-sink-mute {{ .sound_card }} 0
-  pactl set-sink-volume {{ .sound_card }} +1%
-  vol_get
-}
-
-vol_down() {
-  pactl set-sink-mute {{ .sound_card }} 0
-  pactl set-sink-volume {{ .sound_card }} -1%
-  vol_get
-}
-
-vol_set() {
-  pactl set-sink-mute {{ .sound_card }} false
-  pactl set-sink-volume {{ .sound_card }} "$1"%
-  vol_get
-}
-
-vol_get() {
-  vol=$(pacmd list-sinks | grep "-" | grep -o " [0-9]*% " | head -n1)
-  echo "$vol"
-}
-{{- end }}
 
 case "$1" in
   up)
@@ -70,4 +43,5 @@ case "$1" in
   *)
     echo "call $0 with only [up] or [down]"
     exit 1
+  ;;
 esac
